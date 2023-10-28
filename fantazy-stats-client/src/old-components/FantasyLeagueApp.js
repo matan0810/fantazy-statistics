@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import StatsList from "./StatsList";
+import StatsList from "../StatsList";
 import AddStatsForm from "./AddStatsForm";
+import { SERVER_URL } from "../constants/constants";
 
-const SERVER_URL = "http://localhost:3001/api/stats";
 
 const FantasyLeagueApp = () => {
   const [stats, setStats] = useState([]);

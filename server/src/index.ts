@@ -19,7 +19,7 @@ const pool = new Pool({
 });
 
 // Endpoint to get a list of statistics
-app.get("/api/stats", async (_req: any, res: any) => {
+app.get("/api", async (_req: any, res: any) => {
   try {
     const client = await pool.connect();
     const result = await client.query("SELECT * FROM stats");
@@ -32,7 +32,7 @@ app.get("/api/stats", async (_req: any, res: any) => {
 });
 
 // Endpoint to add new statistics
-app.post("/api/stats", async (req: any, res: any) => {
+app.post("/api", async (req: any, res: any) => {
   const { season, seasonType, player, location, points } = req.body;
 
   if (season && seasonType && player && location && points) {

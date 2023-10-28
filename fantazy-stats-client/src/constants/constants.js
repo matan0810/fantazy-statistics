@@ -5,3 +5,5 @@ export const statsPropeties = {
   player: "",
   points: "",
 };
+
+export const SERVER_URL = "http://localhost:3001/api";

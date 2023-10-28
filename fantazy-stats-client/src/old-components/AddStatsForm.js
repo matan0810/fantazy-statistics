@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { statsPropeties } from "./constants/constants";
+import { statsPropeties } from "../constants/constants";
 
 const AddStatsForm = ({ addStats }) => {
   const [formData, setFormData] = useState(statsPropeties);
