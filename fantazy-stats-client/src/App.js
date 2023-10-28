@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Container } from "@mui/material";
 import PlayerTable from "./components/PlayerTable";
 import SeasonSelector from "./components/SeasonSelector";
+import AddStatsForm from "./components/AddStatsForm";
 
 function App() {
   const [currentSeason, setCurrentSeason] = useState("Season 1"); // Set the default season here
@@ -16,12 +17,11 @@ function App() {
         onSeasonChange={handleSeasonChange}
       />
       <PlayerTable season={currentSeason} />
+      <AddStatsForm/>
     </Container>
   );
 }
 
 export default App;
 
-
-//  <FantasyLeagueApp /> 
-
+//  <FantasyLeagueApp />

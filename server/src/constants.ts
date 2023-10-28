@@ -1,16 +1,16 @@
 export const seasonTypes = {
-  champions: 1,
-  israeli: 2,
-  worldcup: 3,
-  euro: 4,
+  1: { name: "champions" },
+  2: { name: "israeli" },
+  3: { name: "worldcup" },
+  4: { name: "euro" },
 };
 
 export const players = {
-  gabi: 1,
-  nati: 2,
-  matan: 3,
-  ori: 4,
-  david: 5,
-  omer: 6,
-  guy: 7,
+  1: { name: "gabi" },
+  2: { name: "nati" },
+  3: { name: "matan" },
+  4: { name: "ori" },
+  5: { name: "david" },
+  6: { name: "omer" },
+  7: { name: "guy" },
 };

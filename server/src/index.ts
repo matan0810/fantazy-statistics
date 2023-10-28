@@ -22,8 +22,9 @@ const pool = new Pool({
 app.get("/api", async (_req: any, res: any) => {
   try {
     const client = await pool.connect();
-    const result = await client.query("SELECT * FROM stats");
+    const result = await client.query("SELECT * FROM stats order by location");
     client.release();
+    
     res.json(result.rows);
   } catch (error) {
     console.error("Error getting statistics:", error);
