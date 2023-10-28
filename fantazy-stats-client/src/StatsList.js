@@ -4,13 +4,13 @@ const StatsList = ({ stats }) => {
   return (
     <div>
       <h2>Statistics</h2>
-      <ul>
-        {stats.map((stat, index) => (
-          <li key={index}>
-            {stat.playerName}: {stat.points} points
-          </li>
-        ))}
-      </ul>
+      {stats?.map((stat, index) => (
+        <div key={index}>
+          {Object.keys(stat).map((key) => (
+            <span key={key}>{` | ${key}: ${stat[key]} | `}</span>
+          ))}
+        </div>
+      ))}
     </div>
   );
 };

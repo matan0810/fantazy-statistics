@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import StatsList from "./StatsList";
 import AddStatsForm from "./AddStatsForm";
-import axios from "axios";
 
 const SERVER_URL = "http://localhost:3001/api/stats";
 
@@ -20,16 +20,13 @@ const FantasyLeagueApp = () => {
       });
   }, []);
 
-  const addStats = (newStats) => {
+  const addStats = async (newStats) => {
     // Send a POST request to add new statistics to the server
-    axios
-      .post(SERVER_URL, newStats)
-      .then((response) => {
-        setStats(response.data);
-      })
-      .catch((error) => {
-        console.error("Error adding stats:", error);
-      });
+    try {
+      await axios.post(SERVER_URL, newStats);
+    } catch (error) {
+      console.error("Error adding stats:", error);
+    }
   };
 
   return (

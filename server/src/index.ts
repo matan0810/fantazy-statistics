@@ -39,8 +39,8 @@ app.post("/api/stats", async (req: any, res: any) => {
     try {
       const client = await pool.connect();
       await client.query(
-        "INSERT INTO stats (player, location, points) VALUES ($1, $2, $3)",
-        [player, location, points]
+        "INSERT INTO stats (season, season_type, player, location, points) VALUES ($1, $2, $3, $4, $5)",
+        [season, seasonType, player, location, points]
       );
 
       client.release();

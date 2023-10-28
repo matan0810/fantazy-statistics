@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { statsPropeties } from "./constants/constants";
 
 const AddStatsForm = ({ addStats }) => {
-  const [formData, setFormData] = useState({
-    playerName: '',
-    points: '',
-  });
+  const [formData, setFormData] = useState(statsPropeties);
 
   const handleInputChange = (event) => {
     setFormData({
@@ -15,31 +13,28 @@ const AddStatsForm = ({ addStats }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addStats(formData);
-    setFormData({
-      playerName: '',
-      points: '',
-    });
+
+    if (Object.keys(formData).every((key) => formData[key])) {
+      addStats(formData);
+      setFormData(statsPropeties);
+    }
   };
 
   return (
     <div>
       <h2>Add New Stats</h2>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="playerName"
-          placeholder="Player Name"
-          value={formData.playerName}
-          onChange={handleInputChange}
-        />
-        <input
-          type="number"
-          name="points"
-          placeholder="Points"
-          value={formData.points}
-          onChange={handleInputChange}
-        />
+        {Object.keys(formData).map((key) => (
+          <input
+            key={key}
+            type="text"
+            name={key}
+            placeholder={key}
+            value={formData[key]}
+            onChange={handleInputChange}
+          />
+        ))}
+
         <button type="submit">Add Stats</button>
       </form>
     </div>
