@@ -8,10 +8,17 @@ import {
   Box,
   Grid,
 } from "@mui/material";
-import { SERVER_URL, statsPropeties } from "../constants/constants";
+import { SERVER_URL, TEAM_PROPERTIES } from "../constants/constants";
 
-const AddStatsForm = () => {
-  const [formData, setFormData] = useState(statsPropeties);
+const AddTeamsForm = ({ currentSeason }) => {
+  const formProps = Object.keys(TEAM_PROPERTIES)
+    .filter((key) => TEAM_PROPERTIES[key].form)
+    .reduce((obj, val) => {
+      obj[val] = "";
+      return obj;
+    }, {});
+
+  const [formData, setFormData] = useState(formProps);
   const [isFormValid, setIsFormValid] = useState(true);
 
   const handleInputChange = (event) => {
@@ -21,10 +28,18 @@ const AddStatsForm = () => {
     });
   };
 
-  const addStats = async (newStats) => {
+  const sendTeams = async (newStats) => {
+    console.log({
+      ...newStats,
+      seasonId: currentSeason,
+    });
     try {
-      await axios.post(SERVER_URL, newStats);
-      setFormData(statsPropeties); // Reset the form after successful submission
+      await axios.post(`${SERVER_URL}/teams`, {
+        ...newStats,
+        seasonId: currentSeason,
+      });
+
+      setFormData(formProps); // Reset the form after successful submission
       setIsFormValid(true); // Reset the validation state
     } catch (error) {
       console.error("Error adding stats:", error);
@@ -35,11 +50,8 @@ const AddStatsForm = () => {
     event.preventDefault();
 
     // Check if all fields are filled
-    if (Object.values(formData).every((value) => value)) {
-      addStats(formData);
-    } else {
-      setIsFormValid(false); // Set the validation state to false if any field is empty
-    }
+    if (Object.values(formData).every((v) => v)) sendTeams(formData);
+    else setIsFormValid(false); // Set the validation state to false if any field is empty
   };
 
   return (
@@ -82,4 +94,4 @@ const AddStatsForm = () => {
   );
 };
 
-export default AddStatsForm;
+export default AddTeamsForm;

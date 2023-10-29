@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container } from "@mui/material";
-import PlayerTable from "./components/PlayerTable";
-import SeasonSelector from "./components/SeasonSelector";
-import AddStatsForm from "./components/AddStatsForm";
 import axios from "axios";
+import { AddTeamsForm, PlayerTable, SeasonSelector } from "./components";
 import { SERVER_URL } from "./constants/constants";
 
 function App() {
@@ -35,9 +33,12 @@ function App() {
         setSeasons={setSeasons}
       />
       <PlayerTable season={currentSeason} />
-      <AddStatsForm />
+      <AddTeamsForm currentSeason={currentSeason} />
     </Container>
   );
 }
 
 export default App;
+
+// todo: form - table live updates
+// todo: form fails alerts
