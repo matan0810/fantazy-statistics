@@ -7,6 +7,7 @@ import { SERVER_URL } from "./constants/constants";
 function App() {
   const [seasons, setSeasons] = useState([]);
   // const [seasonTypes, setSeasonTypes] = useState([]);
+  const [players, setPlayers] = useState([]);
   const [currentSeason, setCurrentSeason] = useState(1); // todo: better way to choose, maybe localStorage
 
   useEffect(() => {
@@ -23,17 +24,24 @@ function App() {
   //     .catch((error) => console.error("Error fetching player data:", error));
   // }, []);
 
+  useEffect(() => {
+    axios
+      .get(`${SERVER_URL}/players`)
+      .then(({ data }) => setPlayers(data))
+      .catch((error) => console.error("Error fetching player data:", error));
+  }, []);
+
   return (
     <Container>
-      <h1>Fantasy League Player Stats</h1>
+      <h1>סטטיסטיקות - פנטזי ליג</h1>
       <SeasonSelector
         currentSeason={currentSeason}
         setCurrentSeason={setCurrentSeason}
         seasons={seasons}
         setSeasons={setSeasons}
       />
-      <PlayerTable season={currentSeason} />
-      <AddTeamsForm currentSeason={currentSeason} />
+      <PlayerTable season={currentSeason} players={players} />
+      <AddTeamsForm currentSeason={currentSeason} players={players}/>
     </Container>
   );
 }
@@ -42,3 +50,5 @@ export default App;
 
 // todo: form - table live updates
 // todo: form fails alerts
+// todo: add team name - in season
+// todo: deploy https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/

@@ -7,17 +7,18 @@ import {
   Button,
   Box,
   Grid,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import { SERVER_URL, TEAM_PROPERTIES } from "../constants/constants";
 
-const AddTeamsForm = ({ currentSeason }) => {
-  const formProps = Object.keys(TEAM_PROPERTIES)
-    .filter((key) => TEAM_PROPERTIES[key].form)
-    .reduce((obj, val) => {
-      obj[val] = "";
-      return obj;
-    }, {});
+const formProps = {
+  [TEAM_PROPERTIES.location.key]: "",
+  [TEAM_PROPERTIES.player.key]: "",
+  [TEAM_PROPERTIES.points.key]: "",
+};
 
+const AddTeamsForm = ({ currentSeason, players }) => {
   const [formData, setFormData] = useState(formProps);
   const [isFormValid, setIsFormValid] = useState(true);
 
@@ -29,10 +30,6 @@ const AddTeamsForm = ({ currentSeason }) => {
   };
 
   const sendTeams = async (newStats) => {
-    console.log({
-      ...newStats,
-      seasonId: currentSeason,
-    });
     try {
       await axios.post(`${SERVER_URL}/teams`, {
         ...newStats,
@@ -57,25 +54,70 @@ const AddTeamsForm = ({ currentSeason }) => {
   return (
     <Container maxWidth="sm" sx={{ margin: 10 }}>
       <Typography variant="h4" gutterBottom>
-        Add New Stats
+        הוספת קבוצה חדשה
       </Typography>
 
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
-          {Object.keys(formData).map((key) => (
-            <Grid item xs={12} key={key}>
-              <TextField
-                fullWidth
-                label={key}
-                name={key}
-                value={formData[key]}
-                onChange={handleInputChange}
-                variant="outlined"
-                error={!isFormValid && !formData[key]} // Highlight empty fields if the form is invalid
-                helperText={!isFormValid && !formData[key] && "Required"}
-              />
-            </Grid>
-          ))}
+          <Grid item xs={12}>
+            <TextField
+              type="number"
+              InputProps={{
+                inputProps: { min: 1, max: Object.keys(players).length },
+              }}
+              fullWidth
+              label={TEAM_PROPERTIES.location.label}
+              name={TEAM_PROPERTIES.location.key}
+              value={formData[TEAM_PROPERTIES.location.key]}
+              onChange={handleInputChange}
+              variant="outlined"
+              error={!isFormValid && !formData[TEAM_PROPERTIES.location.key]} // Highlight empty fields if the form is invalid
+              helperText={
+                !isFormValid &&
+                !formData[TEAM_PROPERTIES.location.key] &&
+                "Required"
+              }
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <Select
+              fullWidth
+              label={TEAM_PROPERTIES.player.label}
+              name={TEAM_PROPERTIES.player.key}
+              value={formData[TEAM_PROPERTIES.player.key]}
+              onChange={handleInputChange}
+              variant="outlined"
+              error={!isFormValid && !formData[TEAM_PROPERTIES.player.key]}
+            >
+              <MenuItem value="">בחר שחקן</MenuItem>
+              {Object.keys(players).map((key) => (
+                <MenuItem key={key} value={key}>
+                  {players[key].label}
+                </MenuItem>
+              ))}
+            </Select>
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              type="number"
+              InputProps={{ inputProps: { min: 0 } }}
+              label={TEAM_PROPERTIES.points.label}
+              name={TEAM_PROPERTIES.points.key}
+              value={formData[TEAM_PROPERTIES.points.key]}
+              onChange={handleInputChange}
+              variant="outlined"
+              error={!isFormValid && !formData[TEAM_PROPERTIES.points.key]} // Highlight empty fields if the form is invalid
+              helperText={
+                !isFormValid &&
+                !formData[TEAM_PROPERTIES.points.key] &&
+                "Required"
+              }
+            />
+          </Grid>
+
           <Grid item xs={12}>
             <Box display="flex" justifyContent="center">
               <Button
@@ -84,7 +126,7 @@ const AddTeamsForm = ({ currentSeason }) => {
                 color="primary"
                 size="large"
               >
-                Add Stats
+                שלח
               </Button>
             </Box>
           </Grid>
