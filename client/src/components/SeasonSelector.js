@@ -6,7 +6,7 @@ function SeasonSelector({ currentSeason, onSeasonChange, seasons }) {
       value={currentSeason}
       onChange={(_e, newSeason) => onSeasonChange(newSeason)}
       sx={{
-        backgroundColor: "#333",
+        // backgroundColor: "#333",
       }}
     >
       {seasons.map((season) => (
@@ -15,7 +15,7 @@ function SeasonSelector({ currentSeason, onSeasonChange, seasons }) {
           value={season.id}
           label={season.year}
           sx={{
-            color: "white",
+            // color: "white",
           }}
         />
       ))}

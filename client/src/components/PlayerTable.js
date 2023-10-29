@@ -11,10 +11,7 @@ import {
 } from "@mui/material";
 import { SERVER_URL, TEAM_PROPERTIES } from "../constants/constants";
 
-const styles = {
-  fontWeight: "bold",
-  backgroundColor: "#f0f0f0",
-};
+const bold = { fontWeight: "bold" };
 
 function PlayerTable({ season, players }) {
   const [teams, setTeams] = useState([]);
@@ -23,31 +20,28 @@ function PlayerTable({ season, players }) {
     axios
       .get(`${SERVER_URL}/teams?season=${season}`)
       .then(({ data }) => setTeams(data))
-      .catch((error) => console.error("Error fetching player data:", error));
+      .catch((error) => console.error("Error fetching team data:", error));
   }, [season]);
 
   return (
-    <TableContainer
-      component={Paper}
-      sx={{
-        maxWidth: "800px",
-        margin: "0 auto",
-      }}
-    >
+    <TableContainer component={Paper}>
       <Table>
-        <TableHead>
+        <TableHead sx={{ backgroundColor: "#f0f0f0" }}>
           <TableRow>
-            <TableCell sx={styles}>{TEAM_PROPERTIES.location.label}</TableCell>
-            <TableCell sx={styles}>{TEAM_PROPERTIES.player.label}</TableCell>
-            <TableCell sx={styles}>{TEAM_PROPERTIES.points.label}</TableCell>
-            <TableCell sx={styles}>{TEAM_PROPERTIES.team_name.label}</TableCell>
+            <TableCell sx={bold}>{TEAM_PROPERTIES.location.label}</TableCell>
+            <TableCell sx={bold}>{TEAM_PROPERTIES.player.label}</TableCell>
+            <TableCell sx={bold}>{TEAM_PROPERTIES.points.label}</TableCell>
+            <TableCell sx={bold}>{TEAM_PROPERTIES.team_name.label}</TableCell>
           </TableRow>
         </TableHead>
 
         <TableBody>
-          {teams?.map((team) => (
-            <TableRow key={team.player}>
-              <TableCell>{team.location}</TableCell>
+          {teams?.map((team, index) => (
+            <TableRow
+              key={team.player}
+              sx={{ backgroundColor: index % 2 ? "#FFE5B4" : "#ADD8E6" }}
+            >
+              <TableCell sx={{ fontWeight: "bold" }}>{team.location}</TableCell>
               <TableCell>{players[team.player]?.label}</TableCell>
               <TableCell>{team.points}</TableCell>
               <TableCell>{team.team_name}</TableCell>
