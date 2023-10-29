@@ -1,15 +1,10 @@
 import { Tabs, Tab } from "@mui/material";
 
-function SeasonSelector({
-  currentSeason,
-  setCurrentSeason,
-  seasons,
-  // setSeasons,
-}) {
+function SeasonSelector({ currentSeason, onSeasonChange, seasons }) {
   return (
     <Tabs
       value={currentSeason}
-      onChange={(_e, newSeason) => setCurrentSeason(newSeason)}
+      onChange={(_e, newSeason) => onSeasonChange(newSeason)}
       sx={{
         backgroundColor: "#333",
       }}

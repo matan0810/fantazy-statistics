@@ -15,8 +15,8 @@ export const TEAM_PROPERTIES = {
     form: true,
     required: true,
   },
-  teamName: {
-    key: "teamName",
+  team_name: {
+    key: "team_name",
     label: "שם קבוצה",
     form: true,
     required: false,

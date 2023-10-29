@@ -16,6 +16,7 @@ const formProps = {
   [TEAM_PROPERTIES.location.key]: "",
   [TEAM_PROPERTIES.player.key]: "",
   [TEAM_PROPERTIES.points.key]: "",
+  [TEAM_PROPERTIES.team_name.key]: "",
 };
 
 const AddTeamsForm = ({ currentSeason, players }) => {
@@ -124,9 +125,10 @@ const AddTeamsForm = ({ currentSeason, players }) => {
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label={TEAM_PROPERTIES.teamName.label}
-              name={TEAM_PROPERTIES.teamName.key}
-              value={formData[TEAM_PROPERTIES.teamName.key]}
+              label={TEAM_PROPERTIES.team_name.label}
+              name={TEAM_PROPERTIES.team_name.key}
+              value={formData[TEAM_PROPERTIES.team_name.key]}
+              placeholder=""
               onChange={handleInputChange}
               variant="outlined"
             />

@@ -24,14 +24,14 @@ teamsRouter.get("/teams", async (req: Request, res: Response) => {
 });
 
 teamsRouter.post("/teams", async (req: Request, res: Response) => {
-  const { seasonId, player, location, points, teamName } = req.body;
+  const { seasonId, player, location, points, team_name } = req.body;
 
   if (seasonId && player && location && points) {
     try {
       const client = await pool.connect();
       await client.query(
         "INSERT INTO teams (season_id, player, location, points, team_name) VALUES ($1, $2, $3, $4, $5)",
-        [seasonId, player, location, points, teamName]
+        [seasonId, player, location, points, team_name]
       );
 
       client.release();
