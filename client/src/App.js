@@ -49,6 +49,7 @@ function App() {
 export default App;
 
 // todo: form - table live updates
+// todo: season change on localhost
 // todo: form fails alerts
 // todo: add team name - in season
 // todo: deploy https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/
