@@ -1,27 +1,24 @@
-// src/components/SeasonSelector.js
-import React from "react";
 import { Tabs, Tab } from "@mui/material";
 
-function SeasonSelector({ currentSeason, onSeasonChange }) {
-  const seasons = ["Season 1", "Season 2", "Season 3"];
-
-  const handleChange = (_event, newSeason) => {
-    onSeasonChange(newSeason);
-  };
-
+function SeasonSelector({
+  currentSeason,
+  setCurrentSeason,
+  seasons,
+  // setSeasons,
+}) {
   return (
     <Tabs
       value={currentSeason}
-      onChange={handleChange}
+      onChange={(_e, newSeason) => setCurrentSeason(newSeason)}
       sx={{
         backgroundColor: "#333",
       }}
     >
-      {seasons.map((season, index) => (
+      {seasons.map((season) => (
         <Tab
-          key={index}
-          label={season}
-          value={season}
+          key={season.id}
+          value={season.id}
+          label={season.year}
           sx={{
             color: "white",
           }}

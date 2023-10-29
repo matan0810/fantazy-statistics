@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import {
   Table,
@@ -22,7 +22,7 @@ function PlayerTable({ season }) {
 
   useEffect(() => {
     axios
-      .get(`${SERVER_URL}/?season=${season}`)
+      .get(`${SERVER_URL}/teams?season=${season}`)
       .then(({ data }) => setTeams(data))
       .catch((error) => console.error("Error fetching player data:", error));
   }, [season]);
