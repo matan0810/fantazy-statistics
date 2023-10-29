@@ -14,4 +14,5 @@ export const players = {
   6: { key: "omer", label: "עומר" },
   7: { key: "guy", label: "גיא" },
   8: { key: "guy", label: "רותם" },
+  9: { key: "noa", label: "נעה" },
 };

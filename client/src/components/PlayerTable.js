@@ -39,7 +39,7 @@ function PlayerTable({ season, players }) {
           {teams?.map((team, index) => (
             <TableRow
               key={team.player}
-              sx={{ backgroundColor: index % 2 ? "#FFE5B4" : "#ADD8E6" }}
+              sx={{ backgroundColor: index % 2 ? "#ADD8E6" : "#FFE5B4" }}
             >
               <TableCell sx={{ fontWeight: "bold" }}>{team.location}</TableCell>
               <TableCell>{players[team.player]?.label}</TableCell>
