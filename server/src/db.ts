@@ -1,11 +1,6 @@
 import { Pool } from "pg";
+import { DB_CREDENTIALS } from "./environment";
 
-export const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "fantazy_stats",
-  password: "1234",
-  port: 5432,
-});
+export const pool = new Pool(DB_CREDENTIALS);
 
 export default pool;

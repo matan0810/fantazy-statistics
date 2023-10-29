@@ -1,10 +1,10 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import pool from "../db";
 
 export const seasonsRouter = express.Router();
 
 // GET all seasons
-seasonsRouter.get("/seasons", async (_req, res) => {
+seasonsRouter.get("/seasons", async (_req: Request, res: Response) => {
   try {
     const { rows } = await pool.query("SELECT * FROM seasons order by year");
     res.json(rows);
@@ -15,7 +15,7 @@ seasonsRouter.get("/seasons", async (_req, res) => {
 });
 
 // POST a new season
-seasonsRouter.post("/seasons", async (req, res) => {
+seasonsRouter.post("/seasons", async (req: Request, res: Response) => {
   const { year, type } = req.body;
   try {
     const { rows } = await pool.query(
@@ -30,7 +30,7 @@ seasonsRouter.post("/seasons", async (req, res) => {
 });
 
 // DELETE a season by ID
-seasonsRouter.delete("/seasons/:id", async (req, res) => {
+seasonsRouter.delete("/seasons/:id", async (req: Request, res: Response) => {
   const seasonId = req.params.id;
   try {
     await pool.query("DELETE FROM seasons WHERE id = $1", [seasonId]);

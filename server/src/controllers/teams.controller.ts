@@ -1,13 +1,19 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import pool from "../db";
 
 export const teamsRouter = express.Router();
 
-// Endpoint to get a list of statistics
-teamsRouter.get("/teams", async (_req: any, res: any) => {
+teamsRouter.get("/teams", async (req: Request, res: Response) => {
+  const {
+    query: { season },
+  } = req;
+
   try {
     const client = await pool.connect();
-    const result = await client.query("SELECT * FROM teams order by location");
+    const result = await client.query(
+      "SELECT * FROM teams WHERE season_id = $1 ORDER BY location",
+      [season]
+    );
     client.release();
 
     res.json(result.rows);
@@ -17,8 +23,7 @@ teamsRouter.get("/teams", async (_req: any, res: any) => {
   }
 });
 
-// Endpoint to add new statistics
-teamsRouter.post("/teams", async (req: any, res: any) => {
+teamsRouter.post("/teams", async (req: Request, res: Response) => {
   const { seasonId, player, location, points } = req.body;
 
   if (seasonId && player && location && points) {

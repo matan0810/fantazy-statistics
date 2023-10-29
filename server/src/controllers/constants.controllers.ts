@@ -1,9 +1,9 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import { players, seasonTypes } from "../constants";
 
 export const constantsRouter = express.Router();
 
-constantsRouter.get("/players", async (_req: any, res: any) => {
+constantsRouter.get("/players", async (_req: Request, res: Response) => {
   try {
     res.json(players);
   } catch (error) {
@@ -12,7 +12,7 @@ constantsRouter.get("/players", async (_req: any, res: any) => {
   }
 });
 
-constantsRouter.get("/seasonTypes", async (_req: any, res: any) => {
+constantsRouter.get("/seasonTypes", async (_req: Request, res: Response) => {
   try {
     res.json(seasonTypes);
   } catch (error) {
