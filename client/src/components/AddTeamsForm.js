@@ -40,15 +40,20 @@ const AddTeamsForm = ({ currentSeason, players }) => {
       setIsFormValid(true); // Reset the validation state
     } catch (error) {
       console.error("Error adding stats:", error);
+      alert("תקלה בשליחת המידע")
     }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Check if all fields are filled
-    if (Object.values(formData).every((v) => v)) sendTeams(formData);
-    else setIsFormValid(false); // Set the validation state to false if any field is empty
+    if (
+      Object.keys(formData).every(
+        (key) => !TEAM_PROPERTIES[key].required || formData[key]
+      )
+    )
+      sendTeams(formData);
+    else setIsFormValid(false);
   };
 
   return (
@@ -75,7 +80,7 @@ const AddTeamsForm = ({ currentSeason, players }) => {
               helperText={
                 !isFormValid &&
                 !formData[TEAM_PROPERTIES.location.key] &&
-                "Required"
+                "חובה"
               }
             />
           </Grid>
@@ -111,10 +116,19 @@ const AddTeamsForm = ({ currentSeason, players }) => {
               variant="outlined"
               error={!isFormValid && !formData[TEAM_PROPERTIES.points.key]} // Highlight empty fields if the form is invalid
               helperText={
-                !isFormValid &&
-                !formData[TEAM_PROPERTIES.points.key] &&
-                "Required"
+                !isFormValid && !formData[TEAM_PROPERTIES.points.key] && "חובה"
               }
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label={TEAM_PROPERTIES.teamName.label}
+              name={TEAM_PROPERTIES.teamName.key}
+              value={formData[TEAM_PROPERTIES.teamName.key]}
+              onChange={handleInputChange}
+              variant="outlined"
             />
           </Grid>
 

@@ -40,6 +40,7 @@ function PlayerTable({ season, players }) {
             <TableCell sx={styles}>{TEAM_PROPERTIES.location.label}</TableCell>
             <TableCell sx={styles}>{TEAM_PROPERTIES.player.label}</TableCell>
             <TableCell sx={styles}>{TEAM_PROPERTIES.points.label}</TableCell>
+            <TableCell sx={styles}>{TEAM_PROPERTIES.teamName.label}</TableCell>
           </TableRow>
         </TableHead>
 
@@ -49,6 +50,7 @@ function PlayerTable({ season, players }) {
               <TableCell>{team.location}</TableCell>
               <TableCell>{players[team.player]?.label}</TableCell>
               <TableCell>{team.points}</TableCell>
+              <TableCell>{team.teamName}</TableCell>
             </TableRow>
           ))}
         </TableBody>

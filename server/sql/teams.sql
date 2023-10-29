@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS public.teams
     player integer NOT NULL,
     location integer NOT NULL,
     points integer NOT NULL DEFAULT 0,
+    team_name character varying[] COLLATE pg_catalog."default",
     CONSTRAINT stats_pkey PRIMARY KEY (season_id, player)
 )
 
