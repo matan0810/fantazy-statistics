@@ -14,7 +14,7 @@ teamsRouter.get("/teams", async (req: Request, res: Response) => {
       `SELECT *
       FROM teams 
       RIGHT JOIN seasons ON teams.season_id=seasons.id
-      WHERE season_id = $1 AND seasons.type = $2
+      WHERE seasons.year = $1 AND seasons.type = $2
       ORDER BY location`,
       [season, seasonType]
     );

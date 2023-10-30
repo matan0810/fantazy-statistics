@@ -41,7 +41,7 @@ const AddTeamsForm = ({ currentSeason, players }) => {
       setIsFormValid(true); // Reset the validation state
     } catch (error) {
       console.error("Error adding stats:", error);
-      alert("תקלה בשליחת המידע")
+      alert("תקלה בשליחת המידע");
     }
   };
 
@@ -52,9 +52,9 @@ const AddTeamsForm = ({ currentSeason, players }) => {
       Object.keys(formData).every(
         (key) => !TEAM_PROPERTIES[key].required || formData[key]
       )
-    )
+    ) {
       sendTeams(formData);
-    else setIsFormValid(false);
+    } else setIsFormValid(false);
   };
 
   return (
