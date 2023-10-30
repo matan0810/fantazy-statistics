@@ -1,18 +1,7 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { Typography, Select, MenuItem } from "@mui/material";
-import { SERVER_URL } from "../constants/constants";
+import { seasonTypes } from "../constants/options";
 
 function Header({ seasonType, onSeasonTypeChange }) {
-  const [seasonTypes, setSeasonTypes] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`${SERVER_URL}/seasonTypes`)
-      .then(({ data }) => setSeasonTypes(data))
-      .catch((error) => console.error("Error fetching player data:", error));
-  }, []);
-
   return (
     <div
       style={{

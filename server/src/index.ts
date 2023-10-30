@@ -1,13 +1,13 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { constantsRouter, seasonsRouter, teamsRouter } from "./controllers";
+import { seasonsRouter, teamsRouter } from "./controllers";
 import { PORT } from "./environment";
 
 const app = express();
 const api = express.Router().use(cors()).use(bodyParser.json());
 
-api.use(seasonsRouter).use(teamsRouter).use(constantsRouter);
+api.use(seasonsRouter).use(teamsRouter);
 
 app
   .use("/api", api)

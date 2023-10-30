@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import { Container } from "@mui/material";
 import axios from "axios";
 import {
-  AddTeamsForm,
+  // AddTeamsForm,
   Header,
   PlayerTable,
   SeasonSelector,
 } from "./components";
 import { SERVER_URL } from "./constants/constants";
+import { players } from "./constants/options";
 
 function App() {
   const [seasons, setSeasons] = useState([]);
-  const [players, setPlayers] = useState([]);
   const [seasonType, setSeasonType] = useState(
     parseInt(localStorage.getItem("seasonType") ?? "1")
   );
@@ -34,17 +34,10 @@ function App() {
       .get(`${SERVER_URL}/seasons?seasonType=${seasonType}`)
       .then(({ data }) => {
         setSeasons(data);
-        onSeasonChange(data[0].id);
+        onSeasonChange(data[0]?.id);
       })
       .catch((error) => console.error("Error fetching player data:", error));
   }, [setSeasons, seasonType]);
-
-  useEffect(() => {
-    axios
-      .get(`${SERVER_URL}/players`)
-      .then(({ data }) => setPlayers(data))
-      .catch((error) => console.error("Error fetching player data:", error));
-  }, []);
 
   return (
     <Container>
@@ -60,17 +53,17 @@ function App() {
         season={currentSeason}
         players={players}
       />
-      <AddTeamsForm currentSeason={currentSeason} players={players} />
+      {/* <AddTeamsForm currentSeason={currentSeason} players={players} /> */}
     </Container>
   );
 }
 
 export default App;
 
+// todo: change colors by competition
 // todo: form - table live updates
+// todo: images proof present
 
 // todo: deploy -
 // https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/
 // https://github.com/gitname/react-gh-pages#3-install-the-gh-pages-npm-package
-
-// todo: images store
