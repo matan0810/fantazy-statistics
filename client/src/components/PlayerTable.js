@@ -13,15 +13,15 @@ import { SERVER_URL, TEAM_PROPERTIES } from "../constants/constants";
 
 const bold = { fontWeight: "bold" };
 
-function PlayerTable({ season, players }) {
+function PlayerTable({ season, players, seasonType }) {
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`${SERVER_URL}/teams?season=${season}`)
+      .get(`${SERVER_URL}/teams?season=${season}&seasonType=${seasonType}`)
       .then(({ data }) => setTeams(data))
       .catch((error) => console.error("Error fetching team data:", error));
-  }, [season]);
+  }, [season, seasonType]);
 
   return (
     <TableContainer component={Paper}>

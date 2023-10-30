@@ -5,14 +5,18 @@ export const teamsRouter = express.Router();
 
 teamsRouter.get("/teams", async (req: Request, res: Response) => {
   const {
-    query: { season },
+    query: { season, seasonType },
   } = req;
 
   try {
     const client = await pool.connect();
     const result = await client.query(
-      "SELECT * FROM teams WHERE season_id = $1 ORDER BY location",
-      [season]
+      `SELECT *
+      FROM teams 
+      RIGHT JOIN seasons ON teams.season_id=seasons.id
+      WHERE season_id = $1 AND seasons.type = $2
+      ORDER BY location`,
+      [season, seasonType]
     );
     client.release();
 

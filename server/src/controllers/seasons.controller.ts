@@ -3,10 +3,19 @@ import pool from "../db";
 
 export const seasonsRouter = express.Router();
 
-// GET all seasons
-seasonsRouter.get("/seasons", async (_req: Request, res: Response) => {
+seasonsRouter.get("/seasons", async (req: Request, res: Response) => {
+  const {
+    query: { seasonType },
+  } = req;
   try {
-    const { rows } = await pool.query("SELECT * FROM seasons order by year");
+    const { rows } = await pool.query(
+      `SELECT *
+    FROM seasons
+    WHERE type = $1
+    ORDER BY year`,
+      [seasonType]
+    );
+
     res.json(rows);
   } catch (error) {
     console.error("Error fetching seasons:", error);
@@ -14,7 +23,6 @@ seasonsRouter.get("/seasons", async (_req: Request, res: Response) => {
   }
 });
 
-// POST a new season
 seasonsRouter.post("/seasons", async (req: Request, res: Response) => {
   const { year, type } = req.body;
   try {

@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
 import { Container } from "@mui/material";
 import axios from "axios";
-import { AddTeamsForm, PlayerTable, SeasonSelector } from "./components";
+import {
+  AddTeamsForm,
+  Header,
+  PlayerTable,
+  SeasonSelector,
+} from "./components";
 import { SERVER_URL } from "./constants/constants";
 
 function App() {
   const [seasons, setSeasons] = useState([]);
-  // const [seasonTypes, setSeasonTypes] = useState([]);
   const [players, setPlayers] = useState([]);
+  const [seasonType, setSeasonType] = useState(
+    parseInt(localStorage.getItem("seasonType") ?? "1")
+  );
   const [currentSeason, setCurrentSeason] = useState(
     parseInt(localStorage.getItem("currentSeason") ?? "1")
   );
@@ -17,19 +24,17 @@ function App() {
     localStorage.setItem("currentSeason", season);
   };
 
+  const onSeasonTypeChange = (type) => {
+    setSeasonType(type);
+    localStorage.setItem("seasonType", type);
+  };
+
   useEffect(() => {
     axios
-      .get(`${SERVER_URL}/seasons`)
+      .get(`${SERVER_URL}/seasons?seasonType=${seasonType}`)
       .then(({ data }) => setSeasons(data))
       .catch((error) => console.error("Error fetching player data:", error));
-  }, [setSeasons]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`${SERVER_URL}/seasonTypes`)
-  //     .then(({ data }) => setSeasonTypes(data))
-  //     .catch((error) => console.error("Error fetching player data:", error));
-  // }, []);
+  }, [setSeasons, seasonType]);
 
   useEffect(() => {
     axios
@@ -40,14 +45,18 @@ function App() {
 
   return (
     <Container>
-      <h1>סטטיסטיקות - פנטזי ליג</h1>
+      <Header seasonType={seasonType} onSeasonTypeChange={onSeasonTypeChange} />
       <SeasonSelector
         currentSeason={currentSeason}
         onSeasonChange={onSeasonChange}
         seasons={seasons}
         setSeasons={setSeasons}
       />
-      <PlayerTable season={currentSeason} players={players} />
+      <PlayerTable
+        seasonType={seasonType}
+        season={currentSeason}
+        players={players}
+      />
       <AddTeamsForm currentSeason={currentSeason} players={players} />
     </Container>
   );
@@ -58,4 +67,7 @@ export default App;
 // todo: form - table live updates
 // todo: form fails alerts
 // todo: add team name - in season
-// todo: deploy https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/
+
+// todo: deploy -
+// https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/
+// https://github.com/gitname/react-gh-pages#3-install-the-gh-pages-npm-package
