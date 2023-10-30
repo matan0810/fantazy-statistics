@@ -12,5 +12,3 @@ api.use(seasonsRouter).use(teamsRouter).use(constantsRouter);
 app
   .use("/api", api)
   .listen(PORT, () => console.log(`Server is running on port ${PORT}`));
-
-  // todo: images store

@@ -32,7 +32,10 @@ function App() {
   useEffect(() => {
     axios
       .get(`${SERVER_URL}/seasons?seasonType=${seasonType}`)
-      .then(({ data }) => setSeasons(data))
+      .then(({ data }) => {
+        setSeasons(data);
+        onSeasonChange(data[0].id);
+      })
       .catch((error) => console.error("Error fetching player data:", error));
   }, [setSeasons, seasonType]);
 
@@ -69,3 +72,5 @@ export default App;
 // todo: deploy -
 // https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/
 // https://github.com/gitname/react-gh-pages#3-install-the-gh-pages-npm-package
+
+// todo: images store

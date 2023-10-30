@@ -29,6 +29,7 @@ function Header({ seasonType, onSeasonTypeChange }) {
       <Select
         label="Season"
         value={seasonType}
+        defaultValue=""
         onChange={(e) => onSeasonTypeChange(e.target.value)}
         variant="outlined"
       >

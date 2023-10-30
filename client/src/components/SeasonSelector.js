@@ -7,7 +7,7 @@ function SeasonSelector({ currentSeason, onSeasonChange, seasons }) {
       onChange={(_e, newSeason) => onSeasonChange(newSeason)}
     >
       {seasons.map((season) => (
-        <Tab key={season.id} value={season.year} label={season.year} />
+        <Tab key={season.id} value={season.id} label={season.year} />
       ))}
     </Tabs>
   );
