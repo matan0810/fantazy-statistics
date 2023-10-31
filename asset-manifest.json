@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/fantazy-statistics/static/css/main.fa018107.css",
-    "main.js": "/fantazy-statistics/static/js/main.bbc11fa4.js",
+    "main.js": "/fantazy-statistics/static/js/main.c91c3b17.js",
     "index.html": "/fantazy-statistics/index.html",
     "main.fa018107.css.map": "/fantazy-statistics/static/css/main.fa018107.css.map",
-    "main.bbc11fa4.js.map": "/fantazy-statistics/static/js/main.bbc11fa4.js.map"
+    "main.c91c3b17.js.map": "/fantazy-statistics/static/js/main.c91c3b17.js.map"
   },
   "entrypoints": [
     "static/css/main.fa018107.css",
-    "static/js/main.bbc11fa4.js"
+    "static/js/main.c91c3b17.js"
   ]
 }
