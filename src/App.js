@@ -57,7 +57,3 @@ export default App;
 
 // todo: change colors by competition
 // todo: images proof present
-
-// todo: deploy -
-// https://www.programonaut.com/7-ways-to-host-your-web-application-for-free/
-// https://github.com/gitname/react-gh-pages#3-install-the-gh-pages-npm-package
