@@ -1,0 +1,692 @@
+[
+  {
+    "season_id": 4,
+    "player": 4,
+    "location": 1,
+    "points": 582,
+    "team_name": "FC agvaniya",
+    "id": 4,
+    "year": 2016,
+    "type": 1
+  },
+  {
+    "season_id": 15,
+    "player": 1,
+    "location": 3,
+    "points": 268,
+    "team_name": "גבריאל",
+    "id": 15,
+    "year": 2016,
+    "type": 3
+  },
+  {
+    "season_id": 15,
+    "player": 6,
+    "location": 2,
+    "points": 271,
+    "team_name": "ריאלונה",
+    "id": 15,
+    "year": 2016,
+    "type": 3
+  },
+  {
+    "season_id": 15,
+    "player": 2,
+    "location": 1,
+    "points": 278,
+    "team_name": "Euro Stars",
+    "id": 15,
+    "year": 2016,
+    "type": 3
+  },
+  {
+    "season_id": 15,
+    "player": 4,
+    "location": 4,
+    "points": 262,
+    "team_name": "FC Afarsek",
+    "id": 15,
+    "year": 2016,
+    "type": 3
+  },
+  {
+    "season_id": 15,
+    "player": 5,
+    "location": 5,
+    "points": 261,
+    "team_name": "לך תדע",
+    "id": 15,
+    "year": 2016,
+    "type": 3
+  },
+  {
+    "season_id": 14,
+    "player": 4,
+    "location": 1,
+    "points": 0,
+    "team_name": "אין",
+    "id": 14,
+    "year": 2016,
+    "type": 4
+  },
+  {
+    "season_id": 15,
+    "player": 3,
+    "location": 6,
+    "points": 235,
+    "team_name": "King David",
+    "id": 15,
+    "year": 2016,
+    "type": 3
+  },
+  {
+    "season_id": 15,
+    "player": 7,
+    "location": 7,
+    "points": 125,
+    "team_name": "קבוצת המלכים",
+    "id": 15,
+    "year": 2016,
+    "type": 3
+  },
+  {
+    "season_id": 14,
+    "player": 2,
+    "location": 2,
+    "points": 0,
+    "team_name": "???",
+    "id": 14,
+    "year": 2016,
+    "type": 4
+  },
+  {
+    "season_id": 4,
+    "player": 5,
+    "location": 4,
+    "points": 523,
+    "team_name": "ריאל בדםם",
+    "id": 4,
+    "year": 2016,
+    "type": 1
+  },
+  {
+    "season_id": 4,
+    "player": 2,
+    "location": 3,
+    "points": 530,
+    "team_name": "השדים האדומים",
+    "id": 4,
+    "year": 2016,
+    "type": 1
+  },
+  {
+    "season_id": 4,
+    "player": 1,
+    "location": 2,
+    "points": 582,
+    "team_name": "מסיבמבה",
+    "id": 4,
+    "year": 2016,
+    "type": 1
+  },
+  {
+    "season_id": 9,
+    "player": 4,
+    "location": 1,
+    "points": 1377,
+    "team_name": "FC mango",
+    "id": 9,
+    "year": 2017,
+    "type": 4
+  },
+  {
+    "season_id": 5,
+    "player": 6,
+    "location": 6,
+    "points": 178,
+    "team_name": "רילונה",
+    "id": 5,
+    "year": 2017,
+    "type": 1
+  },
+  {
+    "season_id": 5,
+    "player": 9,
+    "location": 5,
+    "points": 293,
+    "team_name": "ROCKINGTHIS",
+    "id": 5,
+    "year": 2017,
+    "type": 1
+  },
+  {
+    "season_id": 5,
+    "player": 5,
+    "location": 4,
+    "points": 535,
+    "team_name": "אליפות!!!",
+    "id": 5,
+    "year": 2017,
+    "type": 1
+  },
+  {
+    "season_id": 5,
+    "player": 1,
+    "location": 3,
+    "points": 549,
+    "team_name": "אננס ירוק",
+    "id": 5,
+    "year": 2017,
+    "type": 1
+  },
+  {
+    "season_id": 5,
+    "player": 2,
+    "location": 2,
+    "points": 558,
+    "team_name": "מנצ'סטר של יונייטד",
+    "id": 5,
+    "year": 2017,
+    "type": 1
+  },
+  {
+    "season_id": 5,
+    "player": 4,
+    "location": 1,
+    "points": 588,
+    "team_name": "FC melafefon",
+    "id": 5,
+    "year": 2017,
+    "type": 1
+  },
+  {
+    "season_id": 9,
+    "player": 5,
+    "location": 3,
+    "points": 983,
+    "team_name": "אליפות",
+    "id": 9,
+    "year": 2017,
+    "type": 4
+  },
+  {
+    "season_id": 9,
+    "player": 2,
+    "location": 2,
+    "points": 1375,
+    "team_name": "ביתר יונייטד",
+    "id": 9,
+    "year": 2017,
+    "type": 4
+  },
+  {
+    "season_id": 6,
+    "player": 1,
+    "location": 4,
+    "points": 506,
+    "team_name": "קראוסון שוקולד",
+    "id": 6,
+    "year": 2018,
+    "type": 1
+  },
+  {
+    "season_id": 6,
+    "player": 5,
+    "location": 3,
+    "points": 564,
+    "team_name": "Blabla",
+    "id": 6,
+    "year": 2018,
+    "type": 1
+  },
+  {
+    "season_id": 6,
+    "player": 2,
+    "location": 2,
+    "points": 577,
+    "team_name": "United is Back!",
+    "id": 6,
+    "year": 2018,
+    "type": 1
+  },
+  {
+    "season_id": 6,
+    "player": 4,
+    "location": 1,
+    "points": 614,
+    "team_name": "FC Gamba",
+    "id": 6,
+    "year": 2018,
+    "type": 1
+  },
+  {
+    "season_id": 17,
+    "player": 2,
+    "location": 1,
+    "points": 0,
+    "team_name": "Stars of 2018",
+    "id": 17,
+    "year": 2018,
+    "type": 2
+  },
+  {
+    "season_id": 10,
+    "player": 2,
+    "location": 1,
+    "points": 1372,
+    "team_name": "ירושלים של בית\"ר",
+    "id": 10,
+    "year": 2018,
+    "type": 4
+  },
+  {
+    "season_id": 10,
+    "player": 4,
+    "location": 2,
+    "points": 1343,
+    "team_name": "FC Batata",
+    "id": 10,
+    "year": 2018,
+    "type": 4
+  },
+  {
+    "season_id": 6,
+    "player": 3,
+    "location": 6,
+    "points": 359,
+    "team_name": "מכבי פורשר",
+    "id": 6,
+    "year": 2018,
+    "type": 1
+  },
+  {
+    "season_id": 6,
+    "player": 9,
+    "location": 5,
+    "points": 468,
+    "team_name": "עוקפת אתכם בסיבוב",
+    "id": 6,
+    "year": 2018,
+    "type": 1
+  },
+  {
+    "season_id": 7,
+    "player": 1,
+    "location": 1,
+    "points": 634,
+    "team_name": "טורנדו",
+    "id": 7,
+    "year": 2019,
+    "type": 1
+  },
+  {
+    "season_id": 11,
+    "player": 4,
+    "location": 2,
+    "points": 1290,
+    "team_name": "FC Pasiflora",
+    "id": 11,
+    "year": 2019,
+    "type": 4
+  },
+  {
+    "season_id": 11,
+    "player": 2,
+    "location": 1,
+    "points": 1294,
+    "team_name": "ירושלים של בית\"ר",
+    "id": 11,
+    "year": 2019,
+    "type": 4
+  },
+  {
+    "season_id": 7,
+    "player": 7,
+    "location": 6,
+    "points": 276,
+    "team_name": "נפלו לי שתי שיניים",
+    "id": 7,
+    "year": 2019,
+    "type": 1
+  },
+  {
+    "season_id": 7,
+    "player": 6,
+    "location": 5,
+    "points": 396,
+    "team_name": "בננה כדורגל",
+    "id": 7,
+    "year": 2019,
+    "type": 1
+  },
+  {
+    "season_id": 7,
+    "player": 9,
+    "location": 4,
+    "points": 476,
+    "team_name": "Tired Mama",
+    "id": 7,
+    "year": 2019,
+    "type": 1
+  },
+  {
+    "season_id": 7,
+    "player": 2,
+    "location": 3,
+    "points": 612,
+    "team_name": "Red devils",
+    "id": 7,
+    "year": 2019,
+    "type": 1
+  },
+  {
+    "season_id": 7,
+    "player": 4,
+    "location": 2,
+    "points": 629,
+    "team_name": "FC Shnitzel",
+    "id": 7,
+    "year": 2019,
+    "type": 1
+  },
+  {
+    "season_id": 16,
+    "player": 5,
+    "location": 1,
+    "points": 285,
+    "team_name": "פיתה",
+    "id": 16,
+    "year": 2020,
+    "type": 3
+  },
+  {
+    "season_id": 8,
+    "player": 6,
+    "location": 4,
+    "points": 229,
+    "team_name": "ריאל קוסקוס",
+    "id": 8,
+    "year": 2020,
+    "type": 1
+  },
+  {
+    "season_id": 8,
+    "player": 1,
+    "location": 3,
+    "points": 333,
+    "team_name": "ביתר נפוליאון",
+    "id": 8,
+    "year": 2020,
+    "type": 1
+  },
+  {
+    "season_id": 8,
+    "player": 2,
+    "location": 2,
+    "points": 553,
+    "team_name": "שד אדום",
+    "id": 8,
+    "year": 2020,
+    "type": 1
+  },
+  {
+    "season_id": 8,
+    "player": 4,
+    "location": 1,
+    "points": 563,
+    "team_name": "FC Football Club",
+    "id": 8,
+    "year": 2020,
+    "type": 1
+  },
+  {
+    "season_id": 12,
+    "player": 4,
+    "location": 2,
+    "points": 1278,
+    "team_name": "FC Chocolate Cake",
+    "id": 12,
+    "year": 2020,
+    "type": 4
+  },
+  {
+    "season_id": 12,
+    "player": 2,
+    "location": 1,
+    "points": 1405,
+    "team_name": "צהוב שחור",
+    "id": 12,
+    "year": 2020,
+    "type": 4
+  },
+  {
+    "season_id": 16,
+    "player": 2,
+    "location": 5,
+    "points": 248,
+    "team_name": "Euro Gold",
+    "id": 16,
+    "year": 2020,
+    "type": 3
+  },
+  {
+    "season_id": 16,
+    "player": 6,
+    "location": 4,
+    "points": 249,
+    "team_name": "ריאל קוסקוס",
+    "id": 16,
+    "year": 2020,
+    "type": 3
+  },
+  {
+    "season_id": 16,
+    "player": 4,
+    "location": 3,
+    "points": 265,
+    "team_name": "FC ptitim",
+    "id": 16,
+    "year": 2020,
+    "type": 3
+  },
+  {
+    "season_id": 16,
+    "player": 1,
+    "location": 2,
+    "points": 282,
+    "team_name": "Trek Team",
+    "id": 16,
+    "year": 2020,
+    "type": 3
+  },
+  {
+    "season_id": 13,
+    "player": 4,
+    "location": 2,
+    "points": 0,
+    "team_name": "FC Cocopops",
+    "id": 13,
+    "year": 2021,
+    "type": 4
+  },
+  {
+    "season_id": 2,
+    "player": 4,
+    "location": 1,
+    "points": 595,
+    "team_name": "FC Grissini",
+    "id": 2,
+    "year": 2021,
+    "type": 1
+  },
+  {
+    "season_id": 2,
+    "player": 1,
+    "location": 2,
+    "points": 562,
+    "team_name": "SPOCK STARS",
+    "id": 2,
+    "year": 2021,
+    "type": 1
+  },
+  {
+    "season_id": 2,
+    "player": 2,
+    "location": 3,
+    "points": 556,
+    "team_name": "שד אדום",
+    "id": 2,
+    "year": 2021,
+    "type": 1
+  },
+  {
+    "season_id": 2,
+    "player": 6,
+    "location": 4,
+    "points": 284,
+    "team_name": "סתם אחד",
+    "id": 2,
+    "year": 2021,
+    "type": 1
+  },
+  {
+    "season_id": 13,
+    "player": 2,
+    "location": 1,
+    "points": 0,
+    "team_name": "צהוב עולה",
+    "id": 13,
+    "year": 2021,
+    "type": 4
+  },
+  {
+    "season_id": 18,
+    "player": 1,
+    "location": 5,
+    "points": 262,
+    "team_name": "אנטרפייז",
+    "id": 18,
+    "year": 2022,
+    "type": 2
+  },
+  {
+    "season_id": 18,
+    "player": 8,
+    "location": 4,
+    "points": 272,
+    "team_name": "גלקסיה אחרת",
+    "id": 18,
+    "year": 2022,
+    "type": 2
+  },
+  {
+    "season_id": 18,
+    "player": 4,
+    "location": 2,
+    "points": 330,
+    "team_name": "FC salt",
+    "id": 18,
+    "year": 2022,
+    "type": 2
+  },
+  {
+    "season_id": 18,
+    "player": 2,
+    "location": 1,
+    "points": 332,
+    "team_name": "Gold medal",
+    "id": 18,
+    "year": 2022,
+    "type": 2
+  },
+  {
+    "season_id": 1,
+    "player": 2,
+    "location": 3,
+    "points": 572,
+    "team_name": "שובו של CR7",
+    "id": 1,
+    "year": 2022,
+    "type": 1
+  },
+  {
+    "season_id": 1,
+    "player": 4,
+    "location": 2,
+    "points": 632,
+    "team_name": "FC Souffle",
+    "id": 1,
+    "year": 2022,
+    "type": 1
+  },
+  {
+    "season_id": 18,
+    "player": 5,
+    "location": 3,
+    "points": 299,
+    "team_name": "ברק",
+    "id": 18,
+    "year": 2022,
+    "type": 2
+  },
+  {
+    "season_id": 18,
+    "player": 7,
+    "location": 7,
+    "points": 195,
+    "team_name": "מכבי חור בגרב",
+    "id": 18,
+    "year": 2022,
+    "type": 2
+  },
+  {
+    "season_id": 18,
+    "player": 6,
+    "location": 6,
+    "points": 256,
+    "team_name": "ריאל קוסקוס",
+    "id": 18,
+    "year": 2022,
+    "type": 2
+  },
+  {
+    "season_id": 1,
+    "player": 1,
+    "location": 1,
+    "points": 639,
+    "team_name": "TREK TEAM",
+    "id": 1,
+    "year": 2022,
+    "type": 1
+  },
+  {
+    "season_id": 3,
+    "player": 2,
+    "location": 2,
+    "points": 0,
+    "team_name": "סר אלכס",
+    "id": 3,
+    "year": 2023,
+    "type": 1
+  },
+  {
+    "season_id": 3,
+    "player": 1,
+    "location": 3,
+    "points": 0,
+    "team_name": "DS9",
+    "id": 3,
+    "year": 2023,
+    "type": 1
+  },
+  {
+    "season_id": 3,
+    "player": 4,
+    "location": 1,
+    "points": 0,
+    "team_name": "FC Water",
+    "id": 3,
+    "year": 2023,
+    "type": 1
+  }
+]
