@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/fantazy-statistics/static/css/main.fa018107.css",
+    "main.js": "/fantazy-statistics/static/js/main.bbc11fa4.js",
+    "index.html": "/fantazy-statistics/index.html",
+    "main.fa018107.css.map": "/fantazy-statistics/static/css/main.fa018107.css.map",
+    "main.bbc11fa4.js.map": "/fantazy-statistics/static/js/main.bbc11fa4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fa018107.css",
+    "static/js/main.bbc11fa4.js"
+  ]
+}
