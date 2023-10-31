@@ -55,5 +55,4 @@ function App() {
 
 export default App;
 
-// todo: change colors by competition
 // todo: images proof present

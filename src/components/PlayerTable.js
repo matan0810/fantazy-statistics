@@ -14,6 +14,17 @@ import allTeams from "../data/teams.json";
 
 const bold = { fontWeight: "bold" };
 
+const tableColors = (index, seasonType) => {
+  const colors = {
+    1: ["#ADD8E6", "#FFE5B4"],
+    2: ["#E996A4", "#FFE4B5"],
+    3: ["#98FB98", "#B0E0E6"],
+    4: ["#D3D3D3", "#87CEEB"],
+  };
+
+  return { backgroundColor: colors[seasonType][index % 2] };
+};
+
 function PlayerTable({ season, players, seasonType }) {
   const [teams, setTeams] = useState([]);
 
@@ -41,10 +52,7 @@ function PlayerTable({ season, players, seasonType }) {
 
         <TableBody>
           {teams?.map((team, index) => (
-            <TableRow
-              key={team.player}
-              sx={{ backgroundColor: index % 2 ? "#ADD8E6" : "#FFE5B4" }}
-            >
+            <TableRow key={team.player} sx={tableColors(index, seasonType)}>
               <TableCell sx={{ fontWeight: "bold" }}>{team.location}</TableCell>
               <TableCell>{players[team.player]?.label}</TableCell>
               <TableCell>{team.points}</TableCell>
