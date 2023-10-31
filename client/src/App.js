@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react";
 import { Container } from "@mui/material";
-import axios from "axios";
-import {
-  // AddTeamsForm,
-  Header,
-  PlayerTable,
-  SeasonSelector,
-} from "./components";
-import { SERVER_URL } from "./constants/constants";
+import _ from "lodash";
+import { Header, PlayerTable, SeasonSelector } from "./components";
 import { players } from "./constants/options";
+import allSeasons from "./data/seasons.json";
 
 function App() {
   const [seasons, setSeasons] = useState([]);
@@ -20,23 +15,24 @@ function App() {
   );
 
   const onSeasonChange = (season) => {
-    setCurrentSeason(season);
+    setCurrentSeason(parseInt(season));
     localStorage.setItem("currentSeason", season);
   };
 
   const onSeasonTypeChange = (type) => {
-    setSeasonType(type);
+    setSeasonType(parseInt(type));
     localStorage.setItem("seasonType", type);
   };
 
   useEffect(() => {
-    axios
-      .get(`${SERVER_URL}/seasons?seasonType=${seasonType}`)
-      .then(({ data }) => {
-        setSeasons(data);
-        onSeasonChange(data[0]?.id);
-      })
-      .catch((error) => console.error("Error fetching player data:", error));
+    const newSeasons = _.orderBy(
+      allSeasons.filter((s) => s.type === seasonType),
+      ["year"],
+      ["asc"]
+    );
+
+    setSeasons(newSeasons);
+    onSeasonChange(newSeasons[0]?.id);
   }, [setSeasons, seasonType]);
 
   return (
