@@ -49,7 +49,6 @@ function App() {
         season={currentSeason}
         players={players}
       />
-      {/* <AddTeamsForm currentSeason={currentSeason} players={players} /> */}
     </Container>
   );
 }
@@ -57,7 +56,6 @@ function App() {
 export default App;
 
 // todo: change colors by competition
-// todo: form - table live updates
 // todo: images proof present
 
 // todo: deploy -

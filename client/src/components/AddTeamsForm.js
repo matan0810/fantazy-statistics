@@ -153,3 +153,4 @@ const AddTeamsForm = ({ currentSeason, players }) => {
 };
 
 export default AddTeamsForm;
+// todo: form - table live updates

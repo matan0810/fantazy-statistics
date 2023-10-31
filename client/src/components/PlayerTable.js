@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import _ from "lodash";
 import {
   Table,
   TableContainer,
@@ -9,7 +9,8 @@ import {
   TableCell,
   Paper,
 } from "@mui/material";
-import { SERVER_URL, TEAM_PROPERTIES } from "../constants/constants";
+import { TEAM_PROPERTIES } from "../constants/constants";
+import allTeams from "../data/teams.json";
 
 const bold = { fontWeight: "bold" };
 
@@ -17,10 +18,13 @@ function PlayerTable({ season, players, seasonType }) {
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${SERVER_URL}/teams?season=${season}&seasonType=${seasonType}`)
-      .then(({ data }) => setTeams(data))
-      .catch((error) => console.error("Error fetching team data:", error));
+    const newTeams = _.orderBy(
+      allTeams.filter((s) => s.season_id === season),
+      ["location"],
+      ["asc"]
+    );
+
+    setTeams(newTeams);
   }, [season, seasonType]);
 
   return (
