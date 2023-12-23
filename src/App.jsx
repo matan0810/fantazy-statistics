@@ -56,3 +56,4 @@ function App() {
 export default App;
 
 // todo: images proof present
+// todo: data in airtable
