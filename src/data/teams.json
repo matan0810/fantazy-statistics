@@ -688,5 +688,40 @@
     "id": 3,
     "year": 2023,
     "type": 1
+  },
+  {
+    "season_id": 19,
+    "player": 4,
+    "location": 1,
+    "points": 586,
+    "team_name": "FC Tea"
+  },
+  {
+    "season_id": 19,
+    "player": 1,
+    "location": 2,
+    "points": 574,
+    "team_name": "זיתים ופטריות"
+  },
+  {
+    "season_id": 19,
+    "player": 6,
+    "location": 3,
+    "points": 535,
+    "team_name": "עירוני מודיעין 2"
+  },
+  {
+    "season_id": 19,
+    "player": 2,
+    "location": 4,
+    "points": 458,
+    "team_name": "Red devil"
+  },
+  {
+    "season_id": 19,
+    "player": 7,
+    "location": 5,
+    "points": 429,
+    "team_name": "באלישניצל"
   }
 ]
