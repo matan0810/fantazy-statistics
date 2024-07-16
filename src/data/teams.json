@@ -723,5 +723,54 @@
     "location": 5,
     "points": 429,
     "team_name": "באלישניצל"
+  },
+  {
+    "season_id": 20,
+    "player": 1,
+    "location": 5,
+    "points": 228,
+    "team_name": "אקסטרה גבינה ופטריות"
+  },
+  {
+    "season_id": 20,
+    "player": 2,
+    "location": 3,
+    "points": 236,
+    "team_name": "Euro Gold"
+  },
+  {
+    "season_id": 20,
+    "player": 4,
+    "location": 1,
+    "points": 276,
+    "team_name": "FC Almond Milk"
+  },
+  {
+    "season_id": 20,
+    "player": 5,
+    "location": 7,
+    "points": 127,
+    "team_name": "אפצ'י"
+  },
+  {
+    "season_id": 20,
+    "player": 8,
+    "location": 4,
+    "points": 234,
+    "team_name": "רק ריאל"
+  },
+  {
+    "season_id": 20,
+    "player": 7,
+    "location": 6,
+    "points": 217,
+    "team_name": "אכלתקש"
+  },
+  {
+    "season_id": 20,
+    "player": 6,
+    "location": 2,
+    "points": 239,
+    "team_name": "עירוני מודיעין 2"
   }
 ]
