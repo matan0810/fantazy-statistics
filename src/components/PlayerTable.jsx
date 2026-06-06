@@ -324,26 +324,12 @@ function PlayerTable({ season, seasonInfo, players, seasonType }) {
       </Box>
 
       {/* podium */}
-      <Paper
-        elevation={0}
-        sx={{
-          p: { xs: 2, sm: 3 },
-          borderRadius: 4,
-          border: "1px solid rgba(0,0,0,0.05)",
-          boxShadow: "0 10px 30px -18px rgba(17,24,39,0.35)",
-          background: `linear-gradient(180deg, ${comp.accent}14 0%, #fff 60%)`,
-        }}
-      >
-        <Typography sx={{ fontWeight: 800, mb: 1, fontSize: "1.05rem" }}>
-          פודיום
-        </Typography>
-        <Podium
-          teams={teams}
-          players={players}
-          accent={comp.accent}
-          hidePoints={dataLost}
-        />
-      </Paper>
+      <Podium
+        teams={teams}
+        players={players}
+        accent={comp.accent}
+        hidePoints={dataLost}
+      />
 
       {/* full standings */}
       <Paper
