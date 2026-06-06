@@ -1,8 +1,40 @@
 export const seasonTypes = {
-  1: { key: 1, label: "ליגת האלופות" },
-  2: { key: 2, label: "מונדיאל" },
-  3: { key: 3, label: "יורו" },
-  4: { key: 4, label: "ליגת העל" },
+  1: {
+    key: 1,
+    label: "ליגת האלופות",
+    short: "אלופות",
+    emoji: "🏆",
+    color: "#1e3a8a",
+    accent: "#3b82f6",
+    gradient: ["#1e3a8a", "#2563eb"],
+  },
+  2: {
+    key: 2,
+    label: "מונדיאל",
+    short: "מונדיאל",
+    emoji: "🌍",
+    color: "#b45309",
+    accent: "#f59e0b",
+    gradient: ["#92400e", "#d97706"],
+  },
+  3: {
+    key: 3,
+    label: "יורו",
+    short: "יורו",
+    emoji: "🇪🇺",
+    color: "#0e7490",
+    accent: "#06b6d4",
+    gradient: ["#155e75", "#0891b2"],
+  },
+  4: {
+    key: 4,
+    label: "ליגת העל",
+    short: "ליגת העל",
+    emoji: "🇮🇱",
+    color: "#15803d",
+    accent: "#22c55e",
+    gradient: ["#166534", "#16a34a"],
+  },
 };
 
 export const players = {

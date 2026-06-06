@@ -772,5 +772,47 @@
     "location": 2,
     "points": 239,
     "team_name": "עירוני מודיעין 2"
+  },
+  {
+    "season_id": 21,
+    "player": 1,
+    "location": 1,
+    "points": 876,
+    "team_name": "Shark Tank"
+  },
+  {
+    "season_id": 21,
+    "player": 4,
+    "location": 2,
+    "points": 859,
+    "team_name": "FC Omelette"
+  },
+  {
+    "season_id": 21,
+    "player": 2,
+    "location": 3,
+    "points": 799,
+    "team_name": "Red & Gold"
+  },
+  {
+    "season_id": 21,
+    "player": 8,
+    "location": 4,
+    "points": 743,
+    "team_name": "מפרום שהוא לא מפרום"
+  },
+  {
+    "season_id": 21,
+    "player": 7,
+    "location": 5,
+    "points": 528,
+    "team_name": "שקשוקה FC"
+  },
+  {
+    "season_id": 21,
+    "player": 6,
+    "location": 6,
+    "points": 292,
+    "team_name": "מלך החילופים"
   }
 ]

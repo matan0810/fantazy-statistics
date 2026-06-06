@@ -12,7 +12,8 @@
   {
     "id": 3,
     "year": 2023,
-    "type": 1
+    "type": 1,
+    "dataLost": true
   },
   {
     "id": 4,
@@ -62,12 +63,14 @@
   {
     "id": 13,
     "year": 2021,
-    "type": 4
+    "type": 4,
+    "dataLost": true
   },
   {
     "id": 14,
     "year": 2016,
-    "type": 4
+    "type": 4,
+    "dataLost": true
   },
   {
     "id": 15,
@@ -82,7 +85,8 @@
   {
     "id": 17,
     "year": 2018,
-    "type": 2
+    "type": 2,
+    "dataLost": true
   },
   {
     "id": 18,
@@ -99,5 +103,11 @@
     "year": 2024,
     "type": 3,
     "name": "ליגת Eurovision 24"
+  },
+  {
+    "id": 21,
+    "year": 2025,
+    "type": 1,
+    "name": "ליגת לא לשכוח חילופים!"
   }
 ]
