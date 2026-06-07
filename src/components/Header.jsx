@@ -4,7 +4,19 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@mui/material";
+import _ from "lodash";
 import { seasonTypes } from "../constants/options";
+import allSeasons from "../data/seasons.json";
+import { formatSeasonYear } from "../utils/format";
+
+// Derived once from data: the calendar start year of the earliest league season
+const TWO_YEAR_TYPES = new Set([1, 4]);
+const _firstSeason = _.minBy(
+  allSeasons.filter((s) => TWO_YEAR_TYPES.has(s.type)),
+  "year",
+);
+// year field is the END year (e.g. 2016 = 15/16), so subtract 1 for the start
+const SINCE_LABEL = _firstSeason ? String(_firstSeason.year - 1) : "2015";
 
 const VIEWS = [
   { key: "seasons", label: "עונות", emoji: "📅" },
@@ -63,7 +75,7 @@ function Header({ seasonType, onSeasonTypeChange, view, onViewChange }) {
             letterSpacing: 0.5,
           }}
         >
-          🏆 פנטזי ליג · מאז 2016
+          🏆 פנטזי ליג · מאז {SINCE_LABEL}
         </Box>
         <Typography
           variant="h2"
