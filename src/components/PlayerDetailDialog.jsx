@@ -69,8 +69,12 @@ function CompetitionRow({ row }) {
           {comp.label}
         </Typography>
         <Typography sx={{ color: "text.secondary", fontSize: "0.75rem" }}>
-          {row.appearances} עונות · שיא {row.bestPoints} · דירוג טוב{" "}
-          {MEDAL[row.bestFinish] ?? row.bestFinish}
+          {row.appearances} עונות
+          {row.appearances > row.validAppearances && (
+            <span style={{ opacity: 0.65 }}> ({row.validAppearances} עם נתונים)</span>
+          )}
+          {" · "}שיא {row.bestPoints} · דירוג טוב{" "}
+          {row.bestFinish != null ? (MEDAL[row.bestFinish] ?? row.bestFinish) : "—"}
           {row.golds > 0 && ` · ${row.golds}×🥇`}
         </Typography>
       </Box>
@@ -163,7 +167,7 @@ function PlayerDetailDialog({ player, onClose }) {
               <MiniStat label="פודיומים" value={player.podiums} />
               <MiniStat
                 label="דירוג שיא"
-                value={MEDAL[player.bestFinish] ?? player.bestFinish}
+                value={player.bestFinish != null ? (MEDAL[player.bestFinish] ?? player.bestFinish) : "—"}
               />
             </Box>
 
@@ -220,34 +224,44 @@ function PlayerDetailDialog({ player, onClose }) {
                     px: 1,
                     borderRadius: 1.5,
                     backgroundColor:
-                      h.location <= 3 ? `${h.comp.accent}10` : "transparent",
+                      h.location != null && h.location <= 3
+                        ? `${h.comp.accent}10`
+                        : "transparent",
                   }}
                 >
                   <Box
                     sx={{
-                      width: 24,
+                      width: 28,
                       flexShrink: 0,
                       textAlign: "center",
                       fontWeight: 800,
                       fontSize: "0.85rem",
+                      color: h.location == null ? "text.disabled" : "inherit",
                     }}
+                    title={h.location == null ? "מיקום לא ידוע" : undefined}
                   >
-                    {MEDAL[h.location] ?? h.location}
+                    {h.location == null ? "?" : (MEDAL[h.location] ?? h.location)}
                   </Box>
                   <Box sx={{ fontSize: "0.85rem", flexShrink: 0 }}>{h.comp.emoji}</Box>
-                  <Typography
-                    sx={{
-                      flex: 1,
-                      minWidth: 0,
-                      fontWeight: 600,
-                      fontSize: "0.85rem",
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                    }}
-                  >
-                    {h.comp.label} {formatSeasonYear(h.year, h.comp.key)}
-                  </Typography>
+                  <Box sx={{ flex: 1, minWidth: 0 }}>
+                    <Typography
+                      sx={{
+                        fontWeight: 600,
+                        fontSize: "0.85rem",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        color: h.dataLost ? "text.disabled" : "inherit",
+                      }}
+                    >
+                      {h.comp.label} {formatSeasonYear(h.year, h.comp.key)}
+                    </Typography>
+                    {h.dataLost && (
+                      <Typography sx={{ fontSize: "0.68rem", color: "text.disabled", lineHeight: 1 }}>
+                        נתונים לא זמינים
+                      </Typography>
+                    )}
+                  </Box>
                   <Typography
                     sx={{
                       flexShrink: 0,

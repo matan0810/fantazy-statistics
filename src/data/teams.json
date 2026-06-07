@@ -270,6 +270,13 @@
     "type": 2
   },
   {
+    "season_id": 17,
+    "player": 4,
+    "location": null,
+    "points": 0,
+    "team_name": "FC Papaya"
+  },
+  {
     "season_id": 10,
     "player": 2,
     "location": 1,
@@ -849,12 +856,5 @@
     "location": 6,
     "points": 292,
     "team_name": "מלך החילופים"
-  },
-  {
-    "season_id": 22,
-    "player": 3,
-    "location": 3,
-    "points": 844,
-    "team_name": "SHARKS"
   }
 ]

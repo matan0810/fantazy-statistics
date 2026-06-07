@@ -74,8 +74,11 @@ export function computeStats(selectedTypes = null) {
               : 0,
             bestPoints: validRecs.length ? _.maxBy(validRecs, "points").points : 0,
             golds: recs.filter((r) => r.location === 1).length,
-            podiums: recs.filter((r) => r.location <= 3).length,
-            bestFinish: _.minBy(recs, "location").location,
+            podiums: recs.filter((r) => r.location != null && r.location <= 3).length,
+            bestFinish: (() => {
+              const ranked = recs.filter((r) => r.location != null);
+              return ranked.length ? _.minBy(ranked, "location").location : null;
+            })(),
           };
         })
         .orderBy(["golds", "appearances"], ["desc", "desc"])
@@ -110,7 +113,10 @@ export function computeStats(selectedTypes = null) {
         avgPoints: validRecords.length
           ? Math.round(totalPoints / validRecords.length)
           : 0,
-        bestFinish: appearances ? _.minBy(records, "location").location : null,
+        bestFinish: (() => {
+          const ranked = records.filter((r) => r.location != null);
+          return ranked.length ? _.minBy(ranked, "location").location : null;
+        })(),
         titlesByType,
         byCompetition,
         history,
