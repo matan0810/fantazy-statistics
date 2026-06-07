@@ -5,9 +5,8 @@ import {
   ToggleButtonGroup,
 } from "@mui/material";
 import _ from "lodash";
-import { seasonTypes } from "../constants/options";
+import { seasonTypes } from "../constants";
 import allSeasons from "../data/seasons.json";
-import { formatSeasonYear } from "../utils/format";
 
 // Derived once from data: the calendar start year of the earliest league season
 const TWO_YEAR_TYPES = new Set([1, 4]);

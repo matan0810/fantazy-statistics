@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Container, ThemeProvider, CssBaseline, Box } from "@mui/material";
 import _ from "lodash";
 import { Header, PlayerTable, SeasonSelector, StatsPage } from "./components";
-import { players } from "./constants/options";
+import { players } from "./constants";
 import { buildTheme } from "./theme";
 import allSeasons from "./data/seasons.json";
 

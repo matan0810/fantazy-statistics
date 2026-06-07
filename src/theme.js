@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { seasonTypes } from "./constants/options";
+import { seasonTypes } from "./constants";
 
 // Builds a fresh MUI theme keyed to the active competition so the whole
 // UI (buttons, highlights, accents) shifts color identity per competition.

@@ -1,6 +1,8 @@
 import { Box, Typography, Avatar } from "@mui/material";
-import { isLostName } from "../utils/format";
+import { isLostName } from "../../utils";
 
+// Per-rank pedestal styling: gradient, ring glow and height. 1st place also
+// gets a crown. Anything outside 1–3 falls back to the bronze look.
 const MEDALS = {
   1: {
     emoji: "🥇",
@@ -26,10 +28,9 @@ const MEDALS = {
   },
 };
 
-// Classic podium order: 2nd on the right, 1st in the middle, 3rd on the left.
-const ORDER = [2, 1, 3];
-
-function Step({ team, players, accent, hidePoints }) {
+// A single podium column. Renders an empty spacer when the slot has no team so
+// the three columns stay aligned.
+function PodiumStep({ team, players, accent, hidePoints }) {
   if (!team) return <Box sx={{ flex: 1 }} />;
 
   const m = MEDALS[team.location] ?? MEDALS[3];
@@ -51,14 +52,19 @@ function Step({ team, players, accent, hidePoints }) {
       <Box sx={{ height: 26, display: "flex", alignItems: "center" }}>
         {m.champ && (
           <Typography
-            sx={{ fontSize: { xs: 22, sm: 28 }, filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.4))" }}
+            sx={{
+              fontSize: { xs: 22, sm: 28 },
+              filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.4))",
+            }}
           >
             👑
           </Typography>
         )}
       </Box>
 
-      <Typography sx={{ fontSize: { xs: 22, sm: 28 }, lineHeight: 1 }}>{m.emoji}</Typography>
+      <Typography sx={{ fontSize: { xs: 22, sm: 28 }, lineHeight: 1 }}>
+        {m.emoji}
+      </Typography>
 
       <Avatar
         sx={{
@@ -103,7 +109,11 @@ function Step({ team, players, accent, hidePoints }) {
       )}
       {lostName && (
         <Typography
-          sx={{ fontSize: "0.66rem", color: "rgba(255,255,255,0.45)", fontStyle: "italic" }}
+          sx={{
+            fontSize: "0.66rem",
+            color: "rgba(255,255,255,0.45)",
+            fontStyle: "italic",
+          }}
         >
           שם הקבוצה אבד
         </Typography>
@@ -134,7 +144,8 @@ function Step({ team, players, accent, hidePoints }) {
             left: 0,
             right: 0,
             height: "42%",
-            background: "linear-gradient(180deg, rgba(255,255,255,0.45), transparent)",
+            background:
+              "linear-gradient(180deg, rgba(255,255,255,0.45), transparent)",
           }}
         />
         {/* big watermark rank number */}
@@ -186,7 +197,9 @@ function Step({ team, players, accent, hidePoints }) {
             >
               {team.points}
             </Typography>
-            <Typography sx={{ fontSize: { xs: "0.58rem", sm: "0.68rem" }, opacity: 0.9 }}>
+            <Typography
+              sx={{ fontSize: { xs: "0.58rem", sm: "0.68rem" }, opacity: 0.9 }}
+            >
               נקודות
             </Typography>
           </Box>
@@ -196,68 +209,4 @@ function Step({ team, players, accent, hidePoints }) {
   );
 }
 
-function Podium({ teams, players, accent, hidePoints }) {
-  const byLocation = (loc) => teams.find((t) => t.location === loc);
-
-  return (
-    <Box
-      sx={{
-        position: "relative",
-        overflow: "hidden",
-        borderRadius: 4,
-        px: { xs: 1.5, sm: 3 },
-        pt: 2,
-        boxShadow: "0 16px 40px -20px rgba(15,23,42,0.7)",
-        background: "radial-gradient(130% 90% at 50% 0%, #334155 0%, #111827 72%)",
-      }}
-    >
-      {/* spotlight glow behind the champion */}
-      <Box
-        aria-hidden
-        sx={{
-          position: "absolute",
-          top: -50,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: 320,
-          height: 220,
-          background: "radial-gradient(closest-side, rgba(251,191,36,0.28), transparent)",
-          pointerEvents: "none",
-        }}
-      />
-      <Typography
-        sx={{
-          position: "relative",
-          textAlign: "center",
-          color: "rgba(255,255,255,0.9)",
-          fontWeight: 800,
-          fontSize: "1rem",
-          mb: 2,
-          letterSpacing: 0.5,
-        }}
-      >
-        🏆 פודיום
-      </Typography>
-      <Box
-        sx={{
-          position: "relative",
-          display: "flex",
-          alignItems: "flex-end",
-          gap: { xs: 1, sm: 2 },
-        }}
-      >
-        {ORDER.map((loc) => (
-          <Step
-            key={loc}
-            team={byLocation(loc)}
-            players={players}
-            accent={accent}
-            hidePoints={hidePoints}
-          />
-        ))}
-      </Box>
-    </Box>
-  );
-}
-
-export default Podium;
+export default PodiumStep;

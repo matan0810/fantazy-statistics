@@ -1,13 +1,9 @@
 import { Box, Chip, Typography } from "@mui/material";
-import { seasonTypes } from "../constants/options";
-import { formatSeasonYear } from "../utils/format";
+import { seasonTypes } from "../../constants";
+import { formatSeasonYear } from "../../utils";
 
-function SeasonSelector({
-  currentSeason,
-  onSeasonChange,
-  seasons,
-  seasonType,
-}) {
+// Horizontal chip row for picking the active season within a competition.
+function SeasonSelector({ currentSeason, onSeasonChange, seasons, seasonType }) {
   const comp = seasonTypes[seasonType] ?? seasonTypes[1];
 
   if (!seasons.length) return null;
@@ -20,13 +16,7 @@ function SeasonSelector({
       >
         בחר עונה
       </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 1,
-        }}
-      >
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
         {seasons.map((season) => {
           const selected = season.id === currentSeason;
           return (

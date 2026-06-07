@@ -1,11 +1,9 @@
 import proofData from "../data/proofs.json";
 
-const images = import.meta.glob("../final results/**/*.{png,jpg,jpeg,webp}", {
-  eager: true,
-  import: "default",
-});
+// Images live in public/proofs/ and are served as plain static assets.
+// Prepend BASE_URL so the paths resolve correctly on GitHub Pages (/fantazy-statistics/).
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 export function getProofUrls(seasonId) {
-  const paths = proofData[String(seasonId)] ?? [];
-  return paths.map((p) => images[p]).filter(Boolean);
+  return (proofData[String(seasonId)] ?? []).map((p) => base + p);
 }

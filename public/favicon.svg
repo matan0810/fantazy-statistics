@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Trophy</title>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"  stop-color="#FEF9C3"/>
+      <stop offset="45%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#92400E"/>
+    </linearGradient>
+  </defs>
+  <path fill-rule="evenodd" fill="#F59E0B"
+        d="M 16 7 C 9.376 7 4 12.376 4 19 C 4 25.624 9.376 31 16 31 Z
+           M 16 14 C 13.24 14 11 16.24 11 19 C 11 21.76 13.24 24 16 24 Z"/>
+  <path fill-rule="evenodd" fill="#F59E0B"
+        d="M 48 7 C 54.624 7 60 12.376 60 19 C 60 25.624 54.624 31 48 31 Z
+           M 48 14 C 50.76 14 53 16.24 53 19 C 53 21.76 50.76 24 48 24 Z"/>
+  <path d="M 15 7 H 49 L 44 31 Q 38 35 32 35 Q 26 35 20 31 Z" fill="url(#g)"/>
+  <rect x="29"   y="35"   width="6"  height="4.5" fill="#F59E0B"/>
+  <rect x="20"   y="39.5" width="24" height="4"   rx="2"   fill="#D97706"/>
+  <rect x="29"   y="43.5" width="6"  height="4"   fill="#F59E0B"/>
+  <rect x="21"   y="47.5" width="22" height="3"   rx="1.5" fill="#D97706"/>
+  <rect x="15"   y="50.5" width="34" height="5"   rx="2.5" fill="#B45309"/>
+</svg>
