@@ -253,10 +253,10 @@ function PlayerDetailDialog({ player, onClose }) {
                       flexShrink: 0,
                       fontWeight: 800,
                       fontSize: "0.85rem",
-                      color: h.comp.color,
+                      color: h.dataLost ? "text.disabled" : h.comp.color,
                     }}
                   >
-                    {h.points}
+                    {h.dataLost ? "—" : h.points}
                   </Typography>
                 </Box>
               ))}

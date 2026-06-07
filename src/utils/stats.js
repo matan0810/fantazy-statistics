@@ -15,28 +15,39 @@ export function computeStats(selectedTypes = null) {
   const lostSeasonIds = new Set(
     allSeasons.filter((s) => s.dataLost).map((s) => s.id),
   );
+  // allValidSeasons/allValidTeams: exclude dataLost — used only for points-based stats
   const allValidSeasons = allSeasons.filter((s) => !s.dataLost);
   const allValidTeams = allTeams.filter((t) => !lostSeasonIds.has(t.season_id));
 
+  // All seasons including dataLost, filtered by type (for appearances/medals/history)
+  const allFilteredSeasons = selectedTypes
+    ? allSeasons.filter((s) => selectedTypes.has(s.type))
+    : allSeasons;
   const validSeasons = selectedTypes
     ? allValidSeasons.filter((s) => selectedTypes.has(s.type))
     : allValidSeasons;
+
+  const allFilteredIds = new Set(allFilteredSeasons.map((s) => s.id));
   const filteredIds = new Set(validSeasons.map((s) => s.id));
-  const validTeams = selectedTypes
-    ? allValidTeams.filter((t) => filteredIds.has(t.season_id))
-    : allValidTeams;
+
+  // allFilteredTeams includes lost seasons (for appearances/medals/history)
+  const allFilteredTeams = allTeams.filter((t) => allFilteredIds.has(t.season_id));
+  // validTeams excludes lost seasons (for points calculations)
+  const validTeams = allValidTeams.filter((t) => filteredIds.has(t.season_id));
 
   // --- per player aggregation ---
-  const byPlayer = _.groupBy(validTeams, "player");
+  const byPlayer = _.groupBy(allFilteredTeams, "player");
+  const byPlayerValid = _.groupBy(validTeams, "player");
 
   const playerStats = Object.keys(players)
     .map((key) => {
       const id = parseInt(key);
-      const records = byPlayer[id] ?? [];
+      const records = byPlayer[id] ?? [];           // all records including lost seasons
+      const validRecords = byPlayerValid[id] ?? []; // only records with real points data
       const golds = records.filter((r) => r.location === 1).length;
       const silvers = records.filter((r) => r.location === 2).length;
       const bronzes = records.filter((r) => r.location === 3).length;
-      const totalPoints = _.sumBy(records, "points");
+      const totalPoints = _.sumBy(validRecords, "points");
       const appearances = records.length;
 
       // titles split per competition type
@@ -52,12 +63,16 @@ export function computeStats(selectedTypes = null) {
       const byCompetition = _(records)
         .groupBy(typeOf)
         .map((recs, type) => {
+          const validRecs = recs.filter((r) => !lostSeasonIds.has(r.season_id));
           const comp = seasonTypes[type] ?? seasonTypes[1];
           return {
             comp,
             appearances: recs.length,
-            avgPoints: Math.round(_.sumBy(recs, "points") / recs.length),
-            bestPoints: _.maxBy(recs, "points").points,
+            validAppearances: validRecs.length,
+            avgPoints: validRecs.length
+              ? Math.round(_.sumBy(validRecs, "points") / validRecs.length)
+              : 0,
+            bestPoints: validRecs.length ? _.maxBy(validRecs, "points").points : 0,
             golds: recs.filter((r) => r.location === 1).length,
             podiums: recs.filter((r) => r.location <= 3).length,
             bestFinish: _.minBy(recs, "location").location,
@@ -76,6 +91,7 @@ export function computeStats(selectedTypes = null) {
             points: r.points,
             team_name: r.team_name,
             comp,
+            dataLost: lostSeasonIds.has(r.season_id),
           };
         }),
         ["year"],
@@ -91,7 +107,9 @@ export function computeStats(selectedTypes = null) {
         bronzes,
         podiums: golds + silvers + bronzes,
         totalPoints,
-        avgPoints: appearances ? Math.round(totalPoints / appearances) : 0,
+        avgPoints: validRecords.length
+          ? Math.round(totalPoints / validRecords.length)
+          : 0,
         bestFinish: appearances ? _.minBy(records, "location").location : null,
         titlesByType,
         byCompetition,
@@ -117,7 +135,7 @@ export function computeStats(selectedTypes = null) {
   playerStats.forEach((p) =>
     p.byCompetition.forEach((c) => {
       if (
-        c.appearances >= 2 &&
+        c.validAppearances >= 2 &&
         (!bestCompAverage || c.avgPoints > bestCompAverage.avgPoints)
       ) {
         bestCompAverage = {
@@ -134,39 +152,51 @@ export function computeStats(selectedTypes = null) {
   const titlesByCompetition = Object.values(seasonTypes)
     .filter((comp) => !selectedTypes || selectedTypes.has(comp.key))
     .map((comp) => {
-    const compSeasonIds = new Set(
-      validSeasons.filter((s) => s.type === comp.key).map((s) => s.id),
-    );
-    const compTeams = validTeams.filter((t) => compSeasonIds.has(t.season_id));
+      // all seasons (including lost) for season count and champion rankings
+      const compAllSeasonIds = new Set(
+        allFilteredSeasons.filter((s) => s.type === comp.key).map((s) => s.id),
+      );
+      // valid seasons only for the points record
+      const compValidSeasonIds = new Set(
+        validSeasons.filter((s) => s.type === comp.key).map((s) => s.id),
+      );
+      const compAllTeams = allFilteredTeams.filter((t) =>
+        compAllSeasonIds.has(t.season_id),
+      );
+      const compValidTeams = validTeams.filter((t) =>
+        compValidSeasonIds.has(t.season_id),
+      );
 
-    const counts = _.countBy(
-      compTeams.filter((t) => t.location === 1),
-      "player",
-    );
-    const ranked = _.orderBy(
-      Object.entries(counts).map(([pid, count]) => ({
-        name: players[pid]?.label ?? "—",
-        count,
-      })),
-      ["count"],
-      ["desc"],
-    );
+      const counts = _.countBy(
+        compAllTeams.filter((t) => t.location === 1),
+        "player",
+      );
+      const ranked = _.orderBy(
+        Object.entries(counts).map(([pid, count]) => ({
+          name: players[pid]?.label ?? "—",
+          count,
+        })),
+        ["count"],
+        ["desc"],
+      );
 
-    const recordTeam = compTeams.length ? _.maxBy(compTeams, "points") : null;
-    const recordSeason = recordTeam && {
-      name: players[recordTeam.player]?.label ?? "—",
-      points: recordTeam.points,
-      year: seasonById[recordTeam.season_id]?.year,
-    };
+      const recordTeam = compValidTeams.length
+        ? _.maxBy(compValidTeams, "points")
+        : null;
+      const recordSeason = recordTeam && {
+        name: players[recordTeam.player]?.label ?? "—",
+        points: recordTeam.points,
+        year: seasonById[recordTeam.season_id]?.year,
+      };
 
-    return {
-      comp,
-      seasons: compSeasonIds.size,
-      topChampion: ranked[0] ?? null,
-      ranked,
-      recordSeason,
-    };
-  });
+      return {
+        comp,
+        seasons: compAllSeasonIds.size,
+        topChampion: ranked[0] ?? null,
+        ranked,
+        recordSeason,
+      };
+    });
 
   return {
     playerStats,
@@ -174,9 +204,9 @@ export function computeStats(selectedTypes = null) {
     records: { mostTitles, mostPodiums, bestCompAverage },
     titlesByCompetition,
     totals: {
-      seasons: validSeasons.length,
+      seasons: allFilteredSeasons.length,
       players: playerStats.length,
-      records: validTeams.length,
+      records: allFilteredTeams.length,
     },
   };
 }
