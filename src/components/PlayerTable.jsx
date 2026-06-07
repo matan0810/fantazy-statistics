@@ -1,15 +1,18 @@
 import { useState, useEffect, useMemo } from "react";
 import _ from "lodash";
-import { Box, Paper, Typography, Avatar, Divider, Chip } from "@mui/material";
+import { Box, Paper, Typography, Avatar, Divider, Chip, IconButton, Tooltip } from "@mui/material";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import GroupsIcon from "@mui/icons-material/Groups";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import VerifiedIcon from "@mui/icons-material/Verified";
 import { seasonTypes } from "../constants/options";
 import { isLostName, formatSeasonYear } from "../utils/format";
 import { computeStats } from "../utils/stats";
+import { getProofUrls } from "../utils/proofImages";
 import Podium from "./Podium";
 import PlayerDetailDialog from "./PlayerDetailDialog";
+import ProofDialog from "./ProofDialog";
 import allTeams from "../data/teams.json";
 
 const MEDAL = { 1: "🥇", 2: "🥈", 3: "🥉" };
@@ -213,12 +216,14 @@ function StandingRow({
 function PlayerTable({ season, seasonInfo, players, seasonType }) {
   const [teams, setTeams] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [proofOpen, setProofOpen] = useState(false);
   const statsById = useMemo(
     () => _.keyBy(computeStats().playerStats, "id"),
     [],
   );
   const comp = seasonTypes[seasonType] ?? seasonTypes[1];
   const dataLost = Boolean(seasonInfo?.dataLost);
+  const proofUrls = useMemo(() => getProofUrls(season), [season]);
 
   useEffect(() => {
     const newTeams = _.orderBy(
@@ -259,7 +264,7 @@ function PlayerTable({ season, seasonInfo, players, seasonType }) {
       <Box
         sx={{
           display: "flex",
-          alignItems: "baseline",
+          alignItems: "center",
           flexWrap: "wrap",
           gap: 1.5,
         }}
@@ -293,6 +298,22 @@ function PlayerTable({ season, seasonInfo, players, seasonType }) {
               border: "1px solid rgba(0,0,0,0.1)",
             }}
           />
+        )}
+        {proofUrls.length > 0 && (
+          <Tooltip title="הצג הוכחה" arrow>
+            <IconButton
+              size="small"
+              onClick={() => setProofOpen(true)}
+              sx={{
+                color: comp.accent,
+                backgroundColor: `${comp.accent}15`,
+                "&:hover": { backgroundColor: `${comp.accent}28` },
+                transition: "all 0.18s",
+              }}
+            >
+              <VerifiedIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
         )}
       </Box>
 
@@ -394,6 +415,13 @@ function PlayerTable({ season, seasonInfo, players, seasonType }) {
       )}
 
       <PlayerDetailDialog player={selected} onClose={() => setSelected(null)} />
+
+      <ProofDialog
+        open={proofOpen}
+        onClose={() => setProofOpen(false)}
+        urls={proofUrls}
+        seasonLabel={`${comp.label} ${formatSeasonYear(seasonInfo?.year, seasonType)}`}
+      />
     </Box>
   );
 }

@@ -123,69 +123,113 @@ function RecordCard({ emoji, label, name, highlight, sub }) {
   );
 }
 
-// Pill-style competition picker — averages are always scoped to one
-// competition, so there is no blended "all" option.
-function CompetitionFilter({ value, onChange }) {
+function CompetitionFilter({ selected, onToggle }) {
   const options = Object.values(seasonTypes);
 
   return (
-    <Box sx={{ display: "flex", gap: 0.75, flexWrap: "wrap", mb: 1.5 }}>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        gap: 1,
+        flexWrap: "wrap",
+        mb: 1.5,
+        p: 1.25,
+        borderRadius: 3,
+        backgroundColor: "rgba(0,0,0,0.03)",
+        border: "1px solid rgba(0,0,0,0.07)",
+      }}
+    >
+      <Typography
+        sx={{ fontSize: "0.78rem", fontWeight: 700, color: "text.secondary", flexShrink: 0 }}
+      >
+        סנן:
+      </Typography>
       {options.map((o) => {
-        const active = value === o.key;
+        const active = selected.has(o.key);
         return (
           <Box
             key={o.key}
-            onClick={() => onChange(o.key)}
+            onClick={() => onToggle(o.key)}
             sx={{
               cursor: "pointer",
               userSelect: "none",
-              px: 1.5,
-              py: 0.6,
+              px: 1.25,
+              py: 0.5,
               borderRadius: 999,
               fontWeight: 700,
               fontSize: "0.85rem",
               border: "1.5px solid",
-              borderColor: active ? ACCENT : "rgba(0,0,0,0.12)",
-              backgroundColor: active ? ACCENT : "#fff",
-              color: active ? "#fff" : "text.secondary",
+              borderColor: active ? o.color : "rgba(0,0,0,0.15)",
+              backgroundColor: active ? o.color : "rgba(0,0,0,0.04)",
+              color: active ? "#fff" : "#777",
               transition: "all 0.15s",
-              "&:hover": { borderColor: ACCENT, color: active ? "#fff" : ACCENT },
+              display: "flex",
+              alignItems: "center",
+              gap: 0.5,
+              "&:hover": {
+                borderColor: o.color,
+                backgroundColor: active ? o.color : `${o.color}22`,
+                color: active ? "#fff" : o.color,
+              },
             }}
           >
-            <span style={{ marginInlineEnd: 4 }}>{o.emoji}</span>
+            <span>{o.emoji}</span>
             {o.label}
+            {active && (
+              <span style={{ fontSize: "0.7rem", opacity: 0.85, marginInlineStart: 2 }}>✓</span>
+            )}
           </Box>
         );
       })}
+      <Typography sx={{ fontSize: "0.72rem", color: "text.disabled", mr: "auto" }}>
+        לחצו לבחירה מרובה
+      </Typography>
     </Box>
   );
 }
 
-function StatsPage() {
-  const stats = useMemo(() => computeStats(), []);
-  const { hallOfFame, playerStats, records, titlesByCompetition, totals } = stats;
-  const [selected, setSelected] = useState(null);
-  const [compFilter, setCompFilter] = useState(1);
+// Default: all competitions except Ligat HaAl (type 4)
+const DEFAULT_COMPS = new Set([1, 2, 3]);
 
-  // Average leaderboard scoped to a single competition, where the game count is
-  // consistent and the average is a fair comparison.
+function StatsPage() {
+  const [selectedComps, setSelectedComps] = useState(DEFAULT_COMPS);
+  const [selected, setSelected] = useState(null);
+
+  const toggleComp = (key) => {
+    setSelectedComps((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) {
+        if (next.size > 1) next.delete(key);
+      } else {
+        next.add(key);
+      }
+      return next;
+    });
+  };
+
+  const stats = useMemo(() => computeStats(selectedComps), [selectedComps]);
+  const { hallOfFame, playerStats, records, titlesByCompetition, totals } = stats;
+
   const leaders = useMemo(() => {
     return _.orderBy(
-      playerStats
-        .map((p) => {
-          const c = p.byCompetition.find((b) => b.comp.key === Number(compFilter));
-          return c ? { player: p, metric: c.avgPoints, appearances: c.appearances } : null;
-        })
-        .filter(Boolean),
+      playerStats.map((p) => ({
+        player: p,
+        metric: p.avgPoints,
+        appearances: p.appearances,
+      })),
       ["metric"],
       ["desc"]
     );
-  }, [compFilter, playerStats]);
+  }, [playerStats]);
 
   const maxMetric = leaders[0]?.metric || 1;
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, pb: 6 }}>
+      {/* competition filter */}
+      <CompetitionFilter selected={selectedComps} onToggle={toggleComp} />
+
       {/* totals strip */}
       <Typography sx={{ color: "text.secondary", fontWeight: 700, mb: 0.5 }}>
         {totals.seasons} עונות · {totals.players} שחקנים · {totals.records} רישומים
@@ -209,9 +253,15 @@ function StatsPage() {
         <RecordCard
           emoji="📊"
           label="שיא ממוצע עונתי"
-          name={records.bestCompAverage?.name}
-          highlight={`${records.bestCompAverage?.avgPoints} בממוצע`}
-          sub={`${records.bestCompAverage?.comp.emoji} ${records.bestCompAverage?.comp.label}`}
+          name={records.bestCompAverage?.name ?? "—"}
+          highlight={
+            records.bestCompAverage ? `${records.bestCompAverage.avgPoints} בממוצע` : null
+          }
+          sub={
+            records.bestCompAverage
+              ? `${records.bestCompAverage.comp.emoji} ${records.bestCompAverage.comp.label}`
+              : "אין מספיק נתונים"
+          }
         />
       </Box>
 
@@ -270,11 +320,10 @@ function StatsPage() {
         ))}
       </Paper>
 
-      {/* average leaders with competition filter */}
-      <SectionTitle emoji="📈" sub="ממוצע נקודות לעונה — בחרו תחרות להשוואה הוגנת">
+      {/* average leaders */}
+      <SectionTitle emoji="📈" sub="ממוצע נקודות לעונה — לפי התחרויות הנבחרות">
         מובילי הממוצע
       </SectionTitle>
-      <CompetitionFilter value={compFilter} onChange={setCompFilter} />
       <Paper elevation={0} sx={{ ...CARD_SX, p: { xs: 1.5, sm: 2.5 } }}>
         {leaders.length === 0 ? (
           <Typography sx={{ color: "text.secondary", py: 2, textAlign: "center" }}>

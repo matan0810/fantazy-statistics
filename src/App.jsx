@@ -77,6 +77,18 @@ function App() {
               <StatsPage />
             )}
           </Box>
+          <Box
+            component="footer"
+            sx={{
+              textAlign: "center",
+              py: 3,
+              color: "text.disabled",
+              fontSize: "0.72rem",
+              userSelect: "none",
+            }}
+          >
+            © כל הזכויות שמורות לי
+          </Box>
         </Container>
       </Box>
     </ThemeProvider>
@@ -85,5 +97,4 @@ function App() {
 
 export default App;
 
-// todo: images proof present
 // todo: data in airtable

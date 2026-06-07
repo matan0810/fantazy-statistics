@@ -85,7 +85,7 @@ function Header({ seasonType, onSeasonTypeChange, view, onViewChange }) {
             maxWidth: 520,
           }}
         >
-          כל האלופות, השיאים וההיסטוריה של הליגה — במקום אחד.
+          כל האליפויות, השיאים וההיסטוריה של הליגה — במקום אחד.
         </Typography>
 
         {/* page navigation */}

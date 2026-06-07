@@ -7,17 +7,24 @@ import { players, seasonTypes } from "../constants/options";
 // `location` is the final rank (1 = champion). Because each competition has a
 // different number of game-weeks, points are only compared *within* a
 // competition; across competitions we lean on averages and rankings instead.
-export function computeStats() {
+// selectedTypes: optional Set of competition type keys to include (null = all)
+export function computeStats(selectedTypes = null) {
   const seasonById = _.keyBy(allSeasons, "id");
   const typeOf = (r) => seasonById[r.season_id]?.type ?? r.type;
 
-  // Seasons whose real data was lost keep only a marked winner with fake
-  // points — they are excluded from every statistic below.
   const lostSeasonIds = new Set(
     allSeasons.filter((s) => s.dataLost).map((s) => s.id),
   );
-  const validSeasons = allSeasons.filter((s) => !s.dataLost);
-  const validTeams = allTeams.filter((t) => !lostSeasonIds.has(t.season_id));
+  const allValidSeasons = allSeasons.filter((s) => !s.dataLost);
+  const allValidTeams = allTeams.filter((t) => !lostSeasonIds.has(t.season_id));
+
+  const validSeasons = selectedTypes
+    ? allValidSeasons.filter((s) => selectedTypes.has(s.type))
+    : allValidSeasons;
+  const filteredIds = new Set(validSeasons.map((s) => s.id));
+  const validTeams = selectedTypes
+    ? allValidTeams.filter((t) => filteredIds.has(t.season_id))
+    : allValidTeams;
 
   // --- per player aggregation ---
   const byPlayer = _.groupBy(validTeams, "player");
@@ -124,7 +131,9 @@ export function computeStats() {
   );
 
   // --- per competition: champions ranking + season points record ---
-  const titlesByCompetition = Object.values(seasonTypes).map((comp) => {
+  const titlesByCompetition = Object.values(seasonTypes)
+    .filter((comp) => !selectedTypes || selectedTypes.has(comp.key))
+    .map((comp) => {
     const compSeasonIds = new Set(
       validSeasons.filter((s) => s.type === comp.key).map((s) => s.id),
     );
