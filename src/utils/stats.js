@@ -173,17 +173,20 @@ export function computeStats(selectedTypes = null) {
         compValidSeasonIds.has(t.season_id),
       );
 
-      const counts = _.countBy(
-        compAllTeams.filter((t) => t.location === 1),
+      const winningTeams = compAllTeams.filter((t) => t.location === 1);
+      const counts = _.countBy(winningTeams, "player");
+      const winningPointsByPlayer = _.groupBy(
+        winningTeams.filter((t) => !lostSeasonIds.has(t.season_id)),
         "player",
       );
       const ranked = _.orderBy(
         Object.entries(counts).map(([pid, count]) => ({
           name: players[pid]?.label ?? "—",
           count,
+          winningPoints: _.sumBy(winningPointsByPlayer[pid] ?? [], "points"),
         })),
-        ["count"],
-        ["desc"],
+        ["count", "winningPoints"],
+        ["desc", "desc"],
       );
 
       const recordTeam = compValidTeams.length

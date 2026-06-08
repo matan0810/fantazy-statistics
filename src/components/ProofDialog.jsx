@@ -6,17 +6,25 @@ import {
   IconButton,
   Box,
   Typography,
+  CircularProgress,
 } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import {
+  Close as CloseIcon,
+  ChevronRight as ChevronRightIcon,
+  ChevronLeft as ChevronLeftIcon,
+} from "@mui/icons-material";
 
 function ProofDialog({ open, onClose, urls, seasonLabel }) {
   const [idx, setIdx] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (open) setIdx(0);
   }, [open]);
+
+  useEffect(() => {
+    setLoading(true);
+  }, [idx]);
 
   if (!urls?.length) return null;
 
@@ -70,18 +78,43 @@ function ProofDialog({ open, onClose, urls, seasonLabel }) {
           )}
 
           <Box
-            component="img"
-            src={urls[idx]}
-            alt={`הוכחה ${idx + 1}`}
             sx={{
               flex: 1,
-              maxWidth: "100%",
-              maxHeight: "70vh",
-              objectFit: "contain",
-              borderRadius: 2,
-              display: "block",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              minHeight: 200,
             }}
-          />
+          >
+            {loading && (
+              <Box
+                sx={{
+                  position: "absolute",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <CircularProgress size={40} />
+              </Box>
+            )}
+            <Box
+              component="img"
+              src={urls[idx]}
+              alt={`הוכחה ${idx + 1}`}
+              onLoad={() => setLoading(false)}
+              onError={() => setLoading(false)}
+              sx={{
+                maxWidth: "100%",
+                maxHeight: "70vh",
+                objectFit: "contain",
+                borderRadius: 2,
+                display: "block",
+                opacity: loading ? 0 : 1,
+                transition: "opacity 0.2s ease",
+              }}
+            />
+          </Box>
 
           {multi && (
             <IconButton
@@ -96,7 +129,12 @@ function ProofDialog({ open, onClose, urls, seasonLabel }) {
 
         {multi && (
           <Typography
-            sx={{ textAlign: "center", color: "text.secondary", fontSize: "0.78rem", mt: 1 }}
+            sx={{
+              textAlign: "center",
+              color: "text.secondary",
+              fontSize: "0.78rem",
+              mt: 1,
+            }}
           >
             {idx + 1} / {urls.length}
           </Typography>

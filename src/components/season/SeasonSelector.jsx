@@ -3,19 +3,34 @@ import { seasonTypes } from "../../constants";
 import { formatSeasonYear } from "../../utils";
 
 // Horizontal chip row for picking the active season within a competition.
-function SeasonSelector({ currentSeason, onSeasonChange, seasons, seasonType }) {
+function SeasonSelector({
+  currentSeason,
+  onSeasonChange,
+  seasons,
+  seasonType,
+}) {
   const comp = seasonTypes[seasonType] ?? seasonTypes[1];
 
   if (!seasons.length) return null;
 
   return (
     <Box sx={{ mb: 3 }}>
-      <Typography
-        variant="subtitle2"
-        sx={{ color: "text.secondary", fontWeight: 700, mb: 1, px: 0.5 }}
+      <Box
+        sx={{ display: "flex", alignItems: "baseline", gap: 1, mb: 1, px: 0.5 }}
       >
-        בחר עונה
-      </Typography>
+        <Typography
+          variant="subtitle2"
+          sx={{ color: "text.secondary", fontWeight: 700 }}
+        >
+          בחר עונה
+        </Typography>
+        <Typography
+          variant="caption"
+          sx={{ color: "text.disabled", fontWeight: 600 }}
+        >
+          {seasons.length} עונות
+        </Typography>
+      </Box>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
         {seasons.map((season) => {
           const selected = season.id === currentSeason;
