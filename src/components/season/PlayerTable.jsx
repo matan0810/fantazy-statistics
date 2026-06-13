@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import _ from "lodash";
 import { Box, Paper, Typography } from "@mui/material";
 import { seasonTypes } from "../../constants";
@@ -54,7 +54,6 @@ function DataLostNote() {
 }
 
 function PlayerTable({ season, seasonInfo, players, seasonType }) {
-  const [teams, setTeams] = useState([]);
   const [selected, setSelected] = useState(null);
   const [proofOpen, setProofOpen] = useState(false);
   const statsById = useMemo(
@@ -65,14 +64,15 @@ function PlayerTable({ season, seasonInfo, players, seasonType }) {
   const dataLost = Boolean(seasonInfo?.dataLost);
   const proofUrls = useMemo(() => getProofUrls(season), [season]);
 
-  useEffect(() => {
-    const newTeams = _.orderBy(
-      allTeams.filter((s) => s.season_id === season),
-      ["location"],
-      ["asc"],
-    );
-    setTeams(newTeams);
-  }, [season, seasonType]);
+  const teams = useMemo(
+    () =>
+      _.orderBy(
+        allTeams.filter((s) => s.season_id === season),
+        ["location"],
+        ["asc"],
+      ),
+    [season],
+  );
 
   if (!teams.length) return <EmptyState />;
 

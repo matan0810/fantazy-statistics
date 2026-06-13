@@ -65,11 +65,11 @@ const AddTeamsForm = ({ currentSeason, players }) => {
 
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
+          <Grid size={12}>
             <TextField
               type="number"
-              InputProps={{
-                inputProps: { min: 1, max: Object.keys(players).length },
+              slotProps={{
+                htmlInput: { min: 1, max: Object.keys(players).length },
               }}
               fullWidth
               label={TEAM_PROPERTIES.location.label}
@@ -86,7 +86,7 @@ const AddTeamsForm = ({ currentSeason, players }) => {
             />
           </Grid>
 
-          <Grid item xs={12}>
+          <Grid size={12}>
             <Select
               fullWidth
               label={TEAM_PROPERTIES.player.label}
@@ -105,11 +105,11 @@ const AddTeamsForm = ({ currentSeason, players }) => {
             </Select>
           </Grid>
 
-          <Grid item xs={12}>
+          <Grid size={12}>
             <TextField
               fullWidth
               type="number"
-              InputProps={{ inputProps: { min: 0 } }}
+              slotProps={{ htmlInput: { min: 0 } }}
               label={TEAM_PROPERTIES.points.label}
               name={TEAM_PROPERTIES.points.key}
               value={formData[TEAM_PROPERTIES.points.key]}
@@ -122,7 +122,7 @@ const AddTeamsForm = ({ currentSeason, players }) => {
             />
           </Grid>
 
-          <Grid item xs={12}>
+          <Grid size={12}>
             <TextField
               fullWidth
               label={TEAM_PROPERTIES.team_name.label}
@@ -134,7 +134,7 @@ const AddTeamsForm = ({ currentSeason, players }) => {
             />
           </Grid>
 
-          <Grid item xs={12}>
+          <Grid size={12}>
             <Box display="flex" justifyContent="center">
               <Button
                 type="submit"

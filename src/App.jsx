@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Container, ThemeProvider, CssBaseline, Box } from "@mui/material";
 import _ from "lodash";
 import { Header, PlayerTable, SeasonSelector, StatsPage } from "./components";
@@ -7,16 +7,30 @@ import { buildTheme } from "./theme";
 import allSeasons from "./data/seasons.json";
 
 function App() {
-  const [seasons, setSeasons] = useState([]);
   const [seasonType, setSeasonType] = useState(
     parseInt(localStorage.getItem("seasonType") ?? "1"),
-  );
-  const [currentSeason, setCurrentSeason] = useState(
-    parseInt(localStorage.getItem("currentSeason") ?? "1"),
   );
   const [view, setView] = useState(localStorage.getItem("view") ?? "seasons");
 
   const theme = useMemo(() => buildTheme(seasonType), [seasonType]);
+
+  const seasons = useMemo(
+    () =>
+      _.orderBy(
+        allSeasons.filter((s) => s.type === seasonType),
+        ["year"],
+        ["desc"],
+      ),
+    [seasonType],
+  );
+
+  const [currentSeason, setCurrentSeason] = useState(seasons[0]?.id);
+  const [prevSeasonType, setPrevSeasonType] = useState(seasonType);
+  if (seasonType !== prevSeasonType) {
+    setPrevSeasonType(seasonType);
+    setCurrentSeason(seasons[0]?.id);
+    localStorage.setItem("currentSeason", seasons[0]?.id);
+  }
 
   const onViewChange = (next) => {
     setView(next);
@@ -32,18 +46,6 @@ function App() {
     setSeasonType(parseInt(type));
     localStorage.setItem("seasonType", type);
   };
-
-  useEffect(() => {
-    const newSeasons = _.orderBy(
-      allSeasons.filter((s) => s.type === seasonType),
-      ["year"],
-      ["desc"],
-    );
-
-    setSeasons(newSeasons);
-    // always land on the most recent season first
-    onSeasonChange(newSeasons[0]?.id);
-  }, [setSeasons, seasonType]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -63,7 +65,6 @@ function App() {
                   currentSeason={currentSeason}
                   onSeasonChange={onSeasonChange}
                   seasons={seasons}
-                  setSeasons={setSeasons}
                   seasonType={seasonType}
                 />
                 <PlayerTable

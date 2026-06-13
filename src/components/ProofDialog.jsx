@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -16,15 +16,14 @@ import {
 
 function ProofDialog({ open, onClose, urls, seasonLabel }) {
   const [idx, setIdx] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loadedIdx, setLoadedIdx] = useState(null);
+  const loading = loadedIdx !== idx;
 
-  useEffect(() => {
+  const [prevOpen, setPrevOpen] = useState(open);
+  if (open !== prevOpen) {
+    setPrevOpen(open);
     if (open) setIdx(0);
-  }, [open]);
-
-  useEffect(() => {
-    setLoading(true);
-  }, [idx]);
+  }
 
   if (!urls?.length) return null;
 
@@ -102,8 +101,8 @@ function ProofDialog({ open, onClose, urls, seasonLabel }) {
               component="img"
               src={urls[idx]}
               alt={`הוכחה ${idx + 1}`}
-              onLoad={() => setLoading(false)}
-              onError={() => setLoading(false)}
+              onLoad={() => setLoadedIdx(idx)}
+              onError={() => setLoadedIdx(idx)}
               sx={{
                 maxWidth: "100%",
                 maxHeight: "70vh",
