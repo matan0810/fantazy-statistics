@@ -1,10 +1,12 @@
-import { useMemo, useState } from "react";
-import { Container, ThemeProvider, CssBaseline, Box } from "@mui/material";
+import { lazy, Suspense, useMemo, useState } from "react";
+import { Container, ThemeProvider, CssBaseline, Box, CircularProgress } from "@mui/material";
 import _ from "lodash";
-import { Header, PlayerTable, SeasonSelector, StatsPage } from "./components";
+import { Header, PlayerTable, SeasonSelector } from "./components";
 import { players } from "./constants";
 import { buildTheme } from "./theme";
 import allSeasons from "./data/seasons.json";
+
+const StatsPage = lazy(() => import("./components/stats/StatsPage"));
 
 function App() {
   const [seasonType, setSeasonType] = useState(
@@ -75,7 +77,9 @@ function App() {
                 />
               </>
             ) : (
-              <StatsPage />
+              <Suspense fallback={<Box sx={{ display: "flex", justifyContent: "center", py: 6 }}><CircularProgress /></Box>}>
+                <StatsPage />
+              </Suspense>
             )}
           </Box>
           <Box

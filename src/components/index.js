@@ -4,5 +4,4 @@ export { default as ProofDialog } from "./ProofDialog";
 export { default as PlayerTable } from "./season/PlayerTable";
 export { default as Podium } from "./season/Podium";
 export { default as SeasonSelector } from "./season/SeasonSelector";
-export { default as StatsPage } from "./stats/StatsPage";
 export { default as PlayerDetailDialog } from "./player/PlayerDetailDialog";
