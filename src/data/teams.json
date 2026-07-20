@@ -73,7 +73,8 @@
     "team_name": "אין",
     "id": 14,
     "year": 2016,
-    "type": 4
+    "type": 4,
+    "coach": "מישהו"
   },
   {
     "season_id": 15,
@@ -102,7 +103,7 @@
     "player": 2,
     "location": 2,
     "points": 0,
-    "team_name": "???",
+    "team_name": null,
     "id": 14,
     "year": 2016,
     "type": 4
@@ -291,14 +292,16 @@
     "team_name": "Stars of 2018",
     "id": 17,
     "year": 2018,
-    "type": 2
+    "type": 2,
+    "coach": "נתי"
   },
   {
     "season_id": 17,
     "player": 4,
     "location": null,
     "points": 0,
-    "team_name": "FC Papaya"
+    "team_name": "FC Papaya",
+    "coach": "מתן"
   },
   {
     "season_id": 10,
@@ -561,7 +564,8 @@
     "team_name": "FC Cocopops",
     "id": 13,
     "year": 2021,
-    "type": 4
+    "type": 4,
+    "coach": "מתן"
   },
   {
     "season_id": 2,
@@ -615,7 +619,8 @@
     "team_name": "צהוב עולה",
     "id": 13,
     "year": 2021,
-    "type": 4
+    "type": 4,
+    "coach": "נתי"
   },
   {
     "season_id": 18,
@@ -735,7 +740,8 @@
     "team_name": "סר אלכס",
     "id": 3,
     "year": 2023,
-    "type": 1
+    "type": 1,
+    "coach": "נתי"
   },
   {
     "season_id": 3,
@@ -745,7 +751,8 @@
     "team_name": "DS9",
     "id": 3,
     "year": 2023,
-    "type": 1
+    "type": 1,
+    "coach": "SISKO"
   },
   {
     "season_id": 3,
@@ -755,7 +762,8 @@
     "team_name": "FC Water",
     "id": 3,
     "year": 2023,
-    "type": 1
+    "type": 1,
+    "coach": "מתן"
   },
   {
     "season_id": 19,
@@ -802,49 +810,56 @@
     "player": 1,
     "location": 5,
     "points": 228,
-    "team_name": "אקסטרה גבינה ופטריות"
+    "team_name": "אקסטרה גבינה ופטריות",
+    "coach": "פאפא מריו"
   },
   {
     "season_id": 20,
     "player": 2,
     "location": 3,
     "points": 236,
-    "team_name": "Euro Gold"
+    "team_name": "Euro Gold",
+    "coach": "נתי"
   },
   {
     "season_id": 20,
     "player": 4,
     "location": 1,
     "points": 276,
-    "team_name": "FC Almond Milk"
+    "team_name": "FC Almond Milk",
+    "coach": "Matan"
   },
   {
     "season_id": 20,
     "player": 5,
     "location": 7,
     "points": 127,
-    "team_name": "אפצ'י"
+    "team_name": "אפצ'י",
+    "coach": "לבריאות"
   },
   {
     "season_id": 20,
     "player": 8,
     "location": 4,
     "points": 234,
-    "team_name": "רק ריאל"
+    "team_name": "רק ריאל",
+    "coach": "רותם"
   },
   {
     "season_id": 20,
     "player": 7,
     "location": 6,
     "points": 217,
-    "team_name": "אכלתקש"
+    "team_name": "אכלתקש",
+    "coach": "אנצ'לוטי והמסטיק"
   },
   {
     "season_id": 20,
     "player": 6,
     "location": 2,
     "points": 239,
-    "team_name": "עירוני מודיעין 2"
+    "team_name": "עירוני מודיעין 2",
+    "coach": "סתם אחד"
   },
   {
     "season_id": 21,

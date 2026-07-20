@@ -64,7 +64,9 @@ function StandingRow({
       </Avatar>
 
       <Box sx={{ flex: 1, minWidth: 0 }}>
-        <Typography sx={{ fontWeight: 700, fontSize: "1rem", lineHeight: 1.25 }}>
+        <Typography
+          sx={{ fontWeight: 700, fontSize: "1rem", lineHeight: 1.25 }}
+        >
           {name}
         </Typography>
         {team.team_name &&
@@ -105,16 +107,23 @@ function StandingRow({
           <>
             <Typography
               sx={{
-                fontWeight: 600,
-                fontSize: "0.85rem",
+                color: "text.disabled",
+                fontSize: "0.65rem",
+                lineHeight: 1.3,
+              }}
+            >
+              שם המאמן
+            </Typography>
+            <Typography
+              sx={{
+                color: "text.secondary",
+                fontWeight: 500,
+                fontSize: "0.8rem",
                 lineHeight: 1.25,
                 wordBreak: "break-word",
               }}
             >
               {team.coach}
-            </Typography>
-            <Typography sx={{ color: "text.secondary", fontSize: "0.65rem" }}>
-              מאמן
             </Typography>
           </>
         ) : (
