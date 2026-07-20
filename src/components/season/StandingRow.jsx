@@ -93,6 +93,37 @@ function StandingRow({
           ))}
       </Box>
 
+      <Box
+        sx={{
+          width: { xs: 76, sm: 110 },
+          flexShrink: 0,
+          textAlign: "center",
+          px: 0.5,
+        }}
+      >
+        {team.coach ? (
+          <>
+            <Typography
+              sx={{
+                fontWeight: 600,
+                fontSize: "0.85rem",
+                lineHeight: 1.25,
+                wordBreak: "break-word",
+              }}
+            >
+              {team.coach}
+            </Typography>
+            <Typography sx={{ color: "text.secondary", fontSize: "0.65rem" }}>
+              מאמן
+            </Typography>
+          </>
+        ) : (
+          <Typography sx={{ color: "text.disabled", fontSize: "0.85rem" }}>
+            —
+          </Typography>
+        )}
+      </Box>
+
       <Box sx={{ textAlign: "center", flexShrink: 0, pl: 0.5 }}>
         {hidePoints ? (
           <Typography

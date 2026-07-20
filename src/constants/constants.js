@@ -21,4 +21,10 @@ export const TEAM_PROPERTIES = {
     form: true,
     required: false,
   },
+  coach: {
+    key: "coach",
+    label: "שם המאמן",
+    form: true,
+    required: false,
+  },
 };

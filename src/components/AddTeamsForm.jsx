@@ -17,6 +17,7 @@ const formProps = {
   [TEAM_PROPERTIES.player.key]: "",
   [TEAM_PROPERTIES.points.key]: "",
   [TEAM_PROPERTIES.team_name.key]: "",
+  [TEAM_PROPERTIES.coach.key]: "",
 };
 
 const AddTeamsForm = ({ currentSeason, players }) => {
@@ -128,6 +129,18 @@ const AddTeamsForm = ({ currentSeason, players }) => {
               label={TEAM_PROPERTIES.team_name.label}
               name={TEAM_PROPERTIES.team_name.key}
               value={formData[TEAM_PROPERTIES.team_name.key]}
+              placeholder=""
+              onChange={handleInputChange}
+              variant="outlined"
+            />
+          </Grid>
+
+          <Grid size={12}>
+            <TextField
+              fullWidth
+              label={TEAM_PROPERTIES.coach.label}
+              name={TEAM_PROPERTIES.coach.key}
+              value={formData[TEAM_PROPERTIES.coach.key]}
               placeholder=""
               onChange={handleInputChange}
               variant="outlined"
