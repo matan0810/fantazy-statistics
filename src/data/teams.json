@@ -7,7 +7,8 @@
     "team_name": "FC agvaniya",
     "id": 4,
     "year": 2016,
-    "type": 1
+    "type": 1,
+    "coach": "לביא"
   },
   {
     "season_id": 15,
@@ -17,7 +18,8 @@
     "team_name": "גבריאל",
     "id": 15,
     "year": 2016,
-    "type": 3
+    "type": 3,
+    "coach": "חציל סגול"
   },
   {
     "season_id": 15,
@@ -27,7 +29,8 @@
     "team_name": "ריאלונה",
     "id": 15,
     "year": 2016,
-    "type": 3
+    "type": 3,
+    "coach": "עומר המדען"
   },
   {
     "season_id": 15,
@@ -37,7 +40,8 @@
     "team_name": "Euro Stars",
     "id": 15,
     "year": 2016,
-    "type": 3
+    "type": 3,
+    "coach": "נתי"
   },
   {
     "season_id": 15,
@@ -47,7 +51,8 @@
     "team_name": "FC Afarsek",
     "id": 15,
     "year": 2016,
-    "type": 3
+    "type": 3,
+    "coach": "מתן"
   },
   {
     "season_id": 15,
@@ -57,7 +62,8 @@
     "team_name": "לך תדע",
     "id": 15,
     "year": 2016,
-    "type": 3
+    "type": 3,
+    "coach": "אורי"
   },
   {
     "season_id": 14,
@@ -67,7 +73,8 @@
     "team_name": "אין",
     "id": 14,
     "year": 2016,
-    "type": 4
+    "type": 4,
+    "coach": "מישהו"
   },
   {
     "season_id": 15,
@@ -77,7 +84,8 @@
     "team_name": "King David",
     "id": 15,
     "year": 2016,
-    "type": 3
+    "type": 3,
+    "coach": "דוד המלך"
   },
   {
     "season_id": 15,
@@ -87,14 +95,15 @@
     "team_name": "קבוצת המלכים",
     "id": 15,
     "year": 2016,
-    "type": 3
+    "type": 3,
+    "coach": "גיא פורשר"
   },
   {
     "season_id": 14,
     "player": 2,
     "location": 2,
     "points": 0,
-    "team_name": "???",
+    "team_name": null,
     "id": 14,
     "year": 2016,
     "type": 4
@@ -107,7 +116,8 @@
     "team_name": "ריאל בדםם",
     "id": 4,
     "year": 2016,
-    "type": 1
+    "type": 1,
+    "coach": "אורי"
   },
   {
     "season_id": 4,
@@ -117,7 +127,8 @@
     "team_name": "השדים האדומים",
     "id": 4,
     "year": 2016,
-    "type": 1
+    "type": 1,
+    "coach": "נתי"
   },
   {
     "season_id": 4,
@@ -127,7 +138,8 @@
     "team_name": "מסיבמבה",
     "id": 4,
     "year": 2016,
-    "type": 1
+    "type": 1,
+    "coach": "גבריאל"
   },
   {
     "season_id": 9,
@@ -137,7 +149,8 @@
     "team_name": "FC mango",
     "id": 9,
     "year": 2017,
-    "type": 4
+    "type": 4,
+    "coach": "מתן"
   },
   {
     "season_id": 5,
@@ -147,7 +160,8 @@
     "team_name": "רילונה",
     "id": 5,
     "year": 2017,
-    "type": 1
+    "type": 1,
+    "coach": "עומר"
   },
   {
     "season_id": 5,
@@ -157,7 +171,8 @@
     "team_name": "ROCKINGTHIS",
     "id": 5,
     "year": 2017,
-    "type": 1
+    "type": 1,
+    "coach": "NOA"
   },
   {
     "season_id": 5,
@@ -167,7 +182,8 @@
     "team_name": "אליפות!!!",
     "id": 5,
     "year": 2017,
-    "type": 1
+    "type": 1,
+    "coach": "אורי"
   },
   {
     "season_id": 5,
@@ -177,7 +193,8 @@
     "team_name": "אננס ירוק",
     "id": 5,
     "year": 2017,
-    "type": 1
+    "type": 1,
+    "coach": "גבי ורותם"
   },
   {
     "season_id": 5,
@@ -187,7 +204,8 @@
     "team_name": "מנצ'סטר של יונייטד",
     "id": 5,
     "year": 2017,
-    "type": 1
+    "type": 1,
+    "coach": "נתי"
   },
   {
     "season_id": 5,
@@ -197,7 +215,8 @@
     "team_name": "FC melafefon",
     "id": 5,
     "year": 2017,
-    "type": 1
+    "type": 1,
+    "coach": "מתן"
   },
   {
     "season_id": 9,
@@ -207,7 +226,8 @@
     "team_name": "אליפות",
     "id": 9,
     "year": 2017,
-    "type": 4
+    "type": 4,
+    "coach": "אורי"
   },
   {
     "season_id": 9,
@@ -217,7 +237,8 @@
     "team_name": "ביתר יונייטד",
     "id": 9,
     "year": 2017,
-    "type": 4
+    "type": 4,
+    "coach": "נתי"
   },
   {
     "season_id": 6,
@@ -227,7 +248,8 @@
     "team_name": "קראוסון שוקולד",
     "id": 6,
     "year": 2018,
-    "type": 1
+    "type": 1,
+    "coach": "הקונדיטור - גבי"
   },
   {
     "season_id": 6,
@@ -237,7 +259,8 @@
     "team_name": "Blabla",
     "id": 6,
     "year": 2018,
-    "type": 1
+    "type": 1,
+    "coach": "אורי"
   },
   {
     "season_id": 6,
@@ -247,7 +270,8 @@
     "team_name": "United is Back!",
     "id": 6,
     "year": 2018,
-    "type": 1
+    "type": 1,
+    "coach": "נתי"
   },
   {
     "season_id": 6,
@@ -257,7 +281,8 @@
     "team_name": "FC Gamba",
     "id": 6,
     "year": 2018,
-    "type": 1
+    "type": 1,
+    "coach": "מתן"
   },
   {
     "season_id": 17,
@@ -267,14 +292,16 @@
     "team_name": "Stars of 2018",
     "id": 17,
     "year": 2018,
-    "type": 2
+    "type": 2,
+    "coach": "נתי"
   },
   {
     "season_id": 17,
     "player": 4,
     "location": null,
     "points": 0,
-    "team_name": "FC Papaya"
+    "team_name": "FC Papaya",
+    "coach": "מתן"
   },
   {
     "season_id": 10,
@@ -284,7 +311,8 @@
     "team_name": "ירושלים של בית\"ר",
     "id": 10,
     "year": 2018,
-    "type": 4
+    "type": 4,
+    "coach": "נתי"
   },
   {
     "season_id": 10,
@@ -294,7 +322,8 @@
     "team_name": "FC Batata",
     "id": 10,
     "year": 2018,
-    "type": 4
+    "type": 4,
+    "coach": "מתן"
   },
   {
     "season_id": 6,
@@ -304,7 +333,8 @@
     "team_name": "מכבי פורשר",
     "id": 6,
     "year": 2018,
-    "type": 1
+    "type": 1,
+    "coach": "אבו עומאר"
   },
   {
     "season_id": 6,
@@ -314,7 +344,8 @@
     "team_name": "עוקפת אתכם בסיבוב",
     "id": 6,
     "year": 2018,
-    "type": 1
+    "type": 1,
+    "coach": "נעה"
   },
   {
     "season_id": 7,
@@ -324,7 +355,8 @@
     "team_name": "טורנדו",
     "id": 7,
     "year": 2019,
-    "type": 1
+    "type": 1,
+    "coach": "הקונדיטור"
   },
   {
     "season_id": 11,
@@ -334,7 +366,8 @@
     "team_name": "FC Pasiflora",
     "id": 11,
     "year": 2019,
-    "type": 4
+    "type": 4,
+    "coach": "מתן"
   },
   {
     "season_id": 11,
@@ -344,7 +377,8 @@
     "team_name": "ירושלים של בית\"ר",
     "id": 11,
     "year": 2019,
-    "type": 4
+    "type": 4,
+    "coach": "נתי"
   },
   {
     "season_id": 7,
@@ -354,7 +388,8 @@
     "team_name": "נפלו לי שתי שיניים",
     "id": 7,
     "year": 2019,
-    "type": 1
+    "type": 1,
+    "coach": "גיא הכסחן"
   },
   {
     "season_id": 7,
@@ -364,7 +399,8 @@
     "team_name": "בננה כדורגל",
     "id": 7,
     "year": 2019,
-    "type": 1
+    "type": 1,
+    "coach": "זינדין פורשר"
   },
   {
     "season_id": 7,
@@ -374,7 +410,8 @@
     "team_name": "Tired Mama",
     "id": 7,
     "year": 2019,
-    "type": 1
+    "type": 1,
+    "coach": "נעה"
   },
   {
     "season_id": 7,
@@ -384,7 +421,8 @@
     "team_name": "Red devils",
     "id": 7,
     "year": 2019,
-    "type": 1
+    "type": 1,
+    "coach": "נתי"
   },
   {
     "season_id": 7,
@@ -394,7 +432,8 @@
     "team_name": "FC Shnitzel",
     "id": 7,
     "year": 2019,
-    "type": 1
+    "type": 1,
+    "coach": "מתן"
   },
   {
     "season_id": 16,
@@ -404,7 +443,8 @@
     "team_name": "פיתה",
     "id": 16,
     "year": 2020,
-    "type": 3
+    "type": 3,
+    "coach": "בטאבון"
   },
   {
     "season_id": 8,
@@ -414,7 +454,8 @@
     "team_name": "ריאל קוסקוס",
     "id": 8,
     "year": 2020,
-    "type": 1
+    "type": 1,
+    "coach": "השניצלון המגעילון"
   },
   {
     "season_id": 8,
@@ -424,7 +465,8 @@
     "team_name": "ביתר נפוליאון",
     "id": 8,
     "year": 2020,
-    "type": 1
+    "type": 1,
+    "coach": "GAV"
   },
   {
     "season_id": 8,
@@ -434,7 +476,8 @@
     "team_name": "שד אדום",
     "id": 8,
     "year": 2020,
-    "type": 1
+    "type": 1,
+    "coach": "נתי"
   },
   {
     "season_id": 8,
@@ -444,7 +487,8 @@
     "team_name": "FC Football Club",
     "id": 8,
     "year": 2020,
-    "type": 1
+    "type": 1,
+    "coach": "מתן"
   },
   {
     "season_id": 12,
@@ -454,7 +498,8 @@
     "team_name": "FC Chocolate Cake",
     "id": 12,
     "year": 2020,
-    "type": 4
+    "type": 4,
+    "coach": "מתן"
   },
   {
     "season_id": 12,
@@ -464,7 +509,8 @@
     "team_name": "צהוב שחור",
     "id": 12,
     "year": 2020,
-    "type": 4
+    "type": 4,
+    "coach": "נתי"
   },
   {
     "season_id": 16,
@@ -474,7 +520,8 @@
     "team_name": "Euro Gold",
     "id": 16,
     "year": 2020,
-    "type": 3
+    "type": 3,
+    "coach": "אלוף אירופה"
   },
   {
     "season_id": 16,
@@ -484,7 +531,8 @@
     "team_name": "ריאל קוסקוס",
     "id": 16,
     "year": 2020,
-    "type": 3
+    "type": 3,
+    "coach": "סתם אחד"
   },
   {
     "season_id": 16,
@@ -494,7 +542,8 @@
     "team_name": "FC ptitim",
     "id": 16,
     "year": 2020,
-    "type": 3
+    "type": 3,
+    "coach": "M4t4n"
   },
   {
     "season_id": 16,
@@ -504,7 +553,8 @@
     "team_name": "Trek Team",
     "id": 16,
     "year": 2020,
-    "type": 3
+    "type": 3,
+    "coach": "Spock"
   },
   {
     "season_id": 13,
@@ -514,7 +564,8 @@
     "team_name": "FC Cocopops",
     "id": 13,
     "year": 2021,
-    "type": 4
+    "type": 4,
+    "coach": "מתן"
   },
   {
     "season_id": 2,
@@ -524,7 +575,8 @@
     "team_name": "FC Grissini",
     "id": 2,
     "year": 2021,
-    "type": 1
+    "type": 1,
+    "coach": "מתן"
   },
   {
     "season_id": 2,
@@ -534,7 +586,8 @@
     "team_name": "SPOCK STARS",
     "id": 2,
     "year": 2021,
-    "type": 1
+    "type": 1,
+    "coach": "ג. טי. קירק"
   },
   {
     "season_id": 2,
@@ -544,7 +597,8 @@
     "team_name": "שד אדום",
     "id": 2,
     "year": 2021,
-    "type": 1
+    "type": 1,
+    "coach": "נתי"
   },
   {
     "season_id": 2,
@@ -554,7 +608,8 @@
     "team_name": "סתם אחד",
     "id": 2,
     "year": 2021,
-    "type": 1
+    "type": 1,
+    "coach": "אני, אני ואני"
   },
   {
     "season_id": 13,
@@ -564,7 +619,8 @@
     "team_name": "צהוב עולה",
     "id": 13,
     "year": 2021,
-    "type": 4
+    "type": 4,
+    "coach": "נתי"
   },
   {
     "season_id": 18,
@@ -574,7 +630,8 @@
     "team_name": "אנטרפייז",
     "id": 18,
     "year": 2022,
-    "type": 2
+    "type": 2,
+    "coach": "C. ARCHER"
   },
   {
     "season_id": 18,
@@ -584,7 +641,8 @@
     "team_name": "גלקסיה אחרת",
     "id": 18,
     "year": 2022,
-    "type": 2
+    "type": 2,
+    "coach": "רותם"
   },
   {
     "season_id": 18,
@@ -594,7 +652,8 @@
     "team_name": "FC salt",
     "id": 18,
     "year": 2022,
-    "type": 2
+    "type": 2,
+    "coach": "מתן"
   },
   {
     "season_id": 18,
@@ -604,7 +663,8 @@
     "team_name": "Gold medal",
     "id": 18,
     "year": 2022,
-    "type": 2
+    "type": 2,
+    "coach": "נתי"
   },
   {
     "season_id": 1,
@@ -614,7 +674,8 @@
     "team_name": "שובו של CR7",
     "id": 1,
     "year": 2022,
-    "type": 1
+    "type": 1,
+    "coach": "השד האדום שחזר"
   },
   {
     "season_id": 1,
@@ -624,7 +685,8 @@
     "team_name": "FC Souffle",
     "id": 1,
     "year": 2022,
-    "type": 1
+    "type": 1,
+    "coach": "מתן"
   },
   {
     "season_id": 18,
@@ -634,7 +696,8 @@
     "team_name": "ברק",
     "id": 18,
     "year": 2022,
-    "type": 2
+    "type": 2,
+    "coach": "big E"
   },
   {
     "season_id": 18,
@@ -644,7 +707,8 @@
     "team_name": "מכבי חור בגרב",
     "id": 18,
     "year": 2022,
-    "type": 2
+    "type": 2,
+    "coach": "חורו גרבו"
   },
   {
     "season_id": 18,
@@ -654,7 +718,8 @@
     "team_name": "ריאל קוסקוס",
     "id": 18,
     "year": 2022,
-    "type": 2
+    "type": 2,
+    "coach": "סתם אחד"
   },
   {
     "season_id": 1,
@@ -664,7 +729,8 @@
     "team_name": "TREK TEAM",
     "id": 1,
     "year": 2022,
-    "type": 1
+    "type": 1,
+    "coach": "J.T. KIRK"
   },
   {
     "season_id": 3,
@@ -674,7 +740,8 @@
     "team_name": "סר אלכס",
     "id": 3,
     "year": 2023,
-    "type": 1
+    "type": 1,
+    "coach": "נתי"
   },
   {
     "season_id": 3,
@@ -684,7 +751,8 @@
     "team_name": "DS9",
     "id": 3,
     "year": 2023,
-    "type": 1
+    "type": 1,
+    "coach": "SISKO"
   },
   {
     "season_id": 3,
@@ -694,223 +762,255 @@
     "team_name": "FC Water",
     "id": 3,
     "year": 2023,
-    "type": 1
+    "type": 1,
+    "coach": "מתן"
   },
   {
     "season_id": 19,
     "player": 4,
     "location": 1,
     "points": 586,
-    "team_name": "FC Tea"
+    "team_name": "FC Tea",
+    "coach": "Matan"
   },
   {
     "season_id": 19,
     "player": 1,
     "location": 2,
     "points": 574,
-    "team_name": "זיתים ופטריות"
+    "team_name": "זיתים ופטריות",
+    "coach": "Spok"
   },
   {
     "season_id": 19,
     "player": 6,
     "location": 3,
     "points": 535,
-    "team_name": "עירוני מודיעין 2"
+    "team_name": "עירוני מודיעין 2",
+    "coach": "סתם אחד"
   },
   {
     "season_id": 19,
     "player": 2,
     "location": 4,
     "points": 458,
-    "team_name": "Red devil"
+    "team_name": "Red devil",
+    "coach": "נתי"
   },
   {
     "season_id": 19,
     "player": 7,
     "location": 5,
     "points": 429,
-    "team_name": "באלישניצל"
+    "team_name": "באלישניצל",
+    "coach": "אמאשך"
   },
   {
     "season_id": 20,
     "player": 1,
     "location": 5,
     "points": 228,
-    "team_name": "אקסטרה גבינה ופטריות"
+    "team_name": "אקסטרה גבינה ופטריות",
+    "coach": "פאפא מריו"
   },
   {
     "season_id": 20,
     "player": 2,
     "location": 3,
     "points": 236,
-    "team_name": "Euro Gold"
+    "team_name": "Euro Gold",
+    "coach": "נתי"
   },
   {
     "season_id": 20,
     "player": 4,
     "location": 1,
     "points": 276,
-    "team_name": "FC Almond Milk"
+    "team_name": "FC Almond Milk",
+    "coach": "Matan"
   },
   {
     "season_id": 20,
     "player": 5,
     "location": 7,
     "points": 127,
-    "team_name": "אפצ'י"
+    "team_name": "אפצ'י",
+    "coach": "לבריאות"
   },
   {
     "season_id": 20,
     "player": 8,
     "location": 4,
     "points": 234,
-    "team_name": "רק ריאל"
+    "team_name": "רק ריאל",
+    "coach": "רותם"
   },
   {
     "season_id": 20,
     "player": 7,
     "location": 6,
     "points": 217,
-    "team_name": "אכלתקש"
+    "team_name": "אכלתקש",
+    "coach": "אנצ'לוטי והמסטיק"
   },
   {
     "season_id": 20,
     "player": 6,
     "location": 2,
     "points": 239,
-    "team_name": "עירוני מודיעין 2"
+    "team_name": "עירוני מודיעין 2",
+    "coach": "סתם אחד"
   },
   {
     "season_id": 21,
     "player": 2,
     "location": 1,
     "points": 928,
-    "team_name": "Red'n'Gold"
+    "team_name": "Red'n'Gold",
+    "coach": "Nati"
   },
   {
     "season_id": 21,
     "player": 7,
     "location": 2,
     "points": 857,
-    "team_name": "אכלת"
+    "team_name": "אכלת",
+    "coach": "קש"
   },
   {
     "season_id": 21,
     "player": 4,
     "location": 3,
     "points": 848,
-    "team_name": "FC Fish"
+    "team_name": "FC Fish",
+    "coach": "Matan"
   },
   {
     "season_id": 21,
     "player": 6,
     "location": 4,
     "points": 611,
-    "team_name": "לפחות עוקף את נתי"
+    "team_name": "לפחות עוקף את נתי",
+    "coach": "מלך החילופים"
   },
   {
     "season_id": 21,
     "player": 8,
     "location": 5,
     "points": 604,
-    "team_name": "רק ריאל"
+    "team_name": "רק ריאל",
+    "coach": "רותם"
   },
   {
     "season_id": 22,
     "player": 1,
     "location": 1,
     "points": 876,
-    "team_name": "Shark Tank"
+    "team_name": "Shark Tank",
+    "coach": "ספוק הכריש"
   },
   {
     "season_id": 22,
     "player": 4,
     "location": 2,
     "points": 859,
-    "team_name": "FC Omelette"
+    "team_name": "FC Omelette",
+    "coach": "Matan"
   },
   {
     "season_id": 22,
     "player": 2,
     "location": 3,
     "points": 799,
-    "team_name": "Red & Gold"
+    "team_name": "Red & Gold",
+    "coach": "נתי"
   },
   {
     "season_id": 22,
     "player": 8,
     "location": 4,
     "points": 743,
-    "team_name": "מפרום שהוא לא מפרום"
+    "team_name": "מפרום שהוא לא מפרום",
+    "coach": "רותם ואבא"
   },
   {
     "season_id": 22,
     "player": 7,
     "location": 5,
     "points": 528,
-    "team_name": "שקשוקה FC"
+    "team_name": "שקשוקה FC",
+    "coach": "הרב אורי"
   },
   {
     "season_id": 22,
     "player": 6,
     "location": 6,
     "points": 292,
-    "team_name": "מלך החילופים"
+    "team_name": "מלך החילופים",
+    "coach": "הפעם באמת(?)"
   },
   {
     "season_id": 23,
     "player": 4,
     "location": 1,
     "points": 461,
-    "team_name": "FC Watermelon"
+    "team_name": "FC Watermelon",
+    "coach": "Matan"
   },
   {
     "season_id": 23,
     "player": 1,
     "location": 2,
     "points": 449,
-    "team_name": "Stars Trek"
+    "team_name": "Stars Trek",
+    "coach": "J.T. KIRK"
   },
   {
     "season_id": 23,
     "player": 5,
     "location": 3,
     "points": 439,
-    "team_name": "שאדו"
+    "team_name": "שאדו",
+    "coach": "באדו"
   },
   {
     "season_id": 23,
     "player": 2,
     "location": 4,
     "points": 412,
-    "team_name": "It's coming home"
+    "team_name": "It's coming home",
+    "coach": "Nati"
   },
   {
     "season_id": 23,
     "player": 8,
     "location": 5,
     "points": 345,
-    "team_name": "Rotem FC"
+    "team_name": "Rotem FC",
+    "coach": "רתי אוכל בננות"
   },
   {
     "season_id": 23,
     "player": 3,
     "location": 6,
     "points": 322,
-    "team_name": "בורקס פינוקים"
+    "team_name": "בורקס פינוקים",
+    "coach": "איל נווה"
   },
   {
     "season_id": 23,
     "player": 6,
     "location": 7,
     "points": 304,
-    "team_name": "נתי vs הכספת"
+    "team_name": "נתי vs הכספת",
+    "coach": "Mr. Wonderful"
   },
   {
     "season_id": 23,
     "player": 7,
     "location": 8,
     "points": 160,
-    "team_name": "מכבי קלוד קוד"
+    "team_name": "מכבי קלוד קוד",
+    "coach": "התחת של אברם"
   }
 ]
