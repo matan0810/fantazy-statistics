@@ -856,5 +856,61 @@
     "location": 6,
     "points": 292,
     "team_name": "מלך החילופים"
+  },
+  {
+    "season_id": 23,
+    "player": 4,
+    "location": 1,
+    "points": 461,
+    "team_name": "FC Watermelon"
+  },
+  {
+    "season_id": 23,
+    "player": 1,
+    "location": 2,
+    "points": 449,
+    "team_name": "Stars Trek"
+  },
+  {
+    "season_id": 23,
+    "player": 5,
+    "location": 3,
+    "points": 439,
+    "team_name": "שאדו"
+  },
+  {
+    "season_id": 23,
+    "player": 2,
+    "location": 4,
+    "points": 412,
+    "team_name": "It's coming home"
+  },
+  {
+    "season_id": 23,
+    "player": 8,
+    "location": 5,
+    "points": 345,
+    "team_name": "Rotem FC"
+  },
+  {
+    "season_id": 23,
+    "player": 3,
+    "location": 6,
+    "points": 322,
+    "team_name": "בורקס פינוקים"
+  },
+  {
+    "season_id": 23,
+    "player": 6,
+    "location": 7,
+    "points": 304,
+    "team_name": "נתי vs הכספת"
+  },
+  {
+    "season_id": 23,
+    "player": 7,
+    "location": 8,
+    "points": 160,
+    "team_name": "מכבי קלוד קוד"
   }
 ]
