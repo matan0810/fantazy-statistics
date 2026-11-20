@@ -22,12 +22,23 @@ async function main() {
 
   const open = async (options, tag) => {
     const context = await browser.newContext({ acceptDownloads: true, ...options });
+    // A broken step fails in seconds, not after Playwright's half-minute wait.
+    context.setDefaultTimeout(15_000);
     await context.route(
       (target) => target.hostname !== 'localhost',
       (route) => {
         problems.push(`${tag}: request to another host ${route.request().url()}`);
         return route.abort();
       },
+    );
+    // Anything the Content Security Policy blocks is a bug.
+    await context.exposeFunction('__cspViolation', (what) =>
+      problems.push(`${tag}: blocked by the CSP: ${what}`),
+    );
+    await context.addInitScript(() =>
+      document.addEventListener('securitypolicyviolation', (e) =>
+        window.__cspViolation(`${e.violatedDirective} ${e.blockedURI} ${e.sourceFile ?? ''}`),
+      ),
     );
     const page = await context.newPage();
     page.on('pageerror', (error) => problems.push(`${tag}: ${error.message}`));
@@ -56,6 +67,10 @@ async function main() {
   );
   await page.goto(url);
   assert.equal(await page.evaluate(() => document.documentElement.dir), 'rtl');
+  const policy = await page
+    .locator('meta[http-equiv="Content-Security-Policy"]')
+    .getAttribute('content');
+  assert.match(policy ?? '', /default-src 'none'.*script-src 'self'/, 'the page carries its CSP');
   await page.getByRole('heading', { level: 1, name: 'הפנתיאון' }).waitFor();
   await page.getByText(`v${version}`, { exact: true }).waitFor();
   assert.match(page.url(), /#\/$/);
@@ -240,6 +255,68 @@ async function main() {
   assert.ok(fonts.loaded > 0 && fonts.saved > 0, `fonts work offline: ${JSON.stringify(fonts)}`);
   await offline.close();
   step('offline: opens from the saved copy, fonts included');
+
+  // ---------- Security ----------
+  // A context of its own: these steps provoke the errors the others treat as failures.
+  const hostile = await browser.newContext({ locale: 'he-IL' });
+  hostile.setDefaultTimeout(15_000);
+  const evil = await hostile.newPage();
+  const dialogs = [];
+  evil.on('dialog', (d) => {
+    dialogs.push(d.message());
+    return d.dismiss();
+  });
+  const crashes = [];
+  evil.on('pageerror', (error) => crashes.push(error.message));
+
+  // Saved choices that another page on the shared github.io origin could have written.
+  await evil.addInitScript(() => {
+    localStorage.setItem('hall-of-fame:language', '"<img src=x onerror=alert(1)>"');
+    localStorage.setItem('hall-of-fame:season', '{"__proto__":{"polluted":true}}');
+    localStorage.setItem('hall-of-fame:records-filter', '"not a list"');
+  });
+  await evil.goto(url);
+  await evil.getByRole('heading', { level: 1, name: 'הפנתיאון' }).waitFor();
+  assert.equal(await evil.evaluate(() => ({}).polluted), undefined, 'no prototype pollution');
+  step('security: tampered saved choices fall back to the defaults');
+
+  await evil.goto(`${url}#/season/<img src=x onerror=alert(1)>`);
+  await evil.getByRole('heading', { level: 1, name: 'הפנתיאון' }).waitFor();
+  assert.match(evil.url(), /#\/$/, 'an address with markup is shown as home');
+  await evil.goto(`${url}#/player/javascript:alert(1)`);
+  await evil.getByRole('heading', { level: 1, name: 'הפנתיאון' }).waitFor();
+  step('security: addresses with markup or scripts open home');
+
+  const html = await evil.evaluate(() => {
+    try {
+      document.body.insertAdjacentHTML('beforeend', '<b>x</b>');
+      return 'allowed';
+    } catch {
+      return 'blocked';
+    }
+  });
+  assert.equal(html, 'blocked', 'Trusted Types stop writing HTML from script');
+  const script = await evil.evaluate(() => {
+    const s = document.createElement('script');
+    try {
+      s.src = 'data:text/javascript,alert(1)';
+      return 'allowed';
+    } catch {
+      return 'blocked';
+    }
+  });
+  assert.equal(script, 'blocked', 'Trusted Types stop script addresses');
+  step('security: the page refuses to write HTML or load scripts from strings');
+
+  await hostile.route('**/proofs/**', (route) => route.abort());
+  await evil.goto(`${url}#/season/22`);
+  await evil.getByRole('button', { name: 'הוכחה' }).click();
+  await evil.getByText('התמונה לא נטענה').waitFor();
+  step('security: a proof that fails to load says so instead of spinning');
+
+  assert.deepEqual(dialogs, [], 'nothing opened a dialog');
+  assert.deepEqual(crashes, [], 'nothing crashed');
+  await hostile.close();
 
   // ---------- Phone, both languages ----------
   for (const locale of ['he-IL', 'en-US']) {
