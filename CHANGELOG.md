@@ -24,6 +24,14 @@ old `gh-pages` branch), dated by that deploy.
 - Back after following a link returns to the same place on the page, not only the same page.
 - Opening a season from a record or a player starts at the top of the page.
 
+### Security
+
+- A Content Security Policy: the page runs and loads only the site's own files, with no inline script, and Trusted Types refuse any HTML or script address written from a string.
+- Downloaded spreadsheets can no longer carry a formula: a cell that starts like one is kept as text.
+- Saved choices, addresses and proof paths are checked strictly; a tampered value means the default view.
+- Download file names cannot hide their type or point outside the downloads folder.
+- No dependency runs code when it is installed, and CI no longer leaves its token on disk.
+
 ## [3.1.0] - 2026-11-20
 
 ### Added

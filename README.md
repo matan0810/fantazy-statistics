@@ -76,6 +76,7 @@ src/screens/                 Home, Season, Player and Records screens
 src/components/              podium, honours, medal table, champion card, competition chips, download menu
 src/ui/                      buttons, segmented control, dialog, menu, badges, icons
 src/export/                  share image (canvas), CSV tables, file download
+src/security/                Trusted Types policy for the one script loaded by hand
 src/styles/global.css        design tokens and base rules
 scripts/                     version bump and release plan
 tests/                       service worker tests; e2e/ browser smoke test
