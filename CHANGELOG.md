@@ -11,6 +11,8 @@ old `gh-pages` branch), dated by that deploy.
 
 ## [Unreleased]
 
+## [3.1.0] - 2026-11-20
+
 ### Added
 - The podium returns, on the season page and for the hall of legends: three stone blocks of three heights, the champion in the middle under a crown and a soft light, each block with its numeral and the points or medals that earned it. It rises into place as it scrolls into view.
 - Zoom on the rank lines: buttons, pinch, Ctrl and the wheel, or a double click, then drag to move along the seasons.
