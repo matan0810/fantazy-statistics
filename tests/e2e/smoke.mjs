@@ -78,7 +78,7 @@ async function main() {
       .count(),
     4,
   );
-  const firstRow = page.getByRole('region', { name: 'טבלת המדליות' }).locator('tbody tr').first();
+  const firstRow = page.getByRole('region', { name: 'היכל האגדות' }).locator('tbody tr').first();
   assert.match(await firstRow.innerText(), /מתן/);
   step('desktop: four latest champions and the medal table');
 
@@ -114,7 +114,7 @@ async function main() {
   step('desktop: a table row opens the player page');
 
   await page.goto(`${url}#/stats`);
-  await page.getByRole('heading', { level: 1, name: 'שיאי כל הזמנים' }).waitFor();
+  await page.getByRole('heading', { level: 1, name: 'ספר השיאים' }).waitFor();
   assert.match(page.url(), /#\/records$/);
   const titlesOfLeader = () => page.locator('tbody tr').first().locator('td').nth(2).innerText();
   assert.equal(await titlesOfLeader(), '9');
@@ -124,9 +124,9 @@ async function main() {
 
   await page.getByRole('button', { name: 'Switch to English' }).click();
   assert.equal(await page.evaluate(() => document.documentElement.dir), 'ltr');
-  await page.getByRole('heading', { level: 1, name: 'All-time records' }).waitFor();
+  await page.getByRole('heading', { level: 1, name: 'Book of records' }).waitFor();
   await page.reload();
-  await page.getByRole('heading', { level: 1, name: 'All-time records' }).waitFor();
+  await page.getByRole('heading', { level: 1, name: 'Book of records' }).waitFor();
   step('desktop: English, left to right, remembered after a reload');
 
   await desk.close();
@@ -144,7 +144,7 @@ async function main() {
   await off.reload();
   await off.getByRole('heading', { level: 1, name: 'Hall of Fame' }).waitFor();
   const fonts = await off.evaluate(async () => {
-    const faces = await document.fonts.load('16px "Secular One"', 'abc');
+    const faces = await document.fonts.load('16px "Frank Ruhl Libre Variable"', 'abc');
     const saved = await (await caches.open('hall-of-fame-v2')).keys();
     return { loaded: faces.length, saved: saved.filter((r) => r.url.endsWith('.woff2')).length };
   });

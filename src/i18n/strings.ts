@@ -43,6 +43,22 @@ const he = {
   medalTableHint: 'לפי אליפויות, אחר כך מקומות שני ושלישי',
   allRecords: 'לכל השיאים',
 
+  founded: (year: number) => `נוסד ${year}`,
+  statSeasons: 'עונות',
+  statChampions: 'אלופים',
+  statYears: 'שנים',
+  statCompetitions: 'תחרויות',
+  wallEyebrow: 'קיר האלופים',
+  wallTitle: 'האלופים המכהנים',
+  wallHint: 'האלוף האחרון של כל תחרות',
+  legendsEyebrow: 'האגדות',
+  legendsTitle: 'היכל האגדות',
+  legendsHint: 'שלושת הגדולים בתולדות הליגה, ואחריהם כל השאר',
+  historyEyebrow: 'ההיסטוריה',
+  memberSince: (season: string) => `בהיכל מאז ${season}`,
+  trophyCabinet: 'ארון התארים',
+  recordsEyebrow: 'שיאי כל הזמנים',
+
   // shared
   champion: 'אלוף',
   seasonChampion: 'אלוף העונה',
@@ -76,6 +92,7 @@ const he = {
   // season
   pickCompetition: 'תחרות',
   pickSeason: 'בחירת עונה',
+  seasonOf: (i: number, n: number) => `עונה ${i} מתוך ${n}`,
   earlier: 'עונה קודמת',
   later: 'עונה הבאה',
   finalTable: 'טבלה סופית',
@@ -133,7 +150,7 @@ const he = {
   otherPlayers: 'שחקנים נוספים',
 
   // records
-  recordsTitle: 'שיאי כל הזמנים',
+  recordsTitle: 'ספר השיאים',
   recordsLine: 'המובילים, הרצפים והעונות הגדולות.',
   filterLabel: 'תחרויות בחישוב',
   filterHint: 'בחירה מרובה. ליגת העל כבויה כברירת מחדל כי היא עונה של שנה שלמה.',
@@ -194,6 +211,22 @@ const en: Strings = {
   medalTableHint: 'By titles, then second and third places',
   allRecords: 'All records',
 
+  founded: (year) => `Est. ${year}`,
+  statSeasons: 'Seasons',
+  statChampions: 'Champions',
+  statYears: 'Years',
+  statCompetitions: 'Competitions',
+  wallEyebrow: 'The champions wall',
+  wallTitle: 'Reigning champions',
+  wallHint: 'The latest champion of every competition',
+  legendsEyebrow: 'The legends',
+  legendsTitle: 'Hall of legends',
+  legendsHint: 'The three greatest in the league’s history, then everyone else',
+  historyEyebrow: 'The history',
+  memberSince: (season) => `In the hall since ${season}`,
+  trophyCabinet: 'Trophy cabinet',
+  recordsEyebrow: 'All-time records',
+
   champion: 'Champion',
   seasonChampion: 'Champion',
   rank: 'Rank',
@@ -225,6 +258,7 @@ const en: Strings = {
 
   pickCompetition: 'Competition',
   pickSeason: 'Choose a season',
+  seasonOf: (i, n) => `Season ${i} of ${n}`,
   earlier: 'Earlier season',
   later: 'Later season',
   finalTable: 'Final table',
@@ -279,7 +313,7 @@ const en: Strings = {
   history: 'Every season',
   otherPlayers: 'Other players',
 
-  recordsTitle: 'All-time records',
+  recordsTitle: 'Book of records',
   recordsLine: 'The leaders, the streaks and the big seasons.',
   filterLabel: 'Competitions counted',
   filterHint: 'Pick any. The Israeli league is off by default, since it is a full-year season.',

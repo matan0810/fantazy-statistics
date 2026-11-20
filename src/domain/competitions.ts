@@ -10,10 +10,10 @@ export interface Competition {
 
 /** In display order. Names live in i18n (`competition.<id>`). */
 export const COMPETITIONS: readonly Competition[] = [
-  { id: 'ucl', color: '#5b8def', spansTwoYears: true },
-  { id: 'world-cup', color: '#f0a43a', spansTwoYears: false },
-  { id: 'euro', color: '#3ccbd9', spansTwoYears: false },
-  { id: 'ligat-haal', color: '#4cc38a', spansTwoYears: true },
+  { id: 'ucl', color: '#7d9be0', spansTwoYears: true },
+  { id: 'world-cup', color: '#d08a5a', spansTwoYears: false },
+  { id: 'euro', color: '#5eb5b8', spansTwoYears: false },
+  { id: 'ligat-haal', color: '#6fb38a', spansTwoYears: true },
 ];
 
 export function competition(id: CompetitionId): Competition {

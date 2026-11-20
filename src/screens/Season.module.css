@@ -1,128 +1,146 @@
 .page {
+  overflow-x: clip;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 48px;
   max-width: var(--page);
   margin-inline: auto;
-  padding: 28px var(--gutter) 72px;
+  padding: 36px var(--gutter) 96px;
 }
 
 .head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-  animation: rise 360ms var(--ease) both;
-}
-
-.titles {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  animation: rise 800ms var(--slow) both;
+}
+
+.head::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  width: min(760px, 100%);
+  height: 360px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--accent) 12%, transparent),
+    transparent
+  );
+  pointer-events: none;
 }
 
 .title {
   display: flex;
-  align-items: baseline;
-  gap: 14px;
-  flex-wrap: wrap;
-  font-size: clamp(2.2rem, 7vw, 3.8rem);
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.competition {
+  font-size: clamp(1.4rem, 3.4vw, 2rem);
+  font-weight: 500;
+  color: var(--text);
 }
 
 .year {
-  color: var(--accent);
+  font-size: clamp(4rem, 15vw, 8.4rem);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  padding-block: 0.06em;
+  animation: sheen 2400ms var(--slow) 300ms both;
 }
 
 .leagueName {
   color: var(--muted);
-  font-size: 1rem;
+  font-family: var(--display);
+  font-size: 1.1rem;
+  font-style: italic;
 }
 
 .actions {
   display: flex;
-  gap: 8px;
+  gap: 10px;
+  margin-top: 6px;
 }
 
 .facts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0;
+  animation: rise 800ms var(--slow) 120ms both;
 }
 
 .fact {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 14px 18px;
-  border-inline-end: 1px solid var(--line);
+  align-items: center;
+  gap: 6px;
+  padding: 4px clamp(18px, 4vw, 40px);
 }
 
-.fact:last-child {
-  border-inline-end: 0;
+.fact + .fact {
+  border-inline-start: 1px solid var(--gold-line);
 }
 
 .factLabel {
   color: var(--faint);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
 }
 
 .factValue {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  margin: 0;
   font-family: var(--display);
-  font-size: 1.45rem;
-  line-height: 1.2;
-  min-width: 0;
-}
-
-.factValue > span:last-child {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 500;
+  line-height: 1.1;
 }
 
 .board {
   overflow: hidden;
-  animation: rise 420ms var(--ease) 60ms both;
+  animation: rise 800ms var(--slow) 200ms both;
 }
 
 .note {
-  padding: 14px 18px;
-  border: 1px dashed var(--line-strong);
-  border-radius: var(--radius-md);
+  max-width: 640px;
+  margin-inline: auto;
   color: var(--muted);
   font-size: 0.9rem;
+  text-align: center;
 }
 
 .hint {
   color: var(--faint);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
   text-align: center;
 }
 
 @media (max-width: 640px) {
   .page {
-    gap: 22px;
+    gap: 36px;
     padding-top: 20px;
   }
 
   .facts {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
+    row-gap: 18px;
   }
 
-  .fact:nth-child(2n) {
-    border-inline-end: 0;
-  }
-
-  .fact:nth-child(n + 3) {
-    border-block-start: 1px solid var(--line);
+  .fact:nth-child(odd) {
+    border-inline-start: 0;
   }
 
   .hint {

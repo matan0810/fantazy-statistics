@@ -2,10 +2,11 @@ import { useMemo, useState, type CSSProperties } from 'react';
 import { DownloadMenu } from '../components/DownloadMenu';
 import { competition, seasonLabel } from '../domain/competitions';
 import { league } from '../domain/league';
-import { seasonById, summarize } from '../domain/stats';
+import { seasonById, seasonsOf, summarize } from '../domain/stats';
 import { standingsCsv } from '../export/tables';
 import { useI18n } from '../i18n/context';
 import { Avatar } from '../ui/Badges';
+import { Ornament } from '../ui/Ornaments';
 import { Button } from '../ui/Button';
 import { ProofIcon } from '../ui/icons';
 import { Card } from '../ui/Section';
@@ -30,19 +31,25 @@ export function SeasonScreen({ id }: { id: number }) {
   const proofs = (league.proofs.get(season.id) ?? []).map((p) => base + p);
   const { standings: table, champion, margin, average } = summary;
   const top = table[0]?.result.points ?? 0;
+  const order = seasonsOf(league, season.competition)
+    .reverse()
+    .map((s) => s.id);
 
   return (
     <main className={styles.page} style={{ '--accent': comp.color } as CSSProperties}>
       <SeasonNav season={season} />
 
-      <div className={styles.head}>
-        <div className={styles.titles}>
-          <h1 className={styles.title}>
-            <span>{t.competition[season.competition]}</span>
-            <span className={`${styles.year} num`}>{label}</span>
-          </h1>
-          {season.name && <p className={styles.leagueName}>„{season.name}”</p>}
-        </div>
+      <header className={styles.head}>
+        <p className="eyebrow num">
+          {t.seasonOf(order.indexOf(season.id) + 1, order.length)}
+          {season.pointsLost && ` · ${t.pointsLost}`}
+        </p>
+        <h1 className={styles.title}>
+          <span className={styles.competition}>{t.competition[season.competition]}</span>{' '}
+          <span className={`${styles.year} gilded num`}>{label}</span>
+        </h1>
+        {season.name && <p className={styles.leagueName}>„{season.name}”</p>}
+        <Ornament />
         <div className={styles.actions}>
           {proofs.length > 0 && (
             <Button onClick={() => setProofOpen(true)}>
@@ -75,15 +82,15 @@ export function SeasonScreen({ id }: { id: number }) {
             })}
           />
         </div>
-      </div>
+      </header>
 
       <dl className={styles.facts}>
         <div className={styles.fact}>
           <dt className={styles.factLabel}>{t.seasonChampion}</dt>
-          <dd className={styles.factValue} style={{ margin: 0 }}>
+          <dd className={styles.factValue}>
             {champion ? (
               <>
-                <Avatar player={champion.player} size={26} />
+                <Avatar player={champion.player} size={30} gold />
                 <span>{name(champion.player)}</span>
               </>
             ) : (
@@ -93,14 +100,12 @@ export function SeasonScreen({ id }: { id: number }) {
         </div>
         <div className={styles.fact}>
           <dt className={styles.factLabel}>{t.field}</dt>
-          <dd className={`${styles.factValue} num`} style={{ margin: 0 }}>
-            {table.length}
-          </dd>
+          <dd className={`${styles.factValue} num`}>{table.length}</dd>
         </div>
         {margin !== null && (
           <div className={styles.fact}>
             <dt className={styles.factLabel}>{t.margin}</dt>
-            <dd className={`${styles.factValue} num`} style={{ margin: 0 }}>
+            <dd className={`${styles.factValue} num`}>
               <bdi dir="ltr">{margin === 0 ? t.tie : `+${margin}`}</bdi>
             </dd>
           </div>
@@ -108,15 +113,14 @@ export function SeasonScreen({ id }: { id: number }) {
         {average !== null && (
           <div className={styles.fact}>
             <dt className={styles.factLabel}>{t.teamAverage}</dt>
-            <dd className={`${styles.factValue} num`} style={{ margin: 0 }}>
-              {average}
-            </dd>
+            <dd className={`${styles.factValue} num`}>{average}</dd>
           </div>
         )}
       </dl>
 
+      <Podium table={table} />
+
       <Card className={styles.board}>
-        <Podium table={table} />
         <Standings table={table} />
       </Card>
 

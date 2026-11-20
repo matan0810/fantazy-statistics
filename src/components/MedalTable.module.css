@@ -4,13 +4,14 @@
 }
 
 .table th {
-  padding: 10px 8px;
+  padding: 14px 8px 12px;
   color: var(--faint);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-align: center;
-  border-block-end: 1px solid var(--line);
+  vertical-align: bottom;
+  border-block-end: 1px solid var(--gold-line);
 }
 
 .table th:nth-child(2) {
@@ -18,12 +19,21 @@
 }
 
 .table td {
-  padding: 12px 8px;
+  padding: 13px 8px;
   text-align: center;
   border-block-end: 1px solid var(--line);
 }
 
-.table tr:last-child td {
+.table tr > :first-child {
+  padding-inline-start: 20px;
+  width: 56px;
+}
+
+.table tr > :last-child {
+  padding-inline-end: 20px;
+}
+
+.table tbody tr:last-child td {
   border-block-end: 0;
 }
 
@@ -33,39 +43,34 @@
 }
 
 .row:hover {
-  background: var(--surface-hover);
-}
-
-.first td,
-.first th {
-  padding-inline-start: 16px;
-}
-
-.last {
-  padding-inline-end: 16px !important;
+  background: linear-gradient(to right, transparent, var(--gold-soft), transparent);
 }
 
 .who {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   text-align: start;
 }
 
 .whoText {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
   min-width: 0;
 }
 
 .name {
-  font-weight: 700;
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1;
 }
 
 .medal {
   font-family: var(--display);
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  font-weight: 500;
 }
 
 .zero {
@@ -74,15 +79,7 @@
 
 .seasons {
   color: var(--muted);
-}
-
-.short {
-  display: none;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: currentcolor;
-  vertical-align: middle;
+  font-family: var(--display);
 }
 
 @media (max-width: 560px) {
@@ -90,20 +87,21 @@
     display: none;
   }
 
-  .long {
-    display: none;
-  }
-
-  .short {
-    display: inline-block;
-  }
-
   .table th,
   .table td {
-    padding-inline: 6px;
+    padding-inline: 5px;
+  }
+
+  .table tr > :first-child {
+    padding-inline-start: 12px;
+    width: 40px;
+  }
+
+  .table tr > :last-child {
+    padding-inline-end: 12px;
   }
 
   .medal {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
   }
 }

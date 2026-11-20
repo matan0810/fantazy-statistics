@@ -12,18 +12,19 @@
 .grid {
   stroke: var(--line);
   stroke-width: 1;
+  stroke-dasharray: 1 5;
 }
 
 .gridTop {
   stroke: var(--gold);
-  stroke-opacity: 0.35;
-  stroke-dasharray: 2 5;
+  stroke-opacity: 0.45;
+  stroke-dasharray: none;
 }
 
 .axis {
   fill: var(--faint);
   font-family: var(--display);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .axisTop {
@@ -32,11 +33,11 @@
 
 .line {
   fill: none;
-  stroke-width: 3;
+  stroke-width: 2.25;
   stroke-linecap: round;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: draw 1.2s var(--ease) forwards;
+  animation: draw 1.8s var(--slow) forwards;
   animation-delay: var(--delay);
   transition:
     opacity 200ms ease,
@@ -68,7 +69,7 @@
 }
 
 .series[data-active] .line {
-  stroke-width: 4.5;
+  stroke-width: 3.5;
 }
 
 .dot {
@@ -82,7 +83,7 @@
 
 .dot[data-champion] {
   fill: var(--gold);
-  stroke-width: 2.5;
+  stroke-width: 2;
 }
 
 @keyframes draw {
@@ -102,7 +103,7 @@
   z-index: 5;
   min-width: 170px;
   padding: 10px 12px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--gold-line);
   border-radius: var(--radius-md);
   background: var(--surface-raised);
   box-shadow: 0 16px 40px rgb(0 0 0 / 55%);
@@ -120,7 +121,9 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-weight: 700;
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 500;
 }
 
 .tipLine {
@@ -137,8 +140,9 @@
 .legend {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 6px;
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
 .chip {
@@ -151,8 +155,8 @@
   border-radius: var(--radius-pill);
   background: transparent;
   color: var(--muted);
-  font-size: 0.88rem;
-  font-weight: 600;
+  font-size: 0.86rem;
+  font-weight: 500;
   transition:
     border-color var(--fast),
     color var(--fast),
@@ -166,11 +170,12 @@
 
 .chip[aria-pressed='true'] {
   color: var(--text);
-  border-color: var(--color, var(--text));
-  background: color-mix(in srgb, var(--color, var(--text)) 12%, transparent);
+  border-color: var(--color, var(--gold));
+  background: color-mix(in srgb, var(--color, var(--gold)) 10%, transparent);
 }
 
 .count {
   color: var(--gold);
   font-family: var(--display);
+  font-weight: 600;
 }

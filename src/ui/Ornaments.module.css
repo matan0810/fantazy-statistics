@@ -1,0 +1,30 @@
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--gold);
+}
+
+.ornament::before,
+.ornament::after {
+  content: '';
+  height: 1px;
+  width: var(--reach, 64px);
+  background: linear-gradient(to var(--toward, left), var(--gold-line), transparent);
+}
+
+.ornament::after {
+  --toward: right;
+}
+
+.ornament svg {
+  width: 22px;
+  height: 10px;
+  flex-shrink: 0;
+}
+
+.laurel {
+  display: block;
+  overflow: visible;
+}

@@ -5,7 +5,8 @@ import { league } from '../domain/league';
 import { routeHash } from '../domain/routes';
 import { career, playerById, rankChart } from '../domain/stats';
 import { useI18n } from '../i18n/context';
-import { Avatar, CompetitionTag, MedalPips, RankBadge } from '../ui/Badges';
+import { Avatar, CompetitionTag, RankBadge } from '../ui/Badges';
+import { Laurel, Medal, Ornament } from '../ui/Ornaments';
 import { Card, Section } from '../ui/Section';
 import styles from './Player.module.css';
 
@@ -16,37 +17,58 @@ export function PlayerScreen({ id }: { id: number }) {
   if (!player || !c) return null;
 
   const rate = c.appearances ? Math.round((c.podiums / c.appearances) * 100) : 0;
+  const first = c.history.at(-1)?.season;
   const facts = [
     { label: t.seasons, value: c.appearances },
-    { label: t.titles, value: c.titles, gold: true },
     { label: t.podiums, value: c.podiums },
     { label: t.podiumRate, value: `${rate}%` },
     { label: t.bestRank, value: c.bestRank ?? '—' },
   ];
+  const cabinet = [
+    { rank: 1, count: c.titles, label: t.titles },
+    { rank: 2, count: c.seconds, label: t.seconds },
+    { rank: 3, count: c.thirds, label: t.thirds },
+  ] as const;
+  const medallion = <Avatar player={player} size={112} gold={c.titles > 0} />;
 
   return (
     <main className={styles.page} style={{ '--accent': player.color } as CSSProperties}>
-      <div className={styles.hero}>
-        <Avatar player={player} size={96} ring="rgb(255 255 255 / 8%)" />
-        <div className={styles.heroText}>
-          <p className={styles.eyebrow}>{t.playerCard}</p>
-          <h1 className={styles.name}>{name(player)}</h1>
-          <MedalPips titles={c.titles} seconds={c.seconds} thirds={c.thirds} />
+      <header className={styles.hero}>
+        <div className={styles.crest}>
+          {c.titles > 0 ? <Laurel size={210}>{medallion}</Laurel> : medallion}
         </div>
-      </div>
+        {first && (
+          <p className="eyebrow num">
+            {t.memberSince(
+              `${t.competition[first.competition]} ${seasonLabel(first.year, first.competition)}`,
+            )}
+          </p>
+        )}
+        <h1 className={`${styles.name} ${c.titles > 0 ? 'gilded' : ''}`}>{name(player)}</h1>
+        <Ornament />
+        <div className={styles.cabinet} aria-label={t.trophyCabinet} role="group">
+          {cabinet.map((m) => (
+            <div key={m.rank} className={styles.shelf} data-empty={m.count ? undefined : ''}>
+              <Medal rank={m.rank} size={52} />
+              <span className={`${styles.shelfCount} num`}>{m.count}</span>
+              <span className={styles.shelfLabel}>{m.label}</span>
+            </div>
+          ))}
+        </div>
+      </header>
 
       <dl className={styles.facts}>
         {facts.map((f) => (
           <div key={f.label} className={styles.fact}>
             <dt className={styles.factLabel}>{f.label}</dt>
-            <dd className={`${styles.factValue} ${f.gold && f.value ? styles.gold : ''} num`}>
+            <dd className={`${styles.factValue} num`}>
               <bdi dir="ltr">{f.value}</bdi>
             </dd>
           </div>
         ))}
       </dl>
 
-      <Section title={t.career} hint={t.careerHint} id="career">
+      <Section eyebrow={t.byCompetition} title={t.career} hint={t.careerHint} id="career">
         <div className={styles.careers}>
           {c.byCompetition.map((cc) => (
             <Card key={cc.competition} className={styles.career}>
@@ -74,7 +96,7 @@ export function PlayerScreen({ id }: { id: number }) {
         </div>
       </Section>
 
-      <Section title={t.history} id="history">
+      <Section eyebrow={t.playerCard} title={t.history} id="history">
         <Card>
           <ul className={styles.history}>
             {c.history.map((h) => (

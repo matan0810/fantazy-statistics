@@ -12,20 +12,34 @@
 
 ## 2. Look
 
-One dark look on purpose: an ink ground, quiet raised surfaces and hairlines, and colour used
-only where it carries meaning:
+A hall of fame, not a dashboard. The references are a museum gallery and an engraved
+plaque: warm black, champagne gold and ivory, light falling softly from above, thin gold
+hairlines instead of boxes, and generous space. Restraint is the rule: one ornament per
+heading, gold only on what is honoured, no loud colour.
 
-- **Gold, silver, bronze** for ranks 1 to 3, everywhere (badges, podium, pips, chart dots).
-- **One identity colour per player** (`players.json`): their line, avatar and dots. The
-  colours are saturated and far apart, so nine lines stay distinguishable.
-- **One accent per competition**, for its tag, the selected season and its share image.
-
-Type: Secular One for display (titles, names, every number that matters), Heebo for text.
-Both are bundled, so the site has no outside host and works offline. Numbers use tabular
-figures so columns line up.
+- **Type.** Frank Ruhl Libre, a classic Hebrew serif, for every title, name and number that
+  matters; Heebo, light and quiet, for running text. Small labels are spaced capitals (the
+  engraved line on a plaque). Both fonts are bundled, so the site has no outside host and
+  works offline. Numbers use lining, tabular figures.
+- **Colour.** Warm black ground with a fine film grain; gold as a metal (gradients, never a
+  flat yellow) for champions, rank one and the titles; silver and bronze for ranks two and
+  three. Each player has a muted jewel tone (sapphire, ruby, amethyst...) used only as a thin
+  ring, a line or a dot. Competitions keep a faint accent, for their tag and a soft glow.
+- **Ornaments**, all drawn as SVG in the code: a laurel wreath (its leaves placed along an
+  arc, `src/ui/laurel.ts`), a divider of two fading rules and a diamond under every title,
+  medals on ribbons, a trophy in fine line.
+- **Forms.**
+  - Medallion: a player's serif initial on dark enamel, ringed in their jewel tone; a
+    champion's medallion has a gold outer ring, and the greatest stands inside a laurel.
+  - Plaque: a double frame (outer hairline, inner gold) for champions and records.
+  - Plinth: dark stone with a lit metal edge and an engraved metal numeral, for the season's
+    podium and the hall of legends.
+- **Motion.** Slow and soft: titles rise in and catch a sheen of light once; the rank lines
+  draw themselves; plinths and plaques lift a little under the pointer. All of it is off
+  with reduced motion.
 
 Layout follows the reading direction through logical CSS properties; nothing is mirrored by
-hand except the chart's time axis (below).
+hand except the chart's time axis (below). Headings are centred, as on a monument.
 
 ## 3. Rank lines
 

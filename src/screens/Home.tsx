@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { RankLines } from '../charts/RankLines';
-import { ChampionCard } from '../components/ChampionCard';
+import { ChampionPlaque } from '../components/ChampionPlaque';
+import { Legends } from '../components/Legends';
 import { MedalTable } from '../components/MedalTable';
 import { COMPETITIONS, competition } from '../domain/competitions';
 import { league } from '../domain/league';
@@ -8,6 +9,7 @@ import { champions, medalTable, rankChart } from '../domain/stats';
 import type { CompetitionId } from '../domain/types';
 import { useI18n } from '../i18n/context';
 import { ChevronIcon } from '../ui/icons';
+import { Laurel, Trophy } from '../ui/Ornaments';
 import { Card, Section } from '../ui/Section';
 import { Segmented } from '../ui/Segmented';
 import styles from './Home.module.css';
@@ -24,24 +26,64 @@ export function Home() {
   const chart = useMemo(() => rankChart(league, comp), [comp]);
   const latest = COMPETITIONS.flatMap((c) => champions(league, c.id).slice(0, 1));
   const table = useMemo(() => medalTable(league), []);
+  const stats = [
+    { label: t.statYears, value: Math.max(...league.seasons.map((s) => s.year)) - SINCE },
+    { label: t.statSeasons, value: league.seasons.length },
+    { label: t.statChampions, value: table.filter((c) => c.titles > 0).length },
+  ];
 
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
-        <p className={styles.eyebrow}>
-          {t.league} · {t.since(SINCE)}
+        <div className={styles.crest}>
+          <Laurel size={150}>
+            <Trophy size={58} />
+          </Laurel>
+        </div>
+        <p className={`eyebrow ${styles.eyebrow}`}>
+          {t.league} · {t.founded(SINCE)}
         </p>
-        <h1 className={styles.title}>{t.heroTitle}</h1>
+        <h1 className={`${styles.title} gilded`}>{t.heroTitle}</h1>
         <p className={styles.lead}>{t.heroLine}</p>
-        <p className={`${styles.facts} num`}>
-          {t.heroFacts(league.seasons.length, league.players.length)}
-        </p>
+        <dl className={styles.stats}>
+          {stats.map((s) => (
+            <div key={s.label} className={styles.stat}>
+              <dd className={`${styles.statValue} num`}>{s.value}</dd>
+              <dt className={styles.statLabel}>{s.label}</dt>
+            </div>
+          ))}
+        </dl>
       </section>
 
-      <Card className={styles.chart}>
-        <div className={styles.chartHead}>
-          <h2>{t.linesTitle}</h2>
-          <div>
+      <Section eyebrow={t.wallEyebrow} title={t.wallTitle} hint={t.wallHint} id="wall">
+        <div className={styles.plaques}>
+          {latest.map((entry) => (
+            <ChampionPlaque key={entry.season.id} entry={entry} />
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        eyebrow={t.legendsEyebrow}
+        title={t.legendsTitle}
+        hint={t.legendsHint}
+        id="medals"
+        action={
+          <a className={styles.more} href="#/records">
+            {t.allRecords}
+            <ChevronIcon />
+          </a>
+        }
+      >
+        <Legends table={table} />
+        <Card className={styles.ranking}>
+          <MedalTable rows={table} />
+        </Card>
+      </Section>
+
+      <Section eyebrow={t.historyEyebrow} title={t.linesTitle} hint={t.linesHint} id="lines">
+        <Card className={styles.chart}>
+          <div className={styles.chartHead}>
             <Segmented
               label={t.pickCompetition}
               value={comp}
@@ -53,32 +95,7 @@ export function Home() {
               }))}
             />
           </div>
-        </div>
-        <p className={styles.chartHint}>{t.linesHint}</p>
-        <RankLines chart={chart} />
-      </Card>
-
-      <Section title={t.latestChampions} id="latest">
-        <div className={styles.champions}>
-          {latest.map((entry) => (
-            <ChampionCard key={entry.season.id} entry={entry} />
-          ))}
-        </div>
-      </Section>
-
-      <Section
-        title={t.medalTable}
-        hint={t.medalTableHint}
-        id="medals"
-        action={
-          <a className={styles.more} href="#/records">
-            {t.allRecords}
-            <ChevronIcon />
-          </a>
-        }
-      >
-        <Card>
-          <MedalTable rows={table} />
+          <RankLines chart={chart} />
         </Card>
       </Section>
     </main>

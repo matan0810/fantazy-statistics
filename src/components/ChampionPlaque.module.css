@@ -1,0 +1,65 @@
+.link {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-md);
+  transition: transform 400ms var(--slow);
+}
+
+.link:hover {
+  transform: translateY(-3px);
+}
+
+.link:hover .points {
+  background-position: 0 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  padding: 22px 16px 20px;
+  text-align: center;
+}
+
+.season {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  color: var(--muted);
+}
+
+.name {
+  margin-top: 6px;
+  font-family: var(--display);
+  font-size: 1.65rem;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.team {
+  min-height: 1.4em;
+  max-width: 100%;
+  color: var(--muted);
+  font-size: 0.82rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.foot {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: auto;
+  color: var(--faint);
+  font-size: 0.8rem;
+}
+
+.points {
+  font-family: var(--display);
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1;
+  transition: background-position 900ms var(--slow);
+}

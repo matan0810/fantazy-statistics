@@ -7,25 +7,22 @@ import { MEDAL_COLOR } from './medals';
 
 const vars = (v: Record<string, string | number>) => v as CSSProperties;
 
-/** A player's initial on their identity colour. */
+/** A player's medallion: their initial, ringed in their colour; champions get a gold ring. */
 export function Avatar({
   player,
   size = 36,
-  ring,
+  gold = false,
 }: {
   player: Player;
   size?: number;
-  ring?: string;
+  gold?: boolean;
 }) {
   const { name } = useI18n();
   return (
     <span
       className={styles.avatar}
-      style={vars({
-        '--size': `${size}px`,
-        '--color': player.color,
-        ...(ring ? { '--ring': ring } : {}),
-      })}
+      data-gold={gold ? '' : undefined}
+      style={vars({ '--size': `${size}px`, '--color': player.color })}
       aria-hidden="true"
     >
       {name(player).charAt(0)}

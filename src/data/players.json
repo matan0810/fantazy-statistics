@@ -1,11 +1,11 @@
 [
-  { "id": 1, "name": { "he": "גבי", "en": "Gabi" }, "color": "#45b8ff" },
-  { "id": 2, "name": { "he": "נתי", "en": "Nati" }, "color": "#ff5468" },
-  { "id": 3, "name": { "he": "דוד", "en": "David" }, "color": "#9be15d" },
-  { "id": 4, "name": { "he": "מתן", "en": "Matan" }, "color": "#b07cff" },
-  { "id": 5, "name": { "he": "אורי", "en": "Uri" }, "color": "#ff9a3c" },
-  { "id": 6, "name": { "he": "עומר", "en": "Omer" }, "color": "#2fd9b9" },
-  { "id": 7, "name": { "he": "גיא", "en": "Guy" }, "color": "#ff6fcf" },
-  { "id": 8, "name": { "he": "רותם", "en": "Rotem" }, "color": "#f4d84a" },
-  { "id": 9, "name": { "he": "נעה", "en": "Noa" }, "color": "#7d8cff" }
+  { "id": 1, "name": { "he": "גבי", "en": "Gabi" }, "color": "#6f93e6" },
+  { "id": 2, "name": { "he": "נתי", "en": "Nati" }, "color": "#d9566b" },
+  { "id": 3, "name": { "he": "דוד", "en": "David" }, "color": "#9cc463" },
+  { "id": 4, "name": { "he": "מתן", "en": "Matan" }, "color": "#a785e0" },
+  { "id": 5, "name": { "he": "אורי", "en": "Uri" }, "color": "#e09a52" },
+  { "id": 6, "name": { "he": "עומר", "en": "Omer" }, "color": "#45b48a" },
+  { "id": 7, "name": { "he": "גיא", "en": "Guy" }, "color": "#df7fb0" },
+  { "id": 8, "name": { "he": "רותם", "en": "Rotem" }, "color": "#dcc25e" },
+  { "id": 9, "name": { "he": "נעה", "en": "Noa" }, "color": "#5fbfd0" }
 ]

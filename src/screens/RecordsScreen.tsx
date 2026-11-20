@@ -10,7 +10,8 @@ import { medalCsv } from '../export/tables';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useI18n } from '../i18n/context';
 import { Avatar, CompetitionTag, PlayerDot } from '../ui/Badges';
-import { Card, Section } from '../ui/Section';
+import { Laurel, Ornament, Trophy } from '../ui/Ornaments';
+import { Card, Plaque, Section } from '../ui/Section';
 import styles from './Records.module.css';
 
 const FILTER_KEY = 'hall-of-fame:records-filter';
@@ -30,13 +31,16 @@ function RecordCard({ label, player, value, sub, color, href }: RecordProps) {
   const { name } = useI18n();
   return (
     <a className={styles.record} href={href} style={vars({ '--c': color })}>
-      <span className={styles.recordLabel}>{label}</span>
-      <span className={styles.recordWho}>
-        <Avatar player={player} size={30} />
-        {name(player)}
-      </span>
-      <span className={`${styles.recordValue} num`}>{value}</span>
-      <span className={styles.recordSub}>{sub}</span>
+      <Plaque className={styles.recordBody}>
+        <span className={styles.recordLabel}>{label}</span>
+        <span className={`${styles.recordValue} gilded num`}>{value}</span>
+        <Ornament reach={30} />
+        <span className={styles.recordWho}>
+          <Avatar player={player} size={30} />
+          {name(player)}
+        </span>
+        <span className={styles.recordSub}>{sub}</span>
+      </Plaque>
     </a>
   );
 }
@@ -87,7 +91,7 @@ export function RecordsScreen() {
       player: r.mostPodiums.player,
       value: r.mostPodiums.value,
       sub: t.podiums,
-      color: 'var(--silver)',
+      color: 'var(--gold)',
       href: playerHref(r.mostPodiums.player),
     });
   if (r.bestAverage)
@@ -127,16 +131,20 @@ export function RecordsScreen() {
       player: r.mostSeasons.player,
       value: r.mostSeasons.value,
       sub: t.seasons,
-      color: 'var(--text)',
+      color: 'var(--gold)',
       href: playerHref(r.mostSeasons.player),
     });
 
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
-        <p className={styles.eyebrow}>{t.brand}</p>
-        <h1 className={styles.title}>{t.recordsTitle}</h1>
+        <Laurel size={120}>
+          <Trophy size={44} />
+        </Laurel>
+        <p className="eyebrow">{t.recordsEyebrow}</p>
+        <h1 className={`${styles.title} gilded`}>{t.recordsTitle}</h1>
         <p className={styles.lead}>{t.recordsLine}</p>
+        <Ornament />
         <div className={styles.toolbar}>
           <div>
             <p className={styles.filterLabel}>{t.filterLabel}</p>
@@ -163,7 +171,7 @@ export function RecordsScreen() {
               eyebrow: `${t.brand} · ${t.recordsTitle}`,
               title: t.medalTable,
               subtitle: active.map(compName).join(' · '),
-              accent: '#f2c14e',
+              accent: '#d4b06a',
               rtl: language === 'he',
               footer: t.brand,
               rows: table.map((row, i) => ({
@@ -187,13 +195,13 @@ export function RecordsScreen() {
         ))}
       </div>
 
-      <Section title={t.medalTable} hint={t.medalTableHint} id="medals">
+      <Section eyebrow={t.legendsEyebrow} title={t.medalTable} hint={t.medalTableHint} id="medals">
         <Card>
           <MedalTable rows={table} />
         </Card>
       </Section>
 
-      <Section title={t.championsRoll} id="roll">
+      <Section eyebrow={t.wallEyebrow} title={t.championsRoll} id="roll">
         <div className={styles.rolls}>
           {COMPETITIONS.filter((c) => filter.has(c.id)).map((c) => {
             const high = r.highScores.find((h) => h.placing.season.competition === c.id);

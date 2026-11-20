@@ -4,12 +4,13 @@
 
 .menu {
   position: absolute;
-  inset-inline-end: 0;
-  top: calc(100% + 8px);
+  left: 50%;
+  translate: -50% 0;
+  top: calc(100% + 10px);
   z-index: 40;
   min-width: 260px;
   padding: 6px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--gold-line);
   border-radius: var(--radius-md);
   background: var(--surface-raised);
   box-shadow: 0 24px 60px rgb(0 0 0 / 55%);

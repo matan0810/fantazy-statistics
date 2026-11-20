@@ -4,6 +4,7 @@ import type { Placing } from '../../domain/stats';
 import { goTo } from '../../hooks/useRoute';
 import { useI18n } from '../../i18n/context';
 import { Avatar, RankBadge } from '../../ui/Badges';
+import { MEDAL_INK } from '../../ui/medals';
 import styles from './Standings.module.css';
 
 /** The final table. Each row opens the player's page; a thin bar shows points against the leader. */
@@ -41,7 +42,7 @@ export function Standings({ table }: { table: Placing[] }) {
               </td>
               <td>
                 <a className={styles.who} href={href} aria-label={t.openPlayer(name(p.player))}>
-                  <Avatar player={p.player} size={34} />
+                  <Avatar player={p.player} size={36} gold={p.result.rank === 1} />
                   <span className={styles.whoText}>
                     <span className={styles.name}>{name(p.player)}</span>
                     <span className={styles.team}>
@@ -69,7 +70,16 @@ export function Standings({ table }: { table: Placing[] }) {
               <td className={`${styles.right} ${styles.gap} ${styles.hideSmall} num`}>
                 {p.gap === null ? '' : <bdi dir="ltr">{p.gap === 0 ? '0' : `−${p.gap}`}</bdi>}
               </td>
-              <td className={`${styles.right} ${styles.points} num`}>{p.result.points ?? '—'}</td>
+              <td
+                className={`${styles.right} ${styles.points} num`}
+                style={
+                  p.result.rank !== null && MEDAL_INK[p.result.rank]
+                    ? { color: MEDAL_INK[p.result.rank] }
+                    : undefined
+                }
+              >
+                {p.result.points ?? '—'}
+              </td>
             </tr>
           );
         })}

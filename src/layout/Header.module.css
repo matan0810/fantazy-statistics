@@ -2,16 +2,30 @@
   position: sticky;
   top: 0;
   z-index: 30;
-  border-block-end: 1px solid var(--line);
-  background: rgb(9 10 15 / 82%);
-  backdrop-filter: saturate(150%) blur(14px);
+  background: linear-gradient(180deg, rgb(11 10 8 / 94%), rgb(11 10 8 / 82%));
+  backdrop-filter: saturate(140%) blur(14px);
   padding-top: env(safe-area-inset-top);
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--gold-line) 20%,
+    var(--gold-line) 80%,
+    transparent
+  );
 }
 
 .bar {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 28px;
   max-width: var(--page);
   height: var(--header);
   margin-inline: auto;
@@ -25,23 +39,18 @@
   min-width: 0;
 }
 
-.mark {
-  width: 30px;
-  height: 30px;
-  flex-shrink: 0;
-}
-
 .name {
   font-family: var(--display);
-  font-size: 1.25rem;
+  font-size: 1.3rem;
+  font-weight: 500;
   line-height: 1;
   white-space: nowrap;
 }
 
 .nav {
   display: flex;
-  gap: 4px;
-  margin-inline-start: 12px;
+  gap: 6px;
+  margin-inline-start: 8px;
 }
 
 .link {
@@ -49,10 +58,11 @@
   display: inline-flex;
   align-items: center;
   height: var(--header);
-  padding-inline: 12px;
+  padding-inline: 14px;
   color: var(--muted);
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   transition: color var(--fast);
 }
 
@@ -61,29 +71,31 @@
 }
 
 .link[aria-current='page'] {
-  color: var(--text);
+  color: var(--gold-bright);
 }
 
 .link[aria-current='page']::after {
   content: '';
   position: absolute;
-  inset-inline: 12px;
-  bottom: -1px;
-  height: 2px;
-  border-radius: 2px;
+  left: 50%;
+  bottom: 12px;
+  width: 5px;
+  height: 5px;
   background: var(--gold);
+  transform: translateX(-50%) rotate(45deg);
 }
 
 .end {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin-inline-start: auto;
 }
 
 .version {
   color: var(--faint);
-  font-size: 0.8rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
 }
 
 /* Phone: the three tabs move to a row of their own under the brand. */
@@ -100,15 +112,19 @@
     margin: 0;
     padding-inline: var(--gutter);
     gap: 0;
-    border-block: 1px solid var(--line);
-    background: rgb(9 10 15 / 92%);
+    background: rgb(11 10 8 / 94%);
     backdrop-filter: blur(14px);
+    border-block-end: 1px solid var(--line);
   }
 
   .link {
     flex: 1;
     justify-content: center;
     height: 46px;
+  }
+
+  .link[aria-current='page']::after {
+    bottom: 5px;
   }
 
   .header {

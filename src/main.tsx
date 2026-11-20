@@ -1,6 +1,5 @@
 import '@fontsource-variable/heebo';
-import '@fontsource/secular-one/hebrew-400.css';
-import '@fontsource/secular-one/latin-400.css';
+import '@fontsource-variable/frank-ruhl-libre';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';

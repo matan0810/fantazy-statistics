@@ -22,7 +22,7 @@ export function Header({ route, seasonsHref }: Props) {
     <header className={styles.header}>
       <div className={styles.bar}>
         <a className={styles.brand} href="#/">
-          <Logo className={styles.mark} />
+          <Logo size={42} />
           <span className={styles.name}>{t.brand}</span>
         </a>
         <nav className={styles.nav} aria-label={t.navLabel}>
