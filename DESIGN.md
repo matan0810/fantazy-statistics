@@ -82,7 +82,9 @@ The home page's chart, and the player page's, show one competition at a time:
   pointer (or between the fingers) in place, never shows fewer than three seasons, and pans
   by dragging once zoomed. Vertical swipes still scroll the page. A drag never counts as a
   click on a dot. The logic is in `src/charts/zoom.ts`, tested on its own.
-- Hovering a line or a name, or choosing a name, picks out that line and fades the rest. On
+- Hovering a line or a name picks out that line and fades the rest. Names can be chosen
+  together to compare several lines; each stays lit until chosen again, and "All" clears
+  them. On
   a mouse a dot opens its season; on touch the first tap shows the season with a link.
 - The lines draw in when the chart scrolls into view, dots follow. With reduced motion they
   appear at once.

@@ -35,7 +35,8 @@ const he = {
   heroFacts: (seasons: number, players: number) =>
     `${seasons} עונות · ${players} שחקנים · 4 תחרויות`,
   linesTitle: 'קווי הדירוג',
-  linesHint: 'כל קו הוא שחקן לאורך העונות. למעלה זה מקום ראשון. בחרו שחקן כדי להדגיש את הדרך שלו.',
+  linesHint:
+    'כל קו הוא שחקן לאורך העונות. למעלה זה מקום ראשון. בחרו שחקן אחד או כמה כדי להשוות את הדרך שלהם.',
   linesLabel: (competition: string) => `גרף מקומות הסיום ב${competition} לאורך העונות`,
   showAll: 'כולם',
   zoomIn: 'הגדלה',
@@ -220,7 +221,7 @@ const en: Strings = {
   heroFacts: (seasons, players) => `${seasons} seasons · ${players} players · 4 competitions`,
   linesTitle: 'Rank lines',
   linesHint:
-    'Each line is a player across the seasons. Top is first place. Pick a player to follow their path.',
+    'Each line is a player across the seasons. Top is first place. Pick one player or several to compare their paths.',
   linesLabel: (competition) => `Finishing positions in the ${competition} across the seasons`,
   showAll: 'Everyone',
   zoomIn: 'Zoom in',

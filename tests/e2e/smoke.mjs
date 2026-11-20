@@ -67,9 +67,15 @@ async function main() {
   const matanChip = page.getByRole('button', { name: /^מתן/ }).first();
   await matanChip.click();
   assert.equal(await matanChip.getAttribute('aria-pressed'), 'true');
+  const gabiChip = page.getByRole('button', { name: /^גבי/ }).first();
+  await gabiChip.click();
+  await page.mouse.move(0, 0);
+  assert.equal(await matanChip.getAttribute('aria-pressed'), 'true', 'picks add up');
+  assert.equal(await chart.locator('[data-active]').count(), 2, 'two lines stand out');
+  await gabiChip.click();
   await page.getByRole('group', { name: 'תחרות' }).getByRole('button', { name: 'מונדיאל' }).click();
   await page.getByRole('img', { name: /מונדיאל/ }).waitFor();
-  step('desktop: rank lines chart draws, picks a player and switches competition');
+  step('desktop: rank lines chart draws, picks several players and switches competition');
 
   // time runs left to right in Hebrew too, and the axis zooms and resets
   await page.getByRole('group', { name: 'תחרות' }).getByRole('button', { name: 'אלופות' }).click();

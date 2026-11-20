@@ -43,7 +43,8 @@ export function RankLines({ chart, focus, compact = false }: Props) {
   const [revealRef, shown] = useReveal<HTMLDivElement>();
   const clipId = `clip-${useId().replace(/:/g, '')}`;
   const columns = chart.seasons.length;
-  const [selected, setSelected] = useState<number | null>(null);
+  // Several players can be picked to compare their lines; none picked shows everyone alike.
+  const [selected, setSelected] = useState<readonly number[]>([]);
   const [hovered, setHovered] = useState<number | null>(null);
   const [probe, setProbe] = useState<Probe | null>(null);
   const [view, setView] = useState<View>(() => fullView(columns));
@@ -153,12 +154,14 @@ export function RankLines({ chart, focus, compact = false }: Props) {
   const zoomBy = (factor: number) =>
     setView(zoomView(view, factor, (view.from + view.to) / 2, columns));
 
-  const active = focus ?? probe?.line.player.id ?? hovered ?? selected;
+  const single = focus ?? probe?.line.player.id ?? hovered;
+  const active: readonly number[] = single != null ? [single] : selected;
+  const isOn = (id: number) => active.includes(id);
   const visibleSpan = view.to - view.from;
   const step = labelStep(plotWidth, Math.max(1, visibleSpan));
   const ranks = Array.from({ length: chart.maxRank }, (_, i) => i + 1);
   const ordered = [...chart.lines].sort(
-    (a, b) => Number(a.player.id === active) - Number(b.player.id === active),
+    (a, b) => Number(isOn(a.player.id)) - Number(isOn(b.player.id)),
   );
   const inView = (index: number) => index >= view.from - 0.01 && index <= view.to + 0.01;
 
@@ -265,12 +268,12 @@ export function RankLines({ chart, focus, compact = false }: Props) {
             <g clipPath={`url(#${clipId})`}>
               {ordered.map((line, li) => {
                 const { solid, bridges } = linePaths(frame, line.points);
-                const isActive = line.player.id === active;
+                const isActive = isOn(line.player.id);
                 return (
                   <g
                     key={line.player.id}
                     className={styles.series}
-                    data-dim={active != null && !isActive ? '' : undefined}
+                    data-dim={active.length > 0 && !isActive ? '' : undefined}
                     data-active={isActive ? '' : undefined}
                     style={vars({ '--delay': `${li * 70}ms` })}
                     onPointerEnter={() => focus == null && setHovered(line.player.id)}
@@ -359,9 +362,9 @@ export function RankLines({ chart, focus, compact = false }: Props) {
           <button
             type="button"
             className={styles.chip}
-            aria-pressed={selected === null}
+            aria-pressed={selected.length === 0}
             onClick={() => {
-              setSelected(null);
+              setSelected([]);
               setProbe(null);
             }}
           >
@@ -373,10 +376,15 @@ export function RankLines({ chart, focus, compact = false }: Props) {
               type="button"
               className={styles.chip}
               style={vars({ '--color': line.player.color })}
-              aria-pressed={selected === line.player.id}
+              aria-pressed={selected.includes(line.player.id)}
               onClick={() => {
                 setProbe(null);
-                setSelected(selected === line.player.id ? null : line.player.id);
+                setSelected((ids) =>
+                  ids.includes(line.player.id)
+                    ? ids.filter((id) => id !== line.player.id)
+                    : [...ids, line.player.id],
+                );
+                setHovered(null);
               }}
               onPointerEnter={() => setHovered(line.player.id)}
               onPointerLeave={() => setHovered(null)}
