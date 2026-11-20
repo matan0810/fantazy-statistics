@@ -9,5 +9,4 @@ export {
   shareFile,
   safeFileName,
 } from "./export";
-export { useInstall } from "./useInstall";
 export { downloadAllData, seasonRows, SEASON_HEADERS } from "./exportData";

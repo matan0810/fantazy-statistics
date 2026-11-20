@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import _ from "lodash";
 import { T, alpha } from "../../constants";
 import allSeasons from "../../data/seasons.json";
-import InstallButton from "./InstallButton";
 import { NAV_ITEMS } from "./navItems";
 
 // year is the END year of two-year seasons (2016 = 15/16)
@@ -133,7 +132,6 @@ function AppHeader({ view, onViewChange }) {
 
         <Box sx={{ flex: 1 }} />
         <DesktopNav view={view} onViewChange={onViewChange} />
-        <InstallButton />
       </Box>
     </Box>
   );

@@ -8,7 +8,7 @@ Live: https://matan0810.github.io/fantazy-statistics
 - **All-time stats**: records, a medal table, average leaders, and a champions archive per competition. Every archive row links to its season.
 - **Shareable links**: every screen has its own URL (`#/season/12`, `#/stats`).
 - **Downloads**
-  - *Install as an app* (PWA): the "הורדת האפליקציה" button installs it to the home screen. It works offline.
+  - *Install as an app* (PWA): from the browser menu ("Add to Home Screen" / "Install app"). It works offline.
   - *Image*: a ready-to-share PNG of any season table or of the medal table, or share it directly from a phone.
   - *Excel*: a CSV of the current table, or the full archive of all seasons.
   - *Proof screenshots*: each one can be downloaded from the proof dialog.
