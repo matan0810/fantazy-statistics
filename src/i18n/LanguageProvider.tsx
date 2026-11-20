@@ -4,6 +4,7 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 import { I18nContext } from './context';
 import { defaultLanguage, isLanguage, STRINGS, type Language } from './strings';
 
+// Keys keep the site's first name, so visitors' saved choices survive the rename.
 const STORAGE_KEY = 'hall-of-fame:language';
 
 export function LanguageProvider({ children }: { children: ReactNode }) {

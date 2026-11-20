@@ -93,7 +93,12 @@ describe('records', () => {
 
   it('finds the closest and the most one-sided title', () => {
     const r = records(league, WITHOUT_LIGAT);
-    expect(r.closestTitle).toMatchObject({ value: 0, placing: { season: { id: 4 } } });
+    expect(r.closestTitle).toMatchObject({
+      value: 0,
+      placing: { season: { id: 4 } },
+      runnerUp: { player: { id: 1 } },
+    });
+    expect(r.biggestWin?.runnerUp?.result.rank).toBe(2);
     expect(r.biggestWin).toMatchObject({ value: 15.5, placing: { season: { id: 20 } } });
   });
 

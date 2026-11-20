@@ -1,0 +1,264 @@
+/* An architectural podium: three stone blocks set side by side (second, first, third),
+   each with a lit metal edge and an engraved Roman numeral. The champion stands highest,
+   under a narrow fall of light, with a crown. Blocks rise in turn when the podium comes
+   into view, then the players appear, then the light. */
+.podium {
+  --top: 210px;
+  position: relative;
+  padding-top: 24px;
+}
+
+.stage {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+  max-width: 880px;
+  margin-inline: auto;
+}
+
+.slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  padding: 0 10px 20px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 800ms var(--slow),
+    transform 800ms var(--slow);
+}
+
+.podium[data-shown] .person {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(var(--delay) + 450ms);
+}
+
+.crown {
+  width: 34px;
+  height: 20px;
+  margin-bottom: 2px;
+}
+
+.name {
+  max-width: 100%;
+  margin-top: 4px;
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.05;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color var(--fast);
+}
+
+.slot[data-place='1'] .name {
+  font-size: 2.3rem;
+}
+
+.person:hover .name {
+  color: var(--gold-text);
+}
+
+.caption {
+  max-width: 100%;
+  min-height: 1.4em;
+  color: var(--muted);
+  font-size: 0.86rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.block {
+  position: relative;
+  width: 100%;
+  height: calc(var(--top) * var(--h));
+  background: linear-gradient(180deg, #1d1b17 0%, #131210 55%, #0d0c0b 100%);
+  box-shadow: inset 1px 0 0 rgb(0 0 0 / 55%);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 1100ms var(--slow);
+}
+
+.podium[data-shown] .block {
+  transform: none;
+  transition-delay: var(--delay);
+}
+
+/* the lit metal edge, and the light it throws down the face */
+.block::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 2px;
+  background: var(--metal);
+}
+
+.block::after {
+  content: '';
+  position: absolute;
+  inset: 2px 0 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--metal) 10%, transparent),
+    transparent 45%
+  );
+}
+
+.numeral {
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  inset-inline: 0;
+  color: var(--metal);
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4.6vw, 3rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+
+.slot[data-place='1'] .numeral {
+  font-size: clamp(2.6rem, 6vw, 3.8rem);
+}
+
+.face {
+  position: absolute;
+  z-index: 1;
+  bottom: 16px;
+  inset-inline: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.face b {
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 300;
+}
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+.slot[data-empty] .block {
+  opacity: 0.35;
+}
+
+/* the fall of light on the champion */
+.light {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 50%;
+  width: min(420px, 60%);
+  height: calc(100% - var(--top) + 8px);
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    rgb(243 223 170 / 9%),
+    rgb(243 223 170 / 3%) 75%,
+    transparent
+  );
+  clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+  filter: blur(14px);
+  opacity: 0;
+  transition: opacity 1600ms ease;
+  pointer-events: none;
+}
+
+.podium[data-shown] .light {
+  opacity: 1;
+  transition-delay: 1100ms;
+}
+
+.floor {
+  position: relative;
+  height: 1px;
+  max-width: 1000px;
+  margin-inline: auto;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--line-strong) 15%,
+    var(--line-strong) 85%,
+    transparent
+  );
+}
+
+.floor::after {
+  content: '';
+  position: absolute;
+  inset-inline: 10%;
+  top: 1px;
+  height: 36px;
+  background: radial-gradient(50% 100% at 50% 0%, rgb(243 223 170 / 5%), transparent);
+}
+
+@media (max-width: 640px) {
+  .podium {
+    --top: 176px;
+  }
+
+  .numeral {
+    top: 12px;
+    font-size: 1.7rem;
+  }
+
+  .slot[data-place='1'] .numeral {
+    font-size: 2.2rem;
+  }
+
+  .person {
+    gap: 6px;
+    padding: 0 4px 14px;
+  }
+
+  .name {
+    font-size: 1.15rem;
+  }
+
+  .slot[data-place='1'] .name {
+    font-size: 1.6rem;
+  }
+
+  .caption {
+    font-size: 0.74rem;
+  }
+
+  .face {
+    gap: 6px;
+    bottom: 10px;
+    font-size: 0.72rem;
+  }
+
+  .count {
+    gap: 3px;
+    font-size: 0.8rem;
+  }
+}

@@ -1,4 +1,4 @@
-# Hall of Fame: design
+# The Pantheon: design
 
 ## 1. Scope
 
@@ -18,7 +18,7 @@ space. Precision over decoration: no gradients on type, no texture, no glow, no 
 ornaments. What is honoured is marked by type, position and a touch of gold, not by effects.
 
 - **Type.** Two families with clear roles. Noto Serif Hebrew, light (300), only for display:
-  the wordmark, page and section titles, the Roman numerals and the names on the honours and
+  the wordmark, page and section titles, the Roman numerals and the names on the podium and
   champion labels. IBM Plex Sans Hebrew for everything read at reading size: names in lists,
   every figure (true tabular numerals), labels and running text. Labels are small spaced
   capitals in English and lightly spaced in Hebrew (wide spacing breaks Hebrew letters
@@ -33,9 +33,17 @@ ornaments. What is honoured is marked by type, position and a touch of gold, not
   - Monogram: the player's serif initial inside a hairline ring in their colour; a champion
     adds a second, gold ring set off by a thin gap.
   - Rank: the numeral inside a hairline ring, in metal for the podium.
-  - Honours: the first three side by side in reading order, each under a Roman numeral in
-    metal (I, II, III), separated by hairlines. Used for the season's podium and for the hall
-    of legends.
+  - Podium: the first three on stone blocks of three heights, champion in the middle, always
+    laid out II · I · III (it is a picture, so it does not mirror in Hebrew). Each block
+    carries its Roman numeral in metal and, at its foot, the figure that earned the place
+    (points for a season, medals for the legends). The champion wears a fine gold crown and
+    the gold ring, and stands in a soft beam of light. When it scrolls into view the blocks
+    rise from bronze to gold, the people appear on them, then the light. Used for the
+    season's podium and for the hall of legends.
+  - Mark: a fine-line gold trophy beside the wordmark, and alone in a double ring as the app
+    icon and favicon.
+  - Actions: a screen's proof and download controls are icon buttons in its top corner,
+    named for screen readers and in a tooltip, with no visible words.
   - Museum label: a hairline frame, a spaced-capitals title, a rule, then the content. Used
     for the champions wall and the records.
   - Section heading: eyebrow and serif title at the start, the hint at the far end, a
@@ -89,12 +97,18 @@ Across competitions the site uses titles, podiums and per-competition averages.
   so it compares across competitions.
 - Seasons whose points were lost keep their order, medals and appearances, and are left out
   of everything based on points.
-- The records page leaves the Israeli league out by default (a full-year season); the choice
-  is remembered.
+- **Which competitions count.** The records page and the home page's legends share one
+  choice, made with chips under them and remembered. By default the Israeli league is left
+  out (a full-year season); nothing on the page says so. Every chip may be turned off, and
+  then the page shows only a prompt to choose one.
+- **Where a record leads.** Titles, podiums and seasons played open the player. A streak and
+  a best average open the player on that competition. The closest title and the biggest win
+  open the season, and name the runner-up they were won against.
 
 ## 5. Addresses
 
-`#/` home, `#/season/<id>`, `#/player/<id>`, `#/records`. `#/stats` (the old statistics
+`#/` home, `#/season/<id>`, `#/player/<id>` (with `/<competition>` to open their career on
+it, for example `#/player/4/ucl`), `#/records`. `#/stats` (the old statistics
 address) opens records. Unknown addresses show home and are rewritten. The last season seen
 is where "Seasons" leads.
 

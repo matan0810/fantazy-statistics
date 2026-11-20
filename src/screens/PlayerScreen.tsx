@@ -15,11 +15,22 @@ import styles from './Player.module.css';
 
 const HISTORY_PREVIEW = 8;
 
-export function PlayerScreen({ id }: { id: number }) {
+interface Props {
+  id: number;
+  /** The competition to open the career on, from the address. */
+  competition?: CompetitionId;
+}
+
+export function PlayerScreen({ id, competition: fromAddress }: Props) {
   const { t, name } = useI18n();
   const player = playerById(league, id);
   const c = useMemo(() => (player ? careerOf(league, player) : null), [player]);
-  const [picked, setPicked] = useState<CompetitionId>('ucl');
+  const [picked, setPicked] = useState<CompetitionId>(fromAddress ?? 'ucl');
+  // A tab writes itself into the address without a navigation, so the view can be shared.
+  const pick = (competition: CompetitionId) => {
+    setPicked(competition);
+    window.history.replaceState(null, '', routeHash({ name: 'player', id, competition }));
+  };
   const [showAll, setShowAll] = useState(false);
   if (!player || !c) return null;
 
@@ -81,7 +92,7 @@ export function PlayerScreen({ id }: { id: number }) {
           <Segmented
             label={t.pickCompetition}
             value={career.competition}
-            onChange={setPicked}
+            onChange={pick}
             options={c.byCompetition.map((cc) => ({
               value: cc.competition,
               label: t.competition[cc.competition],

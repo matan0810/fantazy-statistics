@@ -1,0 +1,63 @@
+<!doctype html>
+<!--
+  The app icon: the trophy from src/ui/Trophy.tsx in gold on the site's black, inside a fine
+  double ring. Rendered to public/icons/*.png and public/favicon.svg by a browser, e.g.:
+  open with ?size=512&scale=0.62 and screenshot the 512px square.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #0a0a09;
+      }
+      .box {
+        width: var(--s);
+        height: var(--s);
+        display: grid;
+        place-items: center;
+      }
+      .ring {
+        width: calc(var(--s) * var(--k));
+        height: calc(var(--s) * var(--k));
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        box-shadow:
+          inset 0 0 0 calc(var(--s) * 0.008) #c8a96a,
+          0 0 0 calc(var(--s) * 0.028) #0a0a09,
+          0 0 0 calc(var(--s) * 0.036) rgb(200 169 106 / 55%);
+      }
+      svg {
+        width: calc(var(--s) * var(--k) * 0.74);
+        height: calc(var(--s) * var(--k) * 0.74);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="ring">
+        <svg
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="#c8a96a"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M20 10h24v12a12 12 0 0 1-24 0Z" />
+          <path d="M20 14h-6a6 6 0 0 0 7.5 9.4M44 14h6a6 6 0 0 1-7.5 9.4" />
+          <path d="M32 34v9M25.5 43h13l2 8h-17Z" />
+          <path d="M20 55h24" />
+        </svg>
+      </div>
+    </div>
+    <script>
+      const q = new URLSearchParams(location.search);
+      document.documentElement.style.setProperty('--s', `${q.get('size') ?? 512}px`);
+      document.documentElement.style.setProperty('--k', q.get('scale') ?? '0.62');
+    </script>
+  </body>
+</html>

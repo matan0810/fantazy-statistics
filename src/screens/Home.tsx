@@ -1,11 +1,13 @@
 import { useMemo, useState } from 'react';
 import { RankLines } from '../charts/RankLines';
 import { ChampionPlaque } from '../components/ChampionPlaque';
+import { CompetitionChips } from '../components/CompetitionChips';
 import { Legends } from '../components/Legends';
 import { COMPETITIONS, competition } from '../domain/competitions';
 import { league } from '../domain/league';
 import { champions, medalTable, rankChart } from '../domain/stats';
 import type { CompetitionId } from '../domain/types';
+import { useCompetitionFilter } from '../hooks/useCompetitionFilter';
 import { useCountUp } from '../hooks/useCountUp';
 import { useI18n } from '../i18n/context';
 import { ChevronIcon } from '../ui/icons';
@@ -37,11 +39,15 @@ export function Home() {
   const [comp, setComp] = useState<CompetitionId>('ucl');
   const chart = useMemo(() => rankChart(league, comp), [comp]);
   const latest = COMPETITIONS.flatMap((c) => champions(league, c.id).slice(0, 1));
-  const table = useMemo(() => medalTable(league), []);
+  // champions of any competition count for the figure up top
+  const everyone = useMemo(() => medalTable(league), []);
+  // the legends follow the competitions chosen below them (and on the records page)
+  const { active, filter, toggle } = useCompetitionFilter();
+  const table = useMemo(() => medalTable(league, filter), [filter]);
   const stats = [
     { label: t.statYears, value: Math.max(...league.seasons.map((s) => s.year)) - SINCE },
     { label: t.statSeasons, value: league.seasons.length },
-    { label: t.statChampions, value: table.filter((c) => c.titles > 0).length },
+    { label: t.statChampions, value: everyone.filter((c) => c.titles > 0).length },
   ];
 
   return (
@@ -80,7 +86,12 @@ export function Home() {
           </a>
         }
       >
-        <Legends table={table} />
+        {active.length ? (
+          <Legends table={table} />
+        ) : (
+          <p className={styles.empty}>{t.noCompetitions}</p>
+        )}
+        <CompetitionChips active={active} onToggle={toggle} />
       </Section>
 
       <Section eyebrow={t.historyEyebrow} title={t.linesTitle} hint={t.linesHint} id="lines">

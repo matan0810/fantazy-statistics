@@ -8,7 +8,7 @@ const plural = (n: number, one: string, many: string) => (n === 1 ? one : `${n} 
 /** Every piece of interface text, in Hebrew. English must provide the same keys. */
 const he = {
   dir: 'rtl',
-  brand: 'היכל התהילה',
+  brand: 'הפנתיאון',
   league: 'פנטזי ליג',
   switchLanguage: 'English',
   switchLanguageLabel: 'Switch to English',
@@ -30,7 +30,7 @@ const he = {
 
   // home
   since: (year: number) => `מאז ${year}`,
-  heroTitle: 'היכל התהילה',
+  heroTitle: 'הפנתיאון',
   heroLine: 'כל עונה, כל פודיום וכל שיא של הליגה, במקום אחד.',
   heroFacts: (seasons: number, players: number) =>
     `${seasons} עונות · ${players} שחקנים · 4 תחרויות`,
@@ -159,7 +159,6 @@ const he = {
   recordsTitle: 'ספר השיאים',
   recordsLine: 'המובילים, הרצפים והעונות הגדולות.',
   filterLabel: 'תחרויות בחישוב',
-  filterHint: 'בחירה מרובה. ליגת העל כבויה כברירת מחדל כי היא עונה של שנה שלמה.',
   mostTitles: 'הכי הרבה אליפויות',
   mostPodiums: 'הכי הרבה פודיומים',
   mostSeasons: 'הכי הרבה עונות',
@@ -168,12 +167,14 @@ const he = {
   bestAverage: 'הממוצע הגבוה',
   averageValue: (competition: string, seasons: number) => `${competition} · ${seasons} עונות`,
   closestTitle: 'האליפות הצמודה',
-  closestValue: (n: number) => (n === 0 ? 'בשוויון נקודות' : `בהפרש ${n} נק׳`),
+  closestValue: (n: number, rival: string) =>
+    n === 0 ? `בשוויון נקודות מול ${rival}` : `${n} נק׳ לפני ${rival}`,
   biggestWin: 'הניצחון הגדול',
-  biggestValue: (pct: number) => `${pct}% לפני השני`,
+  biggestValue: (pct: number, rival: string) => `${pct}% לפני ${rival}`,
   highScores: 'שיא נקודות בעונה',
   championsRoll: 'כל האלופים',
   noRecord: 'אין מספיק נתונים',
+  noCompetitions: 'בחרו תחרות כדי לראות כאן נתונים.',
 
   offline: 'אין חיבור. מוצג העותק השמור.',
   notFound: 'העמוד לא נמצא',
@@ -183,7 +184,7 @@ export type Strings = typeof he;
 
 const en: Strings = {
   dir: 'ltr',
-  brand: 'Hall of Fame',
+  brand: 'The Pantheon',
   league: 'Fantasy League',
   switchLanguage: 'עברית',
   switchLanguageLabel: 'החלפה לעברית',
@@ -204,7 +205,7 @@ const en: Strings = {
   },
 
   since: (year) => `Since ${year}`,
-  heroTitle: 'Hall of Fame',
+  heroTitle: 'The Pantheon',
   heroLine: 'Every season, podium and record of the league, in one place.',
   heroFacts: (seasons, players) => `${seasons} seasons · ${players} players · 4 competitions`,
   linesTitle: 'Rank lines',
@@ -328,7 +329,6 @@ const en: Strings = {
   recordsTitle: 'Book of records',
   recordsLine: 'The leaders, the streaks and the big seasons.',
   filterLabel: 'Competitions counted',
-  filterHint: 'Pick any. The Israeli league is off by default, since it is a full-year season.',
   mostTitles: 'Most titles',
   mostPodiums: 'Most podiums',
   mostSeasons: 'Most seasons',
@@ -337,12 +337,14 @@ const en: Strings = {
   bestAverage: 'Best average',
   averageValue: (competition, seasons) => `${competition} · ${seasons} seasons`,
   closestTitle: 'Closest title race',
-  closestValue: (n) => (n === 0 ? 'level on points' : `by ${n} pts`),
+  closestValue: (n, rival) =>
+    n === 0 ? `level on points with ${rival}` : `${n} pts ahead of ${rival}`,
   biggestWin: 'Biggest win',
-  biggestValue: (pct) => `${pct}% ahead of second`,
+  biggestValue: (pct, rival) => `${pct}% ahead of ${rival}`,
   highScores: 'Season high score',
   championsRoll: 'Every champion',
   noRecord: 'Not enough data',
+  noCompetitions: 'Choose a competition to see the figures here.',
 
   offline: 'Offline. Showing the saved copy.',
   notFound: 'Page not found',

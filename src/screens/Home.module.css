@@ -80,8 +80,10 @@
   gap: 20px;
 }
 
-.ranking {
-  margin-top: 8px;
+.empty {
+  padding-block: 40px;
+  color: var(--faint);
+  text-align: center;
 }
 
 .chart {

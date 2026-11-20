@@ -1,6 +1,6 @@
-# Hall of Fame: working procedure
+# The Pantheon: working procedure
 
-Hall of Fame (repository `fantazy-statistics`) is the record of our fantasy league: every
+The Pantheon (הפנתיאון in Hebrew; repository `fantazy-statistics`) is the record of our fantasy league: every
 season of four competitions, its podium and final table, player pages and all-time
 records, in Hebrew and English. A static React site on GitHub Pages.
 Live at https://matan0810.github.io/fantazy-statistics.

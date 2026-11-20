@@ -3,7 +3,7 @@
   { "id": 2, "name": { "he": "נתי", "en": "Nati" }, "color": "#d9566b" },
   { "id": 3, "name": { "he": "דוד", "en": "David" }, "color": "#9cc463" },
   { "id": 4, "name": { "he": "מתן", "en": "Matan" }, "color": "#a785e0" },
-  { "id": 5, "name": { "he": "אורי", "en": "Uri" }, "color": "#e09a52" },
+  { "id": 5, "name": { "he": "אורי", "en": "Ori" }, "color": "#e09a52" },
   { "id": 6, "name": { "he": "עומר", "en": "Omer" }, "color": "#45b48a" },
   { "id": 7, "name": { "he": "גיא", "en": "Guy" }, "color": "#df7fb0" },
   { "id": 8, "name": { "he": "רותם", "en": "Rotem" }, "color": "#dcc25e" },

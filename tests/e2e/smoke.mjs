@@ -56,7 +56,7 @@ async function main() {
   );
   await page.goto(url);
   assert.equal(await page.evaluate(() => document.documentElement.dir), 'rtl');
-  await page.getByRole('heading', { level: 1, name: 'היכל התהילה' }).waitFor();
+  await page.getByRole('heading', { level: 1, name: 'הפנתיאון' }).waitFor();
   await page.getByText(`v${version}`, { exact: true }).waitFor();
   assert.match(page.url(), /#\/$/);
   step('desktop: home in Hebrew, right to left, with the version');
@@ -67,12 +67,12 @@ async function main() {
   const matanChip = page.getByRole('button', { name: /^מתן/ }).first();
   await matanChip.click();
   assert.equal(await matanChip.getAttribute('aria-pressed'), 'true');
-  await page.getByRole('button', { name: 'מונדיאל' }).first().click();
+  await page.getByRole('group', { name: 'תחרות' }).getByRole('button', { name: 'מונדיאל' }).click();
   await page.getByRole('img', { name: /מונדיאל/ }).waitFor();
   step('desktop: rank lines chart draws, picks a player and switches competition');
 
   // time runs left to right in Hebrew too, and the axis zooms and resets
-  await page.getByRole('button', { name: 'אלופות' }).first().click();
+  await page.getByRole('group', { name: 'תחרות' }).getByRole('button', { name: 'אלופות' }).click();
   const ucl = page.getByRole('img', { name: /ליגת האלופות/ });
   await ucl.waitFor();
   const labelX = (text) =>
@@ -104,7 +104,7 @@ async function main() {
   );
   const legends = page.getByRole('group', { name: 'היכל האגדות' }).getByRole('link');
   assert.equal(await legends.count(), 3);
-  assert.match(await legends.first().innerText(), /מתן/);
+  assert.match(await legends.nth(1).innerText(), /מתן/, 'the champion stands in the middle');
   step('desktop: four reigning champions and the three legends');
 
   await page.getByRole('navigation').getByRole('link', { name: 'עונות' }).click();
@@ -153,9 +153,38 @@ async function main() {
   assert.match(page.url(), /#\/records$/);
   const titlesOfLeader = () => page.locator('tbody tr').first().locator('td').nth(2).innerText();
   assert.equal(await titlesOfLeader(), '9');
-  await page.getByRole('button', { name: 'ליגת העל' }).click();
+  await page
+    .getByRole('group', { name: 'תחרויות בחישוב' })
+    .getByRole('button', { name: 'ליגת העל' })
+    .click();
   assert.equal(await titlesOfLeader(), '11');
   step('desktop: the old #/stats address opens records, and the filter changes the table');
+
+  const closest = page.getByRole('link', { name: /האליפות הצמודה/ });
+  assert.match(await closest.innerText(), /מול גבי/);
+  await closest.click();
+  await page.waitForURL(/#\/season\/4$/);
+  await page.goBack();
+  for (const name of ['ליגת האלופות', 'מונדיאל', 'יורו', 'ליגת העל']) {
+    const chip = page
+      .getByRole('group', { name: 'תחרויות בחישוב' })
+      .getByRole('button', { name, exact: true });
+    if ((await chip.getAttribute('aria-pressed')) === 'true') await chip.click();
+  }
+  await page.getByText('בחרו תחרות כדי לראות כאן נתונים.').waitFor();
+  assert.equal(await page.locator('table').count(), 0, 'nothing counted, nothing shown');
+  await page
+    .getByRole('group', { name: 'תחרויות בחישוב' })
+    .getByRole('button', { name: 'ליגת האלופות' })
+    .click();
+  await page.locator('table').first().waitFor();
+  step('desktop: a record leads to its season and names the runner-up; no competition, no figures');
+
+  await page.goto(`${url}#/player/2/ligat-haal`);
+  await page.getByRole('img', { name: /ליגת העל/ }).waitFor();
+  step('desktop: a player address can open the career on a competition');
+  await page.goto(`${url}#/records`);
+  await page.getByRole('heading', { level: 1, name: 'ספר השיאים' }).waitFor();
 
   await page.getByRole('button', { name: 'Switch to English' }).click();
   assert.equal(await page.evaluate(() => document.documentElement.dir), 'ltr');
@@ -177,7 +206,7 @@ async function main() {
   await off.waitForFunction(() => navigator.serviceWorker.controller !== null);
   await offline.setOffline(true);
   await off.reload();
-  await off.getByRole('heading', { level: 1, name: 'Hall of Fame' }).waitFor();
+  await off.getByRole('heading', { level: 1, name: 'The Pantheon' }).waitFor();
   const fonts = await off.evaluate(async () => {
     const faces = await document.fonts.load('16px "Noto Serif Hebrew Variable"', 'abc');
     const saved = await (await caches.open('hall-of-fame-v2')).keys();

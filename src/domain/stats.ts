@@ -218,6 +218,8 @@ export interface PlayerValue {
 export interface SeasonRecord {
   placing: Placing;
   value: number;
+  /** Second place that season, for records about a title race. */
+  runnerUp?: Placing;
 }
 
 export interface Records {
@@ -307,10 +309,15 @@ export function records(league: League, filter: CompetitionFilter = ALL_COMPETIT
       streaks.filter((s) => s.value >= 2),
       (s) => s.value,
     ),
-    closestTitle: closest && { placing: closest.champion, value: closest.margin },
+    closestTitle: closest && {
+      placing: closest.champion,
+      value: closest.margin,
+      runnerUp: standings(league, closest.season)[1],
+    },
     biggestWin: biggest && {
       placing: biggest.champion,
       value: Math.round(relativeMargin(league, biggest) * 10) / 10,
+      runnerUp: standings(league, biggest.season)[1],
     },
     highScores,
   };

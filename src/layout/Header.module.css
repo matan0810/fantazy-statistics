@@ -30,6 +30,11 @@
   gap: 14px;
 }
 
+.mark {
+  flex-shrink: 0;
+  margin-inline-end: -4px;
+}
+
 .name {
   font-family: var(--serif);
   font-size: 1.3rem;

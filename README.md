@@ -1,4 +1,7 @@
-# Hall of Fame · היכל התהילה
+# The Pantheon · הפנתיאון
+
+The official name is The Pantheon (the installed app's name); the Hebrew interface calls it
+הפנתיאון.
 
 The record of our fantasy league: every season of the Champions League, the World Cup, the
 Euro and the Israeli league, with its podium and final table, a page for every player, and
@@ -12,10 +15,11 @@ Live at https://matan0810.github.io/fantazy-statistics
   rank. Pick a player to follow their path, zoom in on a stretch of seasons, and open a
   season from its dot.
 - **Seasons**: competition and season pickers (the arrow keys step through seasons), the
-  champion, title margin and average, a podium, and the final table with the gap to first.
+  champion, title margin and average, a podium of three blocks, and the final table with the gap to first.
 - **Players**: medals, podium rate, their line in every competition, and every season.
 - **Records**: most titles, title streaks, closest and most one-sided titles, best average,
-  the medal table, season high scores and every champion. Filter by competition.
+  the medal table, season high scores and every champion. Choose which competitions count
+  (the Israeli league is off by default); the home page's legends follow the same choice.
 - **Downloads**: any table as an image to share or a spreadsheet (CSV), the full archive,
   and the proof screenshots.
 - **Every screen has an address** (`#/season/22`, `#/player/4`, `#/records`), so it can be
@@ -68,7 +72,7 @@ src/domain/                  pure logic, no React: parsing, statistics, records,
 src/i18n/                    Hebrew and English strings, language provider
 src/charts/                  the rank lines chart (SVG) and its geometry
 src/screens/                 Home, Season, Player and Records screens
-src/components/              medal table, champion card, download menu
+src/components/              podium, medal table, champion card, competition chips, download menu
 src/ui/                      buttons, segmented control, dialog, menu, badges, icons
 src/export/                  share image (canvas), CSV tables, file download
 src/styles/global.css        design tokens and base rules

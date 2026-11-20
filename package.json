@@ -2,7 +2,7 @@
   "name": "fantazy-statistics",
   "private": true,
   "version": "3.0.0",
-  "description": "Hall of Fame: every season, podium and record of our fantasy league",
+  "description": "The Pantheon: every season, podium and record of our fantasy league",
   "type": "module",
   "homepage": "https://matan0810.github.io/fantazy-statistics",
   "scripts": {

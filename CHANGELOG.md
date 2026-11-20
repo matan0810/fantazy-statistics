@@ -12,13 +12,24 @@ old `gh-pages` branch), dated by that deploy.
 ## [Unreleased]
 
 ### Added
+- The podium returns, on the season page and for the hall of legends: three stone blocks of three heights, the champion in the middle under a crown and a soft light, each block with its numeral and the points or medals that earned it. It rises into place as it scrolls into view.
 - Zoom on the rank lines: buttons, pinch, Ctrl and the wheel, or a double click, then drag to move along the seasons.
 
 ### Changed
+- The site is now called The Pantheon, הפנתיאון in the Hebrew interface; the installed app is named The Pantheon.
+- A gold trophy is the logo, the app icon and the favicon.
+- The hall of legends on the home page leaves the Israeli league out by default; chips below it choose which competitions count, shared with the records page.
+- The competition filter can be emptied: with nothing chosen, the page asks you to pick a competition.
+- Record cards lead somewhere useful: a streak or an average opens the player on that competition, the closest title and the biggest win open the season and name the runner-up.
+- The proof screenshots and downloads are small icon buttons in the corner of the page.
+- Ori's name is spelled Ori in English.
 - The rank lines run left to right, oldest season first, in Hebrew too, as on any chart.
 - Clearer type: the serif is kept for titles and honoured names; names in lists, figures and labels use IBM Plex Sans Hebrew, with true tabular numerals.
 - Lighter pages: sections appear softly as you scroll and the home page's figures count up; labels and tables lose their boxes; the home page keeps the champions, the legends and the rank lines, and the full ranking is on the records page.
 - A player's career and the champions archive show one competition at a time, with tabs; a player's history shows eight seasons until you ask for all of them.
+
+### Removed
+- The note about the Israeli league on the records page.
 
 ## [3.0.0] - 2026-11-20
 

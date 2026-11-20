@@ -10,7 +10,7 @@ import { Ornament } from '../ui/Ornaments';
 import { Button } from '../ui/Button';
 import { ProofIcon } from '../ui/icons';
 import { Card } from '../ui/Section';
-import { Podium } from './season/Podium';
+import { SeasonPodium } from './season/Podium';
 import { ProofDialog } from './season/ProofDialog';
 import { SeasonNav } from './season/SeasonNav';
 import { Standings } from './season/Standings';
@@ -52,12 +52,18 @@ export function SeasonScreen({ id }: { id: number }) {
         <Ornament reach={56} center />
         <div className={styles.actions}>
           {proofs.length > 0 && (
-            <Button onClick={() => setProofOpen(true)}>
+            <Button
+              icon
+              variant="quiet"
+              onClick={() => setProofOpen(true)}
+              aria-label={t.proof}
+              title={t.proof}
+            >
               <ProofIcon />
-              {t.proof}
             </Button>
           )}
           <DownloadMenu
+            compact
             title={`${title} · ${t.finalStandings}`}
             csv={() => standingsCsv(table, t, name)}
             image={() => ({
@@ -118,7 +124,7 @@ export function SeasonScreen({ id }: { id: number }) {
         )}
       </dl>
 
-      <Podium table={table} />
+      <SeasonPodium table={table} />
 
       <Card className={styles.board}>
         <Standings table={table} />

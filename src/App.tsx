@@ -12,6 +12,7 @@ import { PlayerScreen } from './screens/PlayerScreen';
 import { RecordsScreen } from './screens/RecordsScreen';
 import { SeasonScreen } from './screens/SeasonScreen';
 
+// Keys keep the site's first name, so visitors' saved choices survive the rename.
 const LAST_SEASON_KEY = 'hall-of-fame:season';
 
 export function App() {
@@ -46,7 +47,9 @@ export function App() {
       <Header route={route} seasonsHref={seasonsHref} />
       {route.name === 'home' && <Home />}
       {route.name === 'season' && <SeasonScreen id={route.id} />}
-      {route.name === 'player' && <PlayerScreen id={route.id} />}
+      {route.name === 'player' && (
+        <PlayerScreen key={route.id} id={route.id} competition={route.competition} />
+      )}
       {route.name === 'records' && <RecordsScreen />}
     </>
   );

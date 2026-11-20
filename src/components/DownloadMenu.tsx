@@ -14,12 +14,14 @@ interface Props {
   title: string;
   image: () => ImageSpec;
   csv: () => string;
+  /** Icon only: no word, a tooltip and an accessible name instead. */
+  compact?: boolean;
 }
 
 const csvBlob = (text: string) => new Blob([text], { type: 'text/csv;charset=utf-8' });
 
 /** "Download": a share image, the table as CSV, or the full archive. */
-export function DownloadMenu({ title, image, csv }: Props) {
+export function DownloadMenu({ title, image, csv, compact = false }: Props) {
   const { t, name } = useI18n();
   const [busy, setBusy] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
@@ -94,9 +96,16 @@ export function DownloadMenu({ title, image, csv }: Props) {
         label={t.download}
         items={items}
         trigger={(props) => (
-          <Button {...props} disabled={busy}>
+          <Button
+            {...props}
+            disabled={busy}
+            icon={compact}
+            variant={compact ? 'quiet' : 'default'}
+            aria-label={t.download}
+            title={t.download}
+          >
             <DownloadIcon />
-            {t.download}
+            {!compact && t.download}
           </Button>
         )}
       />

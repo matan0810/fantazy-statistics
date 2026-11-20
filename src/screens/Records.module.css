@@ -34,76 +34,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: 14px;
   margin-top: 18px;
 }
 
-.filterLabel {
-  margin-bottom: 12px;
+.empty {
   color: var(--faint);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
   text-align: center;
-}
-
-[dir='rtl'] .filterLabel {
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-}
-
-.filterHint {
-  margin-top: 12px;
-  color: var(--faint);
-  font-size: 0.82rem;
-  text-align: center;
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 38px;
-  padding-inline: 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  background: transparent;
-  color: var(--faint);
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition:
-    color var(--fast),
-    border-color var(--fast);
-}
-
-.chip::before {
-  content: '';
-  width: 9px;
-  height: 9px;
-  border: 1px solid var(--line-strong);
-  transition: inherit;
-}
-
-.chip:hover {
-  color: var(--text);
-}
-
-.chip[aria-pressed='true'] {
-  color: var(--text);
-  border-color: var(--line-strong);
-}
-
-.chip[aria-pressed='true']::before {
-  border-color: var(--gold);
-  background: var(--gold);
 }
 
 .records {
@@ -129,6 +66,10 @@
 }
 
 .recordLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   padding-bottom: 14px;
   border-block-end: 1px solid var(--line);
   color: var(--faint);
@@ -270,4 +211,20 @@
   .recordWho {
     font-size: 1.05rem;
   }
+}
+
+/* a quiet arrow says the label leads somewhere; it lights up on hover */
+.recordLabel svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.35;
+  transition:
+    opacity var(--fast),
+    transform var(--fast);
+}
+
+.record:hover .recordLabel svg {
+  opacity: 1;
+  color: var(--gold-text);
 }
