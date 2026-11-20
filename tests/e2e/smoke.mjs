@@ -123,10 +123,13 @@ async function main() {
       .count(),
     4,
   );
-  const legends = page.getByRole('group', { name: 'היכל האגדות' }).getByRole('link');
-  assert.equal(await legends.count(), 3);
-  assert.match(await legends.first().innerText(), /מתן/, 'the champion comes first');
-  step('desktop: four reigning champions and the three legends');
+  const legends = page
+    .locator('#medals-title')
+    .locator('xpath=ancestor::section')
+    .locator('tbody tr');
+  assert.ok((await legends.count()) >= 8, 'the whole table, not only the top three');
+  assert.match(await legends.first().innerText(), /מתן/, 'the leader comes first');
+  step('desktop: four reigning champions and the legends table');
 
   await page.getByRole('navigation').getByRole('link', { name: 'עונות' }).click();
   await page.getByRole('heading', { level: 1, name: /ליגת האלופות\s*25\/26/ }).waitFor();

@@ -73,7 +73,7 @@ src/domain/                  pure logic, no React: parsing, statistics, records,
 src/i18n/                    Hebrew and English strings, language provider
 src/charts/                  the rank lines chart (SVG) and its geometry
 src/screens/                 Home, Season, Player and Records screens
-src/components/              podium, honours, medal table, champion card, competition chips, download menu
+src/components/              podium, medal table, champion card, competition chips, download menu
 src/ui/                      buttons, segmented control, dialog, menu, badges, icons
 src/export/                  share image (canvas), CSV tables, file download
 src/security/                Trusted Types policy for the one script loaded by hand

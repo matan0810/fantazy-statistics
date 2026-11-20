@@ -17,7 +17,7 @@ old `gh-pages` branch), dated by that deploy.
 - A turning gold arc while a proof screenshot loads, and a short message if it does not.
 
 ### Changed
-- The hall of legends on the home page is back to its three columns; the podium stays on each season.
+- The home page shows the whole medal table again, under the hall of legends, instead of the top three; the podium stays on each season.
 - Proof and download sit on a bar above the final table, next to what they act on.
 
 ### Fixed

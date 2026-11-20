@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { RankLines } from '../charts/RankLines';
 import { ChampionPlaque } from '../components/ChampionPlaque';
 import { CompetitionChips } from '../components/CompetitionChips';
-import { Legends } from '../components/Legends';
+import { MedalTable } from '../components/MedalTable';
 import { COMPETITIONS, competition } from '../domain/competitions';
 import { league } from '../domain/league';
 import { champions, medalTable, rankChart } from '../domain/stats';
@@ -41,7 +41,7 @@ export function Home() {
   const latest = COMPETITIONS.flatMap((c) => champions(league, c.id).slice(0, 1));
   // champions of any competition count for the figure up top
   const everyone = useMemo(() => medalTable(league), []);
-  // the legends follow the competitions chosen below them (and on the records page)
+  // the table follows the competitions chosen below them (and on the records page)
   const { active, filter, toggle } = useCompetitionFilter();
   const table = useMemo(() => medalTable(league, filter), [filter]);
   const stats = [
@@ -87,7 +87,9 @@ export function Home() {
         }
       >
         {active.length ? (
-          <Legends table={table} />
+          <Card className={styles.ranking}>
+            <MedalTable rows={table} />
+          </Card>
         ) : (
           <p className={styles.empty}>{t.noCompetitions}</p>
         )}

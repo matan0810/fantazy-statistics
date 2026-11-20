@@ -39,10 +39,7 @@ ornaments. What is honoured is marked by type, position and a touch of gold, not
     (points for a season, medals for the legends). The champion wears a fine gold crown and
     the gold ring, and stands in a soft beam of light. When it scrolls into view the blocks
     rise from bronze to gold, the people appear on them, then the light. Used for each
-    season's podium only.
-  - Honours: the first three side by side in reading order, each under a Roman numeral in
-    metal (I, II, III), separated by hairlines. Used for the hall of legends, where a podium
-    would be too much.
+    season's podium only. The home page's hall of legends is the full medal table.
   - Mark: a fine-line gold trophy beside the wordmark, and alone in a double ring as the app
     icon and favicon.
   - Actions: proof and download are icon buttons on the bar above the table they belong to,
@@ -55,7 +52,7 @@ ornaments. What is honoured is marked by type, position and a touch of gold, not
   - Tabs: text with a gold hairline under the chosen one. Buttons: square, hairline, spaced
     capitals.
 - **Restraint.** Each page shows one thing at a time: the home page has the champions,
-  the three legends and the rank lines (the full ranking lives on the records page); a
+  the medal table and the rank lines; a
   player's career and the champions archive show one competition at a time, behind tabs; a
   player's history shows eight seasons until asked for all. Labels have a single rule above
   them instead of a box, and tables sit between rules.
