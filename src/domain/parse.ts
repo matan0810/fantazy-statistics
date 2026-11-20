@@ -20,6 +20,12 @@ const isInt = (v: unknown): v is number => typeof v === 'number' && Number.isInt
 const isText = (v: unknown): v is string => typeof v === 'string' && v.trim().length > 0;
 const isCompetition = (v: unknown): v is CompetitionId => COMPETITION_IDS.some((id) => id === v);
 
+/** A screenshot in public/proofs/: an image there, by a plain path that cannot climb out. */
+const isProofPath = (p: unknown): p is string =>
+  typeof p === 'string' &&
+  /^\/proofs\/(?:[\w\- .]+\/)*[\w\- .]+\.(?:png|jpe?g|webp)$/i.test(p) &&
+  !p.split('/').some((part) => part === '..' || part === '.');
+
 function fail(what: string, record: unknown): never {
   throw new Error(`Invalid data: ${what} in ${JSON.stringify(record)}`);
 }
@@ -125,8 +131,7 @@ export function parseLeague(raw: RawLeague): League {
   for (const [key, paths] of Object.entries(raw.proofs)) {
     const id = Number(key);
     if (!seasonById.has(id)) fail('proof for unknown season', key);
-    if (!Array.isArray(paths) || !paths.every((p) => isText(p) && p.startsWith('/proofs/')))
-      fail('proof paths', paths);
+    if (!Array.isArray(paths) || !paths.every(isProofPath)) fail('proof paths', paths);
     proofs.set(id, paths);
   }
 

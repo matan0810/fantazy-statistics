@@ -18,7 +18,9 @@ const LAST_SEASON_KEY = 'hall-of-fame:season';
 export function App() {
   const route = useRoute();
   const { t, name } = useI18n();
-  const [lastSeason, setLastSeason] = useLocalStorage<number | null>(LAST_SEASON_KEY, null);
+  const [lastSeason, setLastSeason] = useLocalStorage<number | null>(LAST_SEASON_KEY, null, (v) =>
+    typeof v === 'number' && Number.isInteger(v) ? v : undefined,
+  );
   const fallbackSeason = latestSeason(league, 'ucl')?.id ?? 1;
   const seasonsHref = routeHash({
     name: 'season',

@@ -8,7 +8,9 @@ import { defaultLanguage, isLanguage, STRINGS, type Language } from './strings';
 const STORAGE_KEY = 'hall-of-fame:language';
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [stored, setLanguage] = useLocalStorage<Language | null>(STORAGE_KEY, null);
+  const [stored, setLanguage] = useLocalStorage<Language | null>(STORAGE_KEY, null, (v) =>
+    isLanguage(v) ? v : undefined,
+  );
   const language = isLanguage(stored)
     ? stored
     : defaultLanguage(navigator.languages, Intl.DateTimeFormat().resolvedOptions().timeZone);

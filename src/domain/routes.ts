@@ -15,7 +15,8 @@ const isCompetition = (v: unknown): v is CompetitionId => COMPETITION_IDS.some((
  */
 export function parseRoute(hash: string, league: League): Route {
   const [name, rawId, rawComp] = hash.replace(/^#\/?/, '').split(/[/?]/);
-  const id = Number(rawId);
+  // digits only: Number() would also read '1e1', ' 4' or '0x4'
+  const id = /^\d{1,6}$/.test(rawId ?? '') ? Number(rawId) : NaN;
   if (name === 'season' && league.seasons.some((s) => s.id === id)) return { name, id };
   if (name === 'player' && league.players.some((p) => p.id === id))
     return isCompetition(rawComp) ? { name, id, competition: rawComp } : { name, id };

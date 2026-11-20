@@ -15,6 +15,13 @@ describe('routes', () => {
     ['#/season/999', { name: 'home' }],
     ['#/player/abc', { name: 'home' }],
     ['#/nowhere', { name: 'home' }],
+    ['#/season/<img src=x onerror=alert(1)>', { name: 'home' }],
+    ['#/season/12abc', { name: 'home' }],
+    ['#/season/1e1', { name: 'home' }],
+    ['#/season/-4', { name: 'home' }],
+    ['#/player/javascript:alert(1)', { name: 'home' }],
+    ['#/player/4/__proto__', { name: 'player', id: 4 }],
+    ['#/player/4/constructor', { name: 'player', id: 4 }],
   ])('%s', (hash, route) => {
     expect(parseRoute(hash, league)).toEqual(route);
   });

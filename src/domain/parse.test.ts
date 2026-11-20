@@ -51,6 +51,11 @@ describe('parseLeague', () => {
     ['points on a season marked lost', (r) => void (at(r.seasons, 0).pointsLost = true)],
     ['a bad colour', (r) => void (at(r.players, 0).color = 'red')],
     ['a proof outside /proofs/', (r) => void (r.proofs['1'] = ['https://x'])],
+    ['a proof that climbs out', (r) => void (r.proofs['1'] = ['/proofs/../index.png'])],
+    ['a proof that is not an image', (r) => void (r.proofs['1'] = ['/proofs/x.html'])],
+    ['a proof with a script address', (r) => void (r.proofs['1'] = ['javascript:alert(1)'])],
+    ['a proof with a query', (r) => void (r.proofs['1'] = ['/proofs/x.png?a=1'])],
+    ['a player name that is not text', (r) => void (at(r.players, 0).name = { he: 1, en: 'x' })],
     ['a blank team name', (r) => void (at(r.results, 0).team = '  ')],
   ];
 

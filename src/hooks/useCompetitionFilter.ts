@@ -18,8 +18,11 @@ export function readFilter(stored: unknown): CompetitionId[] {
  * and the records page and remembered. It may be empty: then nothing is counted.
  */
 export function useCompetitionFilter() {
-  const [stored, setStored] = useLocalStorage<unknown>(KEY, DEFAULT_COMPETITIONS);
-  const active = useMemo(() => readFilter(stored), [stored]);
+  const [active, setStored] = useLocalStorage<CompetitionId[]>(
+    KEY,
+    [...DEFAULT_COMPETITIONS],
+    readFilter,
+  );
   const filter = useMemo(() => new Set(active), [active]);
   const toggle = (id: CompetitionId) =>
     setStored(active.includes(id) ? active.filter((x) => x !== id) : [...active, id]);
