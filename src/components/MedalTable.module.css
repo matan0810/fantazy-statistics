@@ -7,7 +7,7 @@
   padding: 16px 8px 14px;
   color: var(--faint);
   font-size: 0.68rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   text-align: center;
@@ -62,14 +62,14 @@
 }
 
 .name {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 1.2rem;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
 }
 
 .medal {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 1.3rem;
   font-weight: 300;
 }
@@ -80,7 +80,7 @@
 
 .seasons {
   color: var(--muted);
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-weight: 300;
 }
 

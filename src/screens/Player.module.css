@@ -50,7 +50,7 @@
 }
 
 .shelfCount {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: clamp(2.2rem, 6vw, 3rem);
   font-weight: 300;
   line-height: 1;
@@ -62,7 +62,7 @@
   gap: 8px;
   color: var(--faint);
   font-size: 0.68rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
@@ -93,7 +93,7 @@
 .factLabel {
   color: var(--faint);
   font-size: 0.68rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
@@ -105,7 +105,7 @@
 
 .factValue {
   margin: 0;
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: clamp(1.4rem, 3.4vw, 1.75rem);
   font-weight: 300;
   line-height: 1.1;
@@ -115,39 +115,30 @@
   color: var(--gold-text);
 }
 
-.careers {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-}
-
 .career {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 16px 16px 8px;
-}
-
-.careerHead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .careerStats {
   display: flex;
-  gap: 14px;
+  flex-wrap: wrap;
+  gap: 8px 28px;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.86rem;
 }
 
 .careerStats b {
   color: var(--text);
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: 1.05rem;
+  font-size: 1.3rem;
+  font-weight: 300;
+  margin-inline-end: 4px;
+}
+
+.more {
+  display: flex;
+  justify-content: center;
 }
 
 .history {
@@ -184,7 +175,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .entryTeam {
@@ -196,7 +187,7 @@
 }
 
 .entryPoints {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 1.3rem;
   font-weight: 300;
 }
@@ -220,18 +211,12 @@
   padding-inline: 6px 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius-pill);
-  font-weight: 600;
+  font-weight: 500;
   transition: border-color var(--fast);
 }
 
 .other:hover {
   border-color: var(--gold-line);
-}
-
-@media (max-width: 800px) {
-  .careers {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
 
 @media (max-width: 640px) {

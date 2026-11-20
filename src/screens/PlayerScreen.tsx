@@ -1,23 +1,32 @@
-import { useMemo, type CSSProperties } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
 import { RankLines } from '../charts/RankLines';
-import { seasonLabel } from '../domain/competitions';
+import { competition, seasonLabel } from '../domain/competitions';
 import { league } from '../domain/league';
 import { routeHash } from '../domain/routes';
-import { career, playerById, rankChart } from '../domain/stats';
+import { career as careerOf, playerById, rankChart } from '../domain/stats';
+import type { CompetitionId } from '../domain/types';
 import { useI18n } from '../i18n/context';
 import { Avatar, CompetitionTag, RankBadge } from '../ui/Badges';
 import { MetalDot, Ornament } from '../ui/Ornaments';
+import { Button } from '../ui/Button';
 import { Card, Section } from '../ui/Section';
+import { Segmented } from '../ui/Segmented';
 import styles from './Player.module.css';
+
+const HISTORY_PREVIEW = 8;
 
 export function PlayerScreen({ id }: { id: number }) {
   const { t, name } = useI18n();
   const player = playerById(league, id);
-  const c = useMemo(() => (player ? career(league, player) : null), [player]);
+  const c = useMemo(() => (player ? careerOf(league, player) : null), [player]);
+  const [picked, setPicked] = useState<CompetitionId>('ucl');
+  const [showAll, setShowAll] = useState(false);
   if (!player || !c) return null;
 
   const rate = c.appearances ? Math.round((c.podiums / c.appearances) * 100) : 0;
   const first = c.history.at(-1)?.season;
+  const career = c.byCompetition.find((cc) => cc.competition === picked) ?? c.byCompetition[0];
+  if (!career) return null;
   const facts = [
     { label: t.seasons, value: c.appearances },
     { label: t.podiums, value: c.podiums },
@@ -68,37 +77,46 @@ export function PlayerScreen({ id }: { id: number }) {
       </dl>
 
       <Section eyebrow={t.byCompetition} title={t.career} hint={t.careerHint} id="career">
-        <div className={styles.careers}>
-          {c.byCompetition.map((cc) => (
-            <Card key={cc.competition} className={styles.career}>
-              <div className={styles.careerHead}>
-                <CompetitionTag id={cc.competition} />
-                <div className={`${styles.careerStats} num`}>
-                  <span>
-                    <b>{cc.appearances}</b> {t.seasons}
-                  </span>
-                  {cc.titles > 0 && (
-                    <span>
-                      <b className={styles.gold}>{cc.titles}</b> {t.titles}
-                    </span>
-                  )}
-                  {cc.average !== null && (
-                    <span>
-                      <b>{cc.average}</b> {t.average}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <RankLines chart={rankChart(league, cc.competition)} focus={player.id} compact />
-            </Card>
-          ))}
+        <div className={styles.career}>
+          <Segmented
+            label={t.pickCompetition}
+            value={career.competition}
+            onChange={setPicked}
+            options={c.byCompetition.map((cc) => ({
+              value: cc.competition,
+              label: t.competition[cc.competition],
+              swatch: competition(cc.competition).color,
+            }))}
+          />
+          <div className={`${styles.careerStats} num`}>
+            <span>
+              <b>{career.appearances}</b> {t.seasons}
+            </span>
+            <span>
+              <b className={career.titles ? styles.gold : undefined}>{career.titles}</b> {t.titles}
+            </span>
+            <span>
+              <b>{career.podiums}</b> {t.podiums}
+            </span>
+            {career.average !== null && (
+              <span>
+                <b>{career.average}</b> {t.average}
+              </span>
+            )}
+            {career.best !== null && (
+              <span>
+                <b>{career.best}</b> {t.best}
+              </span>
+            )}
+          </div>
+          <RankLines chart={rankChart(league, career.competition)} focus={player.id} />
         </div>
       </Section>
 
       <Section eyebrow={t.playerCard} title={t.history} id="history">
         <Card>
           <ul className={styles.history}>
-            {c.history.map((h) => (
+            {(showAll ? c.history : c.history.slice(0, HISTORY_PREVIEW)).map((h) => (
               <li key={h.season.id}>
                 <a className={styles.entry} href={routeHash({ name: 'season', id: h.season.id })}>
                   <RankBadge rank={h.result.rank} size={30} />
@@ -123,6 +141,13 @@ export function PlayerScreen({ id }: { id: number }) {
             ))}
           </ul>
         </Card>
+        {c.history.length > HISTORY_PREVIEW && (
+          <div className={styles.more}>
+            <Button onClick={() => setShowAll(!showAll)} aria-expanded={showAll}>
+              {showAll ? t.showFewer : t.showAllSeasons(c.history.length)}
+            </Button>
+          </div>
+        )}
       </Section>
 
       <Section title={t.otherPlayers} id="others">

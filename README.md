@@ -9,7 +9,8 @@ Live at https://matan0810.github.io/fantazy-statistics
 ## Features
 
 - **Rank lines** on the home page: every player is a line through the seasons, by final
-  rank. Pick a player to follow their path; a dot shows the season and opens it.
+  rank. Pick a player to follow their path, zoom in on a stretch of seasons, and open a
+  season from its dot.
 - **Seasons**: competition and season pickers (the arrow keys step through seasons), the
   champion, title margin and average, a podium, and the final table with the gap to first.
 - **Players**: medals, podium rate, their line in every competition, and every season.

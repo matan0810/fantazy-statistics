@@ -17,11 +17,14 @@ champagne gold used sparingly, hairlines instead of boxes, sharp corners and a g
 space. Precision over decoration: no gradients on type, no texture, no glow, no drawn
 ornaments. What is honoured is marked by type, position and a touch of gold, not by effects.
 
-- **Type.** Noto Serif Hebrew at a light weight (300) for every title, name and number that
-  matters: a precise book serif with fine lining figures, in Hebrew and Latin. Assistant for
-  labels and running text. Labels are small spaced capitals in English and lightly spaced in
-  Hebrew (wide spacing breaks Hebrew letters apart). Neither font has an italic, so nothing
-  is set in italic. Both are bundled: no outside host, and they work offline.
+- **Type.** Two families with clear roles. Noto Serif Hebrew, light (300), only for display:
+  the wordmark, page and section titles, the Roman numerals and the names on the honours and
+  champion labels. IBM Plex Sans Hebrew for everything read at reading size: names in lists,
+  every figure (true tabular numerals), labels and running text. Labels are small spaced
+  capitals in English and lightly spaced in Hebrew (wide spacing breaks Hebrew letters
+  apart). Only the weights that exist are used (300, 400, 500), so the browser never fakes a
+  bold, and nothing is set in italic. Both families are bundled: no outside host, and they
+  work offline.
 - **Colour.** Gold `#c8a96a`, flat, for the champion, rank one, the active tab and the key
   figures. Silver and bronze for ranks two and three. Each player has a muted jewel tone,
   used only as a hairline ring, a line or a dot. Competitions keep a small diamond in their
@@ -39,26 +42,38 @@ ornaments. What is honoured is marked by type, position and a touch of gold, not
     full-width hairline below.
   - Tabs: text with a gold hairline under the chosen one. Buttons: square, hairline, spaced
     capitals.
-- **Motion.** Quiet: pages fade in, sections rise a few pixels, the rank lines draw
-  themselves. All of it is off with reduced motion.
+- **Restraint.** Each page shows one thing at a time: the home page has the champions,
+  the three legends and the rank lines (the full ranking lives on the records page); a
+  player's career and the champions archive show one competition at a time, behind tabs; a
+  player's history shows eight seasons until asked for all. Labels have a single rule above
+  them instead of a box, and tables sit between rules.
+- **Motion.** Quiet, and only to guide the eye: each section fades and rises a few pixels as
+  it scrolls into view, its tiles one after another; the home page's figures count up once;
+  the rank lines draw themselves when the chart comes into view. All of it is off with
+  reduced motion.
 
-Layout follows the reading direction through logical CSS properties; nothing is mirrored by
-hand except the chart's time axis (below). Hero headings are centred; everything else aligns
-to the start.
+Layout follows the reading direction through logical CSS properties. Charts are the
+exception: time runs left to right in both languages, as on any chart. Hero headings are
+centred; everything else aligns to the start.
 
 ## 3. Rank lines
 
-The home page's chart, and the player page's small ones, show one competition at a time:
+The home page's chart, and the player page's, show one competition at a time:
 
-- x: the competition's seasons in time order. In Hebrew time runs right to left, in English
-  left to right.
+- x: the competition's seasons in time order, oldest on the left, in both languages.
 - y: final rank, first at the top. The axis ends at the largest field of that competition.
 - A line joins seasons in a row as a smooth curve (level at every season). A season the
   player missed leaves a gap, bridged by a faint dashed curve.
-- Champion seasons are gold dots ringed in the player's colour.
+- Champion seasons are gold dots in the player's colour.
+- **Zoom** on the time axis: the − / + / all-seasons buttons, Ctrl (or ⌘) with the wheel, a
+  trackpad or two-finger pinch, and a double click. The view keeps the point under the
+  pointer (or between the fingers) in place, never shows fewer than three seasons, and pans
+  by dragging once zoomed. Vertical swipes still scroll the page. A drag never counts as a
+  click on a dot. The logic is in `src/charts/zoom.ts`, tested on its own.
 - Hovering a line or a name, or choosing a name, picks out that line and fades the rest. On
   a mouse a dot opens its season; on touch the first tap shows the season with a link.
-- Lines draw in on load, dots follow. With reduced motion they appear at once.
+- The lines draw in when the chart scrolls into view, dots follow. With reduced motion they
+  appear at once.
 - A visually hidden table carries the same data for screen readers.
 
 ## 4. Statistics

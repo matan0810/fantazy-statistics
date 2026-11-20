@@ -1,4 +1,6 @@
-import '@fontsource-variable/assistant';
+import '@fontsource/ibm-plex-sans-hebrew/300.css';
+import '@fontsource/ibm-plex-sans-hebrew/400.css';
+import '@fontsource/ibm-plex-sans-hebrew/500.css';
 import '@fontsource-variable/noto-serif-hebrew';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';

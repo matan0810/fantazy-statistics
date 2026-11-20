@@ -1,7 +1,9 @@
 /* Design tokens and base rules.
    The reference is a museum catalogue, not a casino: warm black, ivory type, one flat
    champagne gold used sparingly, hairlines instead of boxes, sharp corners, and space.
-   A light serif carries every title, name and number; a quiet sans carries the rest.
+   A light serif is kept for display only: titles, the wordmark, Roman numerals and the
+   names on the honours. Everything read at reading size (names in lists, figures, labels)
+   is set in IBM Plex Sans Hebrew, precise and quiet, with true tabular figures.
    No gradients on type, no texture, no glow. Logical properties throughout, so Hebrew
    (RTL) and English (LTR) share every rule. */
 :root {
@@ -25,7 +27,7 @@
   --bronze: #b98a62;
 
   --serif: 'Noto Serif Hebrew Variable', 'Noto Serif Hebrew', Georgia, serif;
-  --sans: 'Assistant Variable', 'Assistant', system-ui, sans-serif;
+  --sans: 'IBM Plex Sans Hebrew', system-ui, sans-serif;
   /* kept as aliases: components use display for the serif, body for the sans */
   --display: var(--serif);
   --body: var(--sans);
@@ -135,7 +137,7 @@ button:disabled {
   color: var(--gold-text);
   font-family: var(--sans);
   font-size: 0.7rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   line-height: 1.4;

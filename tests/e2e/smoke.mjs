@@ -71,6 +71,30 @@ async function main() {
   await page.getByRole('img', { name: /מונדיאל/ }).waitFor();
   step('desktop: rank lines chart draws, picks a player and switches competition');
 
+  // time runs left to right in Hebrew too, and the axis zooms and resets
+  await page.getByRole('button', { name: 'אלופות' }).first().click();
+  const ucl = page.getByRole('img', { name: /ליגת האלופות/ });
+  await ucl.waitFor();
+  const labelX = (text) =>
+    ucl
+      .locator('text', { hasText: text })
+      .first()
+      .evaluate((el) => el.getBoundingClientRect().x);
+  assert.ok((await labelX('15/16')) < (await labelX('25/26')), 'oldest season on the left');
+  const reset = page.getByRole('button', { name: 'כל העונות' });
+  assert.equal(await reset.isDisabled(), true);
+  await page.getByRole('button', { name: 'הגדלה' }).click();
+  await page.getByRole('button', { name: 'הגדלה' }).click();
+  assert.equal(await reset.isDisabled(), false);
+  assert.equal(
+    await ucl.locator('text', { hasText: '15/16' }).count(),
+    0,
+    'zoomed in on the middle',
+  );
+  await reset.click();
+  await ucl.locator('text', { hasText: '15/16' }).waitFor();
+  step('desktop: the chart runs left to right and zooms in and back out');
+
   assert.equal(
     await page
       .locator('a[href^="#/season/"]')
@@ -78,9 +102,10 @@ async function main() {
       .count(),
     4,
   );
-  const firstRow = page.getByRole('region', { name: 'היכל האגדות' }).locator('tbody tr').first();
-  assert.match(await firstRow.innerText(), /מתן/);
-  step('desktop: four latest champions and the medal table');
+  const legends = page.getByRole('group', { name: 'היכל האגדות' }).getByRole('link');
+  assert.equal(await legends.count(), 3);
+  assert.match(await legends.first().innerText(), /מתן/);
+  step('desktop: four reigning champions and the three legends');
 
   await page.getByRole('navigation').getByRole('link', { name: 'עונות' }).click();
   await page.getByRole('heading', { level: 1, name: /ליגת האלופות\s*25\/26/ }).waitFor();
@@ -110,8 +135,18 @@ async function main() {
   await page.locator('tbody tr').nth(1).click();
   await page.getByRole('heading', { level: 1, name: 'מתן' }).waitFor();
   assert.match(page.url(), /#\/player\/4$/);
-  assert.ok((await page.getByRole('img').count()) >= 3, 'one chart per competition');
-  step('desktop: a table row opens the player page');
+  assert.equal(await page.getByRole('img').count(), 1, 'one chart, for the competition chosen');
+  await page
+    .getByRole('group', { name: 'תחרות' })
+    .getByRole('button', { name: 'ליגת העל' })
+    .click();
+  await page.getByRole('img', { name: /ליגת העל/ }).waitFor();
+  const seasonsShown = () =>
+    page.getByRole('region', { name: 'כל העונות' }).getByRole('listitem').count();
+  assert.equal(await seasonsShown(), 8);
+  await page.getByRole('button', { name: 'כל 23 העונות' }).click();
+  assert.equal(await seasonsShown(), 23);
+  step('desktop: the player page: a row opens it, career by competition, all seasons on demand');
 
   await page.goto(`${url}#/stats`);
   await page.getByRole('heading', { level: 1, name: 'ספר השיאים' }).waitFor();

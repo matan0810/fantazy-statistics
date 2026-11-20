@@ -2,11 +2,11 @@ import { useMemo, useState } from 'react';
 import { RankLines } from '../charts/RankLines';
 import { ChampionPlaque } from '../components/ChampionPlaque';
 import { Legends } from '../components/Legends';
-import { MedalTable } from '../components/MedalTable';
 import { COMPETITIONS, competition } from '../domain/competitions';
 import { league } from '../domain/league';
 import { champions, medalTable, rankChart } from '../domain/stats';
 import type { CompetitionId } from '../domain/types';
+import { useCountUp } from '../hooks/useCountUp';
 import { useI18n } from '../i18n/context';
 import { ChevronIcon } from '../ui/icons';
 import { Ornament } from '../ui/Ornaments';
@@ -19,6 +19,18 @@ const SINCE =
   Math.min(
     ...league.seasons.filter((s) => competition(s.competition).spansTwoYears).map((s) => s.year),
   ) - 1;
+
+function Stat({ label, value, delay }: { label: string; value: number; delay: number }) {
+  const shown = useCountUp(value, 1400, delay);
+  return (
+    <div className={styles.stat}>
+      <dd className={`${styles.statValue} num`} aria-label={String(value)}>
+        {shown}
+      </dd>
+      <dt className={styles.statLabel}>{label}</dt>
+    </div>
+  );
+}
 
 export function Home() {
   const { t } = useI18n();
@@ -42,17 +54,14 @@ export function Home() {
         <Ornament reach={56} center />
         <p className={styles.lead}>{t.heroLine}</p>
         <dl className={styles.stats}>
-          {stats.map((s) => (
-            <div key={s.label} className={styles.stat}>
-              <dd className={`${styles.statValue} num`}>{s.value}</dd>
-              <dt className={styles.statLabel}>{s.label}</dt>
-            </div>
+          {stats.map((s, i) => (
+            <Stat key={s.label} label={s.label} value={s.value} delay={500 + i * 150} />
           ))}
         </dl>
       </section>
 
       <Section eyebrow={t.wallEyebrow} title={t.wallTitle} hint={t.wallHint} id="wall">
-        <div className={styles.plaques}>
+        <div className={styles.plaques} data-stagger>
           {latest.map((entry) => (
             <ChampionPlaque key={entry.season.id} entry={entry} />
           ))}
@@ -72,9 +81,6 @@ export function Home() {
         }
       >
         <Legends table={table} />
-        <Card className={styles.ranking}>
-          <MedalTable rows={table} />
-        </Card>
       </Section>
 
       <Section eyebrow={t.historyEyebrow} title={t.linesTitle} hint={t.linesHint} id="lines">

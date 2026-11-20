@@ -1,19 +1,21 @@
-import { useState, type CSSProperties } from 'react';
+import { useEffect, useId, useRef, useState, type CSSProperties } from 'react';
 import { seasonLabel } from '../domain/competitions';
 import { routeHash } from '../domain/routes';
 import type { RankChart, RankLine, RankPoint } from '../domain/stats';
 import { useElementWidth } from '../hooks/useElementWidth';
+import { useReveal } from '../hooks/useReveal';
 import { navigate } from '../hooks/useRoute';
 import { useI18n } from '../i18n/context';
 import { PlayerDot } from '../ui/Badges';
-import { labelStep, linePaths, xOf, yOf, type Frame } from './geometry';
+import { indexAt, labelStep, linePaths, xOf, yOf, type Frame } from './geometry';
 import styles from './RankLines.module.css';
+import { fullView, isZoomed, panView, zoomView, type View } from './zoom';
 
 interface Props {
   chart: RankChart;
   /** Player page: this player's line stands out, there is no legend. */
   focus?: number;
-  /** A shorter chart, for a list of several. */
+  /** A shorter chart. */
   compact?: boolean;
 }
 
@@ -24,75 +26,221 @@ interface Probe {
 }
 
 const vars = (v: Record<string, string>) => v as CSSProperties;
+const STEP = 0.6; // zoom factor of one button press
 
 /**
  * The signature chart: every player is a line through the seasons of one competition,
- * placed by final rank (first at the top). Champion seasons are gold dots. Hovering or
- * choosing a player picks out their line; a dot shows the season and links to it.
+ * placed by final rank (first at the top). Champion seasons are gold dots. Time runs left
+ * to right, as on any chart. The time axis zooms (buttons, pinch, Ctrl+wheel, double
+ * click) and pans (drag). Hovering or choosing a player picks out their line; a dot
+ * shows the season and links to it.
  */
 export function RankLines({ chart, focus, compact = false }: Props) {
-  const { t, name, language } = useI18n();
+  const { t, name } = useI18n();
   const [ref, width] = useElementWidth<HTMLDivElement>();
+  const svgRef = useRef<SVGSVGElement>(null);
+  // the lines draw themselves when the chart comes into view, not when the page loads
+  const [revealRef, shown] = useReveal<HTMLDivElement>();
+  const clipId = `clip-${useId().replace(/:/g, '')}`;
+  const columns = chart.seasons.length;
   const [selected, setSelected] = useState<number | null>(null);
   const [hovered, setHovered] = useState<number | null>(null);
   const [probe, setProbe] = useState<Probe | null>(null);
-  const [pointer, setPointer] = useState<string>('mouse');
+  const [view, setView] = useState<View>(() => fullView(columns));
+  // a new competition starts on its whole history
+  const [viewOf, setViewOf] = useState(chart.competition);
+  if (viewOf !== chart.competition) {
+    setViewOf(chart.competition);
+    setView(fullView(columns));
+    setProbe(null);
+  }
 
-  const active = focus ?? probe?.line.player.id ?? hovered ?? selected;
   const frame: Frame = {
     width,
-    height: compact ? 150 : Math.round(Math.min(400, Math.max(250, width * 0.4))),
+    height: compact ? 170 : Math.round(Math.min(400, Math.max(250, width * 0.4))),
     padTop: 18,
     padBottom: 30,
     padStart: 30,
-    padEnd: 18,
-    columns: chart.seasons.length,
+    padEnd: 20,
     maxRank: chart.maxRank,
-    rtl: language === 'he',
+    view,
   };
-  const step = labelStep(width - frame.padStart - frame.padEnd, chart.seasons.length);
-  const ranks = Array.from({ length: chart.maxRank }, (_, i) => i + 1);
-  // the active line is drawn last, so it sits on top
-  const ordered = [...chart.lines].sort(
-    (a, b) => Number(a.player.id === active) - Number(b.player.id === active),
-  );
+  const plotWidth = width - frame.padStart - frame.padEnd;
+  const zoomed = isZoomed(view, columns);
+  const canZoom = columns > 3;
+
+  // Gestures: pointers by id, the drag or pinch in progress, and whether it moved
+  // (a drag must not also count as a click on a dot).
+  const gesture = useRef<{
+    pointers: Map<number, number>;
+    startView: View;
+    startX: number;
+    startDistance: number;
+    moved: boolean;
+    type: string;
+  }>({
+    pointers: new Map(),
+    startView: view,
+    startX: 0,
+    startDistance: 0,
+    moved: false,
+    type: 'mouse',
+  });
+
+  const localX = (clientX: number) => clientX - (svgRef.current?.getBoundingClientRect().left ?? 0);
+
+  // Ctrl+wheel and trackpad pinch (which browsers send as a wheel with ctrlKey).
+  // A native listener: React's wheel handler is passive and could not stop the page zoom.
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg || !canZoom) return;
+    const onWheel = (e: WheelEvent) => {
+      if (!e.ctrlKey && !e.metaKey) return;
+      e.preventDefault();
+      const f = { ...frame, view };
+      setView(zoomView(view, Math.exp(e.deltaY * 0.01), indexAt(f, localX(e.clientX)), columns));
+    };
+    svg.addEventListener('wheel', onWheel, { passive: false });
+    return () => svg.removeEventListener('wheel', onWheel);
+  });
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    const g = gesture.current;
+    g.type = e.pointerType;
+    g.pointers.set(e.pointerId, localX(e.clientX));
+    g.startView = view;
+    g.moved = false;
+    const xs = [...g.pointers.values()];
+    g.startX = xs[0] ?? 0;
+    g.startDistance = xs.length === 2 ? Math.abs((xs[0] ?? 0) - (xs[1] ?? 0)) : 0;
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    const g = gesture.current;
+    if (!g.pointers.has(e.pointerId) || !canZoom) return;
+    g.pointers.set(e.pointerId, localX(e.clientX));
+    const xs = [...g.pointers.values()];
+    const span = g.startView.to - g.startView.from;
+    if (xs.length === 2 && g.startDistance > 10) {
+      const distance = Math.abs((xs[0] ?? 0) - (xs[1] ?? 0));
+      const mid = ((xs[0] ?? 0) + (xs[1] ?? 0)) / 2;
+      g.moved = true;
+      setView(
+        zoomView(
+          g.startView,
+          g.startDistance / Math.max(distance, 1),
+          indexAt({ ...frame, view: g.startView }, mid),
+          columns,
+        ),
+      );
+    } else if (xs.length === 1 && zoomed) {
+      const dx = (xs[0] ?? 0) - g.startX;
+      if (Math.abs(dx) > 4) g.moved = true;
+      if (g.moved) setView(panView(g.startView, (-dx / (plotWidth || 1)) * span, columns));
+    }
+  };
+
+  const onPointerEnd = (e: React.PointerEvent) => {
+    gesture.current.pointers.delete(e.pointerId);
+  };
 
   const onDot = (line: RankLine, point: RankPoint) => {
-    if (pointer === 'mouse') navigate({ name: 'season', id: point.season.id });
+    if (gesture.current.moved) return;
+    if (gesture.current.type === 'mouse') navigate({ name: 'season', id: point.season.id });
     else setProbe({ line, point, pinned: true });
   };
 
+  const zoomBy = (factor: number) =>
+    setView(zoomView(view, factor, (view.from + view.to) / 2, columns));
+
+  const active = focus ?? probe?.line.player.id ?? hovered ?? selected;
+  const visibleSpan = view.to - view.from;
+  const step = labelStep(plotWidth, Math.max(1, visibleSpan));
+  const ranks = Array.from({ length: chart.maxRank }, (_, i) => i + 1);
+  const ordered = [...chart.lines].sort(
+    (a, b) => Number(a.player.id === active) - Number(b.player.id === active),
+  );
+  const inView = (index: number) => index >= view.from - 0.01 && index <= view.to + 0.01;
+
   return (
-    <div>
-      <div className={styles.wrap} ref={ref} onPointerDown={(e) => setPointer(e.pointerType)}>
+    <div ref={revealRef} data-shown={shown ? '' : undefined} className={styles.chart}>
+      {canZoom && (
+        <div className={styles.toolbar}>
+          <span className={styles.hint}>{t.zoomHint}</span>
+          <div className={styles.zoom} role="group" aria-label={t.zoomIn}>
+            <button
+              type="button"
+              aria-label={t.zoomOut}
+              title={t.zoomOut}
+              disabled={!zoomed}
+              onClick={() => zoomBy(1 / STEP)}
+            >
+              −
+            </button>
+            <button
+              type="button"
+              aria-label={t.zoomIn}
+              title={t.zoomIn}
+              disabled={visibleSpan <= 2.01}
+              onClick={() => zoomBy(STEP)}
+            >
+              +
+            </button>
+            <button
+              type="button"
+              className={styles.reset}
+              disabled={!zoomed}
+              onClick={() => setView(fullView(columns))}
+            >
+              {t.zoomReset}
+            </button>
+          </div>
+        </div>
+      )}
+
+      <div className={styles.wrap} ref={ref} dir="ltr" data-zoomed={zoomed ? '' : undefined}>
         {width > 0 && (
           <svg
+            ref={svgRef}
             key={chart.competition}
             className={styles.svg}
             width={width}
             height={frame.height}
             role="img"
             aria-label={t.linesLabel(t.competition[chart.competition])}
-            onPointerLeave={() => {
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={onPointerEnd}
+            onPointerCancel={onPointerEnd}
+            onDoubleClick={(e) =>
+              canZoom && setView(zoomView(view, 0.5, indexAt(frame, localX(e.clientX)), columns))
+            }
+            onPointerLeave={(e) => {
+              onPointerEnd(e);
               setHovered(null);
               if (!probe?.pinned) setProbe(null);
             }}
           >
+            <defs>
+              <clipPath id={clipId}>
+                <rect x={frame.padStart - 8} y={0} width={plotWidth + 16} height={frame.height} />
+              </clipPath>
+            </defs>
+
             {ranks.map((r) => (
               <g key={r}>
                 <line
                   className={r === 1 ? `${styles.grid} ${styles.gridTop}` : styles.grid}
-                  x1={frame.rtl ? frame.padEnd : frame.padStart}
-                  x2={frame.rtl ? width - frame.padStart : width - frame.padEnd}
+                  x1={frame.padStart}
+                  x2={width - frame.padEnd}
                   y1={yOf(frame, r)}
                   y2={yOf(frame, r)}
                 />
                 {(!compact || r === 1 || r === chart.maxRank) && (
                   <text
                     className={r === 1 ? `${styles.axis} ${styles.axisTop}` : styles.axis}
-                    x={frame.rtl ? width - 8 : 8}
+                    x={8}
                     y={yOf(frame, r) + 4}
-                    textAnchor={frame.rtl ? 'end' : 'start'}
                   >
                     {r}
                   </text>
@@ -101,7 +249,7 @@ export function RankLines({ chart, focus, compact = false }: Props) {
             ))}
 
             {chart.seasons.map((s, i) =>
-              i % step === (chart.seasons.length - 1) % step ? (
+              inView(i) && (i - Math.round(view.to)) % step === 0 ? (
                 <text
                   key={s.id}
                   className={styles.axis}
@@ -114,66 +262,68 @@ export function RankLines({ chart, focus, compact = false }: Props) {
               ) : null,
             )}
 
-            {ordered.map((line, li) => {
-              const { solid, bridges } = linePaths(frame, line.points);
-              const isActive = line.player.id === active;
-              const delay = `${li * 70}ms`;
-              return (
-                <g
-                  key={line.player.id}
-                  className={styles.series}
-                  data-dim={active != null && !isActive ? '' : undefined}
-                  data-active={isActive ? '' : undefined}
-                  style={vars({ '--delay': delay })}
-                  onPointerEnter={() => focus == null && setHovered(line.player.id)}
-                >
-                  {/* Keyed by position, not shape: a resize reshapes the paths in place
-                      instead of mounting new ones, which would replay the draw-in. */}
-                  {bridges.map((d, i) => (
-                    <path
-                      key={`b${i}`}
-                      d={d}
-                      className={styles.bridge}
-                      stroke={line.player.color}
-                    />
-                  ))}
-                  {solid.map((d, i) => (
-                    <path
-                      key={`s${i}`}
-                      d={d}
-                      className={styles.line}
-                      stroke={line.player.color}
-                      pathLength={1}
-                    />
-                  ))}
-                  {focus == null &&
-                    [...solid, ...bridges].map((d, i) => (
-                      <path key={`h${i}`} d={d} className={styles.hit} />
+            <g clipPath={`url(#${clipId})`}>
+              {ordered.map((line, li) => {
+                const { solid, bridges } = linePaths(frame, line.points);
+                const isActive = line.player.id === active;
+                return (
+                  <g
+                    key={line.player.id}
+                    className={styles.series}
+                    data-dim={active != null && !isActive ? '' : undefined}
+                    data-active={isActive ? '' : undefined}
+                    style={vars({ '--delay': `${li * 70}ms` })}
+                    onPointerEnter={() => focus == null && setHovered(line.player.id)}
+                  >
+                    {/* Keyed by position, not shape: a resize or a zoom reshapes the paths in
+                        place instead of mounting new ones, which would replay the draw-in. */}
+                    {bridges.map((d, i) => (
+                      <path
+                        key={`b${i}`}
+                        d={d}
+                        className={styles.bridge}
+                        stroke={line.player.color}
+                      />
                     ))}
-                  {line.points.map((p) => (
-                    <circle
-                      key={p.season.id}
-                      className={styles.dot}
-                      data-champion={p.rank === 1 ? '' : undefined}
-                      cx={xOf(frame, p.index)}
-                      cy={yOf(frame, p.rank)}
-                      r={p.rank === 1 ? (compact ? 4.5 : 5.5) : compact ? 3 : 3.5}
-                      fill={line.player.color}
-                      stroke={p.rank === 1 ? line.player.color : undefined}
-                      style={vars({ '--delay': `${900 + li * 70}ms` })}
-                      onPointerEnter={() => setProbe({ line, point: p, pinned: false })}
-                      onClick={() => onDot(line, p)}
-                    />
-                  ))}
-                </g>
-              );
-            })}
+                    {solid.map((d, i) => (
+                      <path
+                        key={`s${i}`}
+                        d={d}
+                        className={styles.line}
+                        stroke={line.player.color}
+                        pathLength={1}
+                      />
+                    ))}
+                    {focus == null &&
+                      [...solid, ...bridges].map((d, i) => (
+                        <path key={`h${i}`} d={d} className={styles.hit} />
+                      ))}
+                    {line.points.map((p) => (
+                      <circle
+                        key={p.season.id}
+                        className={styles.dot}
+                        data-champion={p.rank === 1 ? '' : undefined}
+                        cx={xOf(frame, p.index)}
+                        cy={yOf(frame, p.rank)}
+                        r={p.rank === 1 ? (compact ? 4.5 : 5.5) : compact ? 3 : 3.5}
+                        fill={line.player.color}
+                        stroke={p.rank === 1 ? line.player.color : undefined}
+                        style={vars({ '--delay': `${900 + li * 70}ms` })}
+                        onPointerEnter={() => setProbe({ line, point: p, pinned: false })}
+                        onClick={() => onDot(line, p)}
+                      />
+                    ))}
+                  </g>
+                );
+              })}
+            </g>
           </svg>
         )}
 
-        {probe && (
+        {probe && inView(probe.point.index) && (
           <div
             className={styles.tip}
+            dir="auto"
             data-pinned={probe.pinned ? '' : undefined}
             style={{
               left: Math.min(Math.max(xOf(frame, probe.point.index), 90), width - 90),

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { useReveal } from '../hooks/useReveal';
 import styles from './Section.module.css';
 
 interface Props {
@@ -14,8 +15,14 @@ interface Props {
 /** A titled part of a page: eyebrow and serif title at the start, a hairline across. */
 export function Section({ title, eyebrow, hint, action, id, children }: Props) {
   const headingId = id ? `${id}-title` : undefined;
+  const [ref, shown] = useReveal<HTMLElement>();
   return (
-    <section className={styles.section} aria-labelledby={headingId}>
+    <section
+      ref={ref}
+      className={styles.section}
+      aria-labelledby={headingId}
+      data-revealed={shown ? '' : undefined}
+    >
       <div className={styles.head}>
         <div className={styles.titles}>
           {eyebrow && <p className="eyebrow">{eyebrow}</p>}

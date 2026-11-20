@@ -1,4 +1,4 @@
-import { useMemo, type CSSProperties, type ReactNode } from 'react';
+import { useMemo, useState, type CSSProperties, type ReactNode } from 'react';
 import { DownloadMenu } from '../components/DownloadMenu';
 import { MedalTable } from '../components/MedalTable';
 import { COMPETITIONS, competition, seasonLabel } from '../domain/competitions';
@@ -9,9 +9,10 @@ import { COMPETITION_IDS, type CompetitionId, type Player } from '../domain/type
 import { medalCsv } from '../export/tables';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useI18n } from '../i18n/context';
-import { Avatar, CompetitionTag, PlayerDot } from '../ui/Badges';
+import { Avatar, PlayerDot } from '../ui/Badges';
 import { Ornament } from '../ui/Ornaments';
 import { Card, Plaque, Section } from '../ui/Section';
+import { Segmented } from '../ui/Segmented';
 import styles from './Records.module.css';
 
 const FILTER_KEY = 'hall-of-fame:records-filter';
@@ -41,6 +42,56 @@ function RecordCard({ label, player, value, sub, href }: RecordProps) {
         <span className={styles.recordSub}>{sub}</span>
       </Plaque>
     </a>
+  );
+}
+
+/** Every champion of one competition at a time, chosen with tabs. */
+function ChampionsRoll({ competitions }: { competitions: CompetitionId[] }) {
+  const { t, name } = useI18n();
+  const [picked, setPicked] = useState<CompetitionId>('ucl');
+  const current = competitions.includes(picked) ? picked : (competitions[0] ?? 'ucl');
+  const high = records(league, new Set([current])).highScores[0];
+  return (
+    <div className={styles.roll}>
+      <Segmented
+        label={t.pickCompetition}
+        value={current}
+        onChange={setPicked}
+        options={competitions.map((id) => ({
+          value: id,
+          label: t.competition[id],
+          swatch: competition(id).color,
+        }))}
+      />
+      {high && (
+        <p className={styles.rollHigh}>
+          {t.highScores}: <b className="num">{high.value}</b> · {name(high.placing.player)}{' '}
+          {seasonLabel(high.placing.season.year, current)}
+        </p>
+      )}
+      <ul className={styles.rollList}>
+        {champions(league, current).map((entry) => (
+          <li key={entry.season.id}>
+            <a
+              className={styles.rollItem}
+              href={routeHash({ name: 'season', id: entry.season.id })}
+            >
+              <span className={`${styles.rollYear} num`}>
+                {seasonLabel(entry.season.year, current)}
+              </span>
+              <span className={styles.rollName}>
+                <PlayerDot player={entry.champion.player} />
+                {name(entry.champion.player)}
+              </span>
+              <span className={styles.rollTeam}>{entry.champion.result.team ?? ''}</span>
+              <span className={`${styles.rollPoints} num`}>
+                {entry.champion.result.points ?? '—'}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -198,42 +249,9 @@ export function RecordsScreen() {
       </Section>
 
       <Section eyebrow={t.wallEyebrow} title={t.championsRoll} id="roll">
-        <div className={styles.rolls}>
-          {COMPETITIONS.filter((c) => filter.has(c.id)).map((c) => {
-            const high = r.highScores.find((h) => h.placing.season.competition === c.id);
-            return (
-              <Card key={c.id} className={styles.roll}>
-                <div className={styles.rollHead} style={vars({ '--c': c.color })}>
-                  <CompetitionTag id={c.id} />
-                </div>
-                {high && (
-                  <div className={styles.rollHigh} style={vars({ '--c': c.color })}>
-                    {t.highScores}: <b className="num">{high.value}</b> ·{' '}
-                    {name(high.placing.player)} {seasonLabel(high.placing.season.year, c.id)}
-                  </div>
-                )}
-                <ul className={styles.rollList}>
-                  {champions(league, c.id).map((entry) => (
-                    <li key={entry.season.id}>
-                      <a className={styles.rollItem} href={seasonHref(entry.season.id)}>
-                        <span className={`${styles.rollYear} num`}>
-                          {seasonLabel(entry.season.year, c.id)}
-                        </span>
-                        <span className={styles.rollName}>
-                          <PlayerDot player={entry.champion.player} />
-                          {name(entry.champion.player)}
-                        </span>
-                        <span className={`${styles.rollPoints} num`}>
-                          {entry.champion.result.points ?? '—'}
-                        </span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-            );
-          })}
-        </div>
+        <ChampionsRoll
+          competitions={COMPETITIONS.filter((c) => filter.has(c.id)).map((c) => c.id)}
+        />
       </Section>
     </main>
   );

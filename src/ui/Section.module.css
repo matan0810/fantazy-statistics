@@ -2,7 +2,46 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  animation: rise 700ms var(--slow) both;
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 900ms var(--slow),
+    transform 900ms var(--slow);
+}
+
+/* Shown once it scrolls into view; its tiles follow one after another. */
+.section[data-revealed] {
+  opacity: 1;
+  transform: none;
+}
+
+.section [data-stagger] > * {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 700ms var(--slow),
+    transform 700ms var(--slow);
+}
+
+.section[data-revealed] [data-stagger] > * {
+  opacity: 1;
+  transform: none;
+}
+
+.section[data-revealed] [data-stagger] > :nth-child(2) {
+  transition-delay: 90ms;
+}
+
+.section[data-revealed] [data-stagger] > :nth-child(3) {
+  transition-delay: 180ms;
+}
+
+.section[data-revealed] [data-stagger] > :nth-child(4) {
+  transition-delay: 270ms;
+}
+
+.section[data-revealed] [data-stagger] > :nth-child(n + 5) {
+  transition-delay: 360ms;
 }
 
 /* Start-aligned heading over a full-width hairline, the hint and actions at the far end. */
@@ -42,16 +81,12 @@
 }
 
 .card {
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  background: rgb(255 250 240 / 1.2%);
+  border-block-end: 1px solid var(--line);
 }
 
 .plaque {
   height: 100%;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  background: rgb(255 250 240 / 1.5%);
+  border-block-start: 1px solid var(--line-strong);
   transition: border-color 300ms ease;
 }
 

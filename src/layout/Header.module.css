@@ -43,7 +43,7 @@
   border-inline-start: 1px solid var(--line-strong);
   color: var(--gold-text);
   font-size: 0.66rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -66,7 +66,7 @@
   height: var(--header);
   color: var(--muted);
   font-size: 0.72rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   transition: color var(--fast);

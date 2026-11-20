@@ -1,5 +1,10 @@
 import type { RankPoint } from '../domain/stats';
+import type { View } from './zoom';
 
+/**
+ * The plot area. Time always runs left to right, as on any chart, in Hebrew too; the
+ * visible stretch of seasons is `view`, so the chart can be zoomed and panned.
+ */
 export interface Frame {
   width: number;
   height: number;
@@ -7,22 +12,27 @@ export interface Frame {
   padBottom: number;
   padStart: number;
   padEnd: number;
-  columns: number;
   maxRank: number;
-  /** Time runs right to left in Hebrew. */
-  rtl: boolean;
+  view: View;
 }
 
+const inner = (f: Frame) => f.width - f.padStart - f.padEnd;
+
 export function xOf(f: Frame, index: number): number {
-  const inner = f.width - f.padStart - f.padEnd;
-  const x = f.columns <= 1 ? inner / 2 : (index * inner) / (f.columns - 1);
-  const fromLeft = f.padStart + x;
-  return f.rtl ? f.width - fromLeft : fromLeft;
+  const span = f.view.to - f.view.from;
+  if (span <= 0) return f.padStart + inner(f) / 2;
+  return f.padStart + ((index - f.view.from) * inner(f)) / span;
+}
+
+/** The season position under an x coordinate: the inverse of xOf. */
+export function indexAt(f: Frame, x: number): number {
+  const w = inner(f) || 1;
+  return f.view.from + ((x - f.padStart) / w) * (f.view.to - f.view.from);
 }
 
 export function yOf(f: Frame, rank: number): number {
-  const inner = f.height - f.padTop - f.padBottom;
-  return f.padTop + (f.maxRank <= 1 ? 0 : ((rank - 1) * inner) / (f.maxRank - 1));
+  const h = f.height - f.padTop - f.padBottom;
+  return f.padTop + (f.maxRank <= 1 ? 0 : ((rank - 1) * h) / (f.maxRank - 1));
 }
 
 /**
@@ -61,8 +71,8 @@ export function linePaths(
   return { solid, bridges };
 }
 
-/** Which season labels fit: all of them, or every other one on a narrow chart. */
-export function labelStep(width: number, columns: number): number {
-  const room = columns > 1 ? width / (columns - 1) : width;
+/** Every how many seasons a label fits: 1, 2 or 3, by the room per visible season. */
+export function labelStep(width: number, visibleSpan: number): number {
+  const room = visibleSpan > 0 ? width / visibleSpan : width;
   return room < 34 ? 3 : room < 52 ? 2 : 1;
 }

@@ -11,6 +11,15 @@ old `gh-pages` branch), dated by that deploy.
 
 ## [Unreleased]
 
+### Added
+- Zoom on the rank lines: buttons, pinch, Ctrl and the wheel, or a double click, then drag to move along the seasons.
+
+### Changed
+- The rank lines run left to right, oldest season first, in Hebrew too, as on any chart.
+- Clearer type: the serif is kept for titles and honoured names; names in lists, figures and labels use IBM Plex Sans Hebrew, with true tabular numerals.
+- Lighter pages: sections appear softly as you scroll and the home page's figures count up; labels and tables lose their boxes; the home page keeps the champions, the legends and the rank lines, and the full ranking is on the records page.
+- A player's career and the champions archive show one competition at a time, with tabs; a player's history shows eight seasons until you ask for all of them.
+
 ## [3.0.0] - 2026-11-20
 
 The third generation of the site, rebuilt from the ground up: TypeScript, its own design

@@ -41,13 +41,13 @@ const GOLD = '#c8a96a';
 const LINE = '#24221e';
 const METAL: Record<number, string> = { 1: '#c8a96a', 2: '#bfc3c9', 3: '#b98a62' };
 const SERIF = '"Noto Serif Hebrew Variable", Georgia, serif';
-const SANS = '"Assistant Variable", sans-serif';
+const SANS = '"IBM Plex Sans Hebrew", sans-serif';
 
 async function fontsReady() {
   if (!('fonts' in document)) return;
   await Promise.allSettled([
     document.fonts.load(`300 80px ${SERIF}`, 'אבג 123 abc'),
-    document.fonts.load(`600 24px ${SANS}`, 'אבג abc'),
+    document.fonts.load(`500 24px ${SANS}`, 'אבג abc'),
     document.fonts.load(`400 24px ${SANS}`, 'אבג abc'),
   ]);
 }
@@ -96,7 +96,7 @@ export async function renderImage(spec: ImageSpec): Promise<Blob> {
 
   // header
   ctx.letterSpacing = spec.rtl ? '2px' : '6px';
-  text(spec.eyebrow, W / 2, PAD + 40, `600 22px ${SANS}`, GOLD, 'center', W - PAD * 2);
+  text(spec.eyebrow, W / 2, PAD + 40, `500 22px ${SANS}`, GOLD, 'center', W - PAD * 2);
   ctx.letterSpacing = '-1px';
   text(spec.title, W / 2, PAD + 150, `300 96px ${SERIF}`, IVORY, 'center', W - PAD * 2);
   ctx.letterSpacing = '0px';
