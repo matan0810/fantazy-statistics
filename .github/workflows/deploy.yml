@@ -1,0 +1,75 @@
+# Every push to master is a deploy: all checks run first, and only if they pass is the
+# site built and published to GitHub Pages. Once it is live, any release that has no
+# tag yet is tagged and published on GitHub with its CHANGELOG.md section: the current
+# version from package.json, and the past ones in scripts/release-history.json.
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    uses: ./.github/workflows/checks.yml
+
+  build:
+    needs: checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
+
+  release:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - name: Tag and publish missing releases
+        run: |
+          node scripts/release-plan.ts "$GITHUB_SHA" "$RUNNER_TEMP/notes" > plan.tsv
+          while IFS=$'\t' read -r tag commit title notes latest; do
+            if gh release view "$tag" > /dev/null 2>&1; then
+              echo "$tag already released"
+              continue
+            fi
+            gh release create "$tag" --target "$commit" --title "$title" \
+              --notes-file "$notes" --latest="$latest"
+            echo "Released $tag at ${commit:0:7}" | tee -a "$GITHUB_STEP_SUMMARY"
+          done < plan.tsv

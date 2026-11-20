@@ -1,38 +1,47 @@
 {
   "name": "fantazy-statistics",
+  "private": true,
   "version": "1.0.0",
-  "homepage": "https://matan0810.github.io/fantazy-statistics",
+  "description": "Hall of Fame: every season, podium and record of our fantasy league",
   "type": "module",
+  "homepage": "https://matan0810.github.io/fantazy-statistics",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "start": "npm run dev",
     "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test",
+    "e2e": "node tests/e2e/smoke.mjs",
+    "bump": "node scripts/bump.ts"
   },
   "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^9.1.1",
-    "@mui/material": "^9.1.1",
-    "axios": "^1.17.0",
-    "lodash": "^4.18.1",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "@fontsource-variable/heebo": "^5.3.0",
+    "@fontsource/secular-one": "^5.2.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.4",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.2",
-    "eslint": "^9.39.4",
-    "eslint-plugin-react": "^7.37.5",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "eslint": "^10.15.0",
     "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "gh-pages": "^6.3.0",
-    "globals": "^17.6.0",
-    "vite": "^8.0.16"
+    "eslint-plugin-react-refresh": "^0.5.8",
+    "globals": "^17.14.0",
+    "playwright": "1.63.0",
+    "prettier": "^3.10.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
+  },
+  "engines": {
+    "node": ">=22.18"
   }
 }

@@ -1,0 +1,124 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  padding: 12px 10px;
+  color: var(--faint);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-align: start;
+  border-block-end: 1px solid var(--line);
+}
+
+.table td {
+  padding: 14px 10px;
+  border-block-end: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.table tr > :first-child {
+  padding-inline-start: 18px;
+  width: 52px;
+}
+
+.table tr > :last-child {
+  padding-inline-end: 18px;
+}
+
+.table tbody tr:last-child td {
+  border-block-end: 0;
+}
+
+.row {
+  cursor: pointer;
+  transition: background var(--fast);
+}
+
+.row:hover {
+  background: var(--surface-hover);
+}
+
+.who {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.whoText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.name {
+  font-weight: 700;
+}
+
+.team {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.lost {
+  color: var(--faint);
+  font-style: italic;
+}
+
+.coachInline {
+  display: none;
+  color: var(--faint);
+}
+
+.coach {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.right {
+  text-align: end !important;
+}
+
+.points {
+  font-family: var(--display);
+  font-size: 1.3rem;
+}
+
+.gap {
+  color: var(--faint);
+  font-family: var(--display);
+}
+
+.bar {
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: -15px;
+  height: 2px;
+  width: var(--w);
+  border-radius: 2px;
+  background: linear-gradient(to var(--toward), var(--c), transparent);
+  opacity: 0.7;
+}
+
+@media (max-width: 640px) {
+  .hideSmall {
+    display: none;
+  }
+
+  .coachInline {
+    display: inline;
+  }
+
+  .table tr > :first-child {
+    padding-inline-start: 12px;
+    width: 44px;
+  }
+
+  .table tr > :last-child {
+    padding-inline-end: 12px;
+  }
+}

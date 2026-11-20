@@ -1,0 +1,109 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  padding: 10px 8px;
+  color: var(--faint);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-align: center;
+  border-block-end: 1px solid var(--line);
+}
+
+.table th:nth-child(2) {
+  text-align: start;
+}
+
+.table td {
+  padding: 12px 8px;
+  text-align: center;
+  border-block-end: 1px solid var(--line);
+}
+
+.table tr:last-child td {
+  border-block-end: 0;
+}
+
+.row {
+  cursor: pointer;
+  transition: background var(--fast);
+}
+
+.row:hover {
+  background: var(--surface-hover);
+}
+
+.first td,
+.first th {
+  padding-inline-start: 16px;
+}
+
+.last {
+  padding-inline-end: 16px !important;
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: start;
+}
+
+.whoText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.name {
+  font-weight: 700;
+}
+
+.medal {
+  font-family: var(--display);
+  font-size: 1.2rem;
+}
+
+.zero {
+  color: var(--faint);
+}
+
+.seasons {
+  color: var(--muted);
+}
+
+.short {
+  display: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentcolor;
+  vertical-align: middle;
+}
+
+@media (max-width: 560px) {
+  .hideSmall {
+    display: none;
+  }
+
+  .long {
+    display: none;
+  }
+
+  .short {
+    display: inline-block;
+  }
+
+  .table th,
+  .table td {
+    padding-inline: 6px;
+  }
+
+  .medal {
+    font-size: 1.05rem;
+  }
+}

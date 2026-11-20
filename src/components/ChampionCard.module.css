@@ -1,0 +1,75 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  overflow: hidden;
+  transition:
+    border-color var(--fast),
+    transform 200ms var(--ease);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 3px;
+  background: var(--accent);
+}
+
+.card:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.year {
+  font-family: var(--display);
+  color: var(--muted);
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.name {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+.team {
+  color: var(--muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bottom {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: auto;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.points {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  color: var(--gold);
+}

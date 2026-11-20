@@ -1,0 +1,38 @@
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 280px;
+  padding: 12px;
+  background: #050609;
+}
+
+.image {
+  display: block;
+  max-width: 100%;
+  max-height: 70dvh;
+  border-radius: var(--radius-sm);
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  background: rgb(9 10 15 / 75%);
+  backdrop-filter: blur(6px);
+}
+
+.start {
+  inset-inline-start: 12px;
+}
+
+.end {
+  inset-inline-end: 12px;
+}
+
+.count {
+  padding: 10px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+}

@@ -1,0 +1,355 @@
+[
+  { "season": 4, "player": 4, "rank": 1, "points": 582, "team": "FC agvaniya", "coach": "לביא" },
+  { "season": 4, "player": 1, "rank": 2, "points": 582, "team": "מסיבמבה", "coach": "גבריאל" },
+  { "season": 4, "player": 2, "rank": 3, "points": 530, "team": "השדים האדומים", "coach": "נתי" },
+  { "season": 4, "player": 5, "rank": 4, "points": 523, "team": "ריאל בדםם", "coach": "אורי" },
+  { "season": 5, "player": 4, "rank": 1, "points": 588, "team": "FC melafefon", "coach": "מתן" },
+  {
+    "season": 5,
+    "player": 2,
+    "rank": 2,
+    "points": 558,
+    "team": "מנצ'סטר של יונייטד",
+    "coach": "נתי"
+  },
+  { "season": 5, "player": 1, "rank": 3, "points": 549, "team": "אננס ירוק", "coach": "גבי ורותם" },
+  { "season": 5, "player": 5, "rank": 4, "points": 535, "team": "אליפות!!!", "coach": "אורי" },
+  { "season": 5, "player": 9, "rank": 5, "points": 293, "team": "ROCKINGTHIS", "coach": "NOA" },
+  { "season": 5, "player": 6, "rank": 6, "points": 178, "team": "רילונה", "coach": "עומר" },
+  { "season": 6, "player": 4, "rank": 1, "points": 614, "team": "FC Gamba", "coach": "מתן" },
+  { "season": 6, "player": 2, "rank": 2, "points": 577, "team": "United is Back!", "coach": "נתי" },
+  { "season": 6, "player": 5, "rank": 3, "points": 564, "team": "Blabla", "coach": "אורי" },
+  {
+    "season": 6,
+    "player": 1,
+    "rank": 4,
+    "points": 506,
+    "team": "קראוסון שוקולד",
+    "coach": "הקונדיטור - גבי"
+  },
+  {
+    "season": 6,
+    "player": 9,
+    "rank": 5,
+    "points": 468,
+    "team": "עוקפת אתכם בסיבוב",
+    "coach": "נעה"
+  },
+  {
+    "season": 6,
+    "player": 3,
+    "rank": 6,
+    "points": 359,
+    "team": "מכבי פורשר",
+    "coach": "אבו עומאר"
+  },
+  { "season": 7, "player": 1, "rank": 1, "points": 634, "team": "טורנדו", "coach": "הקונדיטור" },
+  { "season": 7, "player": 4, "rank": 2, "points": 629, "team": "FC Shnitzel", "coach": "מתן" },
+  { "season": 7, "player": 2, "rank": 3, "points": 612, "team": "Red devils", "coach": "נתי" },
+  { "season": 7, "player": 9, "rank": 4, "points": 476, "team": "Tired Mama", "coach": "נעה" },
+  {
+    "season": 7,
+    "player": 6,
+    "rank": 5,
+    "points": 396,
+    "team": "בננה כדורגל",
+    "coach": "זינדין פורשר"
+  },
+  {
+    "season": 7,
+    "player": 7,
+    "rank": 6,
+    "points": 276,
+    "team": "נפלו לי שתי שיניים",
+    "coach": "גיא הכסחן"
+  },
+  {
+    "season": 8,
+    "player": 4,
+    "rank": 1,
+    "points": 563,
+    "team": "FC Football Club",
+    "coach": "מתן"
+  },
+  { "season": 8, "player": 2, "rank": 2, "points": 553, "team": "שד אדום", "coach": "נתי" },
+  { "season": 8, "player": 1, "rank": 3, "points": 333, "team": "ביתר נפוליאון", "coach": "GAV" },
+  {
+    "season": 8,
+    "player": 6,
+    "rank": 4,
+    "points": 229,
+    "team": "ריאל קוסקוס",
+    "coach": "השניצלון המגעילון"
+  },
+  { "season": 2, "player": 4, "rank": 1, "points": 595, "team": "FC Grissini", "coach": "מתן" },
+  {
+    "season": 2,
+    "player": 1,
+    "rank": 2,
+    "points": 562,
+    "team": "SPOCK STARS",
+    "coach": "ג. טי. קירק"
+  },
+  { "season": 2, "player": 2, "rank": 3, "points": 556, "team": "שד אדום", "coach": "נתי" },
+  {
+    "season": 2,
+    "player": 6,
+    "rank": 4,
+    "points": 284,
+    "team": "סתם אחד",
+    "coach": "אני, אני ואני"
+  },
+  { "season": 1, "player": 1, "rank": 1, "points": 639, "team": "TREK TEAM", "coach": "J.T. KIRK" },
+  { "season": 1, "player": 4, "rank": 2, "points": 632, "team": "FC Souffle", "coach": "מתן" },
+  {
+    "season": 1,
+    "player": 2,
+    "rank": 3,
+    "points": 572,
+    "team": "שובו של CR7",
+    "coach": "השד האדום שחזר"
+  },
+  { "season": 3, "player": 4, "rank": 1, "points": null, "team": "FC Water", "coach": "מתן" },
+  { "season": 3, "player": 2, "rank": 2, "points": null, "team": "סר אלכס", "coach": "נתי" },
+  { "season": 3, "player": 1, "rank": 3, "points": null, "team": "DS9", "coach": "SISKO" },
+  { "season": 19, "player": 4, "rank": 1, "points": 586, "team": "FC Tea", "coach": "Matan" },
+  { "season": 19, "player": 1, "rank": 2, "points": 574, "team": "זיתים ופטריות", "coach": "Spok" },
+  {
+    "season": 19,
+    "player": 6,
+    "rank": 3,
+    "points": 535,
+    "team": "עירוני מודיעין 2",
+    "coach": "סתם אחד"
+  },
+  { "season": 19, "player": 2, "rank": 4, "points": 458, "team": "Red devil", "coach": "נתי" },
+  { "season": 19, "player": 7, "rank": 5, "points": 429, "team": "באלישניצל", "coach": "אמאשך" },
+  { "season": 21, "player": 2, "rank": 1, "points": 928, "team": "Red'n'Gold", "coach": "Nati" },
+  { "season": 21, "player": 7, "rank": 2, "points": 857, "team": "אכלת", "coach": "קש" },
+  { "season": 21, "player": 4, "rank": 3, "points": 848, "team": "FC Fish", "coach": "Matan" },
+  {
+    "season": 21,
+    "player": 6,
+    "rank": 4,
+    "points": 611,
+    "team": "לפחות עוקף את נתי",
+    "coach": "מלך החילופים"
+  },
+  { "season": 21, "player": 8, "rank": 5, "points": 604, "team": "רק ריאל", "coach": "רותם" },
+  {
+    "season": 22,
+    "player": 1,
+    "rank": 1,
+    "points": 876,
+    "team": "Shark Tank",
+    "coach": "ספוק הכריש"
+  },
+  { "season": 22, "player": 4, "rank": 2, "points": 859, "team": "FC Omelette", "coach": "Matan" },
+  { "season": 22, "player": 2, "rank": 3, "points": 799, "team": "Red & Gold", "coach": "נתי" },
+  {
+    "season": 22,
+    "player": 8,
+    "rank": 4,
+    "points": 743,
+    "team": "מפרום שהוא לא מפרום",
+    "coach": "רותם ואבא"
+  },
+  { "season": 22, "player": 7, "rank": 5, "points": 528, "team": "שקשוקה FC", "coach": "הרב אורי" },
+  {
+    "season": 22,
+    "player": 6,
+    "rank": 6,
+    "points": 292,
+    "team": "מלך החילופים",
+    "coach": "הפעם באמת(?)"
+  },
+  { "season": 17, "player": 2, "rank": 1, "points": null, "team": "Stars of 2018", "coach": "נתי" },
+  { "season": 17, "player": 4, "rank": null, "points": null, "team": "FC Papaya", "coach": "מתן" },
+  { "season": 18, "player": 2, "rank": 1, "points": 332, "team": "Gold medal", "coach": "נתי" },
+  { "season": 18, "player": 4, "rank": 2, "points": 330, "team": "FC salt", "coach": "מתן" },
+  { "season": 18, "player": 5, "rank": 3, "points": 299, "team": "ברק", "coach": "big E" },
+  { "season": 18, "player": 8, "rank": 4, "points": 272, "team": "גלקסיה אחרת", "coach": "רותם" },
+  { "season": 18, "player": 1, "rank": 5, "points": 262, "team": "אנטרפייז", "coach": "C. ARCHER" },
+  {
+    "season": 18,
+    "player": 6,
+    "rank": 6,
+    "points": 256,
+    "team": "ריאל קוסקוס",
+    "coach": "סתם אחד"
+  },
+  {
+    "season": 18,
+    "player": 7,
+    "rank": 7,
+    "points": 195,
+    "team": "מכבי חור בגרב",
+    "coach": "חורו גרבו"
+  },
+  {
+    "season": 23,
+    "player": 4,
+    "rank": 1,
+    "points": 461,
+    "team": "FC Watermelon",
+    "coach": "Matan"
+  },
+  {
+    "season": 23,
+    "player": 1,
+    "rank": 2,
+    "points": 449,
+    "team": "Stars Trek",
+    "coach": "J.T. KIRK"
+  },
+  { "season": 23, "player": 5, "rank": 3, "points": 439, "team": "שאדו", "coach": "באדו" },
+  {
+    "season": 23,
+    "player": 2,
+    "rank": 4,
+    "points": 412,
+    "team": "It's coming home",
+    "coach": "Nati"
+  },
+  {
+    "season": 23,
+    "player": 8,
+    "rank": 5,
+    "points": 345,
+    "team": "Rotem FC",
+    "coach": "רתי אוכל בננות"
+  },
+  {
+    "season": 23,
+    "player": 3,
+    "rank": 6,
+    "points": 322,
+    "team": "בורקס פינוקים",
+    "coach": "איל נווה"
+  },
+  {
+    "season": 23,
+    "player": 6,
+    "rank": 7,
+    "points": 304,
+    "team": "נתי vs הכספת",
+    "coach": "Mr. Wonderful"
+  },
+  {
+    "season": 23,
+    "player": 7,
+    "rank": 8,
+    "points": 160,
+    "team": "מכבי קלוד קוד",
+    "coach": "התחת של אברם"
+  },
+  { "season": 15, "player": 2, "rank": 1, "points": 278, "team": "Euro Stars", "coach": "נתי" },
+  { "season": 15, "player": 6, "rank": 2, "points": 271, "team": "ריאלונה", "coach": "עומר המדען" },
+  { "season": 15, "player": 1, "rank": 3, "points": 268, "team": "גבריאל", "coach": "חציל סגול" },
+  { "season": 15, "player": 4, "rank": 4, "points": 262, "team": "FC Afarsek", "coach": "מתן" },
+  { "season": 15, "player": 5, "rank": 5, "points": 261, "team": "לך תדע", "coach": "אורי" },
+  {
+    "season": 15,
+    "player": 3,
+    "rank": 6,
+    "points": 235,
+    "team": "King David",
+    "coach": "דוד המלך"
+  },
+  {
+    "season": 15,
+    "player": 7,
+    "rank": 7,
+    "points": 125,
+    "team": "קבוצת המלכים",
+    "coach": "גיא פורשר"
+  },
+  { "season": 16, "player": 5, "rank": 1, "points": 285, "team": "פיתה", "coach": "בטאבון" },
+  { "season": 16, "player": 1, "rank": 2, "points": 282, "team": "Trek Team", "coach": "Spock" },
+  { "season": 16, "player": 4, "rank": 3, "points": 265, "team": "FC ptitim", "coach": "M4t4n" },
+  {
+    "season": 16,
+    "player": 6,
+    "rank": 4,
+    "points": 249,
+    "team": "ריאל קוסקוס",
+    "coach": "סתם אחד"
+  },
+  {
+    "season": 16,
+    "player": 2,
+    "rank": 5,
+    "points": 248,
+    "team": "Euro Gold",
+    "coach": "אלוף אירופה"
+  },
+  {
+    "season": 20,
+    "player": 4,
+    "rank": 1,
+    "points": 276,
+    "team": "FC Almond Milk",
+    "coach": "Matan"
+  },
+  {
+    "season": 20,
+    "player": 6,
+    "rank": 2,
+    "points": 239,
+    "team": "עירוני מודיעין 2",
+    "coach": "סתם אחד"
+  },
+  { "season": 20, "player": 2, "rank": 3, "points": 236, "team": "Euro Gold", "coach": "נתי" },
+  { "season": 20, "player": 8, "rank": 4, "points": 234, "team": "רק ריאל", "coach": "רותם" },
+  {
+    "season": 20,
+    "player": 1,
+    "rank": 5,
+    "points": 228,
+    "team": "אקסטרה גבינה ופטריות",
+    "coach": "פאפא מריו"
+  },
+  {
+    "season": 20,
+    "player": 7,
+    "rank": 6,
+    "points": 217,
+    "team": "אכלתקש",
+    "coach": "אנצ'לוטי והמסטיק"
+  },
+  { "season": 20, "player": 5, "rank": 7, "points": 127, "team": "אפצ'י", "coach": "לבריאות" },
+  { "season": 14, "player": 4, "rank": 1, "points": null, "team": "אין", "coach": "מישהו" },
+  { "season": 14, "player": 2, "rank": 2, "points": null, "team": null, "coach": null },
+  { "season": 9, "player": 4, "rank": 1, "points": 1377, "team": "FC mango", "coach": "מתן" },
+  { "season": 9, "player": 2, "rank": 2, "points": 1375, "team": "ביתר יונייטד", "coach": "נתי" },
+  { "season": 9, "player": 5, "rank": 3, "points": 983, "team": "אליפות", "coach": "אורי" },
+  {
+    "season": 10,
+    "player": 2,
+    "rank": 1,
+    "points": 1372,
+    "team": "ירושלים של בית\"ר",
+    "coach": "נתי"
+  },
+  { "season": 10, "player": 4, "rank": 2, "points": 1343, "team": "FC Batata", "coach": "מתן" },
+  {
+    "season": 11,
+    "player": 2,
+    "rank": 1,
+    "points": 1294,
+    "team": "ירושלים של בית\"ר",
+    "coach": "נתי"
+  },
+  { "season": 11, "player": 4, "rank": 2, "points": 1290, "team": "FC Pasiflora", "coach": "מתן" },
+  { "season": 12, "player": 2, "rank": 1, "points": 1405, "team": "צהוב שחור", "coach": "נתי" },
+  {
+    "season": 12,
+    "player": 4,
+    "rank": 2,
+    "points": 1278,
+    "team": "FC Chocolate Cake",
+    "coach": "מתן"
+  },
+  { "season": 13, "player": 2, "rank": 1, "points": null, "team": "צהוב עולה", "coach": "נתי" },
+  { "season": 13, "player": 4, "rank": 2, "points": null, "team": "FC Cocopops", "coach": "מתן" }
+]

@@ -1,0 +1,41 @@
+.dialog {
+  width: min(560px, calc(100vw - 24px));
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 40px 90px rgb(0 0 0 / 60%);
+  overflow: hidden;
+}
+
+.dialog[open] {
+  display: flex;
+  flex-direction: column;
+  animation: rise 220ms var(--ease);
+}
+
+.dialog::backdrop {
+  background: rgb(4 5 9 / 72%);
+  backdrop-filter: blur(4px);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px 12px 20px;
+  padding-inline: 20px 12px;
+  border-block-end: 1px solid var(--line);
+}
+
+.head h2 {
+  flex: 1;
+  min-width: 0;
+  font-size: 1.15rem;
+}
+
+.body {
+  overflow: auto;
+}

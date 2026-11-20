@@ -1,36 +1,25 @@
-import js from "@eslint/js";
-import globals from "globals";
-import reactPlugin from "eslint-plugin-react";
-import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
+import js from '@eslint/js';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
-export default [
-  { ignores: ["dist", "eslint.config.js"] },
+export default tseslint.config(
+  { ignores: ['dist', 'node_modules'] },
   js.configs.recommended,
-  reactPlugin.configs.flat.recommended,
-  reactPlugin.configs.flat["jsx-runtime"],
+  tseslint.configs.strict,
+  tseslint.configs.stylistic,
+  reactHooks.configs.flat.recommended,
+  reactRefresh.configs.vite,
   {
-    files: ["**/*.{js,jsx}"],
-    plugins: {
-      "react-hooks": reactHooks,
-      "react-refresh": reactRefresh,
-    },
     languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
       globals: globals.browser,
-      parserOptions: {
-        ecmaFeatures: { jsx: true },
-      },
-    },
-    settings: { react: { version: "19" } },
-    rules: {
-      ...reactHooks.configs["recommended-latest"].rules,
-      "react-refresh/only-export-components": [
-        "warn",
-        { allowConstantExport: true },
-      ],
-      "react/prop-types": "off",
     },
   },
-];
+  {
+    files: ['scripts/**', 'tests/**', '*.config.*', 'public/sw.js'],
+    languageOptions: {
+      globals: { ...globals.node, ...globals.serviceworker },
+    },
+  },
+);

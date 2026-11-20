@@ -1,0 +1,131 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: var(--page);
+  margin-inline: auto;
+  padding: 28px var(--gutter) 72px;
+}
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  animation: rise 360ms var(--ease) both;
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: clamp(2.2rem, 7vw, 3.8rem);
+}
+
+.year {
+  color: var(--accent);
+}
+
+.leagueName {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 18px;
+  border-inline-end: 1px solid var(--line);
+}
+
+.fact:last-child {
+  border-inline-end: 0;
+}
+
+.factLabel {
+  color: var(--faint);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.factValue {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--display);
+  font-size: 1.45rem;
+  line-height: 1.2;
+  min-width: 0;
+}
+
+.factValue > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.board {
+  overflow: hidden;
+  animation: rise 420ms var(--ease) 60ms both;
+}
+
+.note {
+  padding: 14px 18px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-md);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.hint {
+  color: var(--faint);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .page {
+    gap: 22px;
+    padding-top: 20px;
+  }
+
+  .facts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fact:nth-child(2n) {
+    border-inline-end: 0;
+  }
+
+  .fact:nth-child(n + 3) {
+    border-block-start: 1px solid var(--line);
+  }
+
+  .hint {
+    display: none;
+  }
+}
