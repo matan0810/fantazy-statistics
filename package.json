@@ -19,8 +19,8 @@
     "bump": "node scripts/bump.ts"
   },
   "dependencies": {
-    "@fontsource-variable/frank-ruhl-libre": "^5.3.0",
-    "@fontsource-variable/heebo": "^5.3.0",
+    "@fontsource-variable/assistant": "^5.3.0",
+    "@fontsource-variable/noto-serif-hebrew": "^5.3.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },

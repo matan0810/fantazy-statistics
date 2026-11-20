@@ -157,7 +157,7 @@ export function RankLines({ chart, focus, compact = false }: Props) {
                       data-champion={p.rank === 1 ? '' : undefined}
                       cx={xOf(frame, p.index)}
                       cy={yOf(frame, p.rank)}
-                      r={p.rank === 1 ? (compact ? 5 : 6.5) : compact ? 3.5 : 4.5}
+                      r={p.rank === 1 ? (compact ? 4.5 : 5.5) : compact ? 3 : 3.5}
                       fill={line.player.color}
                       stroke={p.rank === 1 ? line.player.color : undefined}
                       style={vars({ '--delay': `${900 + li * 70}ms` })}

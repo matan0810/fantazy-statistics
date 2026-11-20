@@ -1,5 +1,5 @@
-import '@fontsource-variable/heebo';
-import '@fontsource-variable/frank-ruhl-libre';
+import '@fontsource-variable/assistant';
+import '@fontsource-variable/noto-serif-hebrew';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';

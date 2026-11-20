@@ -1,46 +1,46 @@
-/* Design tokens and base rules. A hall of fame, not a dashboard: warm black, champagne
-   gold and ivory, an elegant serif for everything that is read as a title or a number,
-   thin gold hairlines instead of boxes, and soft light from above like a gallery.
-   Colour is reserved for meaning: metals for ranks, one jewel tone per player.
-   Logical properties throughout, so Hebrew (RTL) and English (LTR) share every rule. */
+/* Design tokens and base rules.
+   The reference is a museum catalogue, not a casino: warm black, ivory type, one flat
+   champagne gold used sparingly, hairlines instead of boxes, sharp corners, and space.
+   A light serif carries every title, name and number; a quiet sans carries the rest.
+   No gradients on type, no texture, no glow. Logical properties throughout, so Hebrew
+   (RTL) and English (LTR) share every rule. */
 :root {
   color-scheme: dark;
 
-  --ink: #0b0a08;
-  --surface: #12100d;
-  --surface-raised: #191612;
-  --surface-hover: #211d18;
-  --line: #2a251e;
-  --line-strong: #3d362c;
-  --text: #f2ebdd;
-  --muted: #a69d8d;
-  --faint: #6f675b;
+  --ink: #0a0a09;
+  --surface: #111110;
+  --surface-raised: #171614;
+  --surface-hover: #1c1b18;
+  --line: #24221e;
+  --line-strong: #35322c;
+  --text: #eee8dd;
+  --muted: #9b958a;
+  --faint: #645f57;
 
-  --gold: #d4b06a;
-  --gold-bright: #f3dfaa;
-  --gold-deep: #8f6b2e;
-  --gold-line: rgb(212 176 106 / 28%);
-  --gold-soft: rgb(212 176 106 / 9%);
-  --gold-metal: linear-gradient(135deg, #f6e4b4 0%, #d4b06a 38%, #a07a37 62%, #e9cf8f 100%);
-  --silver: #c9ccd3;
-  --silver-metal: linear-gradient(135deg, #f4f5f7 0%, #c3c7cf 40%, #8b9099 65%, #dfe2e7 100%);
-  --bronze: #c48a5a;
-  --bronze-metal: linear-gradient(135deg, #f0c39b 0%, #c48a5a 40%, #85512b 65%, #dca57a 100%);
+  --gold: #c8a96a;
+  --gold-text: #d9bf88;
+  --gold-line: rgb(200 169 106 / 38%);
+  --gold-soft: rgb(200 169 106 / 7%);
+  --silver: #bfc3c9;
+  --bronze: #b98a62;
 
-  --display: 'Frank Ruhl Libre Variable', 'Frank Ruhl Libre', Georgia, serif;
-  --body: 'Heebo Variable', system-ui, sans-serif;
+  --serif: 'Noto Serif Hebrew Variable', 'Noto Serif Hebrew', Georgia, serif;
+  --sans: 'Assistant Variable', 'Assistant', system-ui, sans-serif;
+  /* kept as aliases: components use display for the serif, body for the sans */
+  --display: var(--serif);
+  --body: var(--sans);
 
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
   --radius-pill: 999px;
-  --tap: 38px;
-  --gutter: 28px;
-  --page: 1120px;
-  --header: 68px;
+  --tap: 40px;
+  --gutter: 32px;
+  --page: 1160px;
+  --header: 72px;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --slow: cubic-bezier(0.16, 1, 0.3, 1);
-  --fast: 160ms ease;
+  --fast: 180ms ease;
 }
 
 @media (pointer: coarse) {
@@ -51,8 +51,8 @@
 
 @media (max-width: 640px) {
   :root {
-    --gutter: 18px;
-    --header: 58px;
+    --gutter: 20px;
+    --header: 60px;
   }
 }
 
@@ -72,38 +72,26 @@ html {
 body {
   margin: 0;
   min-height: 100dvh;
-  background:
-    radial-gradient(1100px 620px at 50% -260px, rgb(212 176 106 / 11%), transparent 70%),
-    radial-gradient(700px 500px at 50% 120%, rgb(212 176 106 / 4%), transparent 70%), var(--ink);
+  background: var(--ink);
   color: var(--text);
-  font-family: var(--body);
+  font-family: var(--sans);
   font-size: 16px;
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
-}
-
-/* Film grain over everything: it takes the flatness off the dark and reads as material. */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  pointer-events: none;
-  opacity: 0.07;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  font-kerning: normal;
 }
 
 h1,
 h2,
 h3 {
   margin: 0;
-  font-family: var(--display);
-  font-weight: 500;
-  line-height: 1.08;
-  letter-spacing: -0.005em;
+  font-family: var(--serif);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   text-wrap: balance;
 }
 
@@ -125,44 +113,37 @@ button {
 
 button:disabled {
   cursor: default;
-  opacity: 0.35;
+  opacity: 0.3;
 }
 
 :focus-visible {
-  outline: 1.5px solid var(--gold);
-  outline-offset: 3px;
+  outline: 1px solid var(--gold);
+  outline-offset: 4px;
 }
 
 ::selection {
-  background: rgb(212 176 106 / 30%);
+  background: rgb(200 169 106 / 28%);
 }
 
-/* Numbers line up in columns. */
+/* Serif numerals that line up in columns. */
 .num {
   font-variant-numeric: lining-nums tabular-nums;
 }
 
-/* Small spaced label above a title: the engraved line on a plaque. */
+/* Small spaced capitals: the engraved line above a title. */
 .eyebrow {
-  color: var(--gold);
-  font-family: var(--body);
-  font-size: 0.72rem;
+  color: var(--gold-text);
+  font-family: var(--sans);
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
+  line-height: 1.4;
 }
 
 [dir='rtl'] .eyebrow {
-  letter-spacing: 0.14em;
-}
-
-/* Gold leaf text. */
-.gilded {
-  background: var(--gold-metal);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
 }
 
 .visually-hidden {
@@ -183,22 +164,13 @@ button:disabled {
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(6px);
   }
 }
 
 @keyframes reveal {
   from {
     opacity: 0;
-  }
-}
-
-@keyframes sheen {
-  from {
-    background-position: 100% 0;
-  }
-  to {
-    background-position: 0 0;
   }
 }
 

@@ -46,10 +46,10 @@ export function SeasonScreen({ id }: { id: number }) {
         </p>
         <h1 className={styles.title}>
           <span className={styles.competition}>{t.competition[season.competition]}</span>{' '}
-          <span className={`${styles.year} gilded num`}>{label}</span>
+          <span className={`${styles.year} num`}>{label}</span>
         </h1>
         {season.name && <p className={styles.leagueName}>„{season.name}”</p>}
-        <Ornament />
+        <Ornament reach={56} center />
         <div className={styles.actions}>
           {proofs.length > 0 && (
             <Button onClick={() => setProofOpen(true)}>

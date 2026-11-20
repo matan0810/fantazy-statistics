@@ -9,7 +9,7 @@ import { champions, medalTable, rankChart } from '../domain/stats';
 import type { CompetitionId } from '../domain/types';
 import { useI18n } from '../i18n/context';
 import { ChevronIcon } from '../ui/icons';
-import { Laurel, Trophy } from '../ui/Ornaments';
+import { Ornament } from '../ui/Ornaments';
 import { Card, Section } from '../ui/Section';
 import { Segmented } from '../ui/Segmented';
 import styles from './Home.module.css';
@@ -35,15 +35,11 @@ export function Home() {
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
-        <div className={styles.crest}>
-          <Laurel size={150}>
-            <Trophy size={58} />
-          </Laurel>
-        </div>
-        <p className={`eyebrow ${styles.eyebrow}`}>
+        <p className="eyebrow">
           {t.league} · {t.founded(SINCE)}
         </p>
-        <h1 className={`${styles.title} gilded`}>{t.heroTitle}</h1>
+        <h1 className={styles.title}>{t.heroTitle}</h1>
+        <Ornament reach={56} center />
         <p className={styles.lead}>{t.heroLine}</p>
         <dl className={styles.stats}>
           {stats.map((s) => (

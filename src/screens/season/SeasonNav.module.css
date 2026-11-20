@@ -39,33 +39,37 @@
 }
 
 .year {
+  position: relative;
   flex-shrink: 0;
-  min-height: 36px;
-  padding-inline: 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
+  min-height: 38px;
+  padding-inline: 12px;
+  border: 0;
   background: transparent;
-  color: var(--muted);
-  font-family: var(--display);
+  color: var(--faint);
+  font-family: var(--serif);
   font-size: 1.05rem;
-  font-weight: 500;
-  transition:
-    color var(--fast),
-    border-color var(--fast),
-    background var(--fast);
+  font-weight: 300;
+  transition: color var(--fast);
 }
 
 .year:hover {
   color: var(--text);
-  border-color: var(--line-strong);
 }
 
 .year[aria-current='true'] {
-  border-color: var(--gold);
-  background: var(--gold-soft);
-  color: var(--gold-bright);
+  color: var(--gold-text);
+}
+
+.year[aria-current='true']::after {
+  content: '';
+  position: absolute;
+  inset-inline: 12px;
+  bottom: 4px;
+  height: 1px;
+  background: var(--gold);
 }
 
 .year[data-lost] {
-  border-style: dashed;
+  font-style: normal;
+  opacity: 0.6;
 }

@@ -12,34 +12,39 @@
 
 ## 2. Look
 
-A hall of fame, not a dashboard. The references are a museum gallery and an engraved
-plaque: warm black, champagne gold and ivory, light falling softly from above, thin gold
-hairlines instead of boxes, and generous space. Restraint is the rule: one ornament per
-heading, gold only on what is honoured, no loud colour.
+A hall of fame in the manner of a museum catalogue: warm black, ivory type, one flat
+champagne gold used sparingly, hairlines instead of boxes, sharp corners and a great deal of
+space. Precision over decoration: no gradients on type, no texture, no glow, no drawn
+ornaments. What is honoured is marked by type, position and a touch of gold, not by effects.
 
-- **Type.** Frank Ruhl Libre, a classic Hebrew serif, for every title, name and number that
-  matters; Heebo, light and quiet, for running text. Small labels are spaced capitals (the
-  engraved line on a plaque). Both fonts are bundled, so the site has no outside host and
-  works offline. Numbers use lining, tabular figures.
-- **Colour.** Warm black ground with a fine film grain; gold as a metal (gradients, never a
-  flat yellow) for champions, rank one and the titles; silver and bronze for ranks two and
-  three. Each player has a muted jewel tone (sapphire, ruby, amethyst...) used only as a thin
-  ring, a line or a dot. Competitions keep a faint accent, for their tag and a soft glow.
-- **Ornaments**, all drawn as SVG in the code: a laurel wreath (its leaves placed along an
-  arc, `src/ui/laurel.ts`), a divider of two fading rules and a diamond under every title,
-  medals on ribbons, a trophy in fine line.
+- **Type.** Noto Serif Hebrew at a light weight (300) for every title, name and number that
+  matters: a precise book serif with fine lining figures, in Hebrew and Latin. Assistant for
+  labels and running text. Labels are small spaced capitals in English and lightly spaced in
+  Hebrew (wide spacing breaks Hebrew letters apart). Neither font has an italic, so nothing
+  is set in italic. Both are bundled: no outside host, and they work offline.
+- **Colour.** Gold `#c8a96a`, flat, for the champion, rank one, the active tab and the key
+  figures. Silver and bronze for ranks two and three. Each player has a muted jewel tone,
+  used only as a hairline ring, a line or a dot. Competitions keep a small diamond in their
+  colour.
 - **Forms.**
-  - Medallion: a player's serif initial on dark enamel, ringed in their jewel tone; a
-    champion's medallion has a gold outer ring, and the greatest stands inside a laurel.
-  - Plaque: a double frame (outer hairline, inner gold) for champions and records.
-  - Plinth: dark stone with a lit metal edge and an engraved metal numeral, for the season's
-    podium and the hall of legends.
-- **Motion.** Slow and soft: titles rise in and catch a sheen of light once; the rank lines
-  draw themselves; plinths and plaques lift a little under the pointer. All of it is off
-  with reduced motion.
+  - Monogram: the player's serif initial inside a hairline ring in their colour; a champion
+    adds a second, gold ring set off by a thin gap.
+  - Rank: the numeral inside a hairline ring, in metal for the podium.
+  - Honours: the first three side by side in reading order, each under a Roman numeral in
+    metal (I, II, III), separated by hairlines. Used for the season's podium and for the hall
+    of legends.
+  - Museum label: a hairline frame, a spaced-capitals title, a rule, then the content. Used
+    for the champions wall and the records.
+  - Section heading: eyebrow and serif title at the start, the hint at the far end, a
+    full-width hairline below.
+  - Tabs: text with a gold hairline under the chosen one. Buttons: square, hairline, spaced
+    capitals.
+- **Motion.** Quiet: pages fade in, sections rise a few pixels, the rank lines draw
+  themselves. All of it is off with reduced motion.
 
 Layout follows the reading direction through logical CSS properties; nothing is mirrored by
-hand except the chart's time axis (below). Headings are centred, as on a monument.
+hand except the chart's time axis (below). Hero headings are centred; everything else aligns
+to the start.
 
 ## 3. Rank lines
 
@@ -80,8 +85,8 @@ is where "Seasons" leads.
 
 ## 6. Downloads
 
-- **Share image**: a 1080-pixel-wide PNG drawn on a canvas, in the page's language and
-  direction: title, every row with its rank disc, player colour, team and coach, points, gap
+- **Share image**: a 1080-pixel-wide PNG drawn on a canvas in the site's look, in the page's
+  language and direction: title, every row with its rank ring, player colour, team and coach, points, gap
   to first and a bar against the leader. On phones that can share files, "Share" opens the
   system share sheet.
 - **CSV**: UTF-8 with a byte order mark, so Excel opens Hebrew correctly.

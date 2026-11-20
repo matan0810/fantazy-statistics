@@ -4,17 +4,18 @@
 }
 
 .table th {
-  padding: 16px 10px 12px;
+  padding: 18px 10px 14px;
   color: var(--faint);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   text-align: start;
-  border-block-end: 1px solid var(--gold-line);
+  border-block-end: 1px solid var(--line-strong);
 }
 
 .table td {
-  padding: 14px 10px;
+  padding: 17px 10px;
   border-block-end: 1px solid var(--line);
   vertical-align: middle;
 }
@@ -38,7 +39,7 @@
 }
 
 .row:hover {
-  background: linear-gradient(to right, transparent, var(--gold-soft), transparent);
+  background: var(--gold-soft);
 }
 
 .who {
@@ -56,9 +57,9 @@
 }
 
 .name {
-  font-family: var(--display);
-  font-size: 1.12rem;
-  font-weight: 500;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 300;
   line-height: 1.2;
 }
 
@@ -69,7 +70,7 @@
 
 .lost {
   color: var(--faint);
-  font-style: italic;
+  font-style: normal;
 }
 
 .coachInline {
@@ -87,21 +88,22 @@
 }
 
 .points {
-  font-family: var(--display);
-  font-size: 1.45rem;
-  font-weight: 500;
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 300;
 }
 
 .gap {
   color: var(--faint);
-  font-family: var(--display);
+  font-family: var(--serif);
+  font-weight: 300;
 }
 
 .bar {
   position: absolute;
   inset-inline-start: 0;
   bottom: -15px;
-  height: 2px;
+  height: 1px;
   width: var(--w);
   border-radius: 2px;
   background: linear-gradient(to var(--toward), var(--c), transparent);

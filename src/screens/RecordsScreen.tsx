@@ -10,7 +10,7 @@ import { medalCsv } from '../export/tables';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useI18n } from '../i18n/context';
 import { Avatar, CompetitionTag, PlayerDot } from '../ui/Badges';
-import { Laurel, Ornament, Trophy } from '../ui/Ornaments';
+import { Ornament } from '../ui/Ornaments';
 import { Card, Plaque, Section } from '../ui/Section';
 import styles from './Records.module.css';
 
@@ -27,16 +27,15 @@ interface RecordProps {
   href: string;
 }
 
-function RecordCard({ label, player, value, sub, color, href }: RecordProps) {
+function RecordCard({ label, player, value, sub, href }: RecordProps) {
   const { name } = useI18n();
   return (
-    <a className={styles.record} href={href} style={vars({ '--c': color })}>
+    <a className={styles.record} href={href}>
       <Plaque className={styles.recordBody}>
         <span className={styles.recordLabel}>{label}</span>
-        <span className={`${styles.recordValue} gilded num`}>{value}</span>
-        <Ornament reach={30} />
+        <span className={`${styles.recordValue} num`}>{value}</span>
         <span className={styles.recordWho}>
-          <Avatar player={player} size={30} />
+          <Avatar player={player} size={28} />
           {name(player)}
         </span>
         <span className={styles.recordSub}>{sub}</span>
@@ -138,13 +137,10 @@ export function RecordsScreen() {
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
-        <Laurel size={120}>
-          <Trophy size={44} />
-        </Laurel>
         <p className="eyebrow">{t.recordsEyebrow}</p>
-        <h1 className={`${styles.title} gilded`}>{t.recordsTitle}</h1>
+        <h1 className={styles.title}>{t.recordsTitle}</h1>
+        <Ornament reach={56} center />
         <p className={styles.lead}>{t.recordsLine}</p>
-        <Ornament />
         <div className={styles.toolbar}>
           <div>
             <p className={styles.filterLabel}>{t.filterLabel}</p>

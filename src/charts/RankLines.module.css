@@ -17,14 +17,14 @@
 
 .gridTop {
   stroke: var(--gold);
-  stroke-opacity: 0.45;
+  stroke-opacity: 0.4;
   stroke-dasharray: none;
 }
 
 .axis {
   fill: var(--faint);
-  font-family: var(--display);
-  font-size: 13px;
+  font-family: var(--serif);
+  font-size: 12px;
 }
 
 .axisTop {
@@ -33,7 +33,7 @@
 
 .line {
   fill: none;
-  stroke-width: 2.25;
+  stroke-width: 1.6;
   stroke-linecap: round;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
@@ -69,7 +69,7 @@
 }
 
 .series[data-active] .line {
-  stroke-width: 3.5;
+  stroke-width: 2.6;
 }
 
 .dot {
@@ -83,7 +83,7 @@
 
 .dot[data-champion] {
   fill: var(--gold);
-  stroke-width: 2;
+  stroke-width: 1.5;
 }
 
 @keyframes draw {
@@ -103,7 +103,7 @@
   z-index: 5;
   min-width: 170px;
   padding: 10px 12px;
-  border: 1px solid var(--gold-line);
+  border: 1px solid var(--line-strong);
   border-radius: var(--radius-md);
   background: var(--surface-raised);
   box-shadow: 0 16px 40px rgb(0 0 0 / 55%);
@@ -121,9 +121,9 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--display);
+  font-family: var(--serif);
   font-size: 1.05rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .tipLine {
@@ -149,33 +149,29 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-height: 34px;
-  padding-inline: 12px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
+  min-height: 32px;
+  padding-inline: 10px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
   background: transparent;
   color: var(--muted);
   font-size: 0.86rem;
   font-weight: 500;
   transition:
     border-color var(--fast),
-    color var(--fast),
-    background var(--fast);
+    color var(--fast);
 }
 
 .chip:hover {
   color: var(--text);
-  border-color: var(--line-strong);
 }
 
 .chip[aria-pressed='true'] {
   color: var(--text);
-  border-color: var(--color, var(--gold));
-  background: color-mix(in srgb, var(--color, var(--gold)) 10%, transparent);
+  border-color: var(--line-strong);
 }
 
 .count {
-  color: var(--gold);
-  font-family: var(--display);
-  font-weight: 600;
+  color: var(--gold-text);
+  font-family: var(--serif);
 }

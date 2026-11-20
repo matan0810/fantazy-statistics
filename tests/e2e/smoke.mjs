@@ -144,7 +144,7 @@ async function main() {
   await off.reload();
   await off.getByRole('heading', { level: 1, name: 'Hall of Fame' }).waitFor();
   const fonts = await off.evaluate(async () => {
-    const faces = await document.fonts.load('16px "Frank Ruhl Libre Variable"', 'abc');
+    const faces = await document.fonts.load('16px "Noto Serif Hebrew Variable"', 'abc');
     const saved = await (await caches.open('hall-of-fame-v2')).keys();
     return { loaded: faces.length, saved: saved.filter((r) => r.url.endsWith('.woff2')).length };
   });

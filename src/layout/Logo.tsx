@@ -1,10 +1,13 @@
-import { Laurel, Trophy } from '../ui/Ornaments';
+import { useI18n } from '../i18n/context';
+import styles from './Header.module.css';
 
-/** The site's mark: a small trophy inside a laurel wreath. */
-export function Logo({ size = 40 }: { size?: number }) {
+/** The wordmark: the name in the serif, the league in spaced capitals after a hairline. */
+export function Logo() {
+  const { t } = useI18n();
   return (
-    <Laurel size={size}>
-      <Trophy size={size * 0.42} />
-    </Laurel>
+    <span className={styles.wordmark}>
+      <span className={styles.name}>{t.brand}</span>
+      <span className={styles.sub}>{t.league}</span>
+    </span>
   );
 }

@@ -6,7 +6,7 @@ import { routeHash } from '../domain/routes';
 import { career, playerById, rankChart } from '../domain/stats';
 import { useI18n } from '../i18n/context';
 import { Avatar, CompetitionTag, RankBadge } from '../ui/Badges';
-import { Laurel, Medal, Ornament } from '../ui/Ornaments';
+import { MetalDot, Ornament } from '../ui/Ornaments';
 import { Card, Section } from '../ui/Section';
 import styles from './Player.module.css';
 
@@ -29,14 +29,11 @@ export function PlayerScreen({ id }: { id: number }) {
     { rank: 2, count: c.seconds, label: t.seconds },
     { rank: 3, count: c.thirds, label: t.thirds },
   ] as const;
-  const medallion = <Avatar player={player} size={112} gold={c.titles > 0} />;
 
   return (
     <main className={styles.page} style={{ '--accent': player.color } as CSSProperties}>
       <header className={styles.hero}>
-        <div className={styles.crest}>
-          {c.titles > 0 ? <Laurel size={210}>{medallion}</Laurel> : medallion}
-        </div>
+        <Avatar player={player} size={88} gold={c.titles > 0} />
         {first && (
           <p className="eyebrow num">
             {t.memberSince(
@@ -44,14 +41,16 @@ export function PlayerScreen({ id }: { id: number }) {
             )}
           </p>
         )}
-        <h1 className={`${styles.name} ${c.titles > 0 ? 'gilded' : ''}`}>{name(player)}</h1>
-        <Ornament />
+        <h1 className={styles.name}>{name(player)}</h1>
+        <Ornament reach={56} center />
         <div className={styles.cabinet} aria-label={t.trophyCabinet} role="group">
           {cabinet.map((m) => (
             <div key={m.rank} className={styles.shelf} data-empty={m.count ? undefined : ''}>
-              <Medal rank={m.rank} size={52} />
               <span className={`${styles.shelfCount} num`}>{m.count}</span>
-              <span className={styles.shelfLabel}>{m.label}</span>
+              <span className={styles.shelfLabel}>
+                <MetalDot rank={m.rank} />
+                {m.label}
+              </span>
             </div>
           ))}
         </div>

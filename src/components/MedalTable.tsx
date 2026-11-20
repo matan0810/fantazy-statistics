@@ -4,7 +4,7 @@ import { goTo } from '../hooks/useRoute';
 import { useI18n } from '../i18n/context';
 import { Avatar, MedalPips, RankBadge } from '../ui/Badges';
 import { MEDAL_INK } from '../ui/medals';
-import { Medal } from '../ui/Ornaments';
+import { MetalDot } from '../ui/Ornaments';
 import styles from './MedalTable.module.css';
 
 const MEDALS = [
@@ -24,7 +24,7 @@ export function MedalTable({ rows }: { rows: Career[] }) {
           <th scope="col">{t.player}</th>
           {MEDALS.map((m) => (
             <th key={m.key} scope="col" title={t[m.key]}>
-              <Medal rank={m.rank} size={24} />
+              <MetalDot rank={m.rank} size={9} />
               <span className="visually-hidden">{t[m.key]}</span>
             </th>
           ))}

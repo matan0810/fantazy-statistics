@@ -2,47 +2,48 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   min-height: var(--tap);
-  padding-inline: 16px;
-  border: 1px solid var(--gold-line);
-  border-radius: var(--radius-pill);
+  padding-inline: 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
   background: transparent;
   color: var(--text);
-  font-size: 0.86rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   white-space: nowrap;
   transition:
-    background var(--fast),
     border-color var(--fast),
     color var(--fast);
 }
 
+[dir='rtl'] .button {
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+}
+
 .button:hover:not(:disabled) {
   border-color: var(--gold);
-  background: var(--gold-soft);
+  color: var(--gold-text);
 }
 
 .primary {
-  border: 0;
-  background: var(--gold-metal);
-  color: #1a140a;
-  font-weight: 600;
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--ink);
 }
 
 .primary:hover:not(:disabled) {
-  background: var(--gold-metal);
-  filter: brightness(1.08);
+  background: var(--gold-text);
+  color: var(--ink);
 }
 
 .quiet {
   border-color: transparent;
   color: var(--muted);
-}
-
-.quiet:hover:not(:disabled) {
-  color: var(--text);
 }
 
 .icon {
@@ -51,8 +52,8 @@
 }
 
 .button svg {
-  width: 17px;
-  height: 17px;
+  width: 16px;
+  height: 16px;
   flex-shrink: 0;
-  stroke-width: 1.6;
+  stroke-width: 1.4;
 }
