@@ -1,7 +1,9 @@
 export { default as AddTeamsForm } from "./AddTeamsForm";
-export { default as Header } from "./Header";
+export { default as AppHeader } from "./layout/AppHeader";
+export { default as BottomNav } from "./layout/BottomNav";
 export { default as ProofDialog } from "./ProofDialog";
-export { default as PlayerTable } from "./season/PlayerTable";
+export { default as CompetitionTabs } from "./season/CompetitionTabs";
+export { default as SeasonRail } from "./season/SeasonRail";
+export { default as SeasonView } from "./season/SeasonView";
 export { default as Podium } from "./season/Podium";
-export { default as SeasonSelector } from "./season/SeasonSelector";
 export { default as PlayerDetailDialog } from "./player/PlayerDetailDialog";

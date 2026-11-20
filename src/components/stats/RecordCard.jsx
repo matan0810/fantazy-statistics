@@ -1,11 +1,10 @@
-import { Box, Paper, Typography } from "@mui/material";
-import { ACCENT, DARK, CARD_SX } from "../../constants";
+import { Box, Typography } from "@mui/material";
+import { CARD_SX, NUM_SX, EYEBROW_SX, alpha } from "../../constants";
 
-// A single all-time record tile (most titles / podiums / best average).
-function RecordCard({ emoji, label, name, highlight, sub }) {
+// A single all-time record tile.
+function RecordCard({ emoji, label, name, value, unit, sub, color = "#a78bfa" }) {
   return (
-    <Paper
-      elevation={0}
+    <Box
       sx={{
         ...CARD_SX,
         flex: "1 1 200px",
@@ -13,54 +12,31 @@ function RecordCard({ emoji, label, name, highlight, sub }) {
         p: 2.25,
         position: "relative",
         overflow: "hidden",
-        background: `linear-gradient(155deg, ${ACCENT}1a 0%, #fff 60%)`,
-        transition: "transform 0.18s ease, box-shadow 0.18s ease",
-        "&:hover": {
-          transform: "translateY(-4px)",
-          boxShadow: "0 18px 40px -16px rgba(17,24,39,0.4)",
-        },
+        backgroundImage: `radial-gradient(120% 90% at 100% 0%, ${alpha(color, 0.18)}, transparent 60%)`,
+        transition: "transform .18s ease, border-color .18s ease",
+        "&:hover": { transform: "translateY(-3px)", borderColor: alpha(color, 0.4) },
       }}
     >
-      <Box
-        aria-hidden
-        sx={{ position: "absolute", left: 12, top: 8, fontSize: 46, opacity: 0.16 }}
-      >
+      <Box aria-hidden sx={{ position: "absolute", left: 10, bottom: -14, fontSize: 84, opacity: 0.08, lineHeight: 1 }}>
         {emoji}
       </Box>
-      <Box
-        sx={{
-          width: 44,
-          height: 44,
-          borderRadius: "50%",
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: 24,
-          mb: 0.75,
-          backgroundColor: `${ACCENT}1f`,
-        }}
-      >
-        {emoji}
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1.25 }}>
+        <Box sx={{ width: 34, height: 34, borderRadius: "10px", display: "grid", placeItems: "center", fontSize: 18, backgroundColor: alpha(color, 0.16), border: `1px solid ${alpha(color, 0.3)}` }}>
+          {emoji}
+        </Box>
+        <Typography sx={{ ...EYEBROW_SX }}>{label}</Typography>
       </Box>
-      <Typography
-        sx={{ color: "text.secondary", fontSize: "0.78rem", fontWeight: 700 }}
-      >
-        {label}
-      </Typography>
-      <Typography sx={{ fontWeight: 900, fontSize: "1.25rem", lineHeight: 1.2 }}>
-        {name}
-      </Typography>
-      {highlight != null && (
-        <Typography sx={{ fontWeight: 900, color: DARK, fontSize: "1rem" }}>
-          {highlight}
+      <Typography sx={{ fontWeight: 900, fontSize: "1.35rem", lineHeight: 1.15 }}>{name}</Typography>
+      {value != null && (
+        <Typography sx={{ ...NUM_SX, fontWeight: 800, fontSize: "2.4rem", lineHeight: 1.05, color }}>
+          {value}
+          <Box component="span" sx={{ fontFamily: "Heebo", fontSize: "0.85rem", fontWeight: 700, color: "text.secondary", marginInlineStart: 0.75 }}>
+            {unit}
+          </Box>
         </Typography>
       )}
-      {sub && (
-        <Typography sx={{ color: "text.secondary", fontSize: "0.75rem" }}>
-          {sub}
-        </Typography>
-      )}
-    </Paper>
+      {sub && <Typography sx={{ color: "text.secondary", fontSize: "0.78rem", mt: 0.25 }}>{sub}</Typography>}
+    </Box>
   );
 }
 

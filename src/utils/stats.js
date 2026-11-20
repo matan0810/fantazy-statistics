@@ -198,8 +198,29 @@ export function computeStats(selectedTypes = null) {
         year: seasonById[recordTeam.season_id]?.year,
       };
 
+      // season-by-season champions, newest first
+      const champions = _.orderBy(
+        allFilteredSeasons.filter((s) => s.type === comp.key),
+        ["year"],
+        ["desc"],
+      )
+        .map((s) => {
+          const w = compAllTeams.find((t) => t.season_id === s.id && t.location === 1);
+          return (
+            w && {
+              seasonId: s.id,
+              year: s.year,
+              name: players[w.player]?.label ?? "—",
+              teamName: w.team_name,
+              points: s.dataLost ? null : w.points,
+            }
+          );
+        })
+        .filter(Boolean);
+
       return {
         comp,
+        champions,
         seasons: compAllSeasonIds.size,
         topChampion: ranked[0] ?? null,
         ranked,

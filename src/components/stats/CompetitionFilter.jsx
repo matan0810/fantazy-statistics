@@ -1,79 +1,63 @@
 import { Box, Typography } from "@mui/material";
-import { seasonTypes } from "../../constants";
+import CheckRounded from "@mui/icons-material/CheckRounded";
+import { seasonTypes, T, alpha } from "../../constants";
 
-// Multi-select competition filter chips. The parent guarantees at least one
-// competition stays active.
+// Multi-select competition filter. The parent keeps at least one active.
 function CompetitionFilter({ selected, onToggle }) {
-  const options = Object.values(seasonTypes);
-
   return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        gap: 1,
-        flexWrap: "wrap",
-        mb: 1.5,
-        p: 1.25,
-        borderRadius: 3,
-        backgroundColor: "rgba(0,0,0,0.03)",
-        border: "1px solid rgba(0,0,0,0.07)",
-      }}
-    >
-      <Typography
-        sx={{
-          fontSize: "0.78rem",
-          fontWeight: 700,
-          color: "text.secondary",
-          flexShrink: 0,
-        }}
-      >
-        סנן:
+    <Box sx={{ mt: 2 }}>
+      <Typography sx={{ fontSize: "0.78rem", fontWeight: 700, color: "text.secondary", mb: 1, px: 0.25 }}>
+        תחרויות בחישוב <Box component="span" sx={{ color: "text.disabled", fontWeight: 500 }}>· בחירה מרובה</Box>
       </Typography>
-      {options.map((o) => {
-        const active = selected.has(o.key);
-        return (
-          <Box
-            key={o.key}
-            onClick={() => onToggle(o.key)}
-            sx={{
-              cursor: "pointer",
-              userSelect: "none",
-              px: 1.25,
-              py: 0.5,
-              borderRadius: 999,
-              fontWeight: 700,
-              fontSize: "0.85rem",
-              border: "1.5px solid",
-              borderColor: active ? o.color : "rgba(0,0,0,0.15)",
-              backgroundColor: active ? o.color : "rgba(0,0,0,0.04)",
-              color: active ? "#fff" : "#777",
-              transition: "all 0.15s",
-              display: "flex",
-              alignItems: "center",
-              gap: 0.5,
-              "&:hover": {
-                borderColor: o.color,
-                backgroundColor: active ? o.color : `${o.color}22`,
-                color: active ? "#fff" : o.color,
-              },
-            }}
-          >
-            <span>{o.emoji}</span>
-            {o.label}
-            {active && (
-              <span
-                style={{ fontSize: "0.7rem", opacity: 0.85, marginInlineStart: 2 }}
+      <Box sx={{ display: "flex", gap: 0.75, flexWrap: "wrap" }}>
+        {Object.values(seasonTypes).map((o) => {
+          const active = selected.has(o.key);
+          return (
+            <Box
+              key={o.key}
+              component="button"
+              aria-pressed={active}
+              onClick={() => onToggle(o.key)}
+              sx={{
+                all: "unset",
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 0.6,
+                px: 1.4,
+                py: 0.7,
+                borderRadius: 999,
+                fontWeight: 700,
+                fontSize: "0.86rem",
+                border: "1px solid",
+                borderColor: active ? alpha(o.color, 0.6) : T.border,
+                backgroundColor: active ? alpha(o.color, 0.16) : "rgba(255,255,255,0.025)",
+                color: active ? T.text : T.textMute,
+                transition: "all .15s",
+                "&:hover": { borderColor: alpha(o.color, 0.6), color: T.text },
+                "&:focus-visible": { outline: `2px solid ${o.color}`, outlineOffset: 2 },
+              }}
+            >
+              <span>{o.emoji}</span>
+              {o.label}
+              <Box
+                sx={{
+                  width: 16,
+                  height: 16,
+                  borderRadius: "50%",
+                  display: "grid",
+                  placeItems: "center",
+                  backgroundColor: active ? o.color : "transparent",
+                  border: active ? "none" : `1.5px solid ${T.borderHi}`,
+                  color: "#0a0f1c",
+                }}
               >
-                ✓
-              </span>
-            )}
-          </Box>
-        );
-      })}
-      <Typography sx={{ fontSize: "0.72rem", color: "text.disabled", mr: "auto" }}>
-        לחצו לבחירה מרובה
-      </Typography>
+                {active && <CheckRounded sx={{ fontSize: 12 }} />}
+              </Box>
+            </Box>
+          );
+        })}
+      </Box>
     </Box>
   );
 }

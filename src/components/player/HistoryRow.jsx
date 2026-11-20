@@ -1,68 +1,28 @@
 import { Box, Typography } from "@mui/material";
 import { formatSeasonYear } from "../../utils";
-import { MEDAL } from "../../constants";
+import { NUM_SX, T } from "../../constants";
+import RankBadge from "../season/RankBadge";
 
-// One season in the player's history list. Handles two "soft" states: an
-// unknown final placement (location == null → muted "?") and a season whose
-// data was lost (muted title + "נתונים לא זמינים" sub-label, dashes for points).
-function HistoryRow({ h }) {
-  const top3 = h.location != null && h.location <= 3;
-
+// One season in the player's history list. Handles an unknown placement
+// (location == null → "?") and seasons whose points data was lost.
+function HistoryRow({ h, isLast }) {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        gap: 1,
-        py: 0.6,
-        px: 1,
-        borderRadius: 1.5,
-        backgroundColor: top3 ? `${h.comp.accent}10` : "transparent",
-      }}
-    >
-      <Box
-        sx={{
-          width: 28,
-          flexShrink: 0,
-          textAlign: "center",
-          fontWeight: 800,
-          fontSize: "0.85rem",
-          color: h.location == null ? "text.disabled" : "inherit",
-        }}
-        title={h.location == null ? "מיקום לא ידוע" : undefined}
-      >
-        {h.location == null ? "?" : MEDAL[h.location] ?? h.location}
+    <Box sx={{ display: "flex", alignItems: "center", gap: 1.25, py: 0.85, px: 1.25, borderBottom: isLast ? "none" : `1px solid ${T.border}` }}>
+      <Box sx={{ flexShrink: 0 }} title={h.location == null ? "מיקום לא ידוע" : undefined}>
+        <RankBadge rank={h.location} size={24} />
       </Box>
-      <Box sx={{ fontSize: "0.85rem", flexShrink: 0 }}>{h.comp.emoji}</Box>
+      <Box sx={{ fontSize: "0.9rem", flexShrink: 0 }}>{h.comp.emoji}</Box>
       <Box sx={{ flex: 1, minWidth: 0 }}>
-        <Typography
-          sx={{
-            fontWeight: 600,
-            fontSize: "0.85rem",
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            color: h.dataLost ? "text.disabled" : "inherit",
-          }}
-        >
+        <Typography noWrap sx={{ fontWeight: 600, fontSize: "0.85rem", color: h.dataLost ? "text.disabled" : "inherit" }}>
           {h.comp.label} {formatSeasonYear(h.year, h.comp.key)}
+          {h.dataLost && (
+            <Box component="span" sx={{ fontSize: "0.68rem", color: "text.disabled", marginInlineStart: 0.75 }}>
+              · נתונים חסרים
+            </Box>
+          )}
         </Typography>
-        {h.dataLost && (
-          <Typography
-            sx={{ fontSize: "0.68rem", color: "text.disabled", lineHeight: 1 }}
-          >
-            נתונים לא זמינים
-          </Typography>
-        )}
       </Box>
-      <Typography
-        sx={{
-          flexShrink: 0,
-          fontWeight: 800,
-          fontSize: "0.85rem",
-          color: h.dataLost ? "text.disabled" : h.comp.color,
-        }}
-      >
+      <Typography sx={{ ...NUM_SX, flexShrink: 0, fontWeight: 800, fontSize: "1.05rem", color: h.dataLost ? "text.disabled" : h.comp.color }}>
         {h.dataLost ? "—" : h.points}
       </Typography>
     </Box>

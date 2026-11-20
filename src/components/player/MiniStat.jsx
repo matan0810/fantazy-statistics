@@ -1,31 +1,25 @@
 import { Box, Typography } from "@mui/material";
-import { DARK } from "../../constants";
+import { NUM_SX, EYEBROW_SX, T } from "../../constants";
 
-// One of the four headline numbers at the top of the player dialog.
-function MiniStat({ label, value }) {
+// One of the headline numbers at the top of the player dialog.
+function MiniStat({ label, value, color }) {
   return (
     <Box
       sx={{
-        flex: "1 1 80px",
+        flex: "1 1 0",
+        minWidth: 0,
         textAlign: "center",
-        p: 1,
-        borderRadius: 3,
-        backgroundColor: "rgba(124,58,237,0.07)",
+        py: 1.1,
+        px: 0.5,
+        borderRadius: "14px",
+        backgroundColor: "rgba(255,255,255,0.035)",
+        border: `1px solid ${T.border}`,
       }}
     >
-      <Typography
-        sx={{
-          fontWeight: 900,
-          fontSize: "1.35rem",
-          lineHeight: 1.1,
-          color: DARK,
-        }}
-      >
+      <Typography sx={{ ...NUM_SX, fontWeight: 800, fontSize: "1.65rem", lineHeight: 1.05, color: color ?? T.text }}>
         {value}
       </Typography>
-      <Typography
-        sx={{ color: "text.secondary", fontSize: "0.72rem", fontWeight: 700 }}
-      >
+      <Typography sx={{ ...EYEBROW_SX, fontSize: "0.64rem" }} noWrap>
         {label}
       </Typography>
     </Box>

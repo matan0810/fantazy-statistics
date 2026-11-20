@@ -1,180 +1,119 @@
 import { Box, Typography, Avatar } from "@mui/material";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronLeftRounded from "@mui/icons-material/ChevronLeftRounded";
 import { isLostName } from "../../utils";
-import { MEDAL } from "../../constants";
+import { NUM_SX, RANK_COLORS, T, alpha } from "../../constants";
+import RankBadge from "./RankBadge";
+import { COLS } from "./standingsLayout";
 
-// One row in the full standings table. Top-3 rows get a tinted background and a
-// larger medal glyph; rows are clickable only when the player has stats.
-function StandingRow({
-  team,
-  players,
-  accent,
-  isLast,
-  hidePoints,
-  onClick,
-  clickable,
-}) {
+function StandingRow({ team, index, players, accent, isLast, hidePoints, gap, ratio, onClick, clickable }) {
   const top3 = team.location <= 3;
   const name = players[team.player]?.label ?? "—";
+  const lost = team.team_name && isLostName(team.team_name);
+  const barColor = RANK_COLORS[team.location] ?? accent;
 
   return (
     <Box
+      component={clickable ? "button" : "div"}
       onClick={clickable ? onClick : undefined}
       sx={{
-        display: "flex",
+        all: "unset",
+        boxSizing: "border-box",
+        width: "100%",
+        position: "relative",
+        display: "grid",
+        gridTemplateColumns: COLS,
         alignItems: "center",
-        gap: { xs: 1.5, sm: 2 },
-        px: { xs: 1.5, sm: 2.5 },
-        py: 1.5,
+        columnGap: { xs: 1.25, sm: 2 },
+        px: { xs: 2, sm: 2.5 },
+        py: { xs: 1.4, sm: 1.6 },
         cursor: clickable ? "pointer" : "default",
-        borderBottom: isLast ? "none" : "1px solid rgba(0,0,0,0.05)",
-        backgroundColor: top3 ? `${accent}0d` : "transparent",
-        transition: "background-color 0.15s",
-        "&:hover": {
-          backgroundColor: clickable ? `${accent}14` : "rgba(0,0,0,0.025)",
-        },
-        "&:hover .row-chevron": { opacity: 1, transform: "translateX(-2px)" },
+        borderBottom: isLast ? "none" : `1px solid ${T.border}`,
+        backgroundColor: top3 ? alpha(RANK_COLORS[team.location], 0.045) : "transparent",
+        transition: "background-color .15s",
+        animation: "fadeUp .4s ease both",
+        animationDelay: `${160 + index * 35}ms`,
+        "&:hover": { backgroundColor: clickable ? "rgba(255,255,255,0.045)" : undefined },
+        "&:hover .row-chevron": { opacity: 1, transform: "translateX(-3px)" },
+        "&:focus-visible": { outline: `2px solid ${accent}`, outlineOffset: -2 },
       }}
     >
-      <Box
-        sx={{
-          width: 34,
-          flexShrink: 0,
-          textAlign: "center",
-          fontSize: top3 ? "1.3rem" : "1rem",
-          fontWeight: 800,
-          color: top3 ? "inherit" : "text.secondary",
-        }}
-      >
-        {MEDAL[team.location] ?? team.location}
-      </Box>
+      <RankBadge rank={team.location} />
 
-      <Avatar
-        sx={{
-          width: 38,
-          height: 38,
-          flexShrink: 0,
-          bgcolor: top3 ? accent : "rgba(0,0,0,0.12)",
-          color: top3 ? "#fff" : "text.secondary",
-          fontWeight: 800,
-          fontSize: "1rem",
-        }}
-      >
-        {name.charAt(0)}
-      </Avatar>
-
-      <Box sx={{ flex: 1, minWidth: 0 }}>
-        <Typography
-          sx={{ fontWeight: 700, fontSize: "1rem", lineHeight: 1.25 }}
-        >
-          {name}
-        </Typography>
-        {team.team_name &&
-          (isLostName(team.team_name) ? (
-            <Typography
-              sx={{
-                color: "text.disabled",
-                fontSize: "0.8rem",
-                fontStyle: "italic",
-                lineHeight: 1.3,
-              }}
-            >
-              שם הקבוצה אבד
-            </Typography>
-          ) : (
-            <Typography
-              sx={{
-                color: "text.secondary",
-                fontSize: "0.85rem",
-                lineHeight: 1.3,
-                wordBreak: "break-word",
-              }}
-            >
-              {team.team_name}
-            </Typography>
-          ))}
-      </Box>
-
-      <Box
-        sx={{
-          width: { xs: 76, sm: 110 },
-          flexShrink: 0,
-          textAlign: "center",
-          px: 0.5,
-        }}
-      >
-        {team.coach ? (
-          <>
-            <Typography
-              sx={{
-                color: "text.disabled",
-                fontSize: "0.65rem",
-                lineHeight: 1.3,
-              }}
-            >
-              שם המאמן
-            </Typography>
-            <Typography
-              sx={{
-                color: "text.secondary",
-                fontWeight: 500,
-                fontSize: "0.8rem",
-                lineHeight: 1.25,
-                wordBreak: "break-word",
-              }}
-            >
-              {team.coach}
-            </Typography>
-          </>
-        ) : (
-          <Typography sx={{ color: "text.disabled", fontSize: "0.85rem" }}>
-            —
-          </Typography>
-        )}
-      </Box>
-
-      <Box sx={{ textAlign: "center", flexShrink: 0, pl: 0.5 }}>
-        {hidePoints ? (
-          <Typography
-            sx={{
-              fontWeight: 700,
-              fontSize: "1.2rem",
-              lineHeight: 1,
-              color: "text.disabled",
-            }}
-          >
-            —
-          </Typography>
-        ) : (
-          <>
-            <Typography
-              sx={{
-                fontWeight: 900,
-                fontSize: "1.2rem",
-                lineHeight: 1,
-                color: accent,
-              }}
-            >
-              {team.points}
-            </Typography>
-            <Typography sx={{ color: "text.secondary", fontSize: "0.65rem" }}>
-              נק׳
-            </Typography>
-          </>
-        )}
-      </Box>
-
-      {clickable && (
-        <ChevronLeftIcon
-          className="row-chevron"
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1.25, minWidth: 0 }}>
+        <Avatar
           sx={{
-            color: accent,
-            opacity: 0.3,
-            transition: "all 0.15s",
+            width: 36,
+            height: 36,
             flexShrink: 0,
-            fontSize: "1.1rem",
+            display: { xs: "none", sm: "flex" },
+            bgcolor: top3 ? alpha(RANK_COLORS[team.location], 0.18) : "rgba(255,255,255,0.06)",
+            color: top3 ? RANK_COLORS[team.location] : T.textDim,
+            border: `1px solid ${top3 ? alpha(RANK_COLORS[team.location], 0.4) : T.border}`,
+            fontWeight: 800,
+            fontSize: "0.95rem",
           }}
-        />
+        >
+          {name.charAt(0)}
+        </Avatar>
+        <Box sx={{ minWidth: 0 }}>
+          <Typography sx={{ fontWeight: 800, fontSize: "1rem", lineHeight: 1.25 }} noWrap>
+            {name}
+          </Typography>
+          <Typography
+            noWrap
+            sx={{ color: lost ? "text.disabled" : "text.secondary", fontStyle: lost ? "italic" : "normal", fontSize: "0.8rem", lineHeight: 1.35 }}
+          >
+            {lost ? "שם הקבוצה אבד" : team.team_name}
+            {team.coach && (
+              <Box component="span" sx={{ display: { xs: "inline", sm: "none" }, color: "text.disabled", fontStyle: "normal" }}>
+                {team.team_name ? " · " : ""}
+                {team.coach}
+              </Box>
+            )}
+          </Typography>
+        </Box>
+      </Box>
+
+      <Box sx={{ display: { xs: "none", sm: "block" }, minWidth: 0 }}>
+        <Typography noWrap sx={{ color: team.coach ? "text.secondary" : "text.disabled", fontSize: "0.85rem", fontWeight: 500 }}>
+          {team.coach || "—"}
+        </Typography>
+      </Box>
+
+      <Box sx={{ display: { xs: "none", sm: "block" }, textAlign: "center" }}>
+        <Typography sx={{ ...NUM_SX, color: "text.disabled", fontWeight: 700, fontSize: "1rem", direction: "ltr" }}>
+          {gap == null ? (hidePoints ? "" : "—") : gap ? `-${gap}` : "0"}
+        </Typography>
+      </Box>
+
+      <Box sx={{ textAlign: "center" }}>
+        <Typography
+          sx={{
+            ...NUM_SX,
+            fontWeight: 800,
+            fontSize: "1.45rem",
+            lineHeight: 1,
+            color: hidePoints ? "text.disabled" : top3 ? RANK_COLORS[team.location] : T.text,
+          }}
+        >
+          {hidePoints ? "—" : team.points}
+        </Typography>
+        {gap != null && (
+          <Typography sx={{ ...NUM_SX, display: { xs: "block", sm: "none" }, color: "text.disabled", fontSize: "0.72rem", fontWeight: 700, direction: "ltr" }}>
+            {gap ? `-${gap}` : "0"}
+          </Typography>
+        )}
+      </Box>
+
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        {clickable && (
+          <ChevronLeftRounded className="row-chevron" sx={{ color: "text.disabled", opacity: 0.6, transition: "all .15s", fontSize: "1.2rem" }} />
+        )}
+      </Box>
+
+      {/* relative score bar */}
+      {ratio != null && (
+        <Box aria-hidden sx={{ position: "absolute", bottom: 0, insetInlineStart: 0, height: 2, width: `${ratio * 100}%`, background: `linear-gradient(270deg, ${alpha(barColor, 0.9)}, transparent)`, opacity: 0.55 }} />
       )}
     </Box>
   );

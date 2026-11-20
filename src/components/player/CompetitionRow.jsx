@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
-import { MEDAL } from "../../constants";
+import { MEDAL, NUM_SX, T, alpha } from "../../constants";
 
-// One card per competition the player took part in — averages are the headline
-// number since the game count is consistent within a single competition.
+// One card per competition — averages are the headline number since the game
+// count is consistent within a single competition.
 function CompetitionRow({ row }) {
   const { comp } = row;
   return (
@@ -11,45 +11,34 @@ function CompetitionRow({ row }) {
         display: "flex",
         alignItems: "center",
         gap: 1.5,
-        p: 1.25,
-        borderRadius: 3,
-        border: "1px solid rgba(0,0,0,0.06)",
-        borderInlineStart: `4px solid ${comp.color}`,
-        backgroundColor: `${comp.accent}0a`,
+        p: 1.4,
+        borderRadius: "14px",
+        border: `1px solid ${T.border}`,
+        background: `linear-gradient(270deg, ${alpha(comp.color, 0.14)}, transparent 70%)`,
+        position: "relative",
+        overflow: "hidden",
+        "&::before": { content: '""', position: "absolute", insetBlock: 0, insetInlineStart: 0, width: 3, backgroundColor: comp.color },
       }}
     >
-      <Box sx={{ fontSize: 22 }}>{comp.emoji}</Box>
+      <Box sx={{ fontSize: 22, lineHeight: 1 }}>{comp.emoji}</Box>
       <Box sx={{ flex: 1, minWidth: 0 }}>
-        <Typography sx={{ fontWeight: 800, fontSize: "0.95rem", lineHeight: 1.2 }}>
-          {comp.label}
-        </Typography>
-        <Typography sx={{ color: "text.secondary", fontSize: "0.75rem" }}>
-          {row.appearances} עונות
-          {row.appearances > row.validAppearances && (
-            <span style={{ opacity: 0.65 }}>
-              {" "}
-              ({row.validAppearances} עם נתונים)
-            </span>
-          )}
-          {" · "}שיא {row.bestPoints} · דירוג טוב{" "}
-          {row.bestFinish != null ? MEDAL[row.bestFinish] ?? row.bestFinish : "—"}
-          {row.golds > 0 && ` · ${row.golds}×🥇`}
+        <Typography sx={{ fontWeight: 800, fontSize: "0.95rem", lineHeight: 1.2 }}>{comp.label}</Typography>
+        <Typography
+          noWrap
+          title={row.appearances > row.validAppearances ? `${row.validAppearances} עונות עם נתוני נקודות` : undefined}
+          sx={{ color: "text.secondary", fontSize: "0.75rem" }}
+        >
+          {row.appearances} עונות · שיא {row.bestPoints}
+          {row.golds > 0
+            ? ` · ${row.golds} ${row.golds === 1 ? "תואר" : "תארים"}`
+            : row.bestFinish != null && ` · הכי גבוה: ${MEDAL[row.bestFinish] ?? `מקום ${row.bestFinish}`}`}
         </Typography>
       </Box>
       <Box sx={{ textAlign: "center", flexShrink: 0 }}>
-        <Typography
-          sx={{
-            fontWeight: 900,
-            fontSize: "1.3rem",
-            color: comp.color,
-            lineHeight: 1,
-          }}
-        >
+        <Typography sx={{ ...NUM_SX, fontWeight: 800, fontSize: "1.6rem", color: comp.color, lineHeight: 1 }}>
           {row.avgPoints}
         </Typography>
-        <Typography sx={{ color: "text.secondary", fontSize: "0.62rem" }}>
-          ממוצע
-        </Typography>
+        <Typography sx={{ color: "text.secondary", fontSize: "0.62rem", fontWeight: 700 }}>ממוצע</Typography>
       </Box>
     </Box>
   );

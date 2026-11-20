@@ -1,48 +1,59 @@
-import { Box, Paper, Typography, Divider } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { CARD_SX, EYEBROW_SX, T } from "../../constants";
 import StandingRow from "./StandingRow";
+import { COLS } from "./standingsLayout";
 
-// The full ranked standings card. Rows link to the player dialog when stats are
-// available for that player.
+// Full ranked standings. Rows open the player dialog when stats exist.
 function StandingsTable({ teams, players, comp, dataLost, statsById, onSelect }) {
+  const top = teams[0]?.points || 1;
   return (
-    <Paper
-      elevation={0}
-      sx={{
-        borderRadius: 4,
-        overflow: "hidden",
-        border: "1px solid rgba(0,0,0,0.05)",
-        boxShadow: "0 10px 30px -18px rgba(17,24,39,0.35)",
-      }}
-    >
-      <Box
-        sx={{
-          px: { xs: 1.5, sm: 2.5 },
-          py: 1.5,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          backgroundColor: "rgba(0,0,0,0.02)",
-        }}
-      >
-        <Typography sx={{ fontWeight: 800 }}>טבלת דירוג מלאה</Typography>
-        <Typography sx={{ color: "text.secondary", fontSize: "0.8rem" }}>
-          👆 לחצו על שחקן לפרטים
+    <Box className="fade-up" sx={{ ...CARD_SX, overflow: "hidden", animationDelay: "120ms" }}>
+      <Box sx={{ px: { xs: 2, sm: 2.5 }, pt: 2, pb: 1.5, display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 1 }}>
+        <Typography sx={{ fontWeight: 900, fontSize: "1.1rem" }}>טבלה סופית</Typography>
+        <Typography sx={{ color: "text.disabled", fontSize: "0.75rem", fontWeight: 600 }}>
+          לחצו על שחקן לכרטיס המלא
         </Typography>
       </Box>
-      <Divider />
+
+      {/* column headers */}
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: COLS,
+          alignItems: "center",
+          columnGap: { xs: 1.25, sm: 2 },
+          px: { xs: 2, sm: 2.5 },
+          py: 0.9,
+          borderTop: `1px solid ${T.border}`,
+          borderBottom: `1px solid ${T.border}`,
+          backgroundColor: "rgba(255,255,255,0.02)",
+          "& > *": { ...EYEBROW_SX, fontSize: "0.66rem" },
+        }}
+      >
+        <Box sx={{ textAlign: "center" }}>#</Box>
+        <Box>שחקן · קבוצה</Box>
+        <Box sx={{ display: { xs: "none", sm: "block" } }}>מאמן</Box>
+        <Box sx={{ display: { xs: "none", sm: "block" }, textAlign: "center" }}>פער</Box>
+        <Box sx={{ textAlign: "center" }}>נק׳</Box>
+        <Box />
+      </Box>
+
       {teams.map((team, i) => (
         <StandingRow
           key={team.player}
+          index={i}
           team={team}
           players={players}
-          accent={comp.accent}
+          accent={comp.color}
           isLast={i === teams.length - 1}
           hidePoints={dataLost}
+          gap={i === 0 || dataLost ? null : top - team.points}
+          ratio={dataLost ? null : team.points / top}
           clickable={Boolean(statsById[team.player])}
           onClick={() => onSelect(statsById[team.player])}
         />
       ))}
-    </Paper>
+    </Box>
   );
 }
 

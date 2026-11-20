@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { CARD_SX, EYEBROW_SX } from "../../constants";
 import PodiumStep from "./PodiumStep";
 
 // Classic podium order: 2nd on the right, 1st in the middle, 3rd on the left.
@@ -9,62 +10,56 @@ function Podium({ teams, players, accent, hidePoints }) {
 
   return (
     <Box
+      className="fade-up"
       sx={{
+        ...CARD_SX,
         position: "relative",
         overflow: "hidden",
-        borderRadius: 4,
-        px: { xs: 1.5, sm: 3 },
-        pt: 2,
-        boxShadow: "0 16px 40px -20px rgba(15,23,42,0.7)",
-        background: "radial-gradient(130% 90% at 50% 0%, #334155 0%, #111827 72%)",
+        px: { xs: 1.5, sm: 4 },
+        pt: 2.25,
+        background:
+          "radial-gradient(120% 90% at 50% 0%, #1b2742 0%, #0c1322 62%, #080d19 100%)",
+        animationDelay: "60ms",
       }}
     >
-      {/* spotlight glow behind the champion */}
+      {/* stadium spotlight on the champion */}
       <Box
         aria-hidden
         sx={{
           position: "absolute",
-          top: -50,
+          top: -60,
           left: "50%",
           transform: "translateX(-50%)",
-          width: 320,
-          height: 220,
-          background:
-            "radial-gradient(closest-side, rgba(251,191,36,0.28), transparent)",
+          width: 420,
+          height: 340,
+          background: "conic-gradient(from 160deg at 50% 0%, transparent 0deg, rgba(251,191,36,0.16) 20deg, transparent 40deg)",
+          filter: "blur(6px)",
           pointerEvents: "none",
         }}
       />
-      <Typography
-        sx={{
-          position: "relative",
-          textAlign: "center",
-          color: "rgba(255,255,255,0.9)",
-          fontWeight: 800,
-          fontSize: "1rem",
-          mb: 2,
-          letterSpacing: 0.5,
-        }}
-      >
-        🏆 פודיום
-      </Typography>
       <Box
+        aria-hidden
         sx={{
-          position: "relative",
-          display: "flex",
-          alignItems: "flex-end",
-          gap: { xs: 1, sm: 2 },
+          position: "absolute",
+          top: -40,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: 360,
+          height: 220,
+          background: "radial-gradient(closest-side, rgba(251,191,36,0.22), transparent)",
+          pointerEvents: "none",
         }}
-      >
+      />
+      <Typography sx={{ ...EYEBROW_SX, position: "relative", textAlign: "center", mb: 1 }}>
+        פודיום העונה
+      </Typography>
+      <Box sx={{ position: "relative", display: "flex", alignItems: "flex-end", gap: { xs: 1, sm: 2.5 } }}>
         {ORDER.map((loc) => (
-          <PodiumStep
-            key={loc}
-            team={byLocation(loc)}
-            players={players}
-            accent={accent}
-            hidePoints={hidePoints}
-          />
+          <PodiumStep key={loc} team={byLocation(loc)} players={players} accent={accent} hidePoints={hidePoints} />
         ))}
       </Box>
+      {/* floor line */}
+      <Box sx={{ height: 2, mx: { xs: -1.5, sm: -4 }, background: "linear-gradient(90deg, transparent, rgba(251,191,36,0.5), transparent)" }} />
     </Box>
   );
 }

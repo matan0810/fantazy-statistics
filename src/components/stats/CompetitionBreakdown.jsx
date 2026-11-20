@@ -2,22 +2,15 @@ import { Box } from "@mui/material";
 import SectionTitle from "../common/SectionTitle";
 import CompetitionCard from "./CompetitionCard";
 
-// Grid of per-tournament cards (champions + points record).
-function CompetitionBreakdown({ titlesByCompetition }) {
+function CompetitionBreakdown({ titlesByCompetition, onSeason }) {
   return (
     <>
-      <SectionTitle emoji="🗂️" sub="אלופים ושיא נקודות בעונה — לכל תחרות בנפרד">
-        לפי טורניר
+      <SectionTitle emoji="🗂️" sub="תארים, שיא נקודות וכל האלופים — לכל תחרות בנפרד">
+        ארכיון האלופים
       </SectionTitle>
-      <Box sx={{ display: "flex", flexWrap: "wrap", gap: { xs: 1.25, sm: 2 } }}>
-        {titlesByCompetition.map(({ comp, seasons, ranked, recordSeason }) => (
-          <CompetitionCard
-            key={comp.key}
-            comp={comp}
-            seasons={seasons}
-            ranked={ranked}
-            recordSeason={recordSeason}
-          />
+      <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0,1fr))" }, gap: { xs: 1.5, sm: 2 }, alignItems: "start" }}>
+        {titlesByCompetition.map((c) => (
+          <CompetitionCard key={c.comp.key} {...c} onSeason={onSeason} />
         ))}
       </Box>
     </>

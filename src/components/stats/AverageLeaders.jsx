@@ -1,82 +1,68 @@
 import { useMemo } from "react";
 import _ from "lodash";
-import { Box, Paper, Typography } from "@mui/material";
-import { ACCENT, DARK, CARD_SX } from "../../constants";
+import { Box, Typography } from "@mui/material";
+import { CARD_SX, NUM_SX, T } from "../../constants";
 import SectionTitle from "../common/SectionTitle";
 
-// Horizontal bar chart of average points per season, ranked. Bars are scaled to
-// the current leader. Rows open the player dialog.
+// Ranked bars of average points per season, scaled to the leader.
 function AverageLeaders({ playerStats, onSelect }) {
   const leaders = useMemo(
-    () =>
-      _.orderBy(
-        playerStats.map((p) => ({
-          player: p,
-          metric: p.avgPoints,
-          appearances: p.appearances,
-        })),
-        ["metric"],
-        ["desc"],
-      ),
+    () => _.orderBy(playerStats.filter((p) => p.avgPoints > 0), ["avgPoints"], ["desc"]),
     [playerStats],
   );
-
-  const maxMetric = leaders[0]?.metric || 1;
+  const max = leaders[0]?.avgPoints || 1;
 
   return (
     <>
-      <SectionTitle emoji="📈" sub="ממוצע נקודות לעונה — לפי התחרויות הנבחרות">
+      <SectionTitle emoji="📈" sub="ממוצע נקודות לעונה (עונות עם נתונים בלבד)">
         מובילי הממוצע
       </SectionTitle>
-      <Paper elevation={0} sx={{ ...CARD_SX, p: { xs: 1.5, sm: 2.5 } }}>
+      <Box sx={{ ...CARD_SX, p: { xs: 1.75, sm: 2.5 }, display: "flex", flexDirection: "column", gap: 0.5 }}>
         {leaders.length === 0 ? (
-          <Typography sx={{ color: "text.secondary", py: 2, textAlign: "center" }}>
-            אין נתונים בתחרות זו
-          </Typography>
+          <Typography sx={{ color: "text.secondary", py: 2, textAlign: "center" }}>אין נתונים בתחרות זו</Typography>
         ) : (
-          leaders.map(({ player, metric, appearances }) => (
+          leaders.map((p, i) => (
             <Box
-              key={player.id}
-              onClick={() => onSelect(player)}
+              key={p.id}
+              component="button"
+              onClick={() => onSelect(p)}
               sx={{
-                py: 1,
+                all: "unset",
+                cursor: "pointer",
+                display: "grid",
+                gridTemplateColumns: { xs: "64px 1fr 48px", sm: "92px 1fr 64px" },
+                alignItems: "center",
+                gap: 1.5,
+                py: 0.9,
                 px: 1,
                 mx: -1,
-                borderRadius: 2,
-                cursor: "pointer",
-                transition: "background-color 0.15s",
-                "&:hover": { backgroundColor: `${ACCENT}0f` },
+                borderRadius: "10px",
+                transition: "background-color .15s",
+                "&:hover": { backgroundColor: "rgba(255,255,255,0.04)" },
+                "&:hover .bar": { filter: "brightness(1.2)" },
               }}
             >
-              <Box sx={{ display: "flex", justifyContent: "space-between", mb: 0.5 }}>
-                <Typography sx={{ fontWeight: 700 }}>{player.name}</Typography>
-                <Typography sx={{ fontWeight: 800 }}>
-                  {metric}
-                  <span
-                    style={{ color: "#999", fontWeight: 500, fontSize: "0.78rem" }}
-                  >
-                    {" "}
-                    · {appearances} עונות
-                  </span>
-                </Typography>
-              </Box>
-              <Box
-                sx={{ height: 9, borderRadius: 999, backgroundColor: "rgba(0,0,0,0.06)" }}
-              >
+              <Typography noWrap sx={{ fontWeight: 700, fontSize: "0.95rem" }}>{p.name}</Typography>
+              <Box sx={{ height: 10, borderRadius: 999, backgroundColor: "rgba(255,255,255,0.05)", overflow: "hidden" }}>
                 <Box
+                  className="bar"
                   sx={{
                     height: "100%",
-                    width: `${(metric / maxMetric) * 100}%`,
+                    width: `${(p.avgPoints / max) * 100}%`,
                     borderRadius: 999,
-                    background: `linear-gradient(90deg, ${DARK}, ${ACCENT})`,
-                    transition: "width 0.35s ease",
+                    background: i === 0 ? "linear-gradient(270deg, #fde68a, #f59e0b)" : "linear-gradient(270deg, #c4b5fd, #7c3aed)",
+                    transition: "width .5s cubic-bezier(.2,.8,.2,1)",
                   }}
                 />
+              </Box>
+              <Box sx={{ textAlign: "left" }}>
+                <Typography sx={{ ...NUM_SX, fontWeight: 800, fontSize: "1.25rem", lineHeight: 1, color: i === 0 ? "#fbbf24" : T.text }}>{p.avgPoints}</Typography>
+                <Typography sx={{ fontSize: "0.62rem", color: "text.disabled", fontWeight: 600 }}>{p.appearances} עונות</Typography>
               </Box>
             </Box>
           ))
         )}
-      </Paper>
+      </Box>
     </>
   );
 }
