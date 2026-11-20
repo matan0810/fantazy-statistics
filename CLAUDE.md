@@ -139,6 +139,11 @@ Semantic versioning, `MAJOR.MINOR.PATCH`:
 The version lives in `package.json` and `package-lock.json` (kept in step by `npm run bump`
 and checked by a test) and is shown in the site's header.
 
+Versions before 3.0.0 were reconstructed from the git history (see the note at the top of
+`CHANGELOG.md`); `scripts/release-history.json` lists them with the commit each one was. A
+new entry is added there only for a release whose tag the Deploy workflow could not create
+at the time.
+
 ## 7. Releasing (only on the owner's order)
 
 A release is a push to `master` whose `package.json` version has no tag yet. Once the site is
@@ -153,9 +158,11 @@ push tags, so never try.
 - [ ] `## [Unreleased]` in `CHANGELOG.md` describes everything in
       `git log origin/master..origin/dev`. If it is empty there is nothing to release: say so.
 - [ ] Pick the bump by section 6 and tell the owner which one and why.
-- [ ] First release only: the owner switches **Settings → Pages → Source** to
-      **GitHub Actions**, and `{ "version": "1.0.0", "commit": "2d0c4050c54397c8f4a76a379ca7425846675556" }`
-      is added to `scripts/release-history.json` so the old site gets its `v1.0.0` tag.
+- [ ] First release (3.0.0) only: the owner switches **Settings → Pages → Source** to
+      **GitHub Actions**, and `{ "version": "2.1.0", "commit": "438600c7a278ce732ac8458aa40274b235b22581" }`
+      is appended to `scripts/release-history.json` (the version now in `package.json` is the
+      live one, 2.1.0; after `npm run bump -- major` it is history). The Deploy run then tags
+      and publishes every past version, 1.0.0 to 2.1.0, at the commit that was live.
 
 ### Release
 

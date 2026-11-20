@@ -21,6 +21,18 @@ Live at https://matan0810.github.io/fantazy-statistics
   shared.
 - **Works offline** and can be installed from the browser menu ("Add to Home Screen").
 
+## History
+
+| Generation | Since         | What it was                                                                 |
+| ---------- | ------------- | --------------------------------------------------------------------------- |
+| Prototype  | October 2023  | An Express and PostgreSQL server with a form for entering results           |
+| 1.x        | October 2023  | A static site: one table per season, data exported from the database        |
+| 2.x        | June 2026     | A new interface: podiums, statistics, player cards, proof screenshots       |
+| 3.x        | November 2026 | This rebuild: TypeScript, its own design system, tests, CI, releases, he/en |
+
+Every version, with what changed, is in [CHANGELOG.md](CHANGELOG.md) and on the
+[releases page](https://github.com/matan0810/fantazy-statistics/releases).
+
 ## Running locally
 
 Needs Node 22.18 or newer.

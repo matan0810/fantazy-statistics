@@ -2,12 +2,17 @@
 
 All changes a visitor or the owner would notice are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and versions follow
-[Semantic Versioning](https://semver.org/): fixes are patch, features are minor,
-breaking changes are major.
+[Semantic Versioning](https://semver.org/): fixes and new results are patch, features are
+minor, breaking changes are major.
+
+Versions before 3.0.0 were never numbered at the time. They were reconstructed from the git
+history: each one is a state of `master` that was published to the live site (a deploy on the
+old `gh-pages` branch), dated by that deploy.
 
 ## [Unreleased]
 
-The site is rebuilt from the ground up.
+The third generation of the site, rebuilt from the ground up: TypeScript, its own design
+system instead of a component library, tests, continuous integration and versioned releases.
 
 ### Added
 - Rank lines on the home page: every player as a line through the seasons of a competition, by final rank. Pick a player to follow their path; a dot shows the season and opens it.
@@ -28,7 +33,71 @@ The site is rebuilt from the ground up.
 - Faster: about half as much code to download (92 KB compressed instead of 169 KB), and no outside host at all (fonts are bundled).
 - The old `#/stats` address opens the records page.
 
-## [1.0.0] - 2026-11-20
+## [2.1.0] - 2026-07-21
 
-The site as it was before versions were kept: seasons by competition with podium and
-table, all-time statistics, player cards and proof screenshots.
+### Added
+- The coach of each team, read off the proof screenshots, in every season's table and in the form for adding a team.
+
+## [2.0.3] - 2026-07-20
+
+### Added
+- World Cup 2026: the final table of eight and its proof screenshot.
+
+## [2.0.2] - 2026-06-13
+
+### Changed
+- The statistics page loads only when it is opened, and the code is split into smaller files, so the site opens faster.
+- Dependencies updated.
+
+## [2.0.1] - 2026-06-08
+
+### Changed
+- The proof dialog shows a loading indicator and steps between several screenshots.
+- The season picker shows how many seasons a competition has, and the season summary is laid out more clearly.
+
+## [2.0.0] - 2026-06-07
+
+The second generation: a whole new interface.
+
+### Added
+- A podium for every season, and summary cards: the champion, the number of teams and the season's points record.
+- A statistics page: all-time records, the hall of fame ranked by titles, average leaders and a breakdown per competition, with a filter by competition.
+- A card for every player: titles, podiums, results per competition and the full season history.
+- Proof screenshots for seasons that have them.
+- Champions League 24/25 and 25/26 results.
+- Seasons whose points were lost are marked; their finishing order still counts, their points do not.
+
+### Changed
+- A colour identity per competition, applied to the whole page.
+- The header shows the year the league began, worked out from the data.
+
+### Removed
+- The striped table colours of the first version.
+
+## [1.0.3] - 2024-07-16
+
+### Added
+- Euro 2024 results.
+
+## [1.0.2] - 2024-06-02
+
+### Added
+- Champions League 23/24 results.
+
+## [1.0.1] - 2023-12-23
+
+### Changed
+- The site is built with Vite instead of Create React App. Nothing visible changed.
+
+## [1.0.0] - 2023-10-31
+
+The first site: published the night the project became a static site.
+
+### Added
+- A final table for every season of the Champions League, the World Cup, the Euro and the Israeli league: rank, player, points and team name, 18 seasons from 2015/16.
+- A competition switch and a season picker; the last choice is remembered.
+- Striped table colours per competition.
+
+Before this release the project was a prototype with an Express and PostgreSQL server and a
+form for entering results (October 2023). On launch night the data was exported from the
+database into the site, and the server was dropped.
