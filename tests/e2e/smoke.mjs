@@ -339,10 +339,13 @@ async function main() {
     step(`phone ${locale}: every screen fits the width, tabs navigate`);
 
     // The phone's own back (a swipe or the system key) returns to the same place.
-    await phone.evaluate(() => window.scrollTo({ top: 1400 }));
-    await phone.waitForTimeout(100);
+    // Bring a record card into view first: a tap on something off screen would scroll to it.
+    const card = phone.getByRole('link', { name: /Biggest leap|הזינוק הגדול/ });
+    await card.scrollIntoViewIfNeeded();
+    await phone.waitForTimeout(150);
     const place = await phone.evaluate(() => window.scrollY);
-    await phone.locator('a[href^="#/season/"]').filter({ visible: true }).first().tap();
+    assert.ok(place > 300, 'the card is well down the page');
+    await card.tap();
     await phone.waitForURL(/#\/season\/\d+$/);
     await phone.goBack();
     await phone.waitForURL(/#\/records$/);

@@ -66,14 +66,22 @@ export function useRoute(): Route {
   useLayoutEffect(() => {
     if (!target) return;
     let frame = 0;
-    let tries = 0;
+    const until = performance.now() + 2000;
+    // The reader's own scroll ends the attempt: their hand wins over our memory.
+    const stop = () => cancelAnimationFrame(frame);
     const apply = () => {
       window.scrollTo({ top: target.top });
-      if (Math.abs(window.scrollY - target.top) > 2 && ++tries < 30)
+      if (Math.abs(window.scrollY - target.top) > 2 && performance.now() < until)
         frame = requestAnimationFrame(apply);
     };
     apply();
-    return () => cancelAnimationFrame(frame);
+    window.addEventListener('wheel', stop, { passive: true, once: true });
+    window.addEventListener('touchstart', stop, { passive: true, once: true });
+    return () => {
+      stop();
+      window.removeEventListener('wheel', stop);
+      window.removeEventListener('touchstart', stop);
+    };
   }, [target]);
 
   return route;
