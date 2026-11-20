@@ -1,7 +1,7 @@
 {
   "name": "fantazy-statistics",
   "private": true,
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Hall of Fame: every season, podium and record of our fantasy league",
   "type": "module",
   "homepage": "https://matan0810.github.io/fantazy-statistics",

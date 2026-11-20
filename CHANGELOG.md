@@ -11,6 +11,8 @@ old `gh-pages` branch), dated by that deploy.
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-11-20
+
 The third generation of the site, rebuilt from the ground up: TypeScript, its own design
 system instead of a component library, tests, continuous integration and versioned releases.
 

@@ -6,5 +6,6 @@
   { "version": "2.0.0", "commit": "2c6a5024b0662132cfb74c9816947ad1a6b9b3ba" },
   { "version": "2.0.1", "commit": "8dd00fff057c34ba9e856bca3389e9c5c41e2c1f" },
   { "version": "2.0.2", "commit": "a870197fe3a4bda61339ae3be752a3e11284ec03" },
-  { "version": "2.0.3", "commit": "8ce6c026b37f7d411ece723cd81135caf3c179c7" }
+  { "version": "2.0.3", "commit": "8ce6c026b37f7d411ece723cd81135caf3c179c7" },
+  { "version": "2.1.0", "commit": "438600c7a278ce732ac8458aa40274b235b22581" }
 ]
