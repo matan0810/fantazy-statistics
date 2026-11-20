@@ -111,6 +111,25 @@ Across competitions the site uses titles, podiums and per-competition averages.
   - _Greatest rivalry_: of the pairs that met in at least half as many seasons as the most
     frequent pair, the most even record, then the most meetings. Shown from the side that
     leads.
+  - _Eternal bronze_: most third places.
+  - _Heartbreak_: the title lost by the fewest points, named with its champion.
+  - _Best season without the title_: the most points above the season's average by
+    someone who did not win it (seasons of at least three scored players).
+  - _Above the champion_: most seasons finishing above the reigning champion of that
+    competition (fewer seasons first on a tie).
+  - _Steadiest_: the smallest spread of places relative to the field, over at least five
+    seasons; shown as the spread in places.
+  - _Current form_: the best average place over the last four seasons, at least three
+    played. Within a year the club seasons (May) come before the summer tournaments.
+  - _The long wait_: most seasons played before a first title (the later on a tie).
+  - _Loyal to the name_: the same team name for the most seasons, at least two.
+- **The order of the cards**: the leaders, then the near misses, then the long stories,
+  and the seasons played last (`src/screens/records/storyCards.ts`).
+- **Head to head**, on each player's page: for every rival they shared a ranked season
+  with, the seasons above and below, as "above – below" and a hairline split in gold from
+  the reading start. All competitions count, as on the rest of the player's page.
+- **National-team tournaments**, on the records page: World Cups and Euros only, by place
+  relative to the field, then titles; it does not follow the competition chips.
 - **Where a record leads.** Titles, podiums and seasons played open the player. A streak and
   a best average open the player on that competition. The closest title and the biggest win
   open the season, and name the runner-up they were won against. The leap opens its season;
