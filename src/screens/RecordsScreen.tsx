@@ -3,6 +3,8 @@ import { CompetitionChips } from '../components/CompetitionChips';
 import { DownloadMenu } from '../components/DownloadMenu';
 import { MedalTable } from '../components/MedalTable';
 import { feats } from '../domain/feats';
+import { stories } from '../domain/stories';
+import { tournamentTable } from '../domain/tournaments';
 import { league } from '../domain/league';
 import { medalTable, records } from '../domain/stats';
 import { medalCsv } from '../export/tables';
@@ -13,21 +15,25 @@ import { Card, Section } from '../ui/Section';
 import { ChampionsRoll } from './records/ChampionsRoll';
 import { RecordCard } from './records/RecordCard';
 import { recordCards } from './records/recordCards';
+import { inOrder, storyCards } from './records/storyCards';
+import { TournamentTable } from './records/TournamentTable';
 import styles from './Records.module.css';
 
 export function RecordsScreen() {
   const { t, name, language } = useI18n();
   const { active, filter, toggle } = useCompetitionFilter();
   // Everything below is derived from the chosen competitions alone.
-  const { table, r, f } = useMemo(
+  const { table, r, f, s } = useMemo(
     () => ({
       table: medalTable(league, filter),
       r: records(league, filter),
       f: feats(league, filter),
+      s: stories(league, filter),
     }),
     [filter],
   );
-  const cards = recordCards(r, f, t, name);
+  const cards = inOrder([...recordCards(r, f, t, name), ...storyCards(s, t, name)]);
+  const tournaments = useMemo(() => tournamentTable(league), []);
   const maxTitles = table[0]?.titles || 1;
   const empty = active.length === 0;
 
@@ -86,6 +92,17 @@ export function RecordsScreen() {
           >
             <Card>
               <MedalTable rows={table} />
+            </Card>
+          </Section>
+
+          <Section
+            eyebrow={`${t.competition['world-cup']} · ${t.competition.euro}`}
+            title={t.tournamentsTitle}
+            hint={t.tournamentsHint}
+            id="tournaments"
+          >
+            <Card>
+              <TournamentTable rows={tournaments} />
             </Card>
           </Section>
 

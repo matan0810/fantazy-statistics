@@ -199,8 +199,21 @@ async function main() {
   await page.goBack();
   await page.getByRole('heading', { level: 1, name: 'ספר השיאים' }).waitFor();
   await page.waitForFunction((y) => Math.abs(window.scrollY - y) < 3, before);
-  for (const label of ['הסגן הנצחי', 'היריבות הגדולה'])
+  for (const label of [
+    'הסגן הנצחי',
+    'היריבות הגדולה',
+    'הברונזה הנצחית',
+    'הלב השבור',
+    'העונה הגדולה בלי תואר',
+    'מעל האלוף',
+    'היציב',
+    'הכושר הנוכחי',
+    'ההמתנה הארוכה',
+    'נאמן לשם',
+  ])
     await page.getByRole('link', { name: new RegExp(label) }).waitFor();
+  const tournaments = page.locator('#tournaments-title').locator('xpath=ancestor::section');
+  assert.ok((await tournaments.locator('tbody tr').count()) >= 5, 'the tournament table');
   step('desktop: new records, and back from one returns to the same place');
 
   const closest = page.getByRole('link', { name: /האליפות הצמודה/ });
@@ -225,6 +238,8 @@ async function main() {
 
   await page.goto(`${url}#/player/2/ligat-haal`);
   await page.getByRole('img', { name: /ליגת העל/ }).waitFor();
+  const rivals = page.locator('#head-to-head-title').locator('xpath=ancestor::section');
+  assert.ok((await rivals.getByRole('link').count()) >= 5, 'head to head lists the rivals');
   step('desktop: a player address can open the career on a competition');
   await page.goto(`${url}#/records`);
   await page.getByRole('heading', { level: 1, name: 'ספר השיאים' }).waitFor();

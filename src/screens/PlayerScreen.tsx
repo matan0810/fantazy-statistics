@@ -12,6 +12,7 @@ import { MetalDot, Ornament } from '../ui/Ornaments';
 import { Button } from '../ui/Button';
 import { Card, Section } from '../ui/Section';
 import { Segmented } from '../ui/Segmented';
+import { HeadToHead } from './player/HeadToHead';
 import styles from './Player.module.css';
 
 const HISTORY_PREVIEW = 8;
@@ -123,6 +124,15 @@ export function PlayerScreen({ id, competition: fromAddress }: Props) {
           </div>
           <RankLines chart={rankChart(league, career.competition)} focus={player.id} />
         </div>
+      </Section>
+
+      <Section
+        eyebrow={t.playerCard}
+        title={t.headToHead}
+        hint={t.headToHeadHint}
+        id="head-to-head"
+      >
+        <HeadToHead playerId={player.id} />
       </Section>
 
       <Section eyebrow={t.playerCard} title={t.history} id="history">

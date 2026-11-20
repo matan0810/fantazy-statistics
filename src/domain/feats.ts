@@ -41,8 +41,8 @@ export interface Feats {
   rivalry: Rivalry | undefined;
 }
 
-/** Ranked seasons of the filter's competitions, oldest first. */
-function rankedTables(league: League, filter: CompetitionFilter): Placing[][] {
+/** Ranked seasons of the filter's competitions, oldest first within each competition. */
+export function rankedTables(league: League, filter: CompetitionFilter): Placing[][] {
   return COMPETITIONS.filter((c) => filter.has(c.id)).flatMap((c) =>
     seasonsOf(league, c.id)
       .reverse()

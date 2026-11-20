@@ -155,6 +155,11 @@ const he = {
   careerHint: 'מקום הסיום בכל עונה, בכל תחרות',
   history: 'כל העונות',
   otherPlayers: 'שחקנים נוספים',
+  headToHead: 'ראש בראש',
+  headToHeadHint: 'בכמה עונות סיים מעל כל יריב, ובכמה מתחתיו',
+  above: 'מעל',
+  below: 'מתחת',
+  together: 'עונות משותפות',
   showAllSeasons: (n: number) => `כל ${n} העונות`,
   showFewer: 'פחות',
 
@@ -180,6 +185,34 @@ const he = {
   leapValue: (season: string, from: number, to: number) => `${season} · ממקום ${from} למקום ${to}`,
   rivalry: 'היריבות הגדולה',
   rivalryValue: (rival: string, meetings: number) => `מול ${rival} · ${meetings} עונות משותפות`,
+  mostThirds: 'הברונזה הנצחית',
+  thirdsValue: (n: number) => `${n} פעמים במקום השלישי`,
+  heartbreak: 'הלב השבור',
+  heartbreakValue: (season: string, gap: number, champion: string) =>
+    gap === 0
+      ? `${season} · שני בשוויון נקודות עם ${champion}`
+      : `${season} · ${gap} נק׳ מאחורי ${champion}`,
+  bestWithoutTitle: 'העונה הגדולה בלי תואר',
+  bestWithoutTitleValue: (season: string, rank: number, pct: number) =>
+    `${season} · מקום ${rank}, ${pct}% מעל ממוצע העונה`,
+  steadiest: 'היציב',
+  steadyValue: (seasons: number, spread: number) =>
+    `${seasons} עונות · המקום זז בממוצע ${spread} בלבד`,
+  aboveChampion: 'מעל האלוף',
+  aboveChampionValue: (n: number) => `${n} פעמים סיים מעל האלוף המכהן`,
+  form: 'הכושר הנוכחי',
+  formValue: (played: number, of: number) =>
+    played === of
+      ? `מקום ממוצע ב-${of} העונות האחרונות`
+      : `מקום ממוצע · ${played} מתוך ${of} העונות האחרונות`,
+  longestWait: 'ההמתנה הארוכה',
+  waitValue: (n: number, season: string) => `${n} עונות עד האליפות הראשונה · ${season}`,
+  loyalName: 'נאמן לשם',
+  loyalValue: (team: string, n: number) => `„${team}” · ${n} עונות`,
+  tournamentsTitle: 'טורנירי הנבחרות',
+  tournamentsHint: 'מונדיאל ויורו בלבד, לפי המקום הממוצע ביחס לגודל הליגה',
+  tournamentsCount: 'טורנירים',
+  averagePlace: 'מקום ממוצע',
   highScores: 'שיא נקודות בעונה',
   championsRoll: 'כל האלופים',
   noRecord: 'אין מספיק נתונים',
@@ -334,6 +367,11 @@ const en: Strings = {
   careerHint: 'Finishing position in every season of every competition',
   history: 'Every season',
   otherPlayers: 'Other players',
+  headToHead: 'Head to head',
+  headToHeadHint: 'In how many seasons they finished above each rival, and below',
+  above: 'Above',
+  below: 'Below',
+  together: 'Seasons together',
   showAllSeasons: (n) => `All ${n} seasons`,
   showFewer: 'Show fewer',
 
@@ -358,6 +396,33 @@ const en: Strings = {
   leapValue: (season, from, to) => `${season} · from ${from} up to ${to}`,
   rivalry: 'Greatest rivalry',
   rivalryValue: (rival, meetings) => `against ${rival} · ${meetings} seasons together`,
+  mostThirds: 'Eternal bronze',
+  thirdsValue: (n) => `${n} times third`,
+  heartbreak: 'Heartbreak',
+  heartbreakValue: (season, gap, champion) =>
+    gap === 0
+      ? `${season} · second, level on points with ${champion}`
+      : `${season} · ${gap} pts behind ${champion}`,
+  bestWithoutTitle: 'Best season without the title',
+  bestWithoutTitleValue: (season, rank, pct) =>
+    `${season} · finished ${rank}, ${pct}% above the season average`,
+  steadiest: 'Steadiest',
+  steadyValue: (seasons, spread) => `${seasons} seasons · a spread of only ${spread} places`,
+  aboveChampion: 'Above the champion',
+  aboveChampionValue: (n) => `${n} times finished above the reigning champion`,
+  form: 'Current form',
+  formValue: (played, of) =>
+    played === of
+      ? `average place over the last ${of} seasons`
+      : `average place · ${played} of the last ${of} seasons`,
+  longestWait: 'The long wait',
+  waitValue: (n, season) => `${n} seasons before the first title · ${season}`,
+  loyalName: 'Loyal to the name',
+  loyalValue: (team, n) => `“${team}” · ${n} seasons`,
+  tournamentsTitle: 'National-team tournaments',
+  tournamentsHint: 'World Cup and Euro only, by average place relative to the field',
+  tournamentsCount: 'Tournaments',
+  averagePlace: 'Avg. place',
   highScores: 'Season high score',
   championsRoll: 'Every champion',
   noRecord: 'Not enough data',

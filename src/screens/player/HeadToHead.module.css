@@ -1,0 +1,64 @@
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* name and score on one line, a hairline below split at the share of seasons above:
+   gold from the reading start, as the score reads "above – below" */
+.row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto 2px;
+  align-items: center;
+  gap: 12px 14px;
+  padding: 16px 0 14px;
+  border-block-end: 1px solid var(--line);
+  transition: background var(--fast);
+}
+
+.row:hover {
+  background: var(--gold-soft);
+}
+
+.name {
+  font-size: 1.05rem;
+  font-weight: 400;
+}
+
+.score {
+  font-family: var(--sans);
+  font-size: 1.25rem;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+}
+
+.above {
+  color: var(--gold-text);
+}
+
+.dash {
+  margin-inline: 6px;
+  color: var(--faint);
+}
+
+.bar {
+  grid-column: 1 / -1;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--gold) calc(var(--share) * 100%),
+    color-mix(in srgb, var(--color) 55%, transparent) calc(var(--share) * 100%)
+  );
+}
+
+[dir='rtl'] .bar {
+  background: linear-gradient(
+    to left,
+    var(--gold) calc(var(--share) * 100%),
+    color-mix(in srgb, var(--color) 55%, transparent) calc(var(--share) * 100%)
+  );
+}
