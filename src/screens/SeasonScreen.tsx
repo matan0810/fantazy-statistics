@@ -50,44 +50,6 @@ export function SeasonScreen({ id }: { id: number }) {
         </h1>
         {season.name && <p className={styles.leagueName}>„{season.name}”</p>}
         <Ornament reach={56} center />
-        <div className={styles.actions}>
-          {proofs.length > 0 && (
-            <Button
-              icon
-              variant="quiet"
-              onClick={() => setProofOpen(true)}
-              aria-label={t.proof}
-              title={t.proof}
-            >
-              <ProofIcon />
-            </Button>
-          )}
-          <DownloadMenu
-            compact
-            title={`${title} · ${t.finalStandings}`}
-            csv={() => standingsCsv(table, t, name)}
-            image={() => ({
-              eyebrow: `${t.brand} · ${t.finalStandings}`,
-              title,
-              subtitle: [season.name, `${table.length} ${t.field}`].filter(Boolean).join(' · '),
-              accent: comp.color,
-              rtl: language === 'he',
-              footer: t.brand,
-              rows: table.map((p) => ({
-                rank: p.result.rank,
-                name: name(p.player),
-                color: p.player.color,
-                sub: [p.result.team, p.result.coach && `${t.coach}: ${p.result.coach}`]
-                  .filter(Boolean)
-                  .join(' · '),
-                value: p.result.points,
-                valueLabel: p.result.points === null ? '' : t.pointsShort,
-                note: p.gap ? `−${p.gap}` : null,
-                ratio: p.result.points !== null && top ? p.result.points / top : null,
-              })),
-            })}
-          />
-        </div>
       </header>
 
       <dl className={styles.facts}>
@@ -126,9 +88,52 @@ export function SeasonScreen({ id }: { id: number }) {
 
       <SeasonPodium table={table} />
 
-      <Card className={styles.board}>
-        <Standings table={table} />
-      </Card>
+      <div className={styles.board}>
+        <div className={styles.boardBar}>
+          <h2 className="eyebrow">{t.finalStandings}</h2>
+          <div className={styles.actions}>
+            {proofs.length > 0 && (
+              <Button
+                icon
+                variant="quiet"
+                onClick={() => setProofOpen(true)}
+                aria-label={t.proof}
+                title={t.proof}
+              >
+                <ProofIcon />
+              </Button>
+            )}
+            <DownloadMenu
+              compact
+              title={`${title} · ${t.finalStandings}`}
+              csv={() => standingsCsv(table, t, name)}
+              image={() => ({
+                eyebrow: `${t.brand} · ${t.finalStandings}`,
+                title,
+                subtitle: [season.name, `${table.length} ${t.field}`].filter(Boolean).join(' · '),
+                accent: comp.color,
+                rtl: language === 'he',
+                footer: t.brand,
+                rows: table.map((p) => ({
+                  rank: p.result.rank,
+                  name: name(p.player),
+                  color: p.player.color,
+                  sub: [p.result.team, p.result.coach && `${t.coach}: ${p.result.coach}`]
+                    .filter(Boolean)
+                    .join(' · '),
+                  value: p.result.points,
+                  valueLabel: p.result.points === null ? '' : t.pointsShort,
+                  note: p.gap ? `−${p.gap}` : null,
+                  ratio: p.result.points !== null && top ? p.result.points / top : null,
+                })),
+              })}
+            />
+          </div>
+        </div>
+        <Card className={styles.boardCard}>
+          <Standings table={table} />
+        </Card>
+      </div>
 
       {season.pointsLost && <p className={styles.note}>{t.pointsLostNote}</p>}
       <p className={styles.hint}>{t.keyboardHint}</p>

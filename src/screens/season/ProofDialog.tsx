@@ -18,6 +18,10 @@ export function ProofDialog({ open, onClose, urls, title }: Props) {
   const [index, setIndex] = useState(0);
   const url = urls[Math.min(index, urls.length - 1)] ?? '';
   const step = (by: number) => setIndex((i) => (i + by + urls.length) % urls.length);
+  // The address that finished loading (or failed): until it matches, the spinner shows.
+  const [settled, setSettled] = useState<{ url: string; failed: boolean } | null>(null);
+  const loading = settled?.url !== url;
+  const failed = !loading && settled.failed;
 
   return (
     <Dialog
@@ -38,7 +42,17 @@ export function ProofDialog({ open, onClose, urls, title }: Props) {
       }
     >
       <div className={styles.stage}>
-        <img className={styles.image} src={url} alt={t.proofTitle(title)} />
+        <img
+          key={url}
+          className={styles.image}
+          src={url}
+          alt={t.proofTitle(title)}
+          data-loading={loading ? '' : undefined}
+          onLoad={() => setSettled({ url, failed: false })}
+          onError={() => setSettled({ url, failed: true })}
+        />
+        {loading && <span className={styles.spinner} role="status" aria-label={t.loading} />}
+        {failed && <p className={styles.failed}>{t.imageFailed}</p>}
         {urls.length > 1 && (
           <>
             <Button

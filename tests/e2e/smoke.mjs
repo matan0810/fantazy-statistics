@@ -104,7 +104,7 @@ async function main() {
   );
   const legends = page.getByRole('group', { name: 'היכל האגדות' }).getByRole('link');
   assert.equal(await legends.count(), 3);
-  assert.match(await legends.nth(1).innerText(), /מתן/, 'the champion stands in the middle');
+  assert.match(await legends.first().innerText(), /מתן/, 'the champion comes first');
   step('desktop: four reigning champions and the three legends');
 
   await page.getByRole('navigation').getByRole('link', { name: 'עונות' }).click();
@@ -119,9 +119,11 @@ async function main() {
   await page.getByRole('button', { name: 'הוכחה' }).click();
   const dialog = page.getByRole('dialog');
   await dialog.waitFor();
+  await dialog.getByRole('img').waitFor();
+  await dialog.getByRole('status').waitFor({ state: 'detached' });
   await page.keyboard.press('Escape');
   await dialog.waitFor({ state: 'hidden' });
-  step('desktop: the proof opens in a dialog and Esc closes it');
+  step('desktop: the proof opens in a dialog, loads past its spinner, Esc closes it');
 
   const csv = (await download(page, /טבלה לאקסל/)).toString('utf8');
   assert.ok(csv.startsWith('﻿מקום,שחקן'), 'CSV has a BOM and Hebrew headers');
@@ -159,6 +161,23 @@ async function main() {
     .click();
   assert.equal(await titlesOfLeader(), '11');
   step('desktop: the old #/stats address opens records, and the filter changes the table');
+
+  // back from a record returns to the same place on the page, not only the same page
+  const leap = page.getByRole('link', { name: /הזינוק הגדול/ });
+  assert.match(await leap.innerText(), /ממקום 5 למקום 1/);
+  await page.evaluate(() => window.scrollTo({ top: 700 }));
+  await page.waitForTimeout(100);
+  const before = await page.evaluate(() => window.scrollY);
+  await leap.click();
+  await page.waitForURL(/#\/season\/\d+$/);
+  await page.getByRole('heading', { level: 1, name: /יורו/ }).waitFor();
+  assert.ok((await page.evaluate(() => window.scrollY)) < 5, 'a new page starts at the top');
+  await page.goBack();
+  await page.getByRole('heading', { level: 1, name: 'ספר השיאים' }).waitFor();
+  await page.waitForFunction((y) => Math.abs(window.scrollY - y) < 3, before);
+  for (const label of ['הסגן הנצחי', 'היריבות הגדולה', 'כף העץ'])
+    await page.getByRole('link', { name: new RegExp(label) }).waitFor();
+  step('desktop: new records, and back from one returns to the same place');
 
   const closest = page.getByRole('link', { name: /האליפות הצמודה/ });
   assert.match(await closest.innerText(), /מול גבי/);

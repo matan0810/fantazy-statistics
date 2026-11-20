@@ -1,5 +1,6 @@
 import { seasonLabel } from '../../domain/competitions';
 import { routeHash } from '../../domain/routes';
+import type { Feats } from '../../domain/feats';
 import type { Records } from '../../domain/stats';
 import type { CompetitionId, Player } from '../../domain/types';
 import type { Strings } from '../../i18n/strings';
@@ -20,7 +21,12 @@ export interface RecordCardData {
  * player (on the competition it was set in, when there is one), a title race opens the
  * season it was decided in.
  */
-export function recordCards(r: Records, t: Strings, name: (p: Player) => string): RecordCardData[] {
+export function recordCards(
+  r: Records,
+  f: Feats,
+  t: Strings,
+  name: (p: Player) => string,
+): RecordCardData[] {
   const comp = (id: CompetitionId) => t.competition[id];
   const player = (p: Player, competition?: CompetitionId) =>
     routeHash(
@@ -68,6 +74,16 @@ export function recordCards(r: Records, t: Strings, name: (p: Player) => string)
       sub: t.averageValue(comp(r.bestAverage.competition), r.bestAverage.seasons),
       href: player(r.bestAverage.player, r.bestAverage.competition),
     });
+  if (f.mostSeconds)
+    cards.push({
+      id: 'seconds',
+      label: t.mostSeconds,
+      player: f.mostSeconds.player,
+      value: String(f.mostSeconds.value),
+      signed: false,
+      sub: t.secondsValue(f.mostSeconds.value),
+      href: player(f.mostSeconds.player),
+    });
   if (r.closestTitle) {
     const s = r.closestTitle.placing.season;
     const rival = r.closestTitle.runnerUp ? name(r.closestTitle.runnerUp.player) : '—';
@@ -94,6 +110,35 @@ export function recordCards(r: Records, t: Strings, name: (p: Player) => string)
       href: routeHash({ name: 'season', id: s.id }),
     });
   }
+  if (f.biggestLeap) {
+    const { placing, from, value } = f.biggestLeap;
+    const s = placing.season;
+    cards.push({
+      id: 'leap',
+      label: t.biggestLeap,
+      player: placing.player,
+      value: `+${value}`,
+      signed: true,
+      sub: t.leapValue(
+        `${comp(s.competition)} ${seasonLabel(s.year, s.competition)}`,
+        from,
+        placing.result.rank ?? 0,
+      ),
+      href: routeHash({ name: 'season', id: s.id }),
+    });
+  }
+  if (f.rivalry) {
+    const { leader, rival, wins, losses } = f.rivalry;
+    cards.push({
+      id: 'rivalry',
+      label: t.rivalry,
+      player: leader,
+      value: `${wins}–${losses}`,
+      signed: true,
+      sub: t.rivalryValue(name(rival), wins + losses),
+      href: player(leader),
+    });
+  }
   if (r.mostSeasons)
     cards.push({
       id: 'seasons',
@@ -103,6 +148,16 @@ export function recordCards(r: Records, t: Strings, name: (p: Player) => string)
       signed: false,
       sub: t.seasons,
       href: player(r.mostSeasons.player),
+    });
+  if (f.woodenSpoon)
+    cards.push({
+      id: 'spoon',
+      label: t.woodenSpoon,
+      player: f.woodenSpoon.player,
+      value: String(f.woodenSpoon.value),
+      signed: false,
+      sub: t.spoonValue(f.woodenSpoon.value),
+      href: player(f.woodenSpoon.player),
     });
   return cards;
 }

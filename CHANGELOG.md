@@ -11,6 +11,18 @@ old `gh-pages` branch), dated by that deploy.
 
 ## [Unreleased]
 
+### Added
+- New records, so the page tells more than the leader's story: the eternal runner-up, the biggest leap from one season to the next, the greatest rivalry and the wooden spoon.
+- A turning gold arc while a proof screenshot loads, and a short message if it does not.
+
+### Changed
+- The hall of legends on the home page is back to its three columns; the podium stays on each season.
+- Proof and download sit on a bar above the final table, next to what they act on.
+
+### Fixed
+- Back after following a link returns to the same place on the page, not only the same page.
+- Opening a season from a record or a player starts at the top of the page.
+
 ## [3.1.0] - 2026-11-20
 
 ### Added

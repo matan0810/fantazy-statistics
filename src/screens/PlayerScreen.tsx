@@ -5,6 +5,7 @@ import { league } from '../domain/league';
 import { routeHash } from '../domain/routes';
 import { career as careerOf, playerById, rankChart } from '../domain/stats';
 import type { CompetitionId } from '../domain/types';
+import { replaceAddress } from '../hooks/useRoute';
 import { useI18n } from '../i18n/context';
 import { Avatar, CompetitionTag, RankBadge } from '../ui/Badges';
 import { MetalDot, Ornament } from '../ui/Ornaments';
@@ -29,7 +30,7 @@ export function PlayerScreen({ id, competition: fromAddress }: Props) {
   // A tab writes itself into the address without a navigation, so the view can be shared.
   const pick = (competition: CompetitionId) => {
     setPicked(competition);
-    window.history.replaceState(null, '', routeHash({ name: 'player', id, competition }));
+    replaceAddress(routeHash({ name: 'player', id, competition }));
   };
   const [showAll, setShowAll] = useState(false);
   if (!player || !c) return null;

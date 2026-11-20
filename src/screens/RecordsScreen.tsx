@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { CompetitionChips } from '../components/CompetitionChips';
 import { DownloadMenu } from '../components/DownloadMenu';
 import { MedalTable } from '../components/MedalTable';
+import { feats } from '../domain/feats';
 import { league } from '../domain/league';
 import { medalTable, records } from '../domain/stats';
 import { medalCsv } from '../export/tables';
@@ -18,11 +19,15 @@ export function RecordsScreen() {
   const { t, name, language } = useI18n();
   const { active, filter, toggle } = useCompetitionFilter();
   // Everything below is derived from the chosen competitions alone.
-  const { table, r } = useMemo(
-    () => ({ table: medalTable(league, filter), r: records(league, filter) }),
+  const { table, r, f } = useMemo(
+    () => ({
+      table: medalTable(league, filter),
+      r: records(league, filter),
+      f: feats(league, filter),
+    }),
     [filter],
   );
-  const cards = recordCards(r, t, name);
+  const cards = recordCards(r, f, t, name);
   const maxTitles = table[0]?.titles || 1;
   const empty = active.length === 0;
 

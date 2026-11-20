@@ -38,12 +38,16 @@ ornaments. What is honoured is marked by type, position and a touch of gold, not
     carries its Roman numeral in metal and, at its foot, the figure that earned the place
     (points for a season, medals for the legends). The champion wears a fine gold crown and
     the gold ring, and stands in a soft beam of light. When it scrolls into view the blocks
-    rise from bronze to gold, the people appear on them, then the light. Used for the
-    season's podium and for the hall of legends.
+    rise from bronze to gold, the people appear on them, then the light. Used for each
+    season's podium only.
+  - Honours: the first three side by side in reading order, each under a Roman numeral in
+    metal (I, II, III), separated by hairlines. Used for the hall of legends, where a podium
+    would be too much.
   - Mark: a fine-line gold trophy beside the wordmark, and alone in a double ring as the app
     icon and favicon.
-  - Actions: a screen's proof and download controls are icon buttons in its top corner,
-    named for screen readers and in a tooltip, with no visible words.
+  - Actions: proof and download are icon buttons on the bar above the table they belong to,
+    named for screen readers and in a tooltip, with no visible words. A proof screenshot
+    shows a fine turning gold arc until it has loaded, and a short line if it fails.
   - Museum label: a hairline frame, a spaced-capitals title, a rule, then the content. Used
     for the champions wall and the records.
   - Section heading: eyebrow and serif title at the start, the hint at the far end, a
@@ -101,9 +105,18 @@ Across competitions the site uses titles, podiums and per-competition averages.
   choice, made with chips under them and remembered. By default the Israeli league is left
   out (a full-year season); nothing on the page says so. Every chip may be turned off, and
   then the page shows only a prompt to choose one.
+- **Records of the rest of the league**, so the page tells more than the leader's story:
+  - _Eternal runner-up_: most second places (fewer seasons first on a tie).
+  - _Biggest leap_: most places gained between a player's two consecutive seasons of one
+    competition, at least two (on a tie, the one that lands higher, then the later).
+  - _Greatest rivalry_: of the pairs that met in at least half as many seasons as the most
+    frequent pair, the most even record, then the most meetings. Shown from the side that
+    leads.
+  - _Wooden spoon_: most last places, counted only in fields of three or more.
 - **Where a record leads.** Titles, podiums and seasons played open the player. A streak and
   a best average open the player on that competition. The closest title and the biggest win
-  open the season, and name the runner-up they were won against.
+  open the season, and name the runner-up they were won against. The leap opens its season;
+  the runner-up, the rivalry and the spoon open the player.
 
 ## 5. Addresses
 
@@ -111,6 +124,10 @@ Across competitions the site uses titles, podiums and per-competition averages.
 it, for example `#/player/4/ucl`), `#/records`. `#/stats` (the old statistics
 address) opens records. Unknown addresses show home and are rewritten. The last season seen
 is where "Seasons" leads.
+
+Back and forward return to the place on the page where the reader left it: each history
+entry gets an id in its state, and the scroll position is kept per id for the tab. A new page
+opens at the top, except a step from one season to another, which keeps the place.
 
 ## 6. Downloads
 

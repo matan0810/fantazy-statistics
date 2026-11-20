@@ -9,7 +9,6 @@
 }
 
 .head {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,15 +42,6 @@
   font-family: var(--sans);
   font-size: 1.05rem;
   font-weight: 300;
-}
-
-/* proof and download: two quiet icons in the corner of the title, out of the way */
-.actions {
-  position: absolute;
-  top: 0;
-  inset-inline-end: 0;
-  display: flex;
-  gap: 2px;
 }
 
 .facts {
@@ -99,9 +89,29 @@
   line-height: 1.1;
 }
 
+/* The table's own bar: its name, and the proof and download beside what they act on. */
 .board {
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   animation: rise 800ms var(--slow) 200ms both;
+}
+
+.boardBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 40px;
+}
+
+.actions {
+  display: flex;
+  gap: 4px;
+}
+
+.boardCard {
+  overflow: hidden;
 }
 
 .note {

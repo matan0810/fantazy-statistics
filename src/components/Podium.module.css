@@ -157,15 +157,6 @@
   font-weight: 300;
 }
 
-.count {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  color: var(--text);
-  font-size: 0.95rem;
-  font-weight: 300;
-}
-
 .slot[data-empty] .block {
   opacity: 0.35;
 }
@@ -255,10 +246,5 @@
     gap: 6px;
     bottom: 10px;
     font-size: 0.72rem;
-  }
-
-  .count {
-    gap: 3px;
-    font-size: 0.8rem;
   }
 }
