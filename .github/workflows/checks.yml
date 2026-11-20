@@ -13,7 +13,10 @@ jobs:
     name: Types, lint, format, audit, unit tests
     runs-on: ubuntu-latest
     steps:
+      # The token is not left in .git/config, where any package run later could read it.
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
@@ -33,6 +36,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc

@@ -1,6 +1,12 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { applyRelease, nextVersion, releasedSections, unreleasedNotes } from './changelog';
+import {
+  applyRelease,
+  checkRelease,
+  nextVersion,
+  releasedSections,
+  unreleasedNotes,
+} from './changelog';
 
 const sample = `# Changelog
 
@@ -67,6 +73,24 @@ describe('applyRelease', () => {
   });
 });
 
+describe('checkRelease', () => {
+  const ok = { version: '3.1.0', commit: 'a'.repeat(40), date: '2026-11-20' };
+
+  it('accepts a well-formed release', () => {
+    expect(() => checkRelease(ok)).not.toThrow();
+  });
+
+  it.each([
+    ['a version with a tab', { ...ok, version: '3.1.0\tx' }],
+    ['a version with a shell word', { ...ok, version: '3.1.0; rm -rf /' }],
+    ['a short commit', { ...ok, commit: 'abc1234' }],
+    ['a branch name as commit', { ...ok, commit: 'master' }],
+    ['a date with a newline', { ...ok, date: '2026-11-20\nv9' }],
+  ])('refuses %s', (_, release) => {
+    expect(() => checkRelease(release)).toThrow();
+  });
+});
+
 describe('the project files', () => {
   const changelog = readFileSync(new URL('../CHANGELOG.md', import.meta.url), 'utf8');
   const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
@@ -84,6 +108,12 @@ describe('the project files', () => {
     const documented = releasedSections(changelog).map((section) => section.version);
     expect(documented).toContain(pkg.version);
     for (const { version } of history) expect(documented).toContain(version);
+  });
+
+  it('list only well-formed past releases', () => {
+    const dates = new Map(releasedSections(changelog).map((s) => [s.version, s.date]));
+    for (const { version, commit } of history)
+      expect(() => checkRelease({ version, commit, date: dates.get(version) ?? '' })).not.toThrow();
   });
 
   it('list past releases oldest first, with full commit ids, below the current version', () => {
