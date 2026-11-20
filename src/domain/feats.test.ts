@@ -24,16 +24,11 @@ describe('feats, on the real data', () => {
     expect(f.rivalry).toMatchObject({ leader: { id: 1 }, rival: { id: 2 }, wins: 8, losses: 7 });
   });
 
-  it('counts last places only in fields of three or more', () => {
-    expect(f.woodenSpoon).toMatchObject({ value: 5, player: { id: 7 } });
-  });
-
   it('has nothing to say about no competitions', () => {
     expect(feats(league, new Set())).toEqual({
       mostSeconds: undefined,
       biggestLeap: undefined,
       rivalry: undefined,
-      woodenSpoon: undefined,
     });
   });
 

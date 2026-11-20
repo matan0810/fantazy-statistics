@@ -12,7 +12,7 @@ old `gh-pages` branch), dated by that deploy.
 ## [Unreleased]
 
 ### Added
-- New records, so the page tells more than the leader's story: the eternal runner-up, the biggest leap from one season to the next, the greatest rivalry and the wooden spoon.
+- New records, so the page tells more than the leader's story: the eternal runner-up, the biggest leap from one season to the next and the greatest rivalry.
 - The rank lines compare several players at once: each name you pick stays lit until you pick it again.
 - A turning gold arc while a proof screenshot loads, and a short message if it does not.
 

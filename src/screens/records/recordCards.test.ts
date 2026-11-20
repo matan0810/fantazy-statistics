@@ -34,7 +34,7 @@ describe('record cards', () => {
   });
 
   it('tells more than one player’s story', () => {
-    expect(new Set(cards.map((c) => c.player.id)).size).toBeGreaterThanOrEqual(5);
+    expect(new Set(cards.map((c) => c.player.id)).size).toBeGreaterThanOrEqual(4);
   });
 
   it('opens career totals on the player', () => {

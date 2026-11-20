@@ -11,7 +11,7 @@ import {
 import type { League, Player } from './types';
 
 /**
- * Records beyond the leaders: the runner-up, the leap, the rivalry and the last place.
+ * Records beyond the leaders: the runner-up, the leap and the rivalry.
  * They tell the stories of the rest of the league, not only of whoever wins most.
  */
 
@@ -39,8 +39,6 @@ export interface Feats {
   biggestLeap: Leap | undefined;
   /** The most even of the pairs that met most often. */
   rivalry: Rivalry | undefined;
-  /** Most last places, in fields of three or more. */
-  woodenSpoon: PlayerValue | undefined;
 }
 
 /** Ranked seasons of the filter's competitions, oldest first. */
@@ -58,7 +56,6 @@ export function feats(league: League, filter: CompetitionFilter = ALL_COMPETITIO
     mostSeconds: mostSeconds(league, filter),
     biggestLeap: biggestLeap(tables),
     rivalry: rivalry(tables),
-    woodenSpoon: woodenSpoon(tables),
   };
 }
 
@@ -124,20 +121,4 @@ function rivalry(tables: Placing[][]): Rivalry | undefined {
   return top.aAhead >= top.bAhead
     ? { leader: top.a, rival: top.b, wins: top.aAhead, losses: top.bAhead }
     : { leader: top.b, rival: top.a, wins: top.bAhead, losses: top.aAhead };
-}
-
-function woodenSpoon(tables: Placing[][]): PlayerValue | undefined {
-  const count = new Map<number, { player: Player; value: number; seasons: number }>();
-  for (const table of tables) {
-    for (const p of table) {
-      const entry = count.get(p.player.id) ?? { player: p.player, value: 0, seasons: 0 };
-      entry.seasons++;
-      if (table.length >= 3 && p.result.rank === table.length) entry.value++;
-      count.set(p.player.id, entry);
-    }
-  }
-  const worst = [...count.values()].sort(
-    (a, b) => b.value - a.value || b.seasons - a.seasons || a.player.id - b.player.id,
-  )[0];
-  return worst && worst.value > 0 ? { player: worst.player, value: worst.value } : undefined;
 }

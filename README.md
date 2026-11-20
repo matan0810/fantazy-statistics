@@ -18,7 +18,7 @@ Live at https://matan0810.github.io/fantazy-statistics
   champion, title margin and average, a podium of three blocks, and the final table with the gap to first.
 - **Players**: medals, podium rate, their line in every competition, and every season.
 - **Records**: most titles, title streaks, closest and most one-sided titles, best average,
-  the eternal runner-up, the biggest leap, the greatest rivalry, the wooden spoon,
+  the eternal runner-up, the biggest leap, the greatest rivalry,
   the medal table, season high scores and every champion. Choose which competitions count
   (the Israeli league is off by default); the home page's legends follow the same choice.
 - **Downloads**: any table as an image to share or a spreadsheet (CSV), the full archive,

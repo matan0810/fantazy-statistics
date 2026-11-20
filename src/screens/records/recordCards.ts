@@ -149,15 +149,5 @@ export function recordCards(
       sub: t.seasons,
       href: player(r.mostSeasons.player),
     });
-  if (f.woodenSpoon)
-    cards.push({
-      id: 'spoon',
-      label: t.woodenSpoon,
-      player: f.woodenSpoon.player,
-      value: String(f.woodenSpoon.value),
-      signed: false,
-      sub: t.spoonValue(f.woodenSpoon.value),
-      href: player(f.woodenSpoon.player),
-    });
   return cards;
 }

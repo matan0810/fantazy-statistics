@@ -114,11 +114,10 @@ Across competitions the site uses titles, podiums and per-competition averages.
   - _Greatest rivalry_: of the pairs that met in at least half as many seasons as the most
     frequent pair, the most even record, then the most meetings. Shown from the side that
     leads.
-  - _Wooden spoon_: most last places, counted only in fields of three or more.
 - **Where a record leads.** Titles, podiums and seasons played open the player. A streak and
   a best average open the player on that competition. The closest title and the biggest win
   open the season, and name the runner-up they were won against. The leap opens its season;
-  the runner-up, the rivalry and the spoon open the player.
+  the runner-up and the rivalry open the player.
 
 ## 5. Addresses
 

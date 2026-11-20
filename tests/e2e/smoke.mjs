@@ -196,7 +196,7 @@ async function main() {
   await page.goBack();
   await page.getByRole('heading', { level: 1, name: 'ספר השיאים' }).waitFor();
   await page.waitForFunction((y) => Math.abs(window.scrollY - y) < 3, before);
-  for (const label of ['הסגן הנצחי', 'היריבות הגדולה', 'כף העץ'])
+  for (const label of ['הסגן הנצחי', 'היריבות הגדולה'])
     await page.getByRole('link', { name: new RegExp(label) }).waitFor();
   step('desktop: new records, and back from one returns to the same place');
 
@@ -334,6 +334,17 @@ async function main() {
     await phone.locator('h1').first().waitFor();
     assert.match(phone.url(), /#\/records$/);
     step(`phone ${locale}: every screen fits the width, tabs navigate`);
+
+    // The phone's own back (a swipe or the system key) returns to the same place.
+    await phone.evaluate(() => window.scrollTo({ top: 1400 }));
+    await phone.waitForTimeout(100);
+    const place = await phone.evaluate(() => window.scrollY);
+    await phone.locator('a[href^="#/season/"]').filter({ visible: true }).first().tap();
+    await phone.waitForURL(/#\/season\/\d+$/);
+    await phone.goBack();
+    await phone.waitForURL(/#\/records$/);
+    await phone.waitForFunction((y) => Math.abs(window.scrollY - y) < 3, place);
+    step(`phone ${locale}: back returns to the same place on the page`);
     await context.close();
   }
 
