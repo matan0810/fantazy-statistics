@@ -11,9 +11,11 @@ old `gh-pages` branch), dated by that deploy.
 
 ## [Unreleased]
 
+## [3.3.0] - 2026-11-21
+
 ### Changed
 
-- A new mark: a solid gold trophy in the header, the app icon and the favicon, and set in a laurel wreath above the title on the home page. _(Live since 2026-11-21, published without a version at the owner's request.)_
+- A new mark: a solid gold trophy in the header, the app icon and the favicon, and set in a laurel wreath above the title on the home page.
 - The mark is larger and wears its laurel wreath everywhere: in the header and as the app icon, as well as on the home page.
 
 ## [3.2.0] - 2026-11-21
