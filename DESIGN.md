@@ -40,8 +40,10 @@ ornaments. What is honoured is marked by type, position and a touch of gold, not
     the gold ring, and stands in a soft beam of light. When it scrolls into view the blocks
     rise from bronze to gold, the people appear on them, then the light. Used for each
     season's podium only. The home page's hall of legends is the full medal table.
-  - Mark: a fine-line gold trophy beside the wordmark, and alone in a double ring as the app
-    icon and favicon.
+  - Mark: a solid gold trophy with a dark sheen down the cup, beside the wordmark and alone
+    on black as the app icon and favicon. On the home page it stands in a laurel wreath (the
+    emblem) above the title. One drawing for all of them: `src/ui/mark.ts`; `node
+scripts/icons.ts` writes the icons and favicon from it.
   - Actions: proof and download are icon buttons on the bar above the table they belong to,
     named for screen readers and in a tooltip, with no visible words. A proof screenshot
     shows a fine turning gold arc until it has loaded, and a short line if it fails.

@@ -11,6 +11,7 @@ import { useCompetitionFilter } from '../hooks/useCompetitionFilter';
 import { useCountUp } from '../hooks/useCountUp';
 import { useI18n } from '../i18n/context';
 import { ChevronIcon } from '../ui/icons';
+import { Emblem } from '../ui/Emblem';
 import { Ornament } from '../ui/Ornaments';
 import { Card, Section } from '../ui/Section';
 import { Segmented } from '../ui/Segmented';
@@ -53,6 +54,7 @@ export function Home() {
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
+        <Emblem className={styles.emblem} />
         <p className="eyebrow">
           {t.league} · {t.founded(SINCE)}
         </p>

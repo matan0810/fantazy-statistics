@@ -85,7 +85,7 @@ src/ui/                      buttons, segmented control, dialog, menu, badges, i
 src/export/                  share image (canvas), CSV tables, file download
 src/security/                Trusted Types policy for the one script loaded by hand
 src/styles/global.css        design tokens and base rules
-scripts/                     version bump and release plan
+scripts/                     version bump, release plan, app icons from the mark
 tests/                       service worker tests; e2e/ browser smoke test
 .github/workflows/           checks.yml (shared), ci.yml, deploy.yml
 ```

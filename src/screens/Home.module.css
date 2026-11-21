@@ -18,6 +18,12 @@
   animation: reveal 1200ms var(--slow) both;
 }
 
+.emblem {
+  width: clamp(76px, 12vw, 108px);
+  height: auto;
+  margin-bottom: -6px;
+}
+
 .title {
   font-size: clamp(3.4rem, 11.5vw, 8rem);
   font-weight: 300;
