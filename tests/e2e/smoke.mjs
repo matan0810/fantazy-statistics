@@ -351,6 +351,22 @@ async function main() {
     assert.match(phone.url(), /#\/records$/);
     step(`phone ${locale}: every screen fits the width, tabs navigate`);
 
+    // The download menu opens inside the screen, wherever its button sits.
+    for (const hash of ['#/season/22', '#/records']) {
+      await phone.goto(url + hash);
+      await phone.getByRole('button', { name: /^(הורדה|Download)$/ }).click();
+      const box = await phone.getByRole('menu').boundingBox();
+      const width = phone.viewportSize()?.width ?? 0;
+      assert.ok(
+        box && box.x >= 0 && box.x + box.width <= width,
+        `${locale} ${hash}: the menu fits the screen (${JSON.stringify(box)})`,
+      );
+      await phone.keyboard.press('Escape');
+    }
+    step(`phone ${locale}: the download menu opens inside the screen`);
+    await phone.goto(`${url}#/records`);
+    await phone.locator('h1').first().waitFor();
+
     // The phone's own back (a swipe or the system key) returns to the same place.
     // Bring a record card into view first: a tap on something off screen would scroll to it.
     const card = phone.getByRole('link', { name: /Biggest leap|הזינוק הגדול/ });

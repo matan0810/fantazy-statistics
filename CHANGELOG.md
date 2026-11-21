@@ -11,6 +11,11 @@ old `gh-pages` branch), dated by that deploy.
 
 ## [Unreleased]
 
+### Fixed
+
+- The download menu opens inside the screen, wherever its button sits; it was cut at the edge of a narrow window.
+- Back returns to the right place also after opening the page already shown.
+
 ## [3.3.0] - 2026-11-21
 
 ### Changed

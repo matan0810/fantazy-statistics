@@ -43,22 +43,30 @@ export function useRoute(): Route {
     window.history.scrollRestoration = 'manual';
     let entry = currentEntry();
     let shown = current().name;
-    const onScroll = () => positions.set(entry, window.scrollY);
-    const onHash = () => {
-      entry = currentEntry();
-      const next = current();
+    // The entry is read at every scroll, not remembered: an entry can be added without a
+    // hashchange (opening the address already shown), and its place belongs to it.
+    const onScroll = () => positions.set(currentEntry(), window.scrollY);
+    // Back and forward fire popstate, and hashchange too when the address changes; a
+    // link fires hashchange alone. Each move is handled once.
+    const onMove = () => {
+      const next = currentEntry();
+      if (next === entry) return;
+      entry = next;
+      const route = current();
       const saved = positions.get(entry);
       const fromSeason = shown === 'season';
-      shown = next.name;
-      setRoute(next);
+      shown = route.name;
+      setRoute(route);
       if (saved !== undefined) setTarget({ top: saved });
-      else if (!(fromSeason && next.name === 'season')) setTarget({ top: 0 });
+      else if (!(fromSeason && route.name === 'season')) setTarget({ top: 0 });
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('hashchange', onHash);
+    window.addEventListener('hashchange', onMove);
+    window.addEventListener('popstate', onMove);
     return () => {
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('hashchange', onHash);
+      window.removeEventListener('hashchange', onMove);
+      window.removeEventListener('popstate', onMove);
     };
   }, []);
 
