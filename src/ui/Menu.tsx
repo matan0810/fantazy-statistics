@@ -1,4 +1,5 @@
-import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+import { shiftIntoView } from './menuPlacement';
 import styles from './Menu.module.css';
 
 export interface MenuItem {
@@ -27,7 +28,16 @@ interface Props {
 export function Menu({ trigger, items, label }: Props) {
   const [open, setOpen] = useState(false);
   const wrap = useRef<HTMLDivElement>(null);
+  const menu = useRef<HTMLDivElement>(null);
   const id = useId();
+
+  // Wherever the button sits, the open menu is moved sideways to stay on screen.
+  useLayoutEffect(() => {
+    const el = menu.current;
+    if (!open || !el) return;
+    const { left, right } = el.getBoundingClientRect();
+    el.style.translate = `${shiftIntoView(left, right, document.documentElement.clientWidth)}px 0`;
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -58,7 +68,7 @@ export function Menu({ trigger, items, label }: Props) {
         'aria-controls': id,
       })}
       {open && (
-        <div className={styles.menu} role="menu" id={id} aria-label={label}>
+        <div className={styles.menu} ref={menu} role="menu" id={id} aria-label={label}>
           {items.map((item) => (
             <div key={item.key}>
               {item.divider && <div className={styles.divider} role="separator" />}

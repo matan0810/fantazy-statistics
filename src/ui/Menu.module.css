@@ -2,11 +2,13 @@
   position: relative;
 }
 
+/* Opens from the trigger's end edge towards the page, so a trigger at the edge of the page
+   never pushes the menu off screen (where the page's own clipping would cut it). */
 .menu {
   position: absolute;
-  left: 50%;
-  translate: -50% 0;
+  inset-inline-end: 0;
   top: calc(100% + 10px);
+  max-width: calc(100vw - 2 * 12px);
   z-index: 40;
   min-width: 260px;
   padding: 6px;
