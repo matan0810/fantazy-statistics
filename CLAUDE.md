@@ -159,7 +159,8 @@ push tags, so never try.
 
 - [ ] `dev` is pushed and CI on `dev` is green.
 - [ ] `## [Unreleased]` in `CHANGELOG.md` describes everything in
-      `git log origin/master..origin/dev`. If it is empty there is nothing to release: say so.
+      `git log origin/master..origin/dev`, plus any lines marked live without a version. If it
+      is empty there is nothing to release: say so.
 - [ ] Pick the bump by section 6 and tell the owner which one and why.
 - [ ] First release (3.0.0) only: the owner switches **Settings → Pages → Source** to
       **GitHub Actions**, and `{ "version": "2.1.0", "commit": "438600c7a278ce732ac8458aa40274b235b22581" }`
@@ -189,6 +190,13 @@ git push origin dev:master            # must fast-forward; if it is refused, sto
 Docs, workflows and tooling can reach `master` without a bump, still only on the owner's
 order: fast-forward `master` to `dev` as above and skip `npm run bump`. The site redeploys and
 no tag is created.
+
+The owner may also ask for a change visitors do see to go live without a version. Then, before
+pushing, mark its line under `## [Unreleased]` with
+`_(Live since YYYY-MM-DD, published without a version at the owner's request.)_`. The line
+stays under Unreleased and ships in the next versioned release; at that release, drop the mark
+so the version's notes read as usual. So `CHANGELOG.md` alone always tells what is live: the
+latest version plus every Unreleased line marked live.
 
 ## 8. Something is wrong in production
 
