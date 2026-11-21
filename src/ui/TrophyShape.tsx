@@ -1,14 +1,5 @@
 import { TROPHY } from './mark';
 
-/** The mark: a solid gold trophy. The emblem (`Emblem`) sets it in a laurel wreath. */
-export function Trophy({ size = 22, className }: { size?: number; className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 100 100" width={size} height={size} aria-hidden="true">
-      <TrophyShape />
-    </svg>
-  );
-}
-
 /** The trophy's shapes, for drawing inside another SVG. */
 export function TrophyShape() {
   return (

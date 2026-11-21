@@ -1,13 +1,13 @@
 import { useI18n } from '../i18n/context';
-import { Trophy } from '../ui/Trophy';
+import { Emblem } from '../ui/Emblem';
 import styles from './Header.module.css';
 
-/** The mark and wordmark: the trophy, the name in the serif, the league after a hairline. */
+/** The mark and wordmark: the wreathed trophy, the name in the serif, the league after a hairline. */
 export function Logo() {
   const { t } = useI18n();
   return (
     <span className={styles.wordmark}>
-      <Trophy size={24} className={styles.mark} />
+      <Emblem size={46} className={styles.mark} />
       <span className={styles.name}>{t.brand}</span>
       <span className={styles.sub}>{t.league}</span>
     </span>

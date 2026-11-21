@@ -32,12 +32,13 @@
 
 .mark {
   flex-shrink: 0;
-  margin-inline-end: -4px;
+  margin-block: -6px;
+  margin-inline-end: -6px;
 }
 
 .name {
   font-family: var(--serif);
-  font-size: 1.3rem;
+  font-size: 1.45rem;
   font-weight: 400;
   line-height: 1;
   white-space: nowrap;

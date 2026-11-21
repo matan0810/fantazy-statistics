@@ -19,7 +19,7 @@
 }
 
 .emblem {
-  width: clamp(76px, 12vw, 108px);
+  width: clamp(96px, 16vw, 140px);
   height: auto;
   margin-bottom: -6px;
 }

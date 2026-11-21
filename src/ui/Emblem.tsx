@@ -1,7 +1,7 @@
-import { LEAF_PATH, WREATH, WREATH_TIE } from './mark';
-import { TrophyShape } from './Trophy';
+import { EMBLEM_TROPHY, LEAF_PATH, WREATH, WREATH_TIE } from './mark';
+import { TrophyShape } from './TrophyShape';
 
-/** The trophy in a laurel wreath: the mark at its grandest, for the home page. */
+/** The trophy in a laurel wreath: the mark, in the header and above the home page's title. */
 export function Emblem({ size = 96, className }: { size?: number; className?: string }) {
   return (
     <svg className={className} viewBox="0 0 100 100" width={size} height={size} aria-hidden="true">
@@ -19,7 +19,7 @@ export function Emblem({ size = 96, className }: { size?: number; className?: st
         </g>
       ))}
       <path d={WREATH_TIE} fill="none" stroke="var(--gold)" strokeWidth="1.4" />
-      <g transform="translate(22 19) scale(0.56)">
+      <g transform={EMBLEM_TROPHY}>
         <TrophyShape />
       </g>
     </svg>

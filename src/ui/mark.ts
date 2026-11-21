@@ -57,5 +57,7 @@ export function branch(
 
 /** The two branches of the laurel wreath that frames the trophy in the emblem. */
 export const WREATH = [branch(50, 50, 41, 105, 215, 8), branch(50, 50, 41, 75, -35, 8)];
+/** Where the trophy sits inside the wreath. */
+export const EMBLEM_TROPHY = 'translate(19 16.5) scale(0.62)';
 /** Where the two branches meet at the bottom: a small tie. */
 export const WREATH_TIE = 'M44 92 L50 88 L56 92';
