@@ -31,16 +31,8 @@ Live at https://matan0810.github.io/fantazy-statistics
 
 ## Next
 
-Planned work lives in the repository's issues, one per topic, so nothing depends on
-anyone's memory. In the order the owner intends:
-
-1. [#5 Server and database](https://github.com/matan0810/fantazy-statistics/issues/5):
-   enter results from an admin screen, without a release.
-2. [#4 Themes](https://github.com/matan0810/fantazy-statistics/issues/4): choose the accent
-   colours and a background image.
-3. [#6 A domain of the site's own](https://github.com/matan0810/fantazy-statistics/issues/6).
-
-A new season's results are routine, not an issue: see "Updating results" in `CLAUDE.md`.
+Planned work is in the repository's
+[open issues](https://github.com/matan0810/fantazy-statistics/issues), one per topic.
 
 ## History
 

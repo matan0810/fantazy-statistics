@@ -13,6 +13,9 @@ This file is binding. Follow it on every task, in every session.
 - Everything in the repository is in English: docs, code comments, commit messages. The only
   Hebrew is interface text (`src/i18n/strings.ts`) and the league's data (names, teams).
 - Keep the site simple. A new feature earns a control only if it cannot be a default.
+- Single source of truth: every fact lives in one place, and everywhere else links to it.
+  Planned work is in the issues, versions in `package.json`, changes in `CHANGELOG.md`,
+  rules and numbers in `DESIGN.md`, league data in `src/data/`. Never copy one into another.
 - `master` is production: every push to it deploys the site. **Nothing reaches `master`
   until the owner says to release** ("תעלה גרסה", "תמזג", "release", or the like). A request
   to fix or build something is not a request to release it.
