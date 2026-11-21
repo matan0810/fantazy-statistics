@@ -194,8 +194,8 @@ no tag is created.
 The owner may also ask for a change visitors do see to go live without a version. Then, before
 pushing, mark its line under `## [Unreleased]` with
 `_(Live since YYYY-MM-DD, published without a version at the owner's request.)_`. The line
-stays under Unreleased and ships in the next versioned release; at that release, drop the mark
-so the version's notes read as usual. So `CHANGELOG.md` alone always tells what is live: the
+stays under Unreleased and ships in the next versioned release, where `npm run bump` drops the
+mark so the version's notes read as usual. So `CHANGELOG.md` alone always tells what is live: the
 latest version plus every Unreleased line marked live.
 
 ## 8. Something is wrong in production

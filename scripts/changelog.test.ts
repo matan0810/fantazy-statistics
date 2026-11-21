@@ -66,6 +66,16 @@ describe('applyRelease', () => {
     expect(releasedSections(released)).toHaveLength(3);
   });
 
+  it('drops the mark of lines already live without a version', () => {
+    const marked = sample.replace(
+      '- Something new.',
+      "- Something new. _(Live since 2024-01-30, published without a version at the owner's request.)_",
+    );
+    expect(releasedSections(applyRelease(marked, '1.2.0', '2024-02-03'))[0]?.body).toBe(
+      '### Added\n- Something new.',
+    );
+  });
+
   it('refuses an empty release and a duplicate version', () => {
     const released = applyRelease(sample, '1.2.0', '2024-02-03');
     expect(() => applyRelease(released, '1.3.0', '2024-02-04')).toThrow(/empty/);

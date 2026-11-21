@@ -57,8 +57,12 @@ export function applyRelease(changelog: string, version: string, date: string): 
   const heading = '## [Unreleased]';
   const start = changelog.indexOf(heading) + heading.length;
   const end = start + changelog.slice(start).indexOf(notes) + notes.length;
-  return `${changelog.slice(0, start)}\n\n## [${version}] - ${date}\n\n${notes}${changelog.slice(end)}`;
+  const body = notes.replace(LIVE_MARK, '');
+  return `${changelog.slice(0, start)}\n\n## [${version}] - ${date}\n\n${body}${changelog.slice(end)}`;
 }
+
+/** The note on an Unreleased line already published without a version (CLAUDE.md, section 7). */
+const LIVE_MARK = / _\(Live since \d{4}-\d{2}-\d{2}, published without a version[^)]*\)_/g;
 
 /**
  * A release the Deploy workflow may create: the tag, the commit and the date become
