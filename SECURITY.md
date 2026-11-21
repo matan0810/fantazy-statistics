@@ -55,17 +55,20 @@ A new outside host needs a reason and a line here, and a change to the policy be
 - **Trusted Types** are enforced by Chromium browsers; Safari and Firefox rely on the rest
   of the policy and on React.
 
-## Settings only the owner can change
+## Repository settings
 
-These live in the repository's settings on GitHub, and all work from a phone's browser:
+Set by the owner in the repository's settings on GitHub (November 2026):
 
-- **Settings → Code security**: turn on Dependabot alerts and security updates, secret
-  scanning with push protection, and CodeQL code scanning (default setup).
-- **Settings → Rules → Rulesets**: a ruleset on `master` and `dev` that blocks force pushes
-  and deletion.
-- **Settings → Actions → General → Workflow permissions**: read repository contents only,
-  and do not allow Actions to create or approve pull requests.
-- The account itself: two-factor authentication.
+- **Advanced Security**: Dependabot alerts and security updates, CodeQL code scanning
+  (default setup) with Copilot Autofix suggestions. Dependabot's security pull requests
+  target the default branch, `master`: they are never merged from GitHub, but merged into
+  `dev` locally and tested like any other update (CLAUDE.md, section 9).
+- **Rules**: a ruleset on `master` and `dev` blocks force pushes and deletion.
+- **Actions**: workflows get read-only permissions unless they ask for more, and cannot
+  create or approve pull requests.
+- **The account**: two-factor authentication.
+- **Secret scanning** runs on every public repository; push protection, which refuses a push
+  that contains a key, is turned on under Secret Protection when the settings page offers it.
 
 ## Reporting
 
