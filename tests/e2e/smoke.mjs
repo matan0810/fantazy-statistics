@@ -212,8 +212,6 @@ async function main() {
     'נאמן לשם',
   ])
     await page.getByRole('link', { name: new RegExp(label) }).waitFor();
-  const tournaments = page.locator('#tournaments-title').locator('xpath=ancestor::section');
-  assert.ok((await tournaments.locator('tbody tr').count()) >= 5, 'the tournament table');
   step('desktop: new records, and back from one returns to the same place');
 
   const closest = page.getByRole('link', { name: /האליפות הצמודה/ });

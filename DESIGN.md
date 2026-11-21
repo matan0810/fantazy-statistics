@@ -128,8 +128,6 @@ Across competitions the site uses titles, podiums and per-competition averages.
 - **Head to head**, on each player's page: for every rival they shared a ranked season
   with, the seasons above and below, as "above – below" and a hairline split in gold from
   the reading start. All competitions count, as on the rest of the player's page.
-- **National-team tournaments**, on the records page: World Cups and Euros only, by place
-  relative to the field, then titles; it does not follow the competition chips.
 - **Where a record leads.** Titles, podiums and seasons played open the player. A streak and
   a best average open the player on that competition. The closest title and the biggest win
   open the season, and name the runner-up they were won against. The leap opens its season;
