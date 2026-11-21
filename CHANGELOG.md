@@ -11,6 +11,8 @@ old `gh-pages` branch), dated by that deploy.
 
 ## [Unreleased]
 
+## [3.3.1] - 2026-11-21
+
 ### Fixed
 
 - The download menu opens inside the screen, wherever its button sits; it was cut at the edge of a narrow window.

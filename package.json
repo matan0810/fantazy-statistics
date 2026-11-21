@@ -1,7 +1,7 @@
 {
   "name": "fantazy-statistics",
   "private": true,
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "The Pantheon: every season, podium and record of our fantasy league",
   "type": "module",
   "homepage": "https://matan0810.github.io/fantazy-statistics",
